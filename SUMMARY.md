@@ -5,6 +5,7 @@
 * [Model the Problem](model_the_problem.md)
 * [The Elm Architecture](architecture/overview.md)
    * User Input
+       * Check Boxes
        * Text Fields
            * Check Boxes
        * Buttons
