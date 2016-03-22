@@ -8,7 +8,7 @@
    * Maybe
    * Result
    * [Task](task.md)
-* Interop
+* [Interop](interop.md)
    * [JSON](json.md)
    * [JavaScript](javascript.md)
 
