@@ -10,6 +10,7 @@
        * Text Fields
        * Forms
    * Effects
+       * HTTP
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
