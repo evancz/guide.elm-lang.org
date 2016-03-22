@@ -6,8 +6,6 @@
 * [The Elm Architecture](architecture/overview.md)
    * User Input
        * Check Boxes
-       * Text Fields
-           * Check Boxes
        * Buttons
    * [The Basic Pattern](architecture/counter.md)
    * [HTTP](architecture/http.md)
