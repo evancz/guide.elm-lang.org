@@ -6,7 +6,7 @@
 * [The Elm Architecture](architecture/overview.md)
    * [The Basic Pattern](architecture/counter.md)
    * [HTTP](architecture/http.md)
-   * Time
+   * [Time](architecture/time.md)
    * Animation
    * Web Sockets
 * [Error Handling](error_handling.md)
