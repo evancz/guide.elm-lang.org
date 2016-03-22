@@ -8,6 +8,7 @@
    * HTTP
    * Web Sockets
    * Animation
+   * Geolocation
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
