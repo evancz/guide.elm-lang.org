@@ -7,7 +7,7 @@
    * [The Basic Pattern](architecture/counter.md)
    * [HTTP](architecture/http.md)
    * [Time](architecture/time.md)
-   * Animation
+   * [Animation](architecture/animation.md)
    * Web Sockets
 * [Error Handling](error_handling.md)
    * Maybe
