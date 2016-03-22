@@ -11,6 +11,7 @@
        * Forms
    * Effects
        * HTTP
+       * Time
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
