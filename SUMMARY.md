@@ -9,7 +9,6 @@
        * Check Boxes
        * Text Fields
        * Forms
-   * [Animation](architecture/animation.md)
    * [Web Sockets](architecture/web_sockets.md)
    * Effects
 * [Error Handling](error_handling.md)
