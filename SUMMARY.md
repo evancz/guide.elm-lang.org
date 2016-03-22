@@ -6,8 +6,8 @@
 * [The Elm Architecture](architecture.md)
    * The Basic Pattern
    * HTTP
-   * Animation
    * Web Sockets
+   * Animation
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
