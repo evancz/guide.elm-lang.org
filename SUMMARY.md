@@ -7,8 +7,8 @@
    * The Basic Pattern
    * HTTP
    * Time
-   * Web Sockets
    * Animation
+   * Web Sockets
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
