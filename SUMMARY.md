@@ -14,6 +14,7 @@
        * Time
        * Animation
        * Web Sockets
+   * Nesting
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
