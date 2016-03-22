@@ -3,7 +3,7 @@
 * [Introduction](README.md)
 * [Core Language](core_language.md)
 * [Model the Problem](model_the_problem.md)
-* [The Elm Architecture](architecture/overview.md)
+* [The Elm Architecture](architecture/README.md)
    * [User Input](architecture/user_input.md)
        * [Buttons](architecture/user_input/buttons.md)
        * Check Boxes
