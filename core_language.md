@@ -96,7 +96,7 @@ Elm does not have a notion of &ldquo;truthiness&rdquo; so numbers and strings an
 Now let's make a function that tells us if a number is over 9000.
 
 ```elm
-> over9000 powerLevel = \\
+> over9000 powerLevel = \
 |   if powerLevel > 9000 then "It's over 9000!!!" else "meh"
 <function>
 
@@ -154,10 +154,10 @@ Tuples are another useful data structure. A tuple can hold a fixed number of val
 ```elm
 > import String
 
-> goodName name = \\
-|   if String.length name <= 20 then \\
-|     (True, "name accepted!") \\
-|   else \\
+> goodName name = \
+|   if String.length name <= 20 then \
+|     (True, "name accepted!") \
+|   else \
 |     (False, "name was too long; please limit it to 20 characters")
 
 > goodName "Tom"
