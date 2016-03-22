@@ -2,5 +2,5 @@
 
 * [Introduction](README.md)
 * [Core Language](core_language.md)
-   * Values
+   * [Values](values.md)
 
