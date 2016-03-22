@@ -12,6 +12,7 @@
    * Effects
        * HTTP
        * Time
+       * Animation
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
