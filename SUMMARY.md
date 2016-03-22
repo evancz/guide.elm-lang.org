@@ -13,6 +13,7 @@
        * HTTP
        * Time
        * Animation
+       * Web Sockets
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
