@@ -6,6 +6,7 @@
 * [The Elm Architecture](architecture/overview.md)
    * User Input
        * Buttons
+       * Text Fields
    * [The Basic Pattern](architecture/counter.md)
    * [HTTP](architecture/http.md)
    * [Time](architecture/time.md)
