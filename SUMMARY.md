@@ -5,8 +5,8 @@
 * [Model the Problem](model_the_problem.md)
 * [The Elm Architecture](architecture/overview.md)
    * User Input
-       * Check Boxes
        * Buttons
+       * Check Boxes
    * [The Basic Pattern](architecture/counter.md)
    * [HTTP](architecture/http.md)
    * [Time](architecture/time.md)
