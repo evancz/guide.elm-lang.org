@@ -1,3 +1,3 @@
-# My Awesome Book
+# An Introduction to Elm
 
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+Elm is a function language for web programming.
