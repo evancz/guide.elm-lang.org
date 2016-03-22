@@ -8,6 +8,7 @@
        * Buttons
        * Check Boxes
        * Text Fields
+       * Forms
    * [The Basic Pattern](architecture/counter.md)
    * [HTTP](architecture/http.md)
    * [Time](architecture/time.md)
