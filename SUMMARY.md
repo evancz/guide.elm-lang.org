@@ -4,7 +4,7 @@
 * [Core Language](core_language.md)
 * [Model the Problem](model_the_problem.md)
 * [The Elm Architecture](architecture/overview.md)
-   * User Input
+   * [User Input](architecture/user_input.md)
        * Buttons
        * Check Boxes
        * Text Fields
