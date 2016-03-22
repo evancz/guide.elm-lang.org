@@ -9,7 +9,6 @@
        * Check Boxes
        * Text Fields
        * Forms
-   * [HTTP](architecture/http.md)
    * [Time](architecture/time.md)
    * [Animation](architecture/animation.md)
    * [Web Sockets](architecture/web_sockets.md)
