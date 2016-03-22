@@ -6,4 +6,5 @@
 * [The Elm Architecture](architecture.md)
 * [Error Handling](error_handling.md)
    * Maybe
+   * Result
 
