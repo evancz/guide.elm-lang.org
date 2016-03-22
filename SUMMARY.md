@@ -6,9 +6,9 @@
 * [The Elm Architecture](architecture.md)
    * The Basic Pattern
    * HTTP
+   * Geolocation
    * Web Sockets
    * Animation
-   * Geolocation
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
