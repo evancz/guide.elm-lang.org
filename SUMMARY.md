@@ -9,6 +9,7 @@
    * [Time](architecture/time.md)
    * [Animation](architecture/animation.md)
    * [Web Sockets](architecture/web_sockets.md)
+   * User Input
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
