@@ -5,7 +5,7 @@
 * [Model the Problem](model_the_problem.md)
 * [The Elm Architecture](architecture/overview.md)
    * [The Basic Pattern](architecture/counter.md)
-   * HTTP
+   * [HTTP](architecture/http.md)
    * Time
    * Animation
    * Web Sockets
