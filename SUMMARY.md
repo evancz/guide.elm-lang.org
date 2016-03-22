@@ -4,6 +4,7 @@
 * [Core Language](core_language.md)
 * [Model the Problem](model_the_problem.md)
 * [The Elm Architecture](architecture.md)
+   * The Basic Pattern
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
