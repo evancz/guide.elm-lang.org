@@ -5,6 +5,7 @@
 * [Model the Problem](model_the_problem.md)
 * [The Elm Architecture](architecture.md)
    * The Basic Pattern
+   * HTTP
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
