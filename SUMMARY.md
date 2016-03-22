@@ -1,5 +1,5 @@
 # Summary
 
 * [Introduction](README.md)
-* Core Language
+* [Core Language](core_language.md)
 
