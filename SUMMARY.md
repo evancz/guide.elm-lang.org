@@ -20,7 +20,7 @@
        * Communication
 * [Error Handling](error_handling/README.md)
    * [Maybe](error_handling/maybe.md)
-   * Result
+   * [Result](error_handling/result.md)
    * [Task](error_handling/task.md)
 * [Interop](interop.md)
    * [JSON](json.md)
