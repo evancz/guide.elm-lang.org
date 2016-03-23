@@ -10,7 +10,7 @@
        * [Forms](architecture/user_input/forms.md)
        * [Radio Buttons](architecture/user_input/radio_buttons.md)
        * [Check Boxes](architecture/user_input/check_boxes.md)
-   * Effects
+   * [Effects](architecture/effects/README.md)
        * HTTP
        * Time
        * Animation
