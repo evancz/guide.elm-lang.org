@@ -18,7 +18,7 @@
    * [Reusable Components](architecture/components/README.md)
        * Nesting
        * Communication
-* [Error Handling](error_handling.md)
+* [Error Handling](error_handling/README.md)
    * Maybe
    * Result
    * [Task](task.md)
