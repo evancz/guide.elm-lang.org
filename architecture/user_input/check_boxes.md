@@ -19,7 +19,7 @@ type alias Model =
   , bold : Bool
   }
 
-initialModel =
+model =
   Model False False True
 
 
