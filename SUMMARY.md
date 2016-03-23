@@ -9,6 +9,7 @@
        * [Text Fields](architecture/user_input/text_fields.md)
        * [Check Boxes](architecture/user_input/check_boxes.md)
        * Forms
+       * Radio Buttons
    * Effects
        * HTTP
        * Time
