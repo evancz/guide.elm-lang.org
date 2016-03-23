@@ -48,19 +48,19 @@ view model =
 
 That's everything!
 
-When writing this program from scratch, you start by figuring out what the model should be. We need to keep track of a number that is going up and down, so it is just an integer:
+When writing this program from scratch, I always start by taking a guess at the model. To make a counter, we at least need to keep track of a number that is going up and down. So let's just start with that!
 
 ```elm
 type alias Model = Int
 ```
 
-Now that we know what our model is, we need to define how it changes over time. I always start my `UPDATE` section by defining a set of messages that we will get from the UI:
+Now that we have a model to work with, we need to define how it changes over time. I always start my `UPDATE` section by defining a set of messages that we will get from the UI:
 
 ```elm
 type Msg = Increment | Decrement
 ```
 
-I definitely know the user will be able to increment and decrement the counter. The `Msg` type describes these capabilities as *data*. From there, the `update` function just describes what to do when you receive one of these messages. If you get an `Increment` you increment the model.
+I definitely know the user will be able to increment and decrement the counter. The `Msg` type describes these capabilities as *data*. Important! From there, the `update` function just describes what to do when you receive one of these messages. If you get an `Increment` you increment the model. If you get a `Decrement` you decrement the model. Pretty straight-forward stuff.
 
 ```elm
 update : Msg -> Model -> Model
@@ -73,28 +73,24 @@ update msg model =
       model - 1
 ```
 
-Notice that our `Action` [union type][] does not *do* anything. It simply describes the actions that are possible. If someone decides our counter should be doubled when a certain button is pressed, that will be a new case in `Action`. This means our code ends up very clear about how our model can be transformed. Anyone reading this code will immediately know what is allowed and what is not. Furthermore, they will know exactly how to add new features in a consistent way.
+**Aside:** This is super easy to extend as our product requirements change. Say your product manager has come up with this amazing "reset" feature. A new button that will reset the counter to zero. To add the feature you come back to the `Msg` type and add another possibility: `Reset`. You then move on to the `update` function and describe what happens when you get that message. The Elm compiler will tell you when a `case` expression is missing a possibility, so there is no risk these new messages are unhandled.
 
-[union type]: http://elm-lang.org/learn/Union-Types.elm
-
-Finally, we create a way to `view` our `Model`. We are using [elm-html][] to create some HTML to show in a browser. We will create a div that contains: a decrement button, a div showing the current count, and an increment button.
-
-[elm-html]: http://elm-lang.org/blog/Blazing-Fast-Html.elm
+Okay, so that's all good, but how do we actually make some HTML and show it on screen? Elm has a library called `elm-lang/html` that gives you full access to HTML5 as normal Elm functions:
 
 ```elm
-view : Signal.Address Action -> Model -> Html
-view address model =
+view : Model -> Html Msg
+view model =
   div []
-    [ button [ onClick address Decrement ] [ text "-" ]
-    , div [ countStyle ] [ text (toString model) ]
-    , button [ onClick address Increment ] [ text "+" ]
+    [ button [ onClick Decrement ] [ text "-" ]
+    , div [] [ text (toString model) ]
+    , button [ onClick Increment ] [ text "+" ]
     ]
-
-countStyle : Attribute
-countStyle =
-  ...
 ```
 
-The tricky thing about our `view` function is the `Address`. We will dive into that in the next section! For now, I just want you to notice that **this code is entirely declarative**. We take in a `Model` and produce some `Html`. That is it. At no point do we mutate the DOM manually, which gives the library [much more freedom to make clever optimizations][elm-html] and actually makes rendering *faster* overall. It is crazy. Furthermore, `view` is a plain old function so we can get the full power of Elm&rsquo;s module system, test frameworks, and libraries when creating views.
+One thing to notice is that our `view` function is producing a `Html Msg` value. This means that it is a chunk of HTML that can produce `Msg` values. And when you look at the definition, you see the `onClick` attributes are set to give out `Increment` and `Decrement` values. These will get fed directly into our `update` function, driving our whole app forward.
 
-This pattern is the essence of architecting Elm programs. Every example we see from now on will be a slight variation on this basic pattern: `Model`, `update`, `view`.
+Another thing to notice is that `div` and `button` are just normal Elm functions. These functions take (1) a list of attributes and (2) a list of child nodes. It is just HTML with slightly different syntax. Instead of having `<` and `>` everywhere, we have `[` and `]`. We have found that folks who can read HTML have a pretty easy time learning to read this variation. Okay, but why not have it be *exactly* like HTML? **Since we are using normal Elm functions, we have the full power of the Elm programming language to help us build our views!** We can refactor repetative code out into functions. We can put helpers in modules and import them just like any other code. We can use the same testing frameworks and libraries as any other Elm code. Everything that is nice about programming in Elm is 100% available to help you with your view. No need for a hacked together templating language!
+
+There is also something a bit deeper going on here. **The view code is entirely declarative**. We take in a `Model` and produce some `Html`. That is it. There is no need to mutate the DOM manually, Elm takes care of that behind the scenes. This gives Elm [much more freedom to make clever optimizations][elm-html] and ends up making rendering *faster* overall. So you write less code and the code runs faster. The best kind of abstraction!
+
+This pattern is the essence of The Elm Architecture. Every example we see from now on will be a slight variation on this basic pattern: `Model`, `update`, `view`.
