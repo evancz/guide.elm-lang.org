@@ -14,7 +14,7 @@
        * [HTTP](architecture/effects/http.md)
        * [Time](architecture/effects/time.md)
        * [Animation](architecture/effects/animation.md)
-       * Web Sockets
+       * [Web Sockets](architecture/effects/web_sockets.md)
    * Reusable Components
        * Nesting
        * Communication
