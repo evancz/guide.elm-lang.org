@@ -7,9 +7,9 @@
    * [User Input](architecture/user_input/README.md)
        * [Buttons](architecture/user_input/buttons.md)
        * [Text Fields](architecture/user_input/text_fields.md)
+       * Radio Buttons
        * [Check Boxes](architecture/user_input/check_boxes.md)
        * Forms
-       * Radio Buttons
    * Effects
        * HTTP
        * Time
