@@ -1,6 +1,6 @@
 # The Elm Architecture
 
-**The Elm Architecture** is a simple pattern for infinitely nestable components. It is great for modularity, code reuse, and testing. Ultimately, this pattern makes it easy to create complex web apps that stay healthy and modular as you refactor and add features.
+**The Elm Architecture** is a simple pattern for infinitely nestable components. It is great for modularity, code reuse, and testing. Ultimately, it makes it easy to create complex web apps that stay healthy as you refactor and add features.
 
 This architecture seems to emerge naturally in Elm. We first observed it in the games the Elm community was making. Then in web apps like [TodoMVC][] and [dreamwriter][] to. Now we see it running in production at companies like [NoRedInk][] and [CircuitHub][]. The architecture seems to be a consequence of the design of Elm itself, so it will happen to you whether you know about it or not. This has proven to be really nice for onboarding new developers. Their code just turns out well-architected. It is somewhat unsettling.
 
@@ -50,4 +50,4 @@ view model =
   ...
 ```
 
-The following sections are going to proceed by filling in this skeleton with increasingly interesting logic.
+We will proceed by filling in this skeleton with increasingly interesting logic.
