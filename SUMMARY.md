@@ -7,7 +7,7 @@
    * [User Input](architecture/user_input/README.md)
        * [Buttons](architecture/user_input/buttons.md)
        * Check Boxes
-       * Text Fields
+       * [Text Fields](architecture/user_input/text_fields.md)
        * Forms
    * Effects
        * HTTP
