@@ -95,10 +95,14 @@ view model =
 
 We create a `<div>` with two children.
 
-The interesting child is the `<input>` node. In addition to the `placeholder` attribute, it uses `onInput` to declare what messages should be sent when the user types into this input. The `onInput` function has this type:
+The interesting child is the `<input>` node. In addition to the `placeholder` attribute, it uses `onInput` to declare what messages should be sent when the user types into this input.
+
+This `onInput` function is kind of interesting. It takes one argument, in this case the `Change` function which was created when we declared the `Msg` type:
 
 ```elm
-onInput : (String -> msg) -> Attribute msg
+Change : String -> Msg
 ```
 
-This function takes one argument (a function that takes the current content of the text field and turns it into a message for our update function) and produces an HTML attribute we can use like any other. Now our `view` function says `onInput Change`, so if someone types `yolo` into the text field, we will get messages like `Change "yolo"` in our update function. We will make much more use of these tags in our next example!
+This function is used to tag whatever is currently in the text field. So let's say the text field currently holds `yol` and the user types `o`. This triggers an `input` event, so we will get the message `Change "yolo"` in our `update` function.
+
+It is kind of weird to use this tag when there is only one possibility, but we will make good use of this in our next example!
