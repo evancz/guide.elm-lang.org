@@ -13,7 +13,7 @@
    * [Effects](architecture/effects/README.md)
        * [HTTP](architecture/effects/http.md)
        * [Time](architecture/effects/time.md)
-       * Animation
+       * [Animation](architecture/effects/animation.md)
        * Web Sockets
    * Reusable Components
        * Nesting
