@@ -4,8 +4,7 @@
 import Html exposing (Html, Attribute, text, toElement, div, input)
 import Html.App as Html
 import Html.Attributes exposing (..)
-import Html.Events exposing (onInput)
-import String
+import Html.Events exposing (onCheck)
 
 
 main =
