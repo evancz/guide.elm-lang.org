@@ -1,5 +1,7 @@
 # Text Fields
 
+In the last section we made a counter with increment and decrement buttons.
+
 ```elm
 import Html exposing (Html, Attribute, div, input, text)
 import Html.App as Html
@@ -37,24 +39,8 @@ update (Input newInput) model =
 view : Model -> Html Msg
 view model =
   div []
-    [ input
-        [ placeholder "Text to reverse"
-        , value model.input
-        , onInput Input
-        , myStyle
-        ]
-        []
-    , div [ myStyle ] [ text (String.reverse string) ]
+    [ input [ placeholder "Text to reverse", value model.input, onInput Input ] []
+    , div [] [ text (String.reverse string) ]
     ]
 
-
-myStyle : Attribute msg
-myStyle =
-  style
-    [ ("width", "100%")
-    , ("height", "40px")
-    , ("padding", "10px 0")
-    , ("font-size", "2em")
-    , ("text-align", "center")
-    ]
 ```
