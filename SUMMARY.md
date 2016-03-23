@@ -10,7 +10,7 @@
        * [Forms](architecture/user_input/forms.md)
        * [More](architecture/user_input/more.md)
    * [Effects](architecture/effects/README.md)
-       * Random
+       * [Random](architecture/effects/random.md)
        * [HTTP](architecture/effects/http.md)
        * [Time](architecture/effects/time.md)
        * [Animation](architecture/effects/animation.md)
