@@ -10,11 +10,11 @@
        * [Forms](architecture/user_input/forms.md)
        * [More](architecture/user_input/more.md)
    * [Effects](architecture/effects/README.md)
+       * Random
        * [HTTP](architecture/effects/http.md)
        * [Time](architecture/effects/time.md)
        * [Animation](architecture/effects/animation.md)
        * [Web Sockets](architecture/effects/web_sockets.md)
-       * Random
    * [Reusable Components](architecture/components/README.md)
        * Nesting
        * Communication
