@@ -8,7 +8,7 @@
        * [Buttons](architecture/user_input/buttons.md)
        * [Text Fields](architecture/user_input/text_fields.md)
        * [Forms](architecture/user_input/forms.md)
-       * More
+       * [More](architecture/user_input/more.md)
    * [Effects](architecture/effects/README.md)
        * [HTTP](architecture/effects/http.md)
        * [Time](architecture/effects/time.md)
