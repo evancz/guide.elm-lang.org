@@ -59,7 +59,7 @@ view model =
     , input [ type' "password", placeholder "Password", onInput Password ] []
     , input [ type' "password", placeholder "Re-enter Password", onInput PasswordAgain ] []
     , viewValidation model
-    ]  
+    ]
 
 viewValidation : Model -> Html msg
 viewValidation model =
@@ -70,9 +70,7 @@ viewValidation model =
       else
         ("red", "Passwords do not match!")
   in
-    div
-      [ style [("color", color)] ]
-      [ text message ]
+    div [ style [("color", color)] ] [ text message ]
 ```
 
 This is pretty much exactly our [text field example](TODO) looked, just with more fields. Let's walk through how it came to be!
@@ -112,16 +110,47 @@ update action model =
       { model | passwordAgain = password }
 ```
 
-We get a little bit fancier than normal in our `view` though. It all starts out normal. We create a `<div>` and put a couple `<input>` nodes in it. Each one has an `onInput` attribute that will tag any changes appropriately for our `update` function. (This is all building off of the text field example in the previous section.)
+We get a little bit fancier than normal in our `view` though.
 
-But for the last child we do not directly use an HTML function. Instead we call the `viewValidation` function, passing in the current model. This function compares the two passwords and produces a `<div>` filled with a colorful message explaining the situation.
+```elm
+view : Model -> Html Msg
+view model =
+  div []
+    [ input [ type' "text", placeholder "Name", onInput Name ] []
+    , input [ type' "password", placeholder "Password", onInput Password ] []
+    , input [ type' "password", placeholder "Re-enter Password", onInput PasswordAgain ] []
+    , viewValidation model
+    ]
+```
+
+It starts out normal: We create a `<div>` and put a couple `<input>` nodes in it. Each one has an `onInput` attribute that will tag any changes appropriately for our `update` function. (This is all building off of the text field example in the previous section.)
+
+But for the last child we do not directly use an HTML function. Instead we call the `viewValidation` function, passing in the current model.
+
+```elm
+viewValidation : Model -> Html msg
+viewValidation model =
+  let
+    (color, message) =
+      if model.password == model.passwordAgain then
+        ("green", "OK")
+      else
+        ("red", "Passwords do not match!")
+  in
+    div [ style [("color", color)] ] [ text message ]
+```
+
+This function first compares the two passwords. If they match, you want green text and a positive message. If they do not match, you want red text and a helpful message. With that info, we produce a `<div>` filled with a colorful message explaining the situation.
+
+This starts to show the benefits of having our HTML library be normal Elm code. It would have looked really weird to jam all that code into our `view`. In Elm, you just refactor like you would with any other code!
+
+On these same lines, you may notice that the `<input>` nodes all are created with pretty similar code. Say we made each input fancier: there is an outer `<div>` that holds a `<span>` and an `<input>` with certain classes. It would make total sense to break that pattern out into a `viewInput` function so you never have to repeat yourself. This also means you change it in one place and everyone gets the updated HTML.
 
 > **Exercises:** One cool thing about breaking `viewValidation` out is that it is pretty easy to augment. If you are messing with the code as you read through this (as you should be!) you should try to:
 >
->  * Check that the password is longer than 8 characters.
->  * Make sure the password contains upper case, lower case, and numeric characters.
->  * Add an additional field for `age` and check that it is a number.
+>  - Check that the password is longer than 8 characters.
+>  - Make sure the password contains upper case, lower case, and numeric characters.
+>  - Add an additional field for `age` and check that it is a number.
+>  - Add a "Submit" button. Only show errors *after* it has been pressed.
 >
-> Be sure to use the helpers in [the `String` library][string] if you try any of these!
-
-  [string]: package.elm-lang.org/packages/elm-lang/core/latest/String
+> Be sure to use the helpers in [the `String` library](package.elm-lang.org/packages/elm-lang/core/latest/String) if you try any of these! Also, we need to learn more before we start talking to servers, so before you try that here, keep reading until HTTP is introduced. It will be significantly easier with proper guidance!
