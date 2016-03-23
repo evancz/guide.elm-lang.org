@@ -1,6 +1,11 @@
 # Text Fields
 
-In the last section we made a counter with increment and decrement buttons.
+**[Demo](http://evancz.github.io/elm-architecture-tutorial/examples/2) / [See Code]()**
+
+We are about to create a simple app that reverses the contents of a text field.
+
+Again this is a pretty short program, so I have included the whole thing here. Skim through to get an idea of how everything fits together. Right after that we will go into much more detail!
+
 
 ```elm
 import Html exposing (Html, Attribute, div, input, text)
@@ -44,3 +49,7 @@ view model =
     ]
 
 ```
+
+This code is a slight variant of the counter from the previous section. Same exact model/update/view pattern. The HTML library works the same. The big difference is just in how we filled this skeleton in. Let's walk through that.
+
+As always, you start by figuring out what your `Model` should be. 
