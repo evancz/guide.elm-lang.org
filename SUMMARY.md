@@ -17,6 +17,7 @@
        * Web Sockets
    * Reusing Components
        * Nesting
+       * Communicating between Components
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
