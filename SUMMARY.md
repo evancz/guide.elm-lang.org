@@ -8,7 +8,6 @@
        * [Buttons](architecture/user_input/buttons.md)
        * [Text Fields](architecture/user_input/text_fields.md)
        * [Forms](architecture/user_input/forms.md)
-       * [Radio Buttons](architecture/user_input/radio_buttons.md)
        * [Check Boxes](architecture/user_input/check_boxes.md)
    * [Effects](architecture/effects/README.md)
        * [HTTP](architecture/effects/http.md)
