@@ -1,7 +1,7 @@
 # Text Fields
 
 ```elm
-import Html exposing (Html, Attribute, text, toElement, div, input)
+import Html exposing (Html, Attribute, div, input, text)
 import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
@@ -48,7 +48,7 @@ view model =
     ]
 
 
-myStyle : Attribute
+myStyle : Attribute msg
 myStyle =
   style
     [ ("width", "100%")
