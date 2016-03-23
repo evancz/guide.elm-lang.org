@@ -8,9 +8,53 @@ This section builds on the basic pattern we have seen so far, giving you the abi
 
   - **Subscriptions** &mdash; A subscription lets you register that you are interested in something. Maybe you want to hear about geolocation changes? Maybe you want to hear all the messages coming in on a web socket? Subscriptions let you sit passively and only get updates when they exist.
 
-Together, commands and subscriptions make it possible for your Elm components to talk the outside world.
+Together, commands and subscriptions make it possible for your Elm components to talk the outside world. But how do these new concepts fit into what we already know?
 
-This section covers a lot of important APIs as it gradually digs into these new concepts. I have ordered the examples to build on each other, so while you may want to skip to HTTP *right now*, I think you will end up reaching your goal faster if you read them in order.
+
+## Extending the Architecture Skeleton
+
+So far our architecture skeleton has focused on creating `Model` types and `update` and `view` functions. To handle commands and subscriptions, we need to extend the basic architecture skeleton a little bit:
+
+```elm
+-- MODEL
+
+type alias Model =
+  { ...
+  }
+  
+
+-- UPDATE
+
+type Msg = Submit | ...
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  ...
+  
+  
+-- VIEW
+
+view : Model -> Html Msg
+view model =
+  ...
+
+
+-- SUBSCRIPTIONS
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  ...
+```
+
+The two big additions are:
+
+  1. The `update` function now returns more than just a new model. It returns a new model and some commands you want to run. These commands are all going to produce `Msg` values that will get fed right back into our update function.
+
+  2. There is a `subscriptions` function. This function lets you declare any event sources you need to subscribe to given the current model. Just like with `Html Msg` and `Cmd Msg`, these subscriptions will produce `Msg` values that get fed right back into our update function.
+
+Now it is totally okay if this does not really make sense yet! That only really happens when you start seeing it in action, so lets hop right into the examples!
+
+* * *
 
 > **Aside:** One crucial detail here is that commands and subscriptions are *data*. When you create a command, you do not actually *do* it. Same with commands in real life. Let's try it. Eat an entire watermelon in one bite! Did you do it? No! You kept reading before you even *thought* about buying a tiny watermelon.
 > 
