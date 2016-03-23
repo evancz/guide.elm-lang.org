@@ -19,7 +19,7 @@
        * Nesting
        * Communication
 * [Error Handling](error_handling/README.md)
-   * Maybe
+   * [Maybe](error_handling/maybe.md)
    * Result
    * [Task](error_handling/task.md)
 * [Interop](interop.md)
