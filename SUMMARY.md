@@ -23,6 +23,6 @@
    * [Result](error_handling/result.md)
    * [Task](error_handling/task.md)
 * [Interop](interop.md)
-   * [JSON](json.md)
+   * [JSON](interop/json.md)
    * [JavaScript](javascript.md)
 
