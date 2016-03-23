@@ -24,5 +24,5 @@
    * [Task](error_handling/task.md)
 * [Interop](interop.md)
    * [JSON](interop/json.md)
-   * [JavaScript](javascript.md)
+   * [JavaScript](interop/javascript.md)
 
