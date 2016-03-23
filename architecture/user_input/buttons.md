@@ -1,6 +1,6 @@
 # Buttons
 
-**<hr/><div style="text-align: center;"><a href="http://evancz.github.io/elm-architecture-tutorial/examples/1">Demo</a> / <a href="">Code</a></div><hr/>**
+**[Demo](http://evancz.github.io/elm-architecture-tutorial/examples/1) / [See Code]()**
 
 Our first example is a simple counter that can be incremented or decremented. I find that it can be helpful to see the entire program in one place, so here it is! We will break it down afterwards.
 
