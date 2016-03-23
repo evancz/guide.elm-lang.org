@@ -2,7 +2,7 @@
 
 **[Demo](http://evancz.github.io/elm-architecture-tutorial/examples/2) / [See Code]()**
 
-We are about to create a simple app that reverses the contents of a text field.
+We are about to create a simple app that reverses the contents of a text field. This example also introduces some new stuff that will help us out in our next example.
 
 Again this is a pretty short program, so I have included the whole thing here. Skim through to get an idea of how everything fits together. Right after that we will go into much more detail!
 
