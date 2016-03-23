@@ -22,7 +22,7 @@
    * [Maybe](error_handling/maybe.md)
    * [Result](error_handling/result.md)
    * [Task](error_handling/task.md)
-* [Interop](interop.md)
+* [Interop](interop/README.md)
    * [JSON](interop/json.md)
    * [JavaScript](interop/javascript.md)
 
