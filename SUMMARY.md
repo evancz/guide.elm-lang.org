@@ -21,7 +21,7 @@
 * [Error Handling](error_handling/README.md)
    * Maybe
    * Result
-   * [Task](task.md)
+   * [Task](error_handling/task.md)
 * [Interop](interop.md)
    * [JSON](json.md)
    * [JavaScript](javascript.md)
