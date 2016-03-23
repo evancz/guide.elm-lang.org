@@ -16,6 +16,7 @@
        * Animation
        * Web Sockets
    * Reusing Components
+       * Nesting
 * [Error Handling](error_handling.md)
    * Maybe
    * Result
