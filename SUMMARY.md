@@ -15,7 +15,7 @@
        * [Time](architecture/effects/time.md)
        * [Animation](architecture/effects/animation.md)
        * [Web Sockets](architecture/effects/web_sockets.md)
-   * Reusable Components
+   * [Reusable Components](architecture/components/README.md)
        * Nesting
        * Communication
 * [Error Handling](error_handling.md)
