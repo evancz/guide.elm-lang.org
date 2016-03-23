@@ -116,10 +116,12 @@ We get a little bit fancier than normal in our `view` though. It all starts out 
 
 But for the last child we do not directly use an HTML function. Instead we call the `viewValidation` function, passing in the current model. This function compares the two passwords and produces a `<div>` filled with a colorful message explaining the situation.
 
-One cool thing about breaking `viewValidation` out is that it is pretty easy to augment. If you are messing with the code as you read through this (as you should be!) some fun exercises might are:
+> **Exercises:** One cool thing about breaking `viewValidation` out is that it is pretty easy to augment. If you are messing with the code as you read through this (as you should be!) you should try to:
+>
+>  * Check that the password is longer than 8 characters.
+>  * Make sure the password contains upper case, lower case, and numeric characters.
+>  * Add an additional field for `age` and check that it is a number.
+>
+> Be sure to use the helpers in [the `String` library][string] if you try any of these!
 
-  * Check that the password is longer than 8 characters.
-  * Make sure the password contains upper case, lower case, and numeric characters.
-  * Add an additional field for `age` and check that it is a number.
-
-Be sure to use the helpers in the `String` library if you try any of these!
+  [string]: package.elm-lang.org/packages/elm-lang/core/latest/String
