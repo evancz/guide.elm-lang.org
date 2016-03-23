@@ -15,7 +15,7 @@
        * Time
        * Animation
        * Web Sockets
-   * Reusing Components
+   * Reusable Components
        * Nesting
        * Communicating between Components
 * [Error Handling](error_handling.md)
