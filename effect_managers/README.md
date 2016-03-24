@@ -6,7 +6,7 @@ Well, behind the scenes there are these **effect managers** that handle all the 
 
 ## General Overview
 
-To be a bit more general, effect managers:
+Effect managers are an expert feature that:
 
   1. Let library authors to do all the dirty work of managing exotic effects.
   2. Let application authors use all that work with a nice simple API of commands and subscriptions.
