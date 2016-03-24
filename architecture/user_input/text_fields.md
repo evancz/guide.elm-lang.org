@@ -22,7 +22,7 @@ main =
 -- MODEL
 
 type alias Model =
-  { fieldContent : String
+  { content : String
   }
 
 model =
@@ -38,7 +38,7 @@ update : Msg -> Model -> Model
 update msg model =
   case msg of
     Change newContent ->
-      { model | fieldContent = newContent }
+      { model | content = newContent }
 
 
 -- VIEW
@@ -47,7 +47,7 @@ view : Model -> Html Msg
 view model =
   div []
     [ input [ placeholder "Text to reverse", onInput Change ] []
-    , div [] [ text (String.reverse model.fieldContent) ]
+    , div [] [ text (String.reverse model.content) ]
     ]
 ```
 
@@ -57,11 +57,13 @@ As always, you start by guessing at your `Model` should be. In our case, we know
 
 ```elm
 type alias Model =
-  { fieldContent : String
+  { content : String
   }
 ```
 
-This time I chose to represent the model as a record. (You can read more about records [here](TODO).) For now it just has one named field for our user input, so why not use the `String` by itself like we did in the counter example? Starting with a record makes it easy to add more fields as our app gets more complicated. When the time comes where we want *two* text inputs, we will have to do much less fiddling around.
+This time I chose to represent the model as a record. (You can read more about records [here](TODO).) For now, the record stores the user input in the `content` field.
+
+> **Note:** You may be wondering, why bother having a record if it only holds one entry? Couldn't you just use the string directly? Yes, of course! But starting with a record makes it easy to add more fields as our app gets more complicated. When the time comes where we want *two* text inputs, we will have to do much less fiddling around.
 
 Okay, so we have our model. Now in this app there is only one kind of message really. The user can change the contents of the text field.
 
@@ -80,7 +82,7 @@ update msg model =
       { model | fieldContent = newContent }
 ```
 
-When we receive new content, we use the record update syntax to update the contents of `fieldContent`. We do not *really* need to use this syntax here, but it will make things easier if we end up adding a bunch of fields to our model later.
+When we receive new content, we use the record update syntax to update the contents of `content`.
 
 Finally we need to say how to view our application:
 
@@ -105,4 +107,4 @@ Change : String -> Msg
 
 This function is used to tag whatever is currently in the text field. So let's say the text field currently holds `yol` and the user types `o`. This triggers an `input` event, so we will get the message `Change "yolo"` in our `update` function.
 
-It is kind of weird to use this tag when there is only one possibility, but we will make good use of this in our next example!
+So now we have a simple text field that can reverse user input. Neat! Now on to putting a bunch of text fields together into a more traditional form.
