@@ -28,4 +28,5 @@
 * [Effect Managers](effect_managers/README.md)
    * Batching
    * Caching
+   * Basics
 
