@@ -102,9 +102,11 @@ decodeGifUrl =
   Json.at ["data", "image_url"] Json.string
 ```
 
-Okay, so the `getRandomGif` function is not exceptionally crazy. We first define the `url` we need to hit to get random gifs.
+Okay, so the `getRandomGif` function is not exceptionally crazy. We first define the `url` we need to hit to get random gifs. Next we have [this `Http.simpleGet` function](TODO) which is going to GET some JSON from the `url` we give it. The other arguments all clarify what to do with the result of this GET.
 
-Next we have [this `Http.simpleGet` function](TODO) which is going to GET some JSON from the `url` we give it. The other arguments all clarify what to do with the result of this GET. The **first** argument is a message for when the GET fails. If the server is down or the URL is a 404, we want the `FetchFail` message to be fed into our `update` function. The **second** argument is a way to tag the result of a successful GET. So when we get some URL back like `http://example.com/json`, we convert it into  `FetchSuccess "http://example.com/json"` so that it can be fed into our `update` function. The **third** argument is a JSON decoder. This value describes how to turn a JSON string into an Elm value. In our case, we are saying "try to get the value at `json.data.image_url` and it should be a strung. (If you want a deeper understanding of JSON decoders, check out the full section on it later in this guide! For now you just need to know that it converts JSON into Elm values.)
+  1. The first argument `FetchFail` is a message for when the GET fails. If the server is down or the URL is a 404, we want the `FetchFail` message to be fed into our `update` function.
+  2. The second argument `FetchSuccess` is a way to tag the result of a successful GET. So when we get some URL back like `http://example.com/json`, we convert it into  `FetchSuccess "http://example.com/json"` so that it can be fed into our `update` function.
+  3. The third argument `decodeGifUrl` is a JSON decoder. This value describes how to turn a JSON string into an Elm value. In our case, we are saying "try to get the value at `json.data.image_url` and it should be a string. (If you want a deeper understanding of JSON decoders, check out the full section on it later in this guide! For now you just need to know that it converts JSON into Elm values.)
 
 Ultimately, `Http.simpleGet` is not doing anything too crazy. It GETs JSON from a URL, and turns the result into a message for our `update` function.
 
