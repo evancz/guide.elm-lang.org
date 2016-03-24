@@ -2,9 +2,9 @@
 
 Interop extraordinarily important if you want your language to succeed!
 
-This is just a historical fact. A huge part of why C++ was so successful was that it was easy to migrate a massive C codebase. If you look at the JVM, you see Scala and Clojure carving out pretty big niches for themselves thanks to their nice interop story with Java. It is the same with JavaScript and JSON. For industrial users, there is no point in having an amazing language with great guarantees if there is no way to slowly introduce it into an existing codebase!
+This is just a historical fact. A huge part of why C++ was so successful was that it was easy to migrate a massive C codebase. If you look at the JVM, you see Scala and Clojure carving out pretty big niches for themselves thanks to their nice interop story with Java. For industrial users, there is no point in having an amazing language with great guarantees if there is no way to slowly introduce it into an existing codebase! It is exactly the same in browsers too.
 
-This section focus on the two major kinds of interop that you need when working in browsers.
+This section focus on the major kinds of interop that you need when working in browsers.
 
   1. How to communicate with external services using JSON.
   2. How to embed Elm programs in existing HTML or React apps.
