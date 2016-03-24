@@ -2,7 +2,7 @@
 
 We are about to make an app that fetches a random GIF when the user asks for another image.
 
-When I write code like this, I usually break it into two phases. Phase one is about getting something on screen, just doing the bare minimum to have something to work from. Phase two is iteratively filling in details until I end up with the real thing.
+When I write code like this, I usually break it into two phases. Phase one is about getting something on screen, just doing the bare minimum to have something to work from. Phase two is iteratively filling in details until I end up with the real thing. We will use this process here too!
 
 
 ## Phase One - The Bare Minimum
@@ -18,7 +18,7 @@ type alias Model =
 
 I decided to track a `topic` so I know what kind of gifs to fetch. Maybe later we will want to let the user decide the topic too. I also tracked the `gifUrl` which is a URL that points at some random gif.
 
-At this point I would quickly sketch out the `view` function because it seems like the easiest next step.
+Then I would quickly sketch out the `view` function because it seems like the easiest next step.
 
 ```elm
 view : Model -> Html Msg
@@ -42,25 +42,35 @@ update msg model =
       (model, Cmd.none)
 ```
 
-The `update` function has some new stuff though:
+Now the `update` function has the same overall shape as before, but the return type is a bit different. Instead of just giving back a `Model`, it produces both a `Model` and a command. The idea is: **we still want to step the model forward, but we also want to do some stuff.** In our case, we want to send an HTTP request when the user presses the "More" button.
 
-  1. The return type of `update` is not just a `Model`. It is a pair of `Model` and commands now. The idea is that when we step the model forward, we may also want to do some stuff. In our case, we want to send an HTTP request when the user presses the "More" button.
+For now, I just fill it in with [`Cmd.none`](TODO) which means "I have no commands, do nothing." We will need to fill this in with an HTTP request in phase two, but the goal now is just to get something on screen.
 
-  2. The `MorePlease` branch is using this weird `(!)` operator. This 
+Finally, I would create an `init` value like this:
+
+```elm
+init : (Model, Cmd Msg)
+init =
+  (Model "funny cats" "waiting.gif", Cmd.none)
+```
+
+Here we specify both the initial model and some commands we'd like to run immediately when the app starts. This is exactly the kind of stuff that `update` is producing now too.
+
+At this point, it is possible to wire it all up and take a look. You can click the "More" button, but nothing happens. Let's fix that!
 
 
 ## Phase Two - Adding the Cool Stuff
 
-So now that we have a model, we should figure out what kind of messages we will be getting. We know the user will click a button. We also know we will send an HTTP request that may succeed or fail. So I'd go with this:
+The obvious thing missing right now is the HTTP request. When the user clicks a button we want to command Elm to send a request to `giphy.com` and ask for a random gif. I think it is easiest to start this process by adding new kinds of messages:
 
 ```elm
 type Msg
-  = RequestMore
+  = MorePlease
   | FetchSucceed String
   | FetchFail Http.Error
 ```
 
-In the case of `FetchSucceed` we get the new gif URL, and in the case of `FetchFail` we get some information about what went wrong in particular.
+We still have `MorePlease` from before, but now we add `FetchSucceed` and `FetchFail` to handle the results of an HTTP request. In the case of `FetchSucceed` we get the new gif URL, and in the case of `FetchFail` we get some information about what went wrong in particular.
 
 That is enough to start filling in `update`:
 
@@ -68,23 +78,25 @@ That is enough to start filling in `update`:
 update : Msg -> Model -> (Model, Cmd Msg)
 update action model =
   case action of
-    RequestMore ->
-      model ! [ getRandomGif model.topic ]
+    MorePlease ->
+      (model, getRandomGif model.topic)
 
-    NewGif url ->
-      { model | gifUrl = url } ! []
+    FetchSucceed newUrl ->
+      (Model model.topic newUrl, Cmd.none)
 
-    Fail _ ->
-      model ! []
+    FetchFail _ ->
+      (model, Cmd.none)
 ```
 
+So I added branches for our new messages. In the case of `FetchSucceed` we update the `gifUrl` field to have the new URL. In the case of `FetchFail` we pretty much ignore it, giving back the same model and doing nothing.
+
+I also changed the `MorePlease` branch a bit! Instead of giving back `Cmd.none`, it is calling this `getRandomGif` function with the current topic. This is more aspirational for now. I know I will be describing an HTTP command in a moment
 
 
 ```elm
 init : String -> (Model, Cmd Msg)
 init topic =
-  Model topic "assets/waiting.gif"
-    ! [ getRandomGif topic ]
+  (Model topic "waiting.gif", getRandomGif topic)
 
 
 -- COMMANDS
@@ -113,11 +125,6 @@ decodeUrl =
 >   - If you are interested in learning more about the HTTP library, I recommend you read through the entire section on Error Handling, working from `Maybe` to `Result` to `Task`. It can be tricky if you dive into tasks directly, so do not be afraid of building a conceptual foundation first! This kind of investment pays off in Elm.
 >   - If you want to learn more about JSON decoders, go read that section. It is way easier with guidance!
 
-```elm
-subscriptions : Model -> Sub Msg
-subscriptions model =
-  Sub.none
-```
 
 > **Exercises:** To get more comfortable with this code, try augmenting it with skills we learned in previous sections:
 > 
