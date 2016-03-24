@@ -11,20 +11,34 @@ Okay, so you read it now right? Good. Let's get started on our random gif fetche
 
 ## Phase One - The Bare Minimum
 
-As always, you start out by guessing at what your `Model` should be:
+At this point in this guide, you should be pretty comfortable smacking down the basic skeleton of an Elm app. Guess at the model, fill in some messages, etc. etc.
 
 ```elm
+-- MODEL
+
 type alias Model =
   { topic : String
   , gifUrl : String
   }
-```
 
-I decided to track a `topic` so I know what kind of gifs to fetch. Maybe later we will want to let the user decide the topic too. I also tracked the `gifUrl` which is a URL that points at some random gif.
+init : (Model, Cmd Msg)
+init =
+  (Model "cats" "waiting.gif", Cmd.none)
 
-Then I would quickly sketch out the `view` function because it seems like the easiest next step.
 
-```elm
+-- UPDATE
+
+type Msg = MorePlease
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  case msg of
+    MorePlease ->
+      (model, Cmd.none)
+
+
+-- VIEW
+
 view : Model -> Html Msg
 view model =
   div []
@@ -34,33 +48,9 @@ view model =
     ]
 ```
 
-So this is typical. Same stuff we have been doing with the user input examples of The Elm Architecture. We created a `<button>` that produces `MorePlease` messages, so I guess it is time to take a first pass at the `update` function as well.
+For my model, I decided to track a `topic` so I know what kind of gifs to fetch. I do not want to hard code it to `"cats"`, and maybe later we will want to let the user decide the topic too. I also tracked the `gifUrl` which is a URL that points at some random gif.
 
-```elm
-type Msg = MorePlease
-
-update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
-  case msg of
-    MorePlease ->
-      (model, Cmd.none)
-```
-
-Now the `update` function has the same overall shape as before, but the return type is a bit different. Instead of just giving back a `Model`, it produces both a `Model` and a command. The idea is: **we still want to step the model forward, but we also want to do some stuff.** In our case, we want to send an HTTP request when the user presses the "More" button.
-
-For now, I just fill it in with [`Cmd.none`](TODO) which means "I have no commands, do nothing." We will need to fill this in with an HTTP request in phase two, but the goal now is just to get something on screen.
-
-Finally, I would create an `init` value like this:
-
-```elm
-init : (Model, Cmd Msg)
-init =
-  (Model "funny cats" "waiting.gif", Cmd.none)
-```
-
-Here we specify both the initial model and some commands we'd like to run immediately when the app starts. This is exactly the kind of stuff that `update` is producing now too.
-
-At this point, it is possible to wire it all up and take a look. You can click the "More" button, but nothing happens. Let's fix that!
+Just like in the randomness example, I just made dummy `init`, `update`, and `view` functions. None of them actually produce any commands for now. The point is just to get something on screen!
 
 
 ## Phase Two - Adding the Cool Stuff
