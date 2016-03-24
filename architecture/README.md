@@ -50,4 +50,4 @@ view model =
   ...
 ```
 
-We will proceed by filling in this skeleton with increasingly interesting logic.
+That is really the essence of The Elm Architecture! We will proceed by filling in this skeleton with increasingly interesting logic.
