@@ -25,5 +25,5 @@
 * [Interop](interop/README.md)
    * [JSON](interop/json.md)
    * [JavaScript](interop/javascript.md)
-* Effect Managers
+* [Effect Managers](effect_managers/README.md)
 
