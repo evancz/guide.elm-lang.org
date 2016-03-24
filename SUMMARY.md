@@ -27,5 +27,5 @@
    * [JavaScript](interop/javascript.md)
 * [Effect Managers](effect_managers/README.md)
    * [Caching](effect_managers/caching.md)
-   * Batching
+   * [Batching](effect_managers/batching.md)
 
