@@ -2,7 +2,11 @@
 
 We are about to make an app that fetches a random GIF when the user asks for another image.
 
-When I write code like this, I usually break it into two phases. Phase one is about getting something on screen, just doing the bare minimum to have something to work from. Phase two is iteratively filling in details until I end up with the real thing. We will use this process here too!
+Now, I am going to assume you just read the randomness example. It (1) introduces a two step process for writing apps like this and (2) shows the simplest kind of commands possible. Here we will be using the same two step process to build up to fancier kinds of commands, so I very highly recommend going back one page. I swear you will reach your goals faster if you start with a solid foundation!
+
+...
+
+Okay, so you read it now right? Good. Let's get started on our random gif fetcher!
 
 
 ## Phase One - The Bare Minimum
