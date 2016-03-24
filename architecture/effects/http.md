@@ -48,23 +48,23 @@ view model =
     ]
 ```
 
-For my model, I decided to track a `topic` so I know what kind of gifs to fetch. I do not want to hard code it to `"cats"`, and maybe later we will want to let the user decide the topic too. I also tracked the `gifUrl` which is a URL that points at some random gif.
+For the model, I decided to track a `topic` so I know what kind of gifs to fetch. I do not want to hard code it to `"cats"`, and maybe later we will want to let the user decide the topic too. I also tracked the `gifUrl` which is a URL that points at some random gif.
 
-Just like in the randomness example, I just made dummy `init`, `update`, and `view` functions. None of them actually produce any commands for now. The point is just to get something on screen!
+Like in the randomness example, I just made dummy `init` and `update` functions. None of them actually produce any commands for now. The point is just to get something on screen!
 
 
 ## Phase Two - Adding the Cool Stuff
 
-The obvious thing missing right now is the HTTP request. When the user clicks a button we want to command Elm to send a request to `giphy.com` and ask for a random gif. I think it is easiest to start this process by adding new kinds of messages:
+Alright, the obvious thing missing right now is the HTTP request. I think it is easiest to start this process by adding new kinds of messages. Now remember, **when you give a command, you have to wait for it to happen.** So when we command Elm to do an HTTP request, it is eventually going to tell you "hey, here is what you wanted" or it is going to say "oops, something went wrong with the HTTP request". We need this to be reflected in our messages:
 
 ```elm
 type Msg
   = MorePlease
   | FetchSucceed String
-  | FetchFail Http.Error
+  | FetchFail
 ```
 
-We still have `MorePlease` from before, but now we add `FetchSucceed` and `FetchFail` to handle the results of an HTTP request. In the case of `FetchSucceed` we get the new gif URL, and in the case of `FetchFail` we get some information about what went wrong in particular.
+We still have `MorePlease` from before, but for the HTTP results, we add `FetchSucceed` that holds the new gif URL and `FetchFail` that indicates there was some HTTP issue (server is down, bad URL, etc.)
 
 That is enough to start filling in `update`:
 
@@ -78,47 +78,37 @@ update action model =
     FetchSucceed newUrl ->
       (Model model.topic newUrl, Cmd.none)
 
-    FetchFail _ ->
+    FetchFail ->
       (model, Cmd.none)
 ```
 
 So I added branches for our new messages. In the case of `FetchSucceed` we update the `gifUrl` field to have the new URL. In the case of `FetchFail` we pretty much ignore it, giving back the same model and doing nothing.
 
-I also changed the `MorePlease` branch a bit! Instead of giving back `Cmd.none`, it is calling this `getRandomGif` function with the current topic. This is more aspirational for now. I know I will be describing an HTTP command in a moment
+I also changed the `MorePlease` branch a bit. We need an HTTP command, so I called the `getRandomGif` function. The trick is that I made that function up. It does not exist yet. That is the next step!
 
+Defining `getRandomGif` might look something like this:
 
 ```elm
-init : String -> (Model, Cmd Msg)
-init topic =
-  (Model topic "waiting.gif", getRandomGif topic)
-
-
--- COMMANDS
-
 getRandomGif : String -> Cmd Msg
 getRandomGif topic =
-  Task.perform Fail NewGif
-    (Http.get decodeUrl (randomUrl topic))
+  let
+    url =
+      "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" ++ topic
+  in
+    Http.simpleGet FetchFail FetchSuccess decodeGifUrl url
 
-
-randomUrl : String -> String
-randomUrl topic =
-  Http.url "http://api.giphy.com/v1/gifs/random"
-    [ ("api_key", "dc6zaTOxFJmzC")
-    , ("tag", topic)
-    ]
-
-
-decodeUrl : Json.Decoder String
-decodeUrl =
+decodeGifUrl : Json.Decoder String
+decodeGifUrl =
   Json.at ["data", "image_url"] Json.string
 ```
 
-> **Notes:** A bunch of concepts are needed here, but we need to stay focused on commands and subscriptions for now.
-> 
->   - If you are interested in learning more about the HTTP library, I recommend you read through the entire section on Error Handling, working from `Maybe` to `Result` to `Task`. It can be tricky if you dive into tasks directly, so do not be afraid of building a conceptual foundation first! This kind of investment pays off in Elm.
->   - If you want to learn more about JSON decoders, go read that section. It is way easier with guidance!
+Okay, so the `getRandomGif` function is not exceptionally crazy. We first define the `url` we need to hit to get random gifs.
 
+Next we have [this `Http.simpleGet` function](TODO) which is going to GET some JSON from the `url` we give it. The other arguments all clarify what to do with the result of this GET. The **first** argument is a message for when the GET fails. If the server is down or the URL is a 404, we want the `FetchFail` message to be fed into our `update` function. The **second** argument is a way to tag the result of a successful GET. So when we get some URL back like `http://example.com/json`, we convert it into  `FetchSuccess "http://example.com/json"` so that it can be fed into our `update` function. The **third** argument is a JSON decoder. This value describes how to turn a JSON string into an Elm value. In our case, we are saying "try to get the value at `json.data.image_url` and it should be a strung. (If you want a deeper understanding of JSON decoders, check out the full section on it later in this guide! For now you just need to know that it converts JSON into Elm values.)
+
+Ultimately, `Http.simpleGet` is not doing anything too crazy. It GETs JSON from a URL, and turns the result into a message for our `update` function.
+
+So now when you click the "More" button, it actually goes and fetches a random gif!
 
 > **Exercises:** To get more comfortable with this code, try augmenting it with skills we learned in previous sections:
 > 
