@@ -4,6 +4,8 @@ Commands and subscriptions are a big part of how Elm works. So far we have just 
 
 Well, behind the scenes there are these **effect managers** that handle all the resource management and optimization that makes commands and subscriptions so nice to use!
 
+## General Overview
+
 To be a bit more general, effect managers:
 
   1. Let library authors to do all the dirty work of managing exotic effects.
@@ -19,4 +21,6 @@ This pattern exists for a lot of backend services. Other good examples include:
 
 Hopefully the pattern is becoming more clear. A library author sorts out how to interact with a particular backend service once, and then every other developer ever can just use commands and subscriptions without caring about what is behind the curtain.
 
-The examples that follow will outline some simple effect managers that cover a couple common patterns, like batching and caching.
+## Simple Example
+
+Implement an effect manager for producing unique IDs.
