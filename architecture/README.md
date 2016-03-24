@@ -4,7 +4,7 @@
 
 This architecture seems to emerge naturally in Elm. We first observed it in the games the Elm community was making. Then in web apps like [TodoMVC][] and [dreamwriter][] to. Now we see it running in production at companies like [NoRedInk][] and [CircuitHub][]. The architecture seems to be a consequence of the design of Elm itself, so it will happen to you whether you know about it or not. This has proven to be really nice for onboarding new developers. Their code just turns out well-architected. It is somewhat unsettling.
 
-So The Elm Architecture is *easy* in Elm, but it is useful in any front-end project. In fact, projects like Redux translate The Elm Architecture directly into JavaScript, so you may have already seen derivatives of this pattern. Point is, even if you ultimately cannot use Elm at work yet, you will get a lot out of using Elm and internalizing this pattern.
+So The Elm Architecture is *easy* in Elm, but it is useful in any front-end project. In fact, projects like Redux translate The Elm Architecture into JavaScript pretty directly, so you may have already seen derivatives of this pattern. Point is, even if you ultimately cannot use Elm at work yet, you will get a lot out of using Elm and internalizing this pattern.
 
 [Elm]: http://elm-lang.org/
 [TodoMVC]: https://github.com/evancz/elm-todomvc
