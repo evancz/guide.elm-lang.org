@@ -53,3 +53,51 @@ At this point, it is possible to wire it all up and take a look. You can click t
 
 ## Phase Two - Adding the Cool Stuff
 
+The obvious thing missing right now is the randomness! When the user clicks a button we want to command Elm to reach into its internal random number generator and give us a number between 1 and 6. The first step I would take towards that goal would be adding a new kind of message:
+
+```elm
+type Msg
+  = Roll
+  | NewFace Int
+```
+
+We still have `Roll` from before, but now we add `NewFace` for when Elm hands us our new random number. That is enough to start filling in `update`:
+
+```elm
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  case msg of
+    Roll ->
+      (model, Random.request NewFace (Random.int 1 6))
+
+    NewFace newFace ->
+      (Model newFace, Cmd.none)
+```
+
+There are two new things here. **First**, there is now a branch for `NewFace` messages. When a `NewFace` comes in, we just step the model forward and do nothing. **Second**, we have added a real command to the `Roll` branch. This uses a couple functions from [the `Random` library](TODO). Most important is `Random.request`:
+
+```elm
+Random.request : (a -> msg) -> Random.Generator a -> Cmd msg
+```
+
+This function takes two arguments. The first is a function to tag random values. In our case we want to use `NewFace : Int -> Msg` to turn the random number into a message for our `update` function. The second argument is a "generator" which is like a recipe for producing certain types of random values. You can have generators for simple types like `Int` or `Float` or `Bool`, but also for fancy types like big custom records with lots of fields. In this case, we use one of the simplest generators:
+
+```elm
+Random.int : Int -> Int -> Random.Generator Int
+```
+
+You provide a lower and upper bound on the integer, and now you have a generator that produces integers in that range!
+
+That is it! Now we can click the 
+
+> **Exercises:** Here are some that build on stuff that has already been introduced:
+> 
+>   - Instead of showing a number, show the die face as an image.
+>   - Add a second die and have them both roll at the same time.
+>
+> And here are some that require new skills:
+> 
+>   - Instead of showing an image of a die face, use the `elm-lang/svg` library to draw it yourself.
+>   - After you have learned about tasks and animation, have the die flip around randomly before they settle on a final value.
+
+
