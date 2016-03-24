@@ -16,7 +16,7 @@
        * [Animation](architecture/effects/animation.md)
        * [Web Sockets](architecture/effects/web_sockets.md)
    * [Reusable Components](architecture/components/README.md)
-       * Nesting
+       * [Nesting](architecture/components/nesting.md)
        * Communication
 * [Error Handling](error_handling/README.md)
    * [Maybe](error_handling/maybe.md)
