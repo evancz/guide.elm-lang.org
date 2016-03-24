@@ -60,7 +60,7 @@ Now that we have a model to work with, we need to define how it changes over tim
 type Msg = Increment | Decrement
 ```
 
-I definitely know the user will be able to increment and decrement the counter. The `Msg` type describes these capabilities as *data*. Important! From there, the `update` function just describes what to do when you receive one of these messages. If you get an `Increment` you increment the model. If you get a `Decrement` you decrement the model. Pretty straight-forward stuff.
+I definitely know the user will be able to increment and decrement the counter. The `Msg` type describes these capabilities as *data*. Important! From there, the `update` function just describes what to do when you receive one of these messages.
 
 ```elm
 update : Msg -> Model -> Model
@@ -73,7 +73,7 @@ update msg model =
       model - 1
 ```
 
-**Aside:** This is super easy to extend as our product requirements change. Say your product manager has come up with this amazing "reset" feature. A new button that will reset the counter to zero. To add the feature you come back to the `Msg` type and add another possibility: `Reset`. You then move on to the `update` function and describe what happens when you get that message. The Elm compiler will tell you when a `case` expression is missing a possibility, so there is no risk these new messages are unhandled.
+If you get an `Increment` message, you increment the model. If you get a `Decrement` message, you decrement the model. Pretty straight-forward stuff.
 
 Okay, so that's all good, but how do we actually make some HTML and show it on screen? Elm has a library called `elm-lang/html` that gives you full access to HTML5 as normal Elm functions:
 
@@ -94,3 +94,10 @@ Another thing to notice is that `div` and `button` are just normal Elm functions
 There is also something a bit deeper going on here. **The view code is entirely declarative**. We take in a `Model` and produce some `Html`. That is it. There is no need to mutate the DOM manually, Elm takes care of that behind the scenes. This gives Elm [much more freedom to make clever optimizations][elm-html] and ends up making rendering *faster* overall. So you write less code and the code runs faster. The best kind of abstraction!
 
 This pattern is the essence of The Elm Architecture. Every example we see from now on will be a slight variation on this basic pattern: `Model`, `update`, `view`.
+
+
+> **Exercise:** One cool thing about The Elm Architecture is that it is super easy to extend as our product requirements change. Say your product manager has come up with this amazing "reset" feature. A new button that will reset the counter to zero.
+> 
+> To add the feature you come back to the `Msg` type and add another possibility: `Reset`. You then move on to the `update` function and describe what happens when you get that message. Finally you add a button in your view.
+> 
+> See if you can implement the "reset" feature!
