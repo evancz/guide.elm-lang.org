@@ -17,7 +17,7 @@
        * [Web Sockets](architecture/effects/web_sockets.md)
    * [Reusable Components](architecture/components/README.md)
        * [Nesting](architecture/components/nesting.md)
-       * Communication
+       * [Communication](architecture/components/communication.md)
 * [Error Handling](error_handling/README.md)
    * [Maybe](error_handling/maybe.md)
    * [Result](error_handling/result.md)
