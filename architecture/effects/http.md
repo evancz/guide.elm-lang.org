@@ -2,9 +2,10 @@
 
 We are about to make an app that fetches a random GIF when the user asks for another image.
 
-The last section showed how we can use commands to get random values. Here we use commands to make HTTP requests. It is exactly the same mechanism, but the data we are putting in the command is a bit fancier.
+When I write code like this, I usually break it into two phases. Phase one is about getting something on screen, just doing the bare minimum to have something to work from. Phase two is iteratively filling in details until I end up with the real thing.
 
-The full code lives [here](TODO). I recommend cloning that repo and playing with it yourself!
+
+## Phase One - The Bare Minimum
 
 As always, you start out by guessing at what your `Model` should be:
 
@@ -17,7 +18,38 @@ type alias Model =
 
 I decided to track a `topic` so I know what kind of gifs to fetch. Maybe later we will want to let the user decide the topic too. I also tracked the `gifUrl` which is a URL that points at some random gif.
 
-> **Note:** At this point I would start experimenting to proceed. Often I'll just start with the parts I definitely understand, so I'd set up my `update` and `view` to show a waiting gif and a button that does nothing. You click the button and nothing changes. From there I'd figure out HTTP and JSON stuff. From there I'd figure out what that means for the `update` and `init` functions. Refactor. Add more stuff. Etc. My favorite thing about The Elm Architecture is that I can muddle along without a clear idea of what I'm doing and somehow end up with decent code at the end. Hopefully this perspective is helpful for when you write your own code, but for the sake of clarity, I will present things as if I knew what to do the first time around!
+At this point I would quickly sketch out the `view` function because it seems like the easiest next step.
+
+```elm
+view : Model -> Html Msg
+view model =
+  div []
+    [ h2 [] [text model.topic]
+    , img [src model.gifUrl] []
+    , button [ onClick MorePlease ] [ text "More Please!" ]
+    ]
+```
+
+So this is typical. Same stuff we have been doing with the user input examples of The Elm Architecture. We created a `<button>` that produces `MorePlease` messages, so I guess it is time to take a first pass at the `update` function as well.
+
+```elm
+type Msg = MorePlease
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  case msg of
+    MorePlease ->
+      (model, Cmd.none)
+```
+
+The `update` function has some new stuff though:
+
+  1. The return type of `update` is not just a `Model`. It is a pair of `Model` and commands now. The idea is that when we step the model forward, we may also want to do some stuff. In our case, we want to send an HTTP request when the user presses the "More" button.
+
+  2. The `MorePlease` branch is using this weird `(!)` operator. This 
+
+
+## Phase Two - Adding the Cool Stuff
 
 So now that we have a model, we should figure out what kind of messages we will be getting. We know the user will click a button. We also know we will send an HTTP request that may succeed or fail. So I'd go with this:
 
@@ -53,23 +85,6 @@ init : String -> (Model, Cmd Msg)
 init topic =
   Model topic "assets/waiting.gif"
     ! [ getRandomGif topic ]
-
-
-
--- VIEW
-
-view : Model -> Html Msg
-view model =
-  div []
-    [ h2 [] [text model.topic]
-    , div [imgStyle model.gifUrl] []
-    , button [ onClick RequestMore ] [ text "More Please!" ]
-    ]
-
-
-imgStyle : String -> Attribute msg
-imgStyle url =
-  style [ ("background-image", "url('" ++ url ++ "')")  ]
 
 
 -- COMMANDS
