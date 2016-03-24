@@ -24,7 +24,7 @@
    * [Task](error_handling/task.md)
 * [Interop](interop/README.md)
    * [JSON](interop/json.md)
-   * HTML
+   * [HTML](interop/html.md)
    * [JavaScript](interop/javascript.md)
 * [Effect Managers](effect_managers/README.md)
    * [Caching](effect_managers/caching.md)
