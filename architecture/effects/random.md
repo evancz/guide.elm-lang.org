@@ -88,7 +88,15 @@ Random.int : Int -> Int -> Random.Generator Int
 
 You provide a lower and upper bound on the integer, and now you have a generator that produces integers in that range!
 
-That is it! Now we can click the 
+That is it. Now we can click and see the number flip to some new value!
+
+So the big lessons here are:
+
+  - Write your programs bit by bit. Start with a simple skeleton, and gradually add the tougher stuff.
+  - The `update` function now produces a new model *and* a command.
+  - You cannot just get random values willy-nilly. You create a command for Elm, and Elm will go do some work behind the scenes to provide it for you. Any time our program needs to get unreliable values (randomness, HTTP, file I/O, etc.) you have to go through Elm.
+
+At this point, the best way to improve your understanding of commands is just to see more of them! They will appear prominently with the `Http` and `WebSocket` libraries, so if you are feeling shaky, the only path forward is practicing with randomness and playing with other examples of commands!
 
 > **Exercises:** Here are some that build on stuff that has already been introduced:
 > 
