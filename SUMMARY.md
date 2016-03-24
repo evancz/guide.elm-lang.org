@@ -26,7 +26,7 @@
    * [JSON](interop/json.md)
    * [JavaScript](interop/javascript.md)
 * [Effect Managers](effect_managers/README.md)
+   * Basics
    * Batching
    * Caching
-   * Basics
 
