@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [Core Language](core_language.md)
-* [Thinking Functionally](model_the_problem.md)
+* [Thinking Functionally](thinking_functionally/README.md)
    * Recursion
    * Reading Types
    * Union Types
