@@ -8,7 +8,9 @@ We are going to make a simple chat app. There will be a text field so you can ty
 In other words, `WebSocket` is one of the rare libraries that makes use of both commands and subscriptions.
 
 
+```elm
 
+```
 
 
 For simplicity we will target a simple server that just echos back whatever you type. So you will not be able to have the most exciting conversations in the basic version, but that is why we have exercises on these examples!
