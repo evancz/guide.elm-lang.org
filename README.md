@@ -10,7 +10,7 @@ This guide will:
 
 By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use.
 
-If you are on the fence, I can safely guarantee that if you give Elm a shot, you will end up writing better JavaScript and React code. The ideas transfer pretty easily!
+If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript and React code. The ideas transfer pretty easily!
 
 
 ## A Quick Sample
