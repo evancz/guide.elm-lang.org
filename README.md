@@ -13,19 +13,6 @@ By the end I hope you will not only be able to create great web apps in Elm, but
 If you are on the fence, I can safely guarantee that if you give Elm a shot, you will end up writing better JavaScript and React code. The ideas transfer pretty easily!
 
 
-## Why a *functional* language?
-
-Forget about functional programming. Fancy words, weird ideas, bad tooling. Barf. Elm is about:
-
-  - No runtime errors in practice.
-  - Friendly error messages that help you add features more quickly.
-  - Well-architected code that *stays* well-architected as your app grows.
-  - Automatically enforced semantic versioning for all Elm packages.
-  - Reliable time-travel debugging.
-
-No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because the practical benefits are worth the couple hours you'll spend reading this guide.
-
-
 ## A Quick Sample
 
 Of course *I* think Elm is good, so look for yourself.
@@ -44,6 +31,7 @@ main =
 
 type Msg = Increment | Decrement
 
+
 update msg model =
   case msg of
     Increment ->
@@ -60,3 +48,18 @@ view model =
     , button [ onClick Increment ] [ text "+" ]
     ]
 ```
+
+Notice that the `update` and `view` are entirely decoupled. You describe your HTML in a declarative way and Elm takes care of messing with the DOM.
+
+
+## Why a *functional* language?
+
+Forget about functional programming. Fancy words, weird ideas, bad tooling. Barf. Elm is about:
+
+  - No runtime errors in practice.
+  - Friendly error messages that help you add features more quickly.
+  - Well-architected code that *stays* well-architected as your app grows.
+  - Automatically enforced semantic versioning for all Elm packages.
+  - Reliable time-travel debugging.
+
+No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because the practical benefits are worth the couple hours you'll spend reading this guide.
