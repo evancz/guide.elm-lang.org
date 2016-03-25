@@ -8,7 +8,9 @@ This guide will:
   - Show you how to make interactive apps with *The Elm Architecture*.
   - Emphasize the principles and patterns that generalize to programming in any language.
 
-By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas that it is built upon.
+By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make this process so nice.
+
+If you are on the fence, I can safely guarantee that if you give Elm a shot, you will end up writing better JavaScript and React code. The ideas transfer pretty easily!
 
 
 ## Why a *functional* language?
