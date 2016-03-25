@@ -62,4 +62,4 @@ Forget about functional programming. Fancy words, weird ideas, bad tooling. Barf
   - Automatically enforced semantic versioning for all Elm packages.
   - Reliable time-travel debugging.
 
-No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because the practical benefits are worth the couple hours you'll spend reading this guide.
+No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because the practical benefits are worth the couple hours you'll spend reading this guide. I have worked really hard to make the learning curve in Elm extremely gradual and easy!
