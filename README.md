@@ -24,3 +24,39 @@ Forget about functional programming. Fancy words, weird ideas, bad tooling. Barf
   - Reliable time-travel debugging.
 
 No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because the practical benefits are worth the couple hours you'll spend reading this guide.
+
+
+## A Quick Sample
+
+Of course *I* think Elm is good, so look for yourself.
+
+Here is a simple counter. You can increment and decrement the counter:
+
+```elm
+import Html exposing (Html, button, div, text)
+import Html.App as Html
+import Html.Events exposing (onClick)
+
+
+main =
+  Html.simpleProgram { model = 0, view = view, update = update }
+
+
+type Msg = Increment | Decrement
+
+update msg model =
+  case msg of
+    Increment ->
+      model + 1
+
+    Decrement ->
+      model - 1
+
+
+view model =
+  div []
+    [ button [ onClick Decrement ] [ text "-" ]
+    , div [] [ text (toString model) ]
+    , button [ onClick Increment ] [ text "+" ]
+    ]
+```
