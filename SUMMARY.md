@@ -5,7 +5,7 @@
 * [Thinking Functionally](thinking_functionally/README.md)
    * Recursion
    * Reading Types
-   * Union Types
+   * [Union Types](thinking_functionally/union_types.md)
 * [The Elm Architecture](architecture/README.md)
    * [User Input](architecture/user_input/README.md)
        * [Buttons](architecture/user_input/buttons.md)
