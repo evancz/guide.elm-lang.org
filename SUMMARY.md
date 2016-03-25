@@ -3,6 +3,7 @@
 * [Introduction](README.md)
 * [Core Language](core_language.md)
 * [Thinking Functionally](model_the_problem.md)
+   * Recursion
 * [The Elm Architecture](architecture/README.md)
    * [User Input](architecture/user_input/README.md)
        * [Buttons](architecture/user_input/buttons.md)
