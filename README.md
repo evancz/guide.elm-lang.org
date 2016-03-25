@@ -1,13 +1,13 @@
 # An Introduction to Elm
 
-Elm is a function language for web programming.
+**Elm is a functional language that compiles to JavaScript.** It competes with projects like React as a tool for creating websites and web apps.
 
 
-## Functional Programming
+## Why a *functional* language?
 
-On some level, I do not care about functional programming. I care that Elm users can make delightful apps quickly and easily. I care that they can maintain their codebases as requirements change and their project evolves. Ultimately, I care about engineering. Making something excellent and making it well.
+On some level, functional programming is not that important for Elm. Elm is *really* about making delightful apps quickly. It is about maintaining great codebases as projects evolve and grow. Ultimately, it is about making excellent products and making them well.
 
-In Elm this means:
+So forget about functional programming. Elm is about:
 
   - No runtime errors in practice.
   - Friendly error messages that help you add features more quickly.
@@ -16,7 +16,7 @@ In Elm this means:
   - Reliable time-travel debugging.
   - ...
 
-So yeah, functional programming is interesting and cool, but the premise of Elm is **the core concepts of functional programming are extremely *useful*.** So my goal with this language is to strip away all the silly words and mystery surrounding functional programming and finally make a language in the ML-family that is easy to learn and *use*.
+Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. No combination of JS libraries can ever give you this. So Elm is a functional language because I think this is how we end up with a language that is easier and more fun to use.
 
 
 ## Goals
