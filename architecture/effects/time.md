@@ -71,3 +71,21 @@ view model =
       , line [ x1 "50", y1 "50", x2 handX, y2 handY ] []
       ]
 ```
+
+There is nothing new in the `MODEL` or `UPDATE` sections. Same old stuff. The `view` function is kind of interesting. Instead of using HTML, we use the `Svg` library to draw some shapes. It is pretty much the same as all the HTML stuff we have seen so far, just now for SVG.
+
+The important thing comes in `SUBSCRIPTIONS` section. The `subscriptions` function takes in the model, and instead of returning `Sub.none` like in the examples we have seen so far, it gives back a real life subscription! In this case `Time.every`:
+
+```elm
+Time.every : Time -> (Time -> msg) -> Sub msg
+```
+
+The first argument is a time interval. We chose to get ticks every second. The second argument is a function that turns the current time into a message for the `update` function. We are tagging times with `Tick` so the time 1458863979862 would become `Tick 1458863979862`.
+
+That is all there is to setting up a subscription! These messages will be fed to your `update` function whenever they become available.
+
+
+> **Exercises:**
+> 
+>   - Add a button to pause the clock, turning the `Time` subscription off.
+>   - Make the clock look nicer. Add an hour and minute hand. Etc.
