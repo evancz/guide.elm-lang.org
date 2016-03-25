@@ -1,11 +1,19 @@
 # An Introduction to Elm
 
-**Elm is a functional language that compiles to JavaScript.** It competes with projects like React as a tool for creating websites and web apps.
+**Elm is a functional language that compiles to JavaScript.** It competes with projects like React as a tool for creating websites and web apps. Elm has a very strong emphasis on ease-of-use and quality tooling.
+
+This guide will:
+
+  - Teach you the fundamentals of programming in Elm.
+  - Show you how to make interactive apps with *The Elm Architecture*.
+  - Emphasize the principles and patterns that generalize to programming in any language.
+
+By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas that it is built upon.
 
 
 ## Why a *functional* language?
 
-On some level, functional programming is not that important for Elm. Elm is *really* about making delightful apps quickly. It is about maintaining great codebases as projects evolve and grow. Ultimately, it is about making excellent products and making them well.
+On some level, functional programming is not that important for Elm. Elm is *really* about making apps quickly. It is about maintaining great codebases as projects evolve and grow. Ultimately, it is about making delightful products and making them well.
 
 So forget about functional programming. Elm is about:
 
@@ -15,7 +23,7 @@ So forget about functional programming. Elm is about:
   - Automatically enforced semantic versioning for all Elm packages.
   - Reliable time-travel debugging.
 
-No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because these practical benefits are worth it.
+No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because the practical benefits are worth investing a week in learning.
 
 
 ## Goals
