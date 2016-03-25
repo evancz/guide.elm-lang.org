@@ -72,7 +72,7 @@ view model =
       ]
 ```
 
-There is nothing new in the `MODEL` or `UPDATE` sections. Same old stuff. The `view` function is kind of interesting. Instead of using HTML, we use the `Svg` library to draw some shapes. It is pretty much the same as all the HTML stuff we have seen so far, just now for SVG.
+There is nothing new in the `MODEL` or `UPDATE` sections. Same old stuff. The `view` function is kind of interesting. Instead of using HTML, we use the `Svg` library to draw some shapes. It works just like HTML though. You provide a list of attributes and a list of children for every node.
 
 The important thing comes in `SUBSCRIPTIONS` section. The `subscriptions` function takes in the model, and instead of returning `Sub.none` like in the examples we have seen so far, it gives back a real life subscription! In this case `Time.every`:
 
