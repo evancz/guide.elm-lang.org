@@ -16,7 +16,7 @@ So forget about functional programming. Elm is about:
   - Reliable time-travel debugging.
   - ...
 
-Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. No combination of JS libraries can ever give you this. So Elm is a functional language because I think this is how we end up with a language that is easier and more fun to use.
+No combination of JS libraries can ever give you this. Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because it lets us build a better ecosystem than ever before.
 
 
 ## Goals
