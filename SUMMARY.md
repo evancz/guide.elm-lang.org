@@ -4,7 +4,7 @@
 * [Core Language](core_language.md)
 * [Thinking Functionally](thinking_functionally/README.md)
    * [Recursion](thinking_functionally/recursion.md)
-   * Reading Types
+   * [Reading Types](thinking_functionally/reading_types.md)
    * [Union Types](thinking_functionally/union_types.md)
 * [The Elm Architecture](architecture/README.md)
    * [User Input](architecture/user_input/README.md)
