@@ -1,11 +1,51 @@
 # Types
 
-One of Elm's major benefits is that **users do not see runtime errors in practice**. This is only possible because Elm has types and type inference.
+One of Elm's major benefits is that **users do not see runtime errors in practice**. This is possible because the Elm compiler can analyze your source code very quickly to see how values flow through your program. If a value can ever be used in an invalid way, the compiler tells you about it with a friendly error message. This is called *type inference*. The compilers figures out what *type* of values flow in and out of all your functions.
 
-> **Note:** The term "types" will be used to mean "types as they appear in Elm". This is an important distinction because types in Elm are very different than types in most other languages! Many programmers have only seen types in Java, so their experience is roughly "using types is verbose and annoying, and at the end of the day, I still get the same runtime errors and null pointer exceptions. What's the point?!" Most Elm programmers feel exactly the same way about Java!
+Let's see a small example of this. The following code defines a `toFullName` function which extracts a persons full name as a string:
+
+```elm
+toFullName person =
+  person.firstName ++ " " ++ person.lastName
+
+fullName =
+  toFullName { fistName = "Hermann", lastName = "Hesse" }
+```
+
+Nothing too crazy. Do you see the bug though? 
+
+In JavaScript, the equivalent code spits out `"undefined Hesse"`. Not even an error! Hopefully one of your users will tell you about it when they see it in the wild. In contrast, the Elm compiler just looks at the source code and tells you:
+
+```
+-- TYPE MISMATCH ---------------------------------------------------------------
+
+The argument to function `toFullName` is causing a mismatch.
+
+6│   toFullName { fistName = "Hermann", lastName = "Hesse" }
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Function `toFullName` is expecting the argument to be:
+
+    { a | ..., firstName : ... }
+
+But it is:
+
+    { ..., fistName : ... }
+
+Hint: I compared the record fields and found some potential typos.
+    
+    firstName <-> fistName
+```
+
+It sees that you are trying to pass in the wrong *type* of value. Like the hint in the error message says, someone accidentally wrote `fist` instead of `first`.
+
+It is great to have an assistant for simple mistakes like this, but imagine a more realistic scenario. The code lives in 20 different files. You have some collaborators make changes at the same time as you. No matter how big and complex things get, the Elm compiler checks that *everything* fits together properly. In the end, this makes it much easier to refactor and add new features.
 
 
 ## Contracts
+
+
+> **Note:** I use the term *types* to mean *types-as-they-appear-in-Elm*. Many programmers know types from Java, so their experience is roughly "using types is verbose and annoying, and at the end of the day, I still get runtime errors. What's the point?!" Most Elm programmers feel exactly the same way about Java.
+
 
 Think of types as a contract that can be checked by the compiler. The contract says something like "this function only accepts string arguments" so you can make sure that bad data *never* gets in.
 
