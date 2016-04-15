@@ -11,7 +11,7 @@ add x y =
   x + y
 ```
 
-The first time people see this, the obvious question is “what is the deal with all the arrows?!”
+The first time people see this, the obvious question is "what is the deal with all the arrows?!"
 
 Well, you actually can define `add` so there is only one arrow, like this:
 
