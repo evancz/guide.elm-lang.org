@@ -1,26 +1,8 @@
 # Types
 
-One of Elm's major benefits is that **users do not see runtime errors in practice**. It is a crazy enough thing that some people think it is a lie. This is all made possible by types and type inference.
+One of Elm's major benefits is that **users do not see runtime errors in practice**. This is only possible because Elm has types and type inference.
 
-Let's see an example with the `toFullName` function, which takes a person and shows their full name:
-
-```elm
-toFullName person =
-  person.firstName ++ " " ++ person.lastName
-
-fullName =
-  toFullName { fistName = "Hermann", lastName = "Hesse" }
-```
-
-Do you see the bug? Well, in JavaScript we would run the equivalent code and end up with the string `"undefined Hesse"`. Not even an error! Hopefully one of your users will report it when they see it in the wild.
-
-In Elm, we get the following error message at compile time:
-
-![](Screen Shot 2016-04-15 at 2.05.26 PM.png)
-
-Elm catches the problem immediately, even hinting at the typo causing the issue.
-
-Now imagine this in a realistic program. Multiple files. Multiple contributors. Lots of detailed business logic. Now say someone removes a field, mistakenly thinking that no one needs it. The Elm compiler will find any problems immediately just based on the source code. In JavaScript, you just have to cross your fingers that your tests cover it. (You wrote tests right?)
+> **Note:** The term "types" will be used to mean "types as they appear in Elm". This is an important distinction because types in Elm are very different than types in most other languages! Many programmers have only seen types in Java, so their experience is roughly "using types is verbose and annoying, and at the end of the day, I still get the same runtime errors and null pointer exceptions. What's the point?!" Most Elm programmers feel exactly the same way about Java!
 
 
 ## Contracts
