@@ -3,7 +3,7 @@
 * [Introduction](README.md)
 * [Core Language](core_language.md)
 * [Thinking Functionally](thinking_functionally/README.md)
-   * [Types](thinking_functionally/reading_types.md)
+   * [Types](thinking_functionally/types.md)
    * [Union Types](thinking_functionally/union_types.md)
 * [The Elm Architecture](architecture/README.md)
    * [User Input](architecture/user_input/README.md)
