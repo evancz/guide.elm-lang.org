@@ -63,4 +63,4 @@ Forget about functional programming. Fancy words, weird ideas, bad tooling. Barf
 
 No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because the practical benefits are worth the couple hours you'll spend reading this guide.
 
-I have put a huge emphasis on making Elm easy to learn and use, unlike in many functional languages out there. So all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised!
+I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised!
