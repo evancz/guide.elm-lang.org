@@ -1,4 +1,84 @@
-# Reading Types
+# Types
+
+One of Elm's major benefits is that **users do not see runtime errors in practice**. It is a crazy enough thing that some people think it is a lie. This is all made possible by types and type inference.
+
+Let's see an example with the `toFullName` function, which takes a person and shows their full name:
+
+```elm
+toFullName person =
+  person.firstName ++ " " ++ person.lastName
+
+fullName =
+  toFullName { fistName = "Hermann", lastName = "Hesse" }
+```
+
+Do you see the bug? Well, in JavaScript we would run the equivalent code and end up with the string `"undefined Hesse"`. Not even an error! Hopefully one of your users will report it when they see it in the wild.
+
+In Elm, we get the following error message at compile time:
+
+![](Screen Shot 2016-04-15 at 2.05.26 PM.png)
+
+Elm catches the problem immediately, even hinting at the typo causing the issue.
+
+Now imagine this in a realistic program. Multiple files. Multiple contributors. Lots of detailed business logic. Now say someone removes a field, mistakenly thinking that no one needs it. The Elm compiler will find any problems immediately just based on the source code. In JavaScript, you just have to cross your fingers that your tests cover it. (You wrote tests right?)
+
+
+## Contracts
+
+Think of types as a contract that can be checked by the compiler. The contract says something like "this function only accepts string arguments" so you can make sure that bad data *never* gets in.
+
+The way we write down these contracts is with "type annotations" where we define the exact shape of the data we are working with.
+
+
+```elm
+fortyTwo : Int
+fortyTwo =
+  42
+
+
+names : List String
+names =
+  [ "Alice", "Bob", "Charles" ]
+```
+
+Here we are just describing the general shape of the data we are working with. `fortyTwo` is an integer and `names` is a list of strings. Nothing crazy, just describing the shape of our data.
+
+This becomes much more valuable when you start using it with functions. In the following example, we will pick out the longest name from a list.
+
+```elm
+import String
+
+longestName : List String -> Int
+longestName names =
+  List.maximum (List.map String.length names)
+  
+-- longestName names == "Charles"
+```
+
+Now imagine if someone tried to pass in a list of numbers or books.
+
+```
+-- longestName [1,2,3]
+```
+
+The `String.length` function would break, not knowing how to get the length of a number. Well, the contract for `longestName` rules that out! We only accept lists of strings and only return integers.
+
+Now the cool thing is that all these type annotations are optional. **The compiler can always figure them out automatically, so the contract exists whether you write it down or not.** The annotation go on the line above the actual definition because people will often prototype without them, adding them later when they want a more professional code base.
+
+The `isLong` example is doing exactly the same thing. It requires a record with a field name `pages` that holds integers. Any record will do, with however many other fields you want, but we definitely need the `pages` field!
+
+So in both cases we are writing contracts that say &ldquo;I require input with this shape, and I will give you output with that shape.&rdquo; This is the essence of ruling out runtime errors in Elm. We always know what kind of values a function needs and what kind it produces, so we can just check that we always follow these rules.
+
+> **Note:** All of these types can be inferred, so you can leave off the type annotations and Elm can still check that data is flowing around in a way that works. This means you can just *not* write these contracts and still get all the benefits!
+
+So far we have seen some simple cases where we make sure our data is the right shape, but these contracts become extremely powerful when you start making your own types.
+
+book : { title : String, author : String, pages : Int }
+book =
+  { title = "Demian", author = "Hesse", pages = 176 }
+
+The `book` type was kind of a lot to read, so we can create a `type alias` to make it 
+
 
 
 ## Why so many arrows?!
