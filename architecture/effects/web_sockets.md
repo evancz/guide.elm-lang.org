@@ -14,7 +14,8 @@ This program happens to be pretty short, so here is the full thing:
 import Html exposing (..)
 import Html.App as Html
 import Html.Attributes exposing (..)
-import WebSocket as WS
+import Html.Events exposing (..)
+import WebSocket
 
 
 main =
