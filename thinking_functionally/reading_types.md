@@ -2,7 +2,9 @@
 
 One of Elm's major benefits is that **users do not see runtime errors in practice**. This is possible because the Elm compiler can analyze your source code very quickly to see how values flow through your program. If a value can ever be used in an invalid way, the compiler tells you about it with a friendly error message. This is called *type inference*. The compilers figures out what *type* of values flow in and out of all your functions.
 
-Let's see a small example of this. The following code defines a `toFullName` function which extracts a persons full name as a string:
+## Example of Type Inference
+
+The following code defines a `toFullName` function which extracts a persons full name as a string:
 
 ```elm
 toFullName person =
@@ -12,7 +14,7 @@ fullName =
   toFullName { fistName = "Hermann", lastName = "Hesse" }
 ```
 
-Nothing too crazy. Do you see the bug though? 
+Just writing down the code with no extra clutter like in JavaScript or Python. Do you see the bug though? 
 
 In JavaScript, the equivalent code spits out `"undefined Hesse"`. Not even an error! Hopefully one of your users will tell you about it when they see it in the wild. In contrast, the Elm compiler just looks at the source code and tells you:
 
@@ -25,81 +27,55 @@ The argument to function `toFullName` is causing a mismatch.
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Function `toFullName` is expecting the argument to be:
 
-    { a | ..., firstName : ... }
+    { …, firstName : … }
 
 But it is:
 
-    { ..., fistName : ... }
+    { …, fistName : … }
 
 Hint: I compared the record fields and found some potential typos.
     
     firstName <-> fistName
 ```
 
-It sees that you are trying to pass in the wrong *type* of value. Like the hint in the error message says, someone accidentally wrote `fist` instead of `first`.
+It sees that `toFullName` is getting the wrong *type* of argument. Like the hint in the error message says, someone accidentally wrote `fist` instead of `first`.
 
-It is great to have an assistant for simple mistakes like this, but imagine a more realistic scenario. The code lives in 20 different files. You have some collaborators make changes at the same time as you. No matter how big and complex things get, the Elm compiler checks that *everything* fits together properly. In the end, this makes it much easier to refactor and add new features.
+It is great to have an assistant for simple mistakes like this, but it is even more valuable when you have hundreds of files and a bunch of collaborators making changes. No matter how big and complex things get, the Elm compiler checks that *everything* fits together properly just based on the source code.
 
+Let's learn more about how this works.
 
-## Contracts
-
-
-> **Note:** I use the term *types* to mean *types-as-they-appear-in-Elm*. Many programmers know types from Java, so their experience is roughly "using types is verbose and annoying, and at the end of the day, I still get runtime errors. What's the point?!" Most Elm programmers feel exactly the same way about Java.
+## Types
 
 
-Think of types as a contract that can be checked by the compiler. The contract says something like "this function only accepts string arguments" so you can make sure that bad data *never* gets in.
 
-The way we write down these contracts is with "type annotations" where we define the exact shape of the data we are working with.
 
+## Type Annotations
+
+Elm can figure out types automatically, but it also lets you write a *type annotation* on the line above a definition if you want.
 
 ```elm
 fortyTwo : Int
 fortyTwo =
   42
 
-
 names : List String
 names =
   [ "Alice", "Bob", "Charles" ]
 ```
 
-Here we are just describing the general shape of the data we are working with. `fortyTwo` is an integer and `names` is a list of strings. Nothing crazy, just describing the shape of our data.
+They are just describing the general shape of the data we are working with.  `fortyTwo` is an integer and `names` is a list of strings. Nothing too crazy.
 
-This becomes much more valuable when you start using it with functions. In the following example, we will pick out the longest name from a list.
+We can add type annotations to functions as well. So say we write `isNegative` that figures out if a number is less than zero.
 
 ```elm
-import String
-
-longestName : List String -> Int
-longestName names =
-  List.maximum (List.map String.length names)
-  
--- longestName names == "Charles"
+isNegative : Int -> Bool
+isNegative number =
+  number < 0
 ```
 
-Now imagine if someone tried to pass in a list of numbers or books.
+Here the type annotation is saying 
 
-```
--- longestName [1,2,3]
-```
-
-The `String.length` function would break, not knowing how to get the length of a number. Well, the contract for `longestName` rules that out! We only accept lists of strings and only return integers.
-
-Now the cool thing is that all these type annotations are optional. **The compiler can always figure them out automatically, so the contract exists whether you write it down or not.** The annotation go on the line above the actual definition because people will often prototype without them, adding them later when they want a more professional code base.
-
-The `isLong` example is doing exactly the same thing. It requires a record with a field name `pages` that holds integers. Any record will do, with however many other fields you want, but we definitely need the `pages` field!
-
-So in both cases we are writing contracts that say &ldquo;I require input with this shape, and I will give you output with that shape.&rdquo; This is the essence of ruling out runtime errors in Elm. We always know what kind of values a function needs and what kind it produces, so we can just check that we always follow these rules.
-
-> **Note:** All of these types can be inferred, so you can leave off the type annotations and Elm can still check that data is flowing around in a way that works. This means you can just *not* write these contracts and still get all the benefits!
-
-So far we have seen some simple cases where we make sure our data is the right shape, but these contracts become extremely powerful when you start making your own types.
-
-book : { title : String, author : String, pages : Int }
-book =
-  { title = "Demian", author = "Hesse", pages = 176 }
-
-The `book` type was kind of a lot to read, so we can create a `type alias` to make it 
+I like to think of types as a contract. The contract says something like "this function only accepts string arguments" 
 
 
 
