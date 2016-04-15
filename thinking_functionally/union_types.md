@@ -3,59 +3,7 @@
 
 Many languages have trouble expressing data with weird shapes in a reliable way. You often find yourself doing weird tricks with boolean flags or strings, or giving in and letting the language force you into a model that is slightly off. Either way you end up with code that is hard to maintain and refactor!
 
-This section goes through the parts of Elm that let you work with crazy data in a way that is reliable and easy to refactor. We will start with a foundation of &ldquo;contracts&rdquo; and then use them with progressively crazier and crazier data.
-
-
-## Contracts
-
-Types are an important tool for modeling. Think of them like a contract that can be checked by the compiler that says something like &ldquo;I only accept string arguments&rdquo; so you can make sure that bad data *never* gets in. This is a huge part of how we can rule out runtime errors in Elm.
-
-> **Note:** The term &ldquo;types&rdquo; will be used to mean &ldquo;types as they appear in Elm&rdquo;. This is an important distinction because *types in Elm are very different than types in Java!* Many programmers have only seen types in Java, so their experience is roughly &ldquo;using types is verbose and annoying, and at the end of the day, I still get the same runtime errors and null pointer exceptions as in JavaScript or Python or Ruby. What's the point?!&rdquo; Most Elm programmers share all of these complaints about Java!
-
-The way we write down these contracts is with &ldquo;type annotations&rdquo; where we define the exact shape of the data we are working with.
-
-
-```elm
-fortyTwo : Int
-fortyTwo =
-  42
-
-
-names : List String
-names =
-  [ "Alice", "Bob", "Chuck" ]
-
-
-book : { title: String, author: String, pages: Int }
-book =
-  { title = "Demian", author = "Hesse", pages = 176 }
-```
-
-Here we are just describing the general shape of the data we are working with. `fortyTwo` is an integer, `names` is a list of strings, and `book` is a record with certain fields. Nothing crazy, just describing the shape of our data. This becomes much more valuable when you start using it with functions, where in many languages, getting the wrong kind of data can lead to a crash!
-
-```elm
-import String
-
-
-longestName : List String -> Int
-longestName names =
-  List.maximum (List.map String.length names)
-
-
-isLong : { record | pages : Int } -> Bool
-isLong book =
-  book.pages > 400
-```
-
-In the `longestName` example, we are requiring that our input is a list of strings. If someone tries to pass in a list of integers or books, the `String.length` function would break, so this contract rules that out. We also say the `longestName` function is definitely going to return an `Int` so if we use its result somewhere else, we have a 100% guarantee that it's a whole number.
-
-The `isLong` example is doing exactly the same thing. It requires a record with a field name `pages` that holds integers. Any record will do, with however many other fields you want, but we definitely need the `pages` field!
-
-So in both cases we are writing contracts that say &ldquo;I require input with this shape, and I will give you output with that shape.&rdquo; This is the essence of ruling out runtime errors in Elm. We always know what kind of values a function needs and what kind it produces, so we can just check that we always follow these rules.
-
-> **Note:** All of these types can be inferred, so you can leave off the type annotations and Elm can still check that data is flowing around in a way that works. This means you can just *not* write these contracts and still get all the benefits!
-
-So far we have seen some simple cases where we make sure our data is the right shape, but these contracts become extremely powerful when you start making your own types.
+This section goes through the parts of Elm that let you work with crazy data in a way that is reliable and easy to refactor.
 
 
 ## Enumerations
