@@ -46,18 +46,15 @@ Let's learn more about how this works.
 
 ## Types
 
-To follow along [get everything installed](http://elm-lang.org/install) and start up `elm repl` in the terminal. It should look like this:
+In the [Core Language](../core_language.md) section of this book, we ran a bunch of code in the REPL. Well, we are going to do it again, but now with an emphasis on the types that are getting spit out. So type `elm repl` in your terminal again. You should see this:
 
 ```elm
----- elm repl 0.16.0 -----------------------------------------------------------
+---- elm repl 0.17.0 -----------------------------------------------------------
  :help for help, :exit to exit, more at <https://github.com/elm-lang/elm-repl>
 --------------------------------------------------------------------------------
 >
 ```
 
-The REPL prints out the type of every result, but **we will leave the type annotations off in this tutorial** for the sake of introducing concepts gradually.
-
-We will cover [values](#values), [functions](#functions), [lists](#lists), [tuples](#tuples), and [records](#records). These building blocks all correspond pretty closely with structures in languages like JavaScript, Python, and Java.
 
 
 
