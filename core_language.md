@@ -6,7 +6,7 @@ This section will walk you through Elm's simple core language.
 To follow along [get everything installed](http://elm-lang.org/install) and start up `elm repl` in the terminal. It should look like this:
 
 ```elm
----- elm repl 0.16.0 -----------------------------------------------------------
+---- elm repl 0.17.0 -----------------------------------------------------------
  :help for help, :exit to exit, more at <https://github.com/elm-lang/elm-repl>
 --------------------------------------------------------------------------------
 >
