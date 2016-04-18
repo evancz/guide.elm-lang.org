@@ -55,6 +55,29 @@ In the [Core Language](../core_language.md) section of this book, we ran a bunch
 >
 ```
 
+Let's type some stuff in and see what happens!
+
+```elm
+> "hello"
+"hello" : String
+
+> not True
+False : Bool
+
+> round 3.1415
+3 : Int
+```
+
+The REPL does tells us the resulting value along with what *type* of value it happens to be. Let's see what happens when we have data structures that can hold different types of values:
+
+```elm
+> [ "Alice", "Bob" ]
+[ "Alice", "Bob" ] : List String
+
+> [ "Alice", "Bob" ]
+[ "Alice", "Bob" ] : List String
+```
+
 
 
 
