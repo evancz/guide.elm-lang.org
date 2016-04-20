@@ -18,7 +18,7 @@
        * [Nesting](architecture/components/nesting.md)
        * [Communication](architecture/components/communication.md)
 * [Types](types/README.md)
-   * [Reading Types](reading_types.md)
+   * [Reading Types](types/reading_types.md)
    * [Union Types](types/union_types.md)
 * [Error Handling and Tasks](error_handling/README.md)
    * [Maybe](error_handling/maybe.md)
