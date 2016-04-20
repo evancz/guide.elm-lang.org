@@ -17,7 +17,7 @@
    * [Reusable Components](architecture/components/README.md)
        * [Nesting](architecture/components/nesting.md)
        * [Communication](architecture/components/communication.md)
-* [Types](thinking_functionally/README.md)
+* [Types](types/README.md)
    * [Reading Types](reading_types.md)
    * [Union Types](thinking_functionally/union_types.md)
 * [Error Handling and Tasks](error_handling/README.md)
