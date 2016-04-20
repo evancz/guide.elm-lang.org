@@ -1,1 +1,1 @@
-# Thinking Functionally
+# Types
