@@ -41,3 +41,5 @@ Hint: I compared the record fields and found some potential typos.
 It sees that `toFullName` is getting the wrong *type* of argument. Like the hint in the error message says, someone accidentally wrote `fist` instead of `first`.
 
 It is great to have an assistant for simple mistakes like this, but it is even more valuable when you have hundreds of files and a bunch of collaborators making changes. No matter how big and complex things get, the Elm compiler checks that *everything* fits together properly just based on the source code.
+
+The better you understand types, the more the compiler feels like a friendly assistant. So let's start learning more!
