@@ -3,9 +3,11 @@
 
 Many languages have trouble expressing data with weird shapes in a reliable way. They give you a small set of built-in types, so you have to represent *everything* with them. So you often find yourself using `null` or boolean flags or strings to encode details in a way that is quite error prone.
 
-Elm has *union types* so that you never find yourself in this situation again! It lets you create new types so you can represent complex data much more naturally.
+Elm has *union types* so that you never find yourself in this situation again. It lets you create new types so you can represent complex data much more naturally. This is one of the most important features in Elm, and you will use it a lot!
 
 This section will show a bunch of common use cases, starting with enumerations and building up to complex data structures.
+
+> **Note:** Union types are sometimes called [tagged unions](https://en.wikipedia.org/wiki/Tagged_union). Some communities call them [ADTs](https://en.wikipedia.org/wiki/Algebraic_data_type).
 
 
 ## Enumerations
@@ -26,7 +28,7 @@ Whenever you have weird shaped data in Elm, you want to reach for a union type. 
 type Visibility = All | Active | Completed
 ```
 
-You can read this as: there is a brand new type named `Visibility` and the only values with that type are `All`, `Active`, and `Completed`.
+You can read this as: there is a brand new type named `Visibility` and the only values with that type are `All`, `Active`, and `Completed`. (These are called *tags*.)
 
 From there, we need to use a `case` expression to handle these three scenarios. Here is a `keep` function that would filter our task list based on a given `Visibility`:
 
@@ -56,59 +58,66 @@ tasks = [buy,drink]
 -- keep Complete tasks == [buy]
 ```
 
-One cool thing about `case` is that it is also checked by the compiler. So if you have a typo, you get a hint to help fix it. If you forget to cover a case, the compiler will point that out too. This means you can change and extend the `Visibility` type without the risk of silently creating bugs in existing code.
+One cool thing about `case` expressions is that all the branches are checked by the compiler. So if you type `Complet` by accident, you get a hint about the typo. If you forget to cover a case, the compiler will point that out too. This means you can change and extend the `Visibility` type without the risk of silently creating bugs in existing code.
 
 > **Note:** A `case` is pretty similar to `switch` in JavaScript. The key difference is that a `case` does not have fall through, so you don't need to say `break` in every single branch to make things sane.
 
+Okay, that all seems nice, but how is it any better than enumerations in Java or C?
 
-## State Machines
 
-Okay, what if we want to represent whether someone is logged in or not? We can make a little state machine that lets a user toggle between anonymous and logged in with a user name:
+## Enumerations + Data
+
+Imagine we want to represent whether someone is logged in or not. Rather than fiddling with booleans or null values, we just create a new type of value for this exact scenario.
 
 ```elm
 type User = Anonymous | LoggedIn String
 ```
 
-Notice that the `LoggedIn` value is associated with extra information! This is saying that a user is either `Anonymous` or they are `LoggedIn` and we know their user name. We can use that extra information with case-expressions. The following code turns user info into image resources for their picture.
+There are two tags, but one of them has to be associated with a `String`. So the values with type `User` include things like:
+
+```elm
+  Anonymous
+  LoggedIn "catface420"
+  LoggedIn "AzureDiamond"
+  LoggedIn "abraham-lincoln"
+  ...
+```
+
+In other words, a user is either `Anonymous` or they are `LoggedIn` and we know their user name.
+
+Again, we need to use a `case` expression to work with our `User` type. Say we want to get a users photo:
 
 ```elm
 userPhoto : User -> String
 userPhoto user =
-    case user of
-      Anonymous ->
-          "anon.png"
+  case user of
+    Anonymous ->
+      "anon.png"
 
-      LoggedIn name ->
-          "users/" ++ name ++ "/photo.png"
+    LoggedIn name ->
+      "users/" ++ name ++ "/photo.png"
 ```
 
-If they are not logged in we show a dummy photo, but if they *are* logged in we show the photo we have saved. Now imagine we have a bunch of users all collaborating on a document and we want to show all their pictures.
+There are two possible cases when we have a `User`. If they are `Anonymous` we show a dummy picture. If they are `LoggedIn` we construct the URL of their photo.
+
+Now imagine we have a bunch of users in a chat room and we want to show their pictures.
 
 ```elm
 activeUsers : List User
 activeUsers =
-    [ Anonymous
-    , LoggedIn "Tom"
-    , LoggedIn "Steve"
-    , Anonymous
-    ]
+  [ Anonymous, LoggedIn "catface420", LoggedIn "AzureDiamond", Anonymous ]
 ```
 
-We can mix data with very different shapes in the same list. If we combine the `userPhoto` function with our `activeUsers` list, we can get all the images we need:
+If we combine the `userPhoto` function with our `activeUsers` list, we can get all the images we need:
 
 ```elm
 photos =
-    List.map userPhoto activeUsers
+  List.map userPhoto activeUsers
 
--- photos =
---     [ "anon.png"
---     , "users/Tom/photo.png"
---     , "users/Steve/photo.png"
---     , "anon.png"
---     ]
+--   [ "anon.png", "users/catface420.jpg", "users/AzureDiamond.jpg", "anon.png" ]
 ```
 
-All the users are turned into image resources. So we saw a relatively simple state machine here, but you could imagine users having 5 different possible states, and we can model that in a really precise way that makes it really hard for errors to sneak in. Making little state machines like this is at the heart of making the most of types!
+The nice thing about creating a type like `User` is that no one in your whole codebase can ever "forget" that some users may be anonymous. To deal with a `User`, the compiler will guarantee that the programmer uses a `case` and handles both possible scenarios.
 
 
 ## Tagged Unions
