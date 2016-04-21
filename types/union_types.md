@@ -28,11 +28,11 @@ type Visibility = All | Active | Completed
 
 You can read this as: there is a brand new type named `Visibility` and the only values with that type are `All`, `Active`, and `Completed`.
 
-From there, we use a *case-expression* work with this new type. For example, let's write a function `filterBy` that will filter our tasks based on the visibility we want:
+From there, we need to use a `case` expression to handle these three scenarios. Here is a `keep` function that would filter our task list based on a given `Visibility`:
 
 ```elm
-filterBy : Visibility -> List Task -> List Task
-filterBy visibility tasks =
+keep : Visibility -> List Task -> List Task
+keep visibility tasks =
   case visibility of
     All ->
       tasks
@@ -51,9 +51,9 @@ buy = { task = "Buy milk", complete = True }
 drink = { task = "Drink milk", complete = False }
 tasks = [buy,drink]
 
--- filterBy All tasks == [buy,drink]
--- filterBy Active tasks == [drink]
--- filterBy Complete tasks == [buy]
+-- keep All tasks == [buy,drink]
+-- keep Active tasks == [drink]
+-- keep Complete tasks == [buy]
 ```
 
 One cool thing about `case` is that it is also checked by the compiler. So if you have a typo, you get a hint to help fix it. If you forget to cover a case, the compiler will point that out too. This means you can change and extend the `Visibility` type without the risk of silently creating bugs in existing code.
