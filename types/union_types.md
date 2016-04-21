@@ -1,45 +1,64 @@
 
-# Model The Problem
+# Union Types
 
-Many languages have trouble expressing data with weird shapes in a reliable way. You often find yourself doing weird tricks with boolean flags or strings, or giving in and letting the language force you into a model that is slightly off. Either way you end up with code that is hard to maintain and refactor!
+Many languages have trouble expressing data with weird shapes in a reliable way. They give you a small set of built-in types, so you have to represent *everything* with them. So you often find yourself using `null` or boolean flags or strings to encode details in a way that is quite error prone.
 
-This section goes through the parts of Elm that let you work with crazy data in a way that is reliable and easy to refactor.
+Elm has *union types* so that you never find yourself in this situation again! It lets you create new types so you can represent complex data much more naturally.
+
+This section will show a bunch of common use cases, starting with enumerations and building up to complex data structures.
 
 
 ## Enumerations
 
-It is quite common to create a type that enumerates a couple possible states. Imagine we are creating a [todo list](http://evancz.github.io/elm-todomvc/) and want to create a filter on which tasks are visible. We can show all tasks, all the active tasks, or all the completed tasks. We can represent these three states like this:
+Imagine we are creating a [todo list](http://evancz.github.io/elm-todomvc/) where a user enters their tasks and marks them as complete. We would probably represent these tasks like this:
+
+```elm
+type alias Task = { task : String, complete : Bool }
+```
+
+Now say we want to have three views: show *all* tasks, show only active tasks, and show only completed tasks. Somehow we need to represent which of these three scenarios we are in.
+
+> **Exercise:** Before you continue, think about how you would do this in a language you already know. Three strings? Three integers? A boolean that can be null?
+
+Whenever you have weird shaped data in Elm, you want to reach for a union type. In this case, we would create a type `Visibility` that has three possible values:
 
 ```elm
 type Visibility = All | Active | Completed
 ```
 
-This defines a new type `Visibility` with exactly three possible values: `All`, `Active`, or `Completed`. This means that if you pass in something with type `Visibility` it must be one of these three things!
+You can read this as: there is a brand new type named `Visibility` and the only values with that type are `All`, `Active`, and `Completed`.
 
-We use **case-expressions** to do different things depending on which value we are working with. It is pretty similar to the switch-statements in JavaScript, but a case-expression does not have fall through, so you don't need to say `break` everywhere to make things sane.
+From there, we use a *case-expression* work with this new type. For example, let's write a function `filterBy` that will filter our tasks based on the visibility we want:
 
 ```elm
-toString : Visibility -> String
-toString visibility =
-    case visibility of
-      All ->
-          "All"
+filterBy : Visibility -> List Task -> List Task
+filterBy visibility tasks =
+  case visibility of
+    All ->
+      tasks
 
-      Active ->
-          "Active"
+    Active ->
+      List.filter (\task -> not task.complete) tasks
 
-      Completed ->
-          "Completed"
-
-
--- toString All == "All"
--- toString Active == "Active"
--- toString Completed == "Completed"
+    Completed ->
+      List.filter (\task -> task.complete) tasks
 ```
 
-The case-expression is saying, &ldquo;look at the structure of `visibility`. If it is `All`, do this. If it is `Active`, do that. If it is `Completed` do this other thing.&rdquo;
+The `case` is saying, "look at the structure of `visibility`. If it is `All`, just give back all the tasks. If it is `Active`, keep only the tasks that are not complete. If it is `Completed`, keep only the tasks that are complete." Exactly what we wanted:
 
-This fills the same role as &ldquo;enumerations&rdquo; in languages like Java or C++, but we can do much more than that!
+```elm
+buy = { task = "Buy milk", complete = True }
+drink = { task = "Drink milk", complete = False }
+tasks = [buy,drink]
+
+-- filterBy All tasks == [buy,drink]
+-- filterBy Active tasks == [drink]
+-- filterBy Complete tasks == [buy]
+```
+
+One cool thing about `case` is that it is also checked by the compiler. So if you have a typo, you get a hint to help fix it. If you forget to cover a case, the compiler will point that out too. This means you can change and extend the `Visibility` type without the risk of silently creating bugs in existing code.
+
+> **Note:** A `case` is pretty similar to `switch` in JavaScript. The key difference is that a `case` does not have fall through, so you don't need to say `break` in every single branch to make things sane.
 
 
 ## State Machines
