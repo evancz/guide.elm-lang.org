@@ -76,7 +76,4 @@ Sometimes you want a function that gives an answer sometimes, but just does not 
 
 Let's say Mountain Dew wants to do some add buys for people ages 13 to 18. (It is illegal for kids under 13 to be on our site.) 
 
-
-The contract for `toMonth` explicitly tells everyone that it will give back an integer *or* it won't! You never have to wonder if there is a `null` value sneaking around.
-
-This may seem like a subtle improvement, but imagine all the code you have where you defensively added a `null` check just in case someone else behaves badly. Having contracts means you have a guarantee that a caller won't send you bad data! This is a world where you never again have to spend 4 hours debugging a null pointer exception!
+...
