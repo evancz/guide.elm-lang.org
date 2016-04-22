@@ -40,9 +40,9 @@ addBio bio user =
   { user | bio = bio }
 ```
 
-Imagine what that type annotation would look like if we did not have type aliases. Bad!
+Imagine what that type annotation would look like if we did not have the `User` type alias. Bad!
 
-It is not just about cosmetics though. When writing Elm programs, it is often best to *start* with the type alias before writing a bunch of functions. I find it helps direct my progress in a way that ends up being more efficient overall. Suddenly you know exactly what kind of data you are working with. If you need to add stuff to it, the compiler will tell you about any existing code that is affected by it. I would recommend it!
+Type aliases are not just about cosmetics though. They can help you think more clearly. When writing Elm programs, it is often best to *start* with the type alias before writing a bunch of functions. I find it helps direct my progress in a way that ends up being more efficient overall. Suddenly you know exactly what kind of data you are working with. If you need to add stuff to it, the compiler will tell you about any existing code that is affected by it. I think most experienced Elm folks use a similar process when working with records especially.
 
 > **Note:** When you create a type alias specifically for a record, it also generates a *record constructor*. So our `User` type alias will also generate this function:
 > 
