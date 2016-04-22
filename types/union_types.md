@@ -1,36 +1,58 @@
 
 # Union Types
 
-Many languages have trouble expressing data with weird shapes in a reliable way. They give you a small set of built-in types, so you have to represent *everything* with them. So you often find yourself using `null` or boolean flags or strings to encode details in a way that is quite error prone.
+Many languages have trouble expressing data with weird shapes. They give you a small set of built-in types, and you have to represent everything with them. So you often find yourself using `null` or booleans or strings to encode details in a way that is quite error prone.
 
-Elm has *union types* so that you never find yourself in this situation again. It lets you create new types so you can represent complex data much more naturally. This is one of the most important features in Elm, and you will use it a lot!
-
-This section will show a bunch of common use cases, starting with enumerations and building up to complex data structures.
+Elm's *union types* let you represent complex data much more naturally. We will go through a couple concrete examples to build some intuition about how and when to use union types.
 
 > **Note:** Union types are sometimes called [tagged unions](https://en.wikipedia.org/wiki/Tagged_union). Some communities call them [ADTs](https://en.wikipedia.org/wiki/Algebraic_data_type).
 
 
-## Enumerations
+## Filtering a Todo List
 
-Imagine we are creating a [todo list](http://evancz.github.io/elm-todomvc/) where a user enters their tasks and marks them as complete. We would probably represent these tasks like this:
+> **Problem:** We are creating a [todo list](http://evancz.github.io/elm-todomvc/) full of tasks. We want to have three views: show *all* tasks, show only *active* tasks, and show only *completed* tasks. How do we represent which of these three states we are in?
+
+Whenever you have weird shaped data in Elm, you want to reach for a union type. In this case, we would create a type `Visiblity` that has three possible values:
+
+```elm
+> type Visiblity = All | Active | Completed
+
+> All
+All : Visiblity
+
+> Active
+Active : Visiblity
+
+> Completed
+Completed : Visiblity
+```
+
+Now that we have these three cases defined, we want to create a function `keep` that will properly filter our tasks. It should work like this:
 
 ```elm
 type alias Task = { task : String, complete : Bool }
+
+buy : Task
+buy =
+  { task = "Buy milk", complete = True }
+
+drink : Task
+drink =
+  { task = "Drink milk", complete = False }
+
+tasks : List Task
+tasks =
+  [ buy, drink ]
+
+
+-- keep : Visibility -> List Task -> List Task
+
+-- keep All tasks == [buy,drink]
+-- keep Active tasks == [drink]
+-- keep Complete tasks == [buy]
 ```
 
-Now say we want to have three views: show *all* tasks, show only active tasks, and show only completed tasks. Somehow we need to represent which of these three scenarios we are in.
-
-> **Exercise:** Before you continue, think about how you would do this in a language you already know. Three strings? Three integers? A boolean that can be null?
-
-Whenever you have weird shaped data in Elm, you want to reach for a union type. In this case, we would create a type `Visibility` that has three possible values:
-
-```elm
-type Visibility = All | Active | Completed
-```
-
-You can read this as: there is a brand new type named `Visibility` and the only values with that type are `All`, `Active`, and `Completed`. (These are called *tags*.)
-
-From there, we need to use a `case` expression to handle these three scenarios. Here is a `keep` function that would filter our task list based on a given `Visibility`:
+So the `keep` function needs to look at its first argument, and depending on what it is, filter the list in various ways. We use a `case` expression to do this. It is like an `if` on steroids:
 
 ```elm
 keep : Visibility -> List Task -> List Task
@@ -46,44 +68,50 @@ keep visibility tasks =
       List.filter (\task -> task.complete) tasks
 ```
 
-The `case` is saying, "look at the structure of `visibility`. If it is `All`, just give back all the tasks. If it is `Active`, keep only the tasks that are not complete. If it is `Completed`, keep only the tasks that are complete." Exactly what we wanted:
+The `case` is saying, look at the structure of `visibility`. If it is `All`, just give back all the tasks. If it is `Active`, keep only the tasks that are not complete. If it is `Completed`, keep only the tasks that are complete.
+
+The cool thing about `case` expressions is that all the branches are checked by the compiler. This has some nice benefits:
+
+ 1. If you mistype `Compleet` by accident, you get a hint about the typo.
+ 2. If you forget to handle a value, the compiler will figure it out and tell you.
+
+So say you want to add `Recent` as a fourth possible `Visibility` value. The compiler will find all the `case` expressions in your code that work with `Visibility` values and remind you to handle the new possibility! This means you can change and extend `Visibility` without the risk of silently creating bugs in existing code.
+
+> **Exercise:** Imagine how you would solve this same problem in JavaScript. Three strings? A boolean that can be `null`? What would the definition of `keep` look like? What sort of tests would you want to write to make sure adding new code later was safe.
+
+
+## Anonymous Users
+
+> **Problem:** We have a chat room where people can post whatever they want. Some users are logged in and some are anonymous. How should we represent a user?
+
+Here is a union type that describes users that are either anonymous or named:
 
 ```elm
-buy = { task = "Buy milk", complete = True }
-drink = { task = "Drink milk", complete = False }
-tasks = [buy,drink]
+> type User = Anonymous | Named String
 
--- keep All tasks == [buy,drink]
--- keep Active tasks == [drink]
--- keep Complete tasks == [buy]
+> Anonymous
+Anonymous : User
+
+> Named
+<function> : String -> User
+
+> Named "AzureDiamond"
+Named "AzureDiamond" : User
+
+> Named "abraham-lincoln"
+Named "abraham-lincoln" : User
 ```
 
-One cool thing about `case` expressions is that all the branches are checked by the compiler. So if you type `Complet` by accident, you get a hint about the typo. If you forget to cover a case, the compiler will point that out too. This means you can change and extend the `Visibility` type without the risk of silently creating bugs in existing code.
-
-> **Note:** A `case` is pretty similar to `switch` in JavaScript. The key difference is that a `case` does not have fall through, so you don't need to say `break` in every single branch to make things sane.
-
-Okay, that all seems nice, but how is it any better than enumerations in Java or C?
-
-
-## Enumerations + Data
-
-Imagine we want to represent whether someone is logged in or not. Rather than fiddling with booleans or null values, we just create a new type of value for this exact scenario.
-
-```elm
-type User = Anonymous | LoggedIn String
-```
-
-There are two tags, but one of them has to be associated with a `String`. So the values with type `User` include things like:
+So creating the type `User` also created constructors named `Anonymous` and `Named`. If you want to create a `User` you *must* use one of these two constructors. This guarantees that all the possible `User` values are things like:
 
 ```elm
   Anonymous
-  LoggedIn "catface420"
-  LoggedIn "AzureDiamond"
-  LoggedIn "abraham-lincoln"
+  Named "AzureDiamond"
+  Named "abraham-lincoln"
+  Named "catface420"
+  Named "Tom"
   ...
 ```
-
-In other words, a user is either `Anonymous` or they are `LoggedIn` and we know their user name.
 
 Again, we need to use a `case` expression to work with our `User` type. Say we want to get a users photo:
 
@@ -114,19 +142,17 @@ If we combine the `userPhoto` function with our `activeUsers` list, we can get a
 photos =
   List.map userPhoto activeUsers
 
---   [ "anon.png", "users/catface420.jpg", "users/AzureDiamond.jpg", "anon.png" ]
+-- [ "anon.png", "users/catface420.jpg", "users/AzureDiamond.jpg", "anon.png" ]
 ```
 
 The nice thing about creating a type like `User` is that no one in your whole codebase can ever "forget" that some users may be anonymous. To deal with a `User`, the compiler will guarantee that the programmer uses a `case` and handles both possible scenarios.
 
 
-## Tagged Unions
+## Tagged Data
 
-Now lets try to put together a bunch of *different* types of data in a coherent way.
+> **Problem:** You are creating a dashboard with three different kinds of widgets. One shows scatter plots, one shows recent log data, and one shows time plots.
 
-> **Note:** These are sometimes called [tagged unions](https://en.wikipedia.org/wiki/Tagged_union) (or [ADTs](https://en.wikipedia.org/wiki/Algebraic_data_type) in certain communities).
-
-Say you are creating a dashboard with three different kinds of widgets. One shows scatter plots, one shows recent log data, and one shows time plots. Type unions make it really easy to put together the data we need:
+Type unions make it really easy to put together the data we need:
 
 ```elm
 type Widget
