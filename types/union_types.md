@@ -222,15 +222,31 @@ One nice thing about this approach is that there is no mystery about what kind o
 > The same strategies can be used if you are making a game and have a bunch of different bad guys. Goombas should update one way, but Koopa Troopas do something totally different. Solve each problem independently, and then use a union type to put them all together.
 
 
-## Recursive Data Structures
+## Linked Lists
 
-If you have ever implemented a [linked list](https://en.wikipedia.org/wiki/Linked_list) in C or Java you will appreciate how easy this is in Elm. The following type represents a list. The front of a list can only be one of two things: empty or something followed by a list. We can turn this informal definition into a type:
+> **Problem:** You are stuck on a bus speeding down the highway. If the bus slows down, it will blow up. The only way to save yourself and everyone on the bus is to reimplement linked lists in Elm. HURRY, WE ARE RUNNING OUT OF GAS!
+
+Yeah, yeah, the problem is contrived this time, but it is important to see some of the more advanced things you can do with union types!
+
+If you have ever implemented a [linked list](https://en.wikipedia.org/wiki/Linked_list) in C or Java you will appreciate how easy it is in Elm:
 
 ```elm
-type List a = Empty | Node a (List a)
+> type List a = Empty | Node a (List a)
+
+> Empty
+Empty : List a
+
+> Node
+<function> : a -> List a -> List a
+
+> Node "hi" Empty
+Node "hi" Empty : List String
+
+> Node 1.618 (Node 6.283 Empty)
+Node 1.618 (Node 6.283 Empty) : List Float
 ```
 
-So this creates a type called `List`. A list can either be empty or it can have one element (called the *head* of the list) and &ldquo;the rest of the list&rdquo; (called the *tail* of the list).
+So this creates a type called `List`. A list can either be empty or it can have one element
 
 List also takes a type as an argument, so we can create `(List Int)` or `(List String)` or whatever. The values that have the type `(List Int)` would look like this:
 
