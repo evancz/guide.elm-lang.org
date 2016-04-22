@@ -76,4 +76,8 @@ Sometimes you want a function that gives an answer sometimes, but just does not 
 
 Let's say Mountain Dew wants to do some add buys for people ages 13 to 18. (It is illegal for kids under 13 to be on our site.) 
 
+```elm
+getTeenAge : User -> Maybe Int
+```
+
 ...
