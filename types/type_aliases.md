@@ -30,7 +30,7 @@ hasBio user =
   String.length user.bio > 0
 ```
 
-Looks way better! It is important to emphasize that *these two definitions are exactly the same*. We just made an alias so we can type less.
+Looks way better! It is important to emphasize that *these two definitions are exactly the same*. We just made an alias so we can say the same thing in fewer key strokes.
 
 So if we write a function to add a bio, it would be like this:
 
