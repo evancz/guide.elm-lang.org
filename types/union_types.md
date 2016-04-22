@@ -151,7 +151,7 @@ The nice thing about creating a type like `User` is that no one in your whole co
 
 > **Problem:** You are creating a dashboard with three different kinds of widgets. One shows recent log data, one shows time plots, and one shows scatter plots. How do you represent a widget?
 
-Alright, we are getting a bit fancier now. In Elm, the thing you want to do is solve each case individually. Building programs out of small, reliable, reusable parts is kind of Elm wants you to do things. So I would create representations for each of our three scenarios, along with `view` functions to actually turn them into HTML or SVG or whatever:
+Alright, we are getting a bit fancier now. In Elm, you want to start by solving each case individually. (As you get more experience, you will see that Elm *wants* you to build programs out of small, reusable parts. It is weird.) So I would create representations for each of our three scenarios, along with `view` functions to actually turn them into HTML or SVG or whatever:
 
 ```elm
 type alias LogsInfo =
