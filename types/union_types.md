@@ -84,7 +84,7 @@ So say you want to add `Recent` as a fourth possible `Visibility` value. The com
 
 > **Problem:** We have a chat room where people can post whatever they want. Some users are logged in and some are anonymous. How should we represent a user?
 
-Here is a union type that describes users that are either anonymous or named:
+Again, whenever there is weird shaped data, you want to reach for a unino type. For this case, we want one where users are either anonymous or named:
 
 ```elm
 > type User = Anonymous | Named String
@@ -113,7 +113,7 @@ So creating the type `User` also created constructors named `Anonymous` and `Nam
   ...
 ```
 
-Again, we need to use a `case` expression to work with our `User` type. Say we want to get a users photo:
+Now that we have a representation of a user, lets say we want to get a photo of them to show next to their posts. Again, we need to use a `case` expression to work with our `User` type:
 
 ```elm
 userPhoto : User -> String
@@ -122,11 +122,11 @@ userPhoto user =
     Anonymous ->
       "anon.png"
 
-    LoggedIn name ->
-      "users/" ++ name ++ "/photo.png"
+    Named name ->
+      "users/" ++ name ++ ".png"
 ```
 
-There are two possible cases when we have a `User`. If they are `Anonymous` we show a dummy picture. If they are `LoggedIn` we construct the URL of their photo.
+There are two possible cases when we have a `User`. If they are `Anonymous` we show a dummy picture. If they are `Named` we construct the URL of their photo. This `case` is slightly fancier than the one we saw before. Notice that the second branch has a lower case variable `name`. This means that when we see a value like `Named "AzureDiamond"`, the `name` variable will be bound to `"AzureDiamond"` so we can do other things with it. This is called *pattern matching*.
 
 Now imagine we have a bunch of users in a chat room and we want to show their pictures.
 
@@ -134,98 +134,92 @@ Now imagine we have a bunch of users in a chat room and we want to show their pi
 activeUsers : List User
 activeUsers =
   [ Anonymous, LoggedIn "catface420", LoggedIn "AzureDiamond", Anonymous ]
-```
 
-If we combine the `userPhoto` function with our `activeUsers` list, we can get all the images we need:
-
-```elm
+photos : List String
 photos =
   List.map userPhoto activeUsers
 
 -- [ "anon.png", "users/catface420.jpg", "users/AzureDiamond.jpg", "anon.png" ]
 ```
 
-The nice thing about creating a type like `User` is that no one in your whole codebase can ever "forget" that some users may be anonymous. To deal with a `User`, the compiler will guarantee that the programmer uses a `case` and handles both possible scenarios.
+The nice thing about creating a type like `User` is that no one in your whole codebase can ever "forget" that some users may be anonymous. Anyone who can get a hold of a `User` needs to use a `case` to get any information out of it, and the compiler guarantees every `case` and handles all possible scenarios!
+
+> **Exercise:** Think about how you would solve this problem in some other language. A string where empty string means they are anonymous? A string that can be null? How much testing would you want to do to make sure that everyone handles these special cases correctly?
 
 
-## Tagged Data
+## Widget Dashboard
 
-> **Problem:** You are creating a dashboard with three different kinds of widgets. One shows scatter plots, one shows recent log data, and one shows time plots.
+> **Problem:** You are creating a dashboard with three different kinds of widgets. One shows recent log data, one shows time plots, and one shows scatter plots. How do you represent a widget?
 
-Type unions make it really easy to put together the data we need:
+Alright, we are getting a bit fancier now. In Elm, the thing you want to do is solve each case individually. Building programs out of small, reliable, reusable parts is kind of Elm wants you to do things. So I would create representations for each of our three scenarios, along with `view` functions to actually turn them into HTML or SVG or whatever:
 
 ```elm
-type Widget
-    = ScatterPlot (List (Int, Int))
-    | LogData (List String)
-    | TimePlot (List (Time, Int))
+type alias LogsInfo =
+  { logs : List String
+  }
+
+type alias TimeInfo =
+  { events : List (Time, Float)
+  , yAxis : String
+  }
+
+type alias ScatterInfo =
+  { points : List (Float, Float)
+  , xAxis : String
+  , yAxis : String
+  }
+
+-- viewLogs : LogsInfo -> Html msg
+-- viewTime : TimeInfo -> Html msg
+-- viewScatter : ScatterInfo -> Html msg
 ```
 
-You can think of this as putting together three different types. Each type is &ldquo;tagged&rdquo; with a name like `ScatterPlot` or `LogData`. This lets us tell them apart when your program is running. Now we can write something to render a widget like this:
+At this point, you have created all the helper functions needed to work with these three cases totally independent from each other. Someone can come along later and say, "I need a nice way to show scatter plots" and use just that part of the code.
+
+So the question is really: how do I put these three standalone things together for my particular scenario?
+
+Again, union types are there to put together a bunch of different types!
 
 ```elm
-view : Widget -> Element
+> type Widget = Logs LogsInfo | TimePlot TimeInfo | ScatterPlot ScatterInfo
+
+> Logs
+<function> : LogsInfo -> Widget
+
+> TimePlot
+<function> : TimeInfo -> Widget
+
+> ScatterPlot
+<function> : ScatterInfo -> Widget
+```
+
+So we created a `Widget` type that can only be created with these constructor functions. You can think of these constructors as *tagging* the data so we can tell it apart at runtime. Now we can write something to render a widget like this:
+
+```elm
+view : Widget -> Html msg
 view widget =
-    case widget of
-      ScatterPlot points ->
-          viewScatterPlot points
+  case widget of
+    Logs info ->
+      viewLogs info
 
-      LogData logs ->
-          flow down (map viewLog logs)
+    TimePlot info ->
+      viewTime info
 
-      TimePlot occurrences ->
-          viewTimePlot occurrences
+    ScatterPlot info ->
+      viewScatter info
 ```
 
-Depending on what kind of widget we are looking at, we will render it differently. Perhaps we want to get a bit trickier and have some time plots that are showed on a logarithmic scale. We can augment our `Widget` type a bit.
+One nice thing about this approach is that there is no mystery about what kind of widgets are supported. There are exactly three. If someone wants to add a fourth, they modify the `Widget` type. This means you can never be surprised by the data you get, even if someone on a different team is messing with your code.
 
-```elm
-type Scale = Normal | Logarithmic
-
-type Widget
-    = ScatterPlot (List (Int, Int))
-    | LogData (List String)
-    | TimePlot Scale (List (Time, Int))
-```
-
-Notice that the `TimePlot` tag now has two pieces of data. Each tag can actually hold a bunch of different types.
-
-All of these strategies can be used if you are making a game and have a bunch of different bad guys. Goombas should update one way, but Koopa Troopas do something totally different. Use a tagged union to put them all together!
-
-
-## Banishing NULL
-
-Tons of languages have a concept of `null`. Any time you think you have a `String` you just might have a `null` instead. Should you check? Did the person giving you the value check? Maybe it will be fine? Maybe it will crash your servers? I guess we will find out later!
-
-The inventor, Tony Hoare, has this to say about it:
-
-> I call it my billion-dollar mistake. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in the last forty years.
-
-Elm sidesteps this problem entirely with a type called `Maybe`. You can think of it as making `null` explicit, so we *know* if we have to handle it.
-
-```elm
-type Maybe a = Just a | Nothing
-```
-
-Notice that this type takes an argument `a` that we can fill in with any type we want. We can have types like `(Maybe Int)` which is either `Just` an integer or it is `Nothing`. For example, say we want to parse months from strings.
-
-```elm
-String.toInt : String -> Result String Int
-
-
-toMonth : String -> Maybe Int
-toMonth rawString =
-    case String.toInt rawString of
-      Err message ->
-          Nothing
-
-      Ok n ->
-          if n > 0 && n <= 12 then Just n else Nothing
-```
-
-The contract for `toMonth` explicitly tells everyone that it will give back an integer *or* it won't! You never have to wonder if there is a `null` value sneaking around.
-
-This may seem like a subtle improvement, but imagine all the code you have where you defensively added a `null` check just in case someone else behaves badly. Having contracts means you have a guarantee that a caller won't send you bad data! This is a world where you never again have to spend 4 hours debugging a null pointer exception!
+> **Takeaways:**
+>
+>   - Solve each subproblem first.
+>   - Use union types to put together all the solutions.
+>   - Creating a union type generates a bunch of *constructors*.
+>   - These constuctors *tag* data so that we can differentiate it at runtime.
+>   - A `case` expression lets us tear data apart based on these tags.
+> 
+> The same strategies can be used if you are making a game and have a bunch of different bad guys. Goombas should update one way, but Koopa Troopas do something totally different. Solve each problem independently, and then use a union type to put them all together.
 
 
 ## Recursive Data Structures
