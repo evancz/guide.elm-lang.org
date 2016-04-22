@@ -20,6 +20,7 @@
 * [Types](types/README.md)
    * [Reading Types](types/reading_types.md)
    * [Union Types](types/union_types.md)
+   * Type Aliases
 * [Error Handling and Tasks](error_handling/README.md)
    * [Maybe](error_handling/maybe.md)
    * [Result](error_handling/result.md)
