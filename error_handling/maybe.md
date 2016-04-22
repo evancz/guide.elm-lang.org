@@ -44,7 +44,7 @@ sue =
   { name = "Sue", age = Nothing }
 ```
 
-Now her friends cannot wish her a happy birthday. Sad! Now say Tom creates a profile and he does give his age:
+Now her friends cannot wish her a happy birthday. Sad! Later Tom creates a profile and *does* give his age:
 
 ```elm
 tom : User
@@ -52,9 +52,9 @@ tom =
   { name = "Tom", age = Just 24 }
 ```
 
-Great! Tom is part of a very valuable demographic. Maybe he has a nice job, no kids, and has not learned to budget well yet. The advertisers will be pleased. Maybe next we can figure out his level of education and occupation.
+Great, Tom is part of a valuable demographic! Maybe he has a nice job, no kids, and has not learned to budget well yet. The advertisers will be pleased.
 
-We are not actually able to market alcohol to people under 21, so we would need to check for that:
+Alright, so now that we have some users, how can we market alcohol to them without breaking any laws? People would probably be mad if we market to people under 21, so let's check for that:
 
 ```elm
 canBuyAlcohol : User -> Bool
@@ -67,28 +67,15 @@ canBuyAlcohol user =
       age >= 21
 ```
 
-Now the cool thing is that we are forced to use a `case` to pattern match on the users age. It is actually impossible to write code where you forget that users may not have an age. Elm can make sure of it. Now we can advertise alcohol confident that we are not influencing minors directly, only older their peers!
+Now the cool thing is that we are forced to use a `case` to pattern match on the users age. It is actually impossible to write code where you forget that users may not have an age. Elm can make sure of it. Now we can advertise alcohol confident that we are not influencing minors directly! Only older their peers.
 
 
 ## Partial Functions
 
+Sometimes you want a function that gives an answer sometimes, but just does not in other cases. 
 
+Let's say Mountain Dew wants to do some add buys for people ages 13 to 18. (It is illegal for kids under 13 to be on our site.) 
 
-We can have types like `(Maybe Int)` which is either `Just` an integer or it is `Nothing`. For example, say we want to parse months from strings.
-
-```elm
-String.toInt : String -> Result String Int
-
-
-toMonth : String -> Maybe Int
-toMonth rawString =
-    case String.toInt rawString of
-      Err message ->
-          Nothing
-
-      Ok n ->
-          if n > 0 && n <= 12 then Just n else Nothing
-```
 
 The contract for `toMonth` explicitly tells everyone that it will give back an integer *or* it won't! You never have to wonder if there is a `null` value sneaking around.
 
