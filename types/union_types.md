@@ -73,7 +73,7 @@ The `case` is saying, look at the structure of `visibility`. If it is `All`, jus
 The cool thing about `case` expressions is that all the branches are checked by the compiler. This has some nice benefits:
 
  1. If you mistype `Compleet` by accident, you get a hint about the typo.
- 2. If you forget to handle a value, the compiler will figure it out and tell you.
+ 2. If you forget to handle a case, the compiler will figure it out and tell you.
 
 So say you want to add `Recent` as a fourth possible `Visibility` value. The compiler will find all the `case` expressions in your code that work with `Visibility` values and remind you to handle the new possibility! This means you can change and extend `Visibility` without the risk of silently creating bugs in existing code.
 
