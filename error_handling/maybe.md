@@ -74,10 +74,23 @@ Now the cool thing is that we are forced to use a `case` to pattern match on the
 
 Sometimes you want a function that gives an answer sometimes, but just does not in other cases. 
 
-Let's say Mountain Dew wants to do some add buys for people ages 13 to 18. (It is illegal for kids under 13 to be on our site.) 
+Let's say Mountain Dew wants to do some add buys for people ages 13 to 18. Honestly, it is better to start kids on Mountain Dew younger than that, but it is illegal for kids under 13 to be on our site.
+
+So let's say we want to write a function that will tell us a user's age, but only if they are between 13 and 18:
 
 ```elm
 getTeenAge : User -> Maybe Int
+getTeenAge user =
+  case user.age of
+    Nothing ->
+      Nothing
+      
+    Just age ->
+      if 13 <= age && age <= 18 then
+        Just age
+        
+      else
+        Nothing
 ```
 
-...
+Again, we are reminded that we may not have an age, but if we do, we only want to return it if it is between 13 and 18. Now anyone who calls this function can get a teen age, and Elm will guarantee that they do not assume *everyone* is within that age range.
