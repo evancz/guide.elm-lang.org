@@ -281,9 +281,15 @@ If we get an `Empty` value, the sum is 0. If we have a `Node` we add the first e
 
 On each line, we see one evaluation step. When we call `sum` it transforms the list based on whether it is looking at a `Node` or an `Empty` value.
 
-> **Note:** This is the first recursive function we have written together!
+> **Note:** This is the first recursive function we have written together! Notice that `sum` calls itself to get the sum. It can be tricky to get into the mindset of writing recursive functions, so I wanted to share one weird trick. **Pretend you are already done.**
 > 
-> **Pretend you are already done.**
+> I always start with a `case` and all of the branches listed but not filled in. From there, I solve each branch one at a time, pretending that nothing else exists. So with `sum` I'd look at `Empty ->` and say, an empty list has to sum to zero. Then I'd look at the `Node n remainingNumbers ->` branch and think, well, I know I have a number, a list, and a `sum` function that definitely already exists and totally works. I can just use that and add a number to it!
+
+## Generic Data Structures
+
+> **Problem:** The last section showed linked lists that only worked for integers. That is pretty lame. How can we make linked lists that hold any kind of value?
+
+Everything is going to be pretty much the same, except we are going to introduce a *type variable* in our definition of lists:
 
 ```elm
 > type List a = Empty | Node a (List a)
@@ -301,36 +307,49 @@ Node "hi" Empty : List String
 Node 1.618 (Node 6.283 Empty) : List Float
 ```
 
-Making lists is just the start, we can easily create all sorts of data structures, like [binary trees][binary].
+The fancy part comes in the `Node` constructor. Instead of pinning the data to `Int` and `IntList`, we say that it can hold `a` and `List a`. Basically, you can add a value as long as it is the same type of value as everything else in the list.
 
- [binary]: https://en.wikipedia.org/wiki/Binary_tree "Binary Trees"
+Everything else is the same. You pattern match on lists with `case` and you write recursive functions. The only difference is that our lists can hold anything now!
+
+> **Exercise:** This is exactly how the `List` type in Elm works, so take a look at [the `List` library](http://package.elm-lang.org/packages/elm-lang/core/latest/List) and see if you can implement some of those functions yourself.
+
+
+## Additional Examples
+
+We have seen a couple scenarios, but the best way to get more comfortable is to use union types more! So here are two examples that are kind of fun.
+
+
+### Binary Trees
+
+[Binary trees](https://en.wikipedia.org/wiki/Binary_tree) are almost exactly the same as linked lists:
 
 ```elm
-type Tree a = Empty | Node a (Tree a) (Tree a)
+> type Tree a = Empty | Node a (Tree a) (Tree a)
+
+> Node
+<function> : a -> Tree a -> Tree a -> Tree a
+
+> Node "hi" Empty Empty
+Node "hi" Empty Empty : Tree String
 ```
 
-A tree is either empty or it is a node with a value and two children. Check out [this example][trees] to see some more examples of union types for data structures. If you can do all of the exercises at the end of the example, consider yourself a capable user of this feature!
+A tree is either empty or it is a node with a value and two children. Check out [this example](http://elm-lang.org/examples/binary-tree) for more info on this. If you can do all of the exercises at the end of that link, consider yourself a capable user of union types!
 
-[trees]: /examples/binary-tree
 
-> **Note:** Imagine doing this binary tree exercise in Java. We would probably be working with one super class and two sub classes just to define a tree in the first place! Imagine doing it in JavaScript. It is not quite as bad at first, but imagine trying to refactor the resulting code later if you need to change the core representation. Sneaky breakages everywhere!
+### Languages
 
-We can even model a programming language as data if we want to go really crazy! In this case, it is one that only deals with [Boolean algebra][algebra]:
-
-[algebra]: https://en.wikipedia.org/wiki/Boolean_algebra#Operations "Boolean Algebra"
+We can even model a programming language as data if we want to go really crazy! In this case, it is one that only deals with [Boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra#Operations):
 
 ```elm
 type Boolean
     = T
     | F
     | Not Boolean
-    | Or  Boolean Boolean
     | And Boolean Boolean
+    | Or Boolean Boolean
 
 true = Or T F
 false = And T (Not T)
 ```
 
-Once we have modeled the possible values we can define functions like `eval` which evaluates any `Boolean` to `True` or `False`. See [this example][bool] for more about representing boolean expressions.
-
-[bool]: /examples/boolean-expressions
+Once we have modeled the possible values we can define functions like `eval` which evaluates any `Boolean` to `True` or `False`. See [this example](http://elm-lang.org/examples/boolean-expressions) for more about representing boolean expressions.
