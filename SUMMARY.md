@@ -19,7 +19,7 @@
        * [Communication](architecture/components/communication.md)
 * [Types](types/README.md)
    * [Reading Types](types/reading_types.md)
-   * Type Aliases
+   * [Type Aliases](types/type_aliases.md)
    * [Union Types](types/union_types.md)
 * [Error Handling and Tasks](error_handling/README.md)
    * [Maybe](error_handling/maybe.md)
