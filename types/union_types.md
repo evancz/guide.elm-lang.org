@@ -228,7 +228,62 @@ One nice thing about this approach is that there is no mystery about what kind o
 
 Yeah, yeah, the problem is contrived this time, but it is important to see some of the more advanced things you can do with union types!
 
-If you have ever implemented a [linked list](https://en.wikipedia.org/wiki/Linked_list) in C or Java you will appreciate how easy it is in Elm:
+A [linked list](https://en.wikipedia.org/wiki/Linked_list) is a sequence of values. If you are looking at a linked list, it is either empty or it is a value and more list. That list is either empty or is a value and more list. etc. This intuitive definition works pretty directly in Elm. Let's see it for lists of integers:
+
+```elm
+> type IntList = Empty | Node Int IntList
+
+> Empty
+Empty : IntList
+
+> Node
+<function> : Int -> IntList -> IntList
+
+> Node 42 Empty
+Node 42 Empty : IntList
+
+> Node 64 (Node 128 Empty)
+Node 64 (Node 128 Empty) : IntList
+```
+
+Now we did two new things here:
+
+  1. The `Node` constructor takes *two* arguments instead of one. This is fine. In fact, you can have them take as many arguments as you want.
+  2. Our union type is *recursive*. An `IntList` may hold another `IntList`. Again, this is fine if you are using union types.
+
+The nice thing about our `IntList` type is that now we can only build valid linked lists. Every linked list needs to start with `Empty` and the only way to add a new value is with `Node`.
+
+It is equally nice to work with. Let's say we want to compute the sum of all of the numbers in a list. Just like with any other union type, we need to use a `case` and handle all possible scenarios:
+
+```elm
+sum : IntList -> Int
+sum numbers =
+  case numbers of
+    Empty ->
+      0
+
+    Node n remainingNumbers ->
+      n + sum remainingNumbers
+```
+
+If we get an `Empty` value, the sum is 0. If we have a `Node` we add the first element to the sum of all the remaining ones. So an expression like `(sum (Node 1 (Node 2 (Node 3 Empty))))` is evaluated like this:
+
+```elm
+  sum (Node 1 (Node 2 (Node 3 Empty)))
+  1 + sum (Node 2 (Node 3 Empty))
+  1 + (2 + sum (Node 3 Empty))
+  1 + (2 + (3 + sum Empty))
+  1 + (2 + (3 + 0))
+  1 + (2 + 3)
+  1 + 5
+  6
+```
+
+On each line, we see one evaluation step. When we call `sum` it transforms the list based on whether it is looking at a `Node` or an `Empty` value.
+
+> **Note:** This is the first recursive function we have written together!
+> 
+> **Pretend you are already done.**
 
 ```elm
 > type List a = Empty | Node a (List a)
@@ -245,40 +300,6 @@ Node "hi" Empty : List String
 > Node 1.618 (Node 6.283 Empty)
 Node 1.618 (Node 6.283 Empty) : List Float
 ```
-
-So this creates a type called `List`. A list can either be empty or it can have one element
-
-List also takes a type as an argument, so we can create `(List Int)` or `(List String)` or whatever. The values that have the type `(List Int)` would look like this:
-
-  * `Empty`
-  * `Node 1 Empty`
-  * `Node 3 (Node 2 (Node 1 Empty))`
-
-All of these have the same type, so they can be used in all the same places. So when we pattern match we can define what we want to do in each case. Say we want to compute the sum of all of the numbers in a list. The following function defines the logic for each possible scenario.
-
-```elm
-sum : List Int -> Int
-sum xs =
-    case xs of
-      Empty ->
-          0
-
-      Node first rest ->
-          first + sum rest
-```
-
-If we get an `Empty` value, the sum is 0. If we have a `Node` we add the first element to the sum of all the remaining ones. So an expression like `(sum (Node 1 (Node 2 (Node 3 Empty))))` is evaluated like this:
-
-  * `sum (Node 1 (Node 2 (Node 3 Empty)))`
-  * `1 + sum (Node 2 (Node 3 Empty))`
-  * `1 + (2 + sum (Node 3 Empty))`
-  * `1 + (2 + (3 + sum Empty))`
-  * `1 + (2 + (3 + 0))`
-  * `1 + (2 + 3)`
-  * `1 + 5`
-  * `6`
-
-On each line, we see one evaluation step. When we call `sum` it transforms the list based on whether it is looking at a `Node` or an `Empty` value.
 
 Making lists is just the start, we can easily create all sorts of data structures, like [binary trees][binary].
 
