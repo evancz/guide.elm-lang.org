@@ -1,21 +1,33 @@
 # JavaScript Interop
 
-At some point your Elm program is probably going to need to talk to JavaScript. We do this with a feature called *ports*. The idea is that we keep our Elm and JavaScript code totally separate, only communicating by sending messages back and forth through ports:
+At some point your Elm program is probably going to need to talk to JavaScript. We do by sending messages back and forth between Elm and JavaScript:
 
 ![](interop.png)
 
-This way we can have access to full power of JavaScript, the good and the bad, without giving up on all the things that are nice about Elm!
+This way we can have access to full power of JavaScript, the good and the bad, without giving up on all the things that are nice about Elm.
 
 ## Ports
 
-Elm uses 
+Any communication with JavaScript goes through a *port*. Think of it like a hole in the side of your Elm program where you can plug stuff in.
+
+Imagine we want to send strings to JavaScript to use some nice spell checking library. When that library produces suggestions, we want to send them back into Elm through another port.
 
 ```elm
-port module Foreign exposing (..)
+port module Spelling exposing (..)
 
-port focus : String -> Cmd msg
+port check : String -> Cmd msg
+
+port suggestions : (List String -> msg) -> Sub msg
 ```
 
+```javascript
+var app = Elm.Spelling.fullscreen();
+
+app.ports.check.subscribe(function(word) {
+    var suggestions = spellCheck(word);
+    app.ports.suggestions.send(suggestions);
+});
+```
 
 ## Historical Context
 
