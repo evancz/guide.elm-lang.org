@@ -33,6 +33,6 @@ As we will see soon, the point of `Maybe` is to avoid this problem in a pleasant
 
 Joel Spolsky outlined the issues with exceptions pretty nicely [in the year 2003](http://www.joelonsoftware.com/items/2003/10/13.html). Essentially, code that *looks* fine may actually crash at runtime. Surprise!
 
-The point of `Result` is to make this possibility clear and make sure it is handled appropriately.
+The point of `Result` is to make the possibility of failure clear and make sure it is handled appropriately.
 
 The point of `Task` is pretty much the same, but it also works when we have code that runs asynchronously. Your error handling mechanism shouldn't totally fall apart just because you make an HTTP request!
