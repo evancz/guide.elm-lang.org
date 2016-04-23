@@ -10,7 +10,7 @@ This section focus on the major kinds of interop that you need when working in b
   2. How to embed Elm programs in existing HTML or React apps.
   3. How to communicate with existing JavaScript code.
 
-Each of these types of interop are guided by the self-imposed constraints that (1) there must be a clear way to introduce Elm gradually into diverse environments and (2) Elm should not have to sacrifice its core design principles. In other words, **I want Elm to be amazing and I want you to be able to use it at work.** An tough balance.
+Each of these types of interop are guided by the self-imposed constraints that (1) there must be a clear way to introduce Elm gradually into diverse environments and (2) Elm should not have to sacrifice its core design principles. In other words, **Elm should be great *and* it should be possible to use Elm at work.**
 
 
 ## Advice on Introducing Elm
