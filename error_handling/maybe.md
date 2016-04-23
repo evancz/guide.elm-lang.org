@@ -93,4 +93,13 @@ getTeenAge user =
         Nothing
 ```
 
-Again, we are reminded that we may not have an age, but if we do, we only want to return it if it is between 13 and 18. Now anyone who calls this function can get a teen age, and Elm will guarantee that they do not assume *everyone* is within that age range.
+Again, we are reminded that users may not have an age, but if they do, we only want to return it if it is between 13 and 18. Now Elm can guarantee that anyone who calls `getTeenAge` will have to handle the possibility that the age is out of range.
+
+This gets pretty cool when you start combining it with library functions like [`List.filterMap`](http://package.elm-lang.org/packages/elm-lang/core/latest/List#filterMap) that help you process more data. For example, maybe we want to figure out the distribution of ages between 13 and 18. We could do it like this:
+
+```elm
+> List.filterMap getTeenAge [ sue, tom, User "Alice" 14, User "Bob" 16, User "Chester" 74 ]
+[14,16] : List Int
+```
+
+We end up with only the ages we care about. Now we can feed our `List Int` into a function that figures out the distributions of each number.
