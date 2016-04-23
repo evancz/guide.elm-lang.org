@@ -17,7 +17,7 @@ foreign focus : String -> Cmd msg
 
 ## Historical Context
 
-Now I know that this is not the typical interpretation of *language interop*. The typical interpretation is roughly: *C code can be used **anywhere** in C++ code*. You see the same notion when you look at Java and Scala, or JavaScript and TypeScript. Just be totally backwards compatible. This is the easiest solution, but it forces you to make quite extreme sacrifices in the new language. All the problems of the old language now exist in the new one too.
+Now I know that this is not the typical interpretation of *language interop*. Usually languages just go for full backwards compatibility. So C code can be used *anywhere* in C++ code. You can replace C/C++ with Java/Scala or JavaScript/TypeScript. This is the easiest solution, but it forces you to make quite extreme sacrifices in the new language. All the problems of the old language now exist in the new one too. Hopefully less though.
 
 Elm's interop is built on the observation that **by enforcing some architectural rules, you can make full use of the old language *without* making sacrifices in the new one.** This means we can keep making guarantees like "you will not see runtime errors in Elm" even as you start introducing whatever crazy JavaScript code you need.
 
