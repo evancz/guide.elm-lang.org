@@ -52,7 +52,7 @@ tom =
   { name = "Tom", age = Just 24 }
 ```
 
-Great, Tom is part of a valuable demographic! Maybe he has a nice job, no kids, and has not learned to budget well yet. The advertisers will be pleased.
+Great, that will be nice on his birthday. But more importantly, Tom is part of a valuable demographic! The advertisers will be pleased.
 
 Alright, so now that we have some users, how can we market alcohol to them without breaking any laws? People would probably be mad if we market to people under 21, so let's check for that:
 
