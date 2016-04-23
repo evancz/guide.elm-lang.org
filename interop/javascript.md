@@ -2,7 +2,7 @@
 
 At some point your Elm program is probably going to need to talk to JavaScript. We do this with a feature called *ports*. The idea is that we keep our Elm and JavaScript code totally separate, only communicating by sending messages back and forth through ports:
 
-![](interop.png)
+
 
 This way we can have access to full power of JavaScript, the good and the bad, without giving up on all the things that are nice about Elm!
 
@@ -11,9 +11,9 @@ This way we can have access to full power of JavaScript, the good and the bad, w
 Elm uses 
 
 ```elm
-foreign module Foreign exposing (..)
+port module Foreign exposing (..)
 
-foreign focus : String -> Cmd msg
+port focus : String -> Cmd msg
 ```
 
 
