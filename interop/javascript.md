@@ -9,7 +9,7 @@ Elm's interop story is built on the observation that **by enforcing some archite
 So what are these architectural rules? Turns out it is just The Elm Architecture. Instead of embedding arbitrary JS code right in the middle of Elm, we use commands and subscriptions so that Elm can handle the dirty work for us. In the same way that the `WebSocket` library insulates you from all the crazy failures that might happen with web sockets, we use `foreign modules` to insulate users from all the crazy failures that might happen in JavaScript code.
 
 
-## Foreign Modules
+## Ports
 
 Elm uses 
 
