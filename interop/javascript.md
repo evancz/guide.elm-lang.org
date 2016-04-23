@@ -8,17 +8,9 @@ This way we can have access to full power of JavaScript, the good and the bad, w
 
 ## Ports
 
-Any communication with JavaScript goes through a *port*. Think of it like a hole in the side of your Elm program where you can plug stuff in.
+Any communication with JavaScript goes through a *port*. Think of it like a hole in the side of your Elm program where you can plug stuff in. We will explore how ports work with the following scenario: we want to send strings to JavaScript to use some spell-checking library. When that library produces suggestions, we want to send them back into Elm through another port.
 
-Imagine we want to send strings to JavaScript to use some nice spell checking library. When that library produces suggestions, we want to send them back into Elm through another port.
-
-```elm
-port module Spelling exposing (..)
-
-port check : String -> Cmd msg
-
-port suggestions : (List String -> msg) -> Sub msg
-```
+Let's start with how that would look in JavaScript:
 
 ```javascript
 var app = Elm.Spelling.fullscreen();
@@ -28,6 +20,26 @@ app.ports.check.subscribe(function(word) {
     app.ports.suggestions.send(suggestions);
 });
 ```
+
+We start by initializing our Elm program that has two ports: `check` and `suggestions`. Strings will be coming out of the `check` port, so we `subscribe` to those messages. Whenever we get a word, our callback is going to run it through our spell-checking library and then feed the result back to Elm through the `suggestions` port.
+
+On the Elm side, we have a program like this:
+
+```elm
+port module Spelling exposing (..)
+
+import Html exposing (..)
+import Html.App as Html
+
+port check : String -> Cmd msg
+
+port suggestions : (List String -> msg) -> Sub msg
+
+main =
+  Html.program
+```
+
+
 
 ## Historical Context
 
