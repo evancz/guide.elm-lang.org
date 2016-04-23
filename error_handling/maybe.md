@@ -98,7 +98,10 @@ Again, we are reminded that users may not have an age, but if they do, we only w
 This gets pretty cool when you start combining it with library functions like [`List.filterMap`](http://package.elm-lang.org/packages/elm-lang/core/latest/List#filterMap) that help you process more data. For example, maybe we want to figure out the distribution of ages between 13 and 18. We could do it like this:
 
 ```elm
-> List.filterMap getTeenAge [ sue, tom, User "Alice" 14, User "Bob" 16, User "Chester" 74 ]
+> users = [ sue, tom, User "Alice" 14, User "Bob" 16, User "Chester" 74 ]
+... : List User
+
+> List.filterMap getTeenAge users
 [14,16] : List Int
 ```
 
