@@ -13,7 +13,7 @@ Together, commands and subscriptions make it possible for your Elm components to
 
 ## Extending the Architecture Skeleton
 
-So far [our architecture skeleton](README.md) has focused on creating `Model` types and `update` and `view` functions. To handle commands and subscriptions, we need to extend the basic architecture skeleton a little bit:
+So far [our architecture skeleton](../README.md) has focused on creating `Model` types and `update` and `view` functions. To handle commands and subscriptions, we need to extend the basic architecture skeleton a little bit:
 
 ```elm
 -- MODEL
