@@ -2,9 +2,8 @@
 
 You will sending lots of JSON in your programs. You use the `Json.Decode` library to convert wild and crazy JSON into nicely structured Elm values.
 
-> **Note:** This conversion doubles as a validation phase. In fact, it has revealed bugs in NoRedInk's *backend* code! If your server is producing unexpected values for JavaScript, the client just gradually crashes as you run into missing fields. In contrast, Elm recognizes JSON values with unexpected structure, so NoRedInk gives a nice explanation to the user and logs the unexpected value. This has actually led to some patches in Ruby code!
-
 The core concept for working with JSON is called a **decoder**. It is a value that knows how to turn certain JSON values into Elm values. We will start out by looking at some very basic decoders (how do I get a string?) and then look at how to put them together to handle more complex scenarios.
+
 
 ## Primitive Decoders
 
@@ -13,6 +12,9 @@ The core concept for working with JSON is called a **decoder**. It is a value th
 
 
 ## Handling Uncertainty
+
+
+> **Note:** The conversion from JSON to Elm doubles as a validation phase. In fact, it has revealed bugs in NoRedInk's *backend* code! If your server is producing unexpected values for JavaScript, the client just gradually crashes as you run into missing fields. In contrast, Elm recognizes JSON values with unexpected structure, so NoRedInk gives a nice explanation to the user and logs the unexpected value. This has actually led to some patches in Ruby code!
 
 
 > **Fun Fact:** JSON decoders are actually an instance of a more general pattern in Elm. You see it whenever 
