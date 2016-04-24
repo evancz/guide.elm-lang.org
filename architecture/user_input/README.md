@@ -1,7 +1,11 @@
 # The Elm Architecture + User Input
 
-This section is all about user input. Reacting to button clicks. Handling input in text fields. Checking all sorts of boxes. Etc.
+Your web app is going to need to deal with user input. This section will get you familiar with The Elm Architecture in the context of things like:
 
-We will be working through a few friendly examples. They gradually introduce the most crucial concepts in The Elm Architecture, so it should be a nice learning curve if you go in order.
+  - Buttons
+  - Text Fields
+  - Check Boxes
+  - Radio Buttons
+  - etc.
 
-Let's begin!
+The following examples build gradually, so it should be a nice learning curve if you go in order. Let's begin!
