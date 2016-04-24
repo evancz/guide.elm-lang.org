@@ -123,13 +123,60 @@ This function takes in two different decoders. If they are both successful, it u
 Ok (3,4) : Result String (Int, Int)
 ```
 
-There are a bunch of functions like `object2` (like `object3` and `object4`) for handling different sized objects. Later we will see tricks so you do not need a different function depending on the size of the object you are dealing with. It is just easier to ramp up this way.
+There are a bunch of functions like `object2` (like `object3` and `object4`) for handling different sized objects.
+
+> **Note:** Later we will see tricks so you do not need a different function depending on the size of the object you are dealing with. You can also use functions like [`dict`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#dict) and [`keyValuePairs`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#keyValuePairs) if the JSON you are processing is using an object more like a dictionary. 
+
+## Optional Fields
+
+By now we can decode arbitrary objects, but what if that object has an optional field? Now we want the `maybe` function:
+
+```elm
+maybe : Decoder a -> Decoder (Maybe a)
+```
+
+It is saying, try to use this decoder, but it is fine if it does not work.
+
+```elm
+> import Json.Decode exposing (..)
+
+> type alias User = { name : String, age : Maybe Int }
+
+> user = object2 User ("name" := string) (maybe ("age" := int))
+<decoder> : Decode User
+
+> decodeString user """{ "name": "Tom", "age": 42 }"""
+Ok { name = "Tom", age = Just 42 } : Result String User
+
+> decodeString user """{ "name": "Sue" }"""
+Ok { name = "Sue", age = Nothing } : Result String User
+```
+
+## Weirdly Shaped JSON
+
+There is also the possibility that a field can hold different types of data in different scenarios. I have seen a case where a field is *usually* an integer, but *sometimes* it is a string holding a number. I am not naming names, but it was pretty lame. Luckily, it is not too crazy to make a decoder for this situation as well. The two functions that will help us out are [`oneOf`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#oneOf) and [`customDecoder`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#customDecoder):
+
+```elm
+oneOf : List (Decoder a) -> Decoder a
+
+customDecoder : Decoder a -> (a -> Result String b) -> Decoder b
+```
+
+The `oneOf` function takes a list of decoders and tries them all until one works. If none of them work, the whole thing fails. The `customDecoder` function runs a decoder, and if it succeeds, does whatever further processing you want. So the solution to our "sometimes an int, sometimes a string" problem looks like this:
+
+```elm
+sillyNumber : Decoder Int
+sillyNumber =
+  oneOf
+    [ int
+    , customDecoder string String.toInt
+    ]
+```
+
+We first try to just read an integer. If that fails, we try to read a string and then convert it to an integer with `String.toInt`. In your face crazy JSON!
 
 
-## Handling Uncertainty
-
-
-## Additional Information
+## Broader Context
 
 By now you have seen a pretty big chunk of the actual `Json.Decode` API, so I want to give some additional context about how this fits into the broader world of Elm and web apps.
 
