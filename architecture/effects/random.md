@@ -21,7 +21,10 @@ For now we will just track `dieFace` as an integer between 1 and 6. Then I would
 ```elm
 view : Model -> Html Msg
 view model =
-  h1 [ onClick Roll ] [ text model.dieFace ]
+  div []
+    [ h1 [] [ text (toString model.dieFace) ]
+    , button [ onClick Roll ] [ text "Roll" ]
+    ]
 ```
 
 So this is typical. Same stuff we have been doing with the user input examples of The Elm Architecture. When you click our `<h1>` it is going to produce a `Roll` messages, so I guess it is time to take a first pass at the `update` function as well.
