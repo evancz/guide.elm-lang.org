@@ -1,6 +1,6 @@
 # Buttons
 
-**[Demo](http://evancz.github.io/elm-architecture-tutorial/examples/1) / [See Code]()**
+**[Demo](http://evancz.github.io/elm-architecture-tutorial/examples/1) / [See Code](https://github.com/evancz/elm-architecture-tutorial/tree/0.17/examples/1.elm)**
 
 Our first example is a simple counter that can be incremented or decremented. I find that it can be helpful to see the entire program in one place, so here it is! We will break it down afterwards.
 
