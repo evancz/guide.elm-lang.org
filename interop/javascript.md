@@ -10,7 +10,7 @@ This way we can have access to full power of JavaScript, the good and the bad, w
 
 Any communication with JavaScript goes through a *port*. Think of it like a hole in the side of your Elm program where you can plug stuff in. We will explore how ports work with the following scenario: we want to send words to some spell-checking library in JavaScript. When that library produces suggestions, we want to send them back into Elm.
 
-Let's start with how that would look in JavaScript:
+Assuming you know [how to embed Elm in HTML](html.md), let's start with the JavaScript code we would add to react to messages coming through ports:
 
 ```javascript
 var app = Elm.Spelling.fullscreen();
