@@ -1,6 +1,6 @@
 # JavaScript Interop
 
-At some point your Elm program is probably going to need to talk to JavaScript. We do by sending messages back and forth between Elm and JavaScript:
+At some point your Elm program is probably going to need to talk to JavaScript. We do this by sending messages back and forth between Elm and JavaScript:
 
 ![](interop.png)
 
