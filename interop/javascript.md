@@ -114,6 +114,24 @@ The second one is creating a port named `suggestions`. This one is a subscriptio
 So talking to JavaScript uses the same command and subscription pattern we saw used for HTTP and Web Sockets in the Elm Architecture. Pretty cool!
 
 
+## Customs and Border Protection
+
+Ports must be careful about what values are allowed through. Elm is statically typed, so each port is fitted with some border protection code that ensures that type errors are kept out. Ports also do some conversions so that you get nice colloquial data structures in both Elm and JS.
+
+The particular types that can be sent in and out of ports is quite flexible, covering [all valid JSON values](http://www.json.org/). Specifically, incoming ports can handle all the following Elm types:
+
+  * **Booleans and Strings** &ndash; both exist in Elm and JS!
+  * **Numbers** &ndash; Elm ints and floats correspond to JS numbers
+  * **Lists**   &ndash; correspond to JS arrays
+  * **Arrays**  &ndash; correspond to JS arrays
+  * **Tuples**  &ndash; correspond to fixed-length, mixed-type JS arrays
+  * **Records** &ndash; correspond to JavaScript objects
+  * **Maybes**  &ndash; `Nothing` and `Just 42` correspond to `null` and `42` in JS
+  * **Json**    &ndash; [`Json.Encode.Value`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Encode#Value) corresponds to arbitrary JSON
+
+All conversions are symmetric and type safe. If someone tries to give a badly typed value to Elm it will throw an error in JS immediately. By having a border check like this, Elm code can continue to guarantee that you will never have type errors at runtime.
+
+
 ## Usage Advice
 
 I showed an example where the ports were declared in the root module. This is not a strict requirement. You can actually create a `port module` that gets imported by various parts of your app.
