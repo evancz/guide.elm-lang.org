@@ -28,10 +28,99 @@ On the Elm side, we have a program like this:
 ```elm
 port module Spelling exposing (..)
 
+import Html exposing (..)
+import Html.App as Html
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import String
+
+
+main =
+  Html.program
+    { init = init
+    , view = view
+    , update = update
+    , subscriptions = subscriptions
+    }
+
+
+-- MODEL
+
+type alias Model =
+  { word : String
+  , suggestions : List String
+  }
+
+init : (Model, Cmd Msg)
+init =
+  (Model "" [], Cmd.none)
+
+
+-- UPDATE
+
+type Msg
+  = Change String
+  | Check
+  | Suggest (List String)
+
+
+port check : String -> Cmd msg
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update action model =
+  case action of
+    Change newWord ->
+      ( Model newWord [], Cmd.none )
+
+    Check ->
+      ( model, check model.word )
+
+    Suggest newSuggestions ->
+      ( Model model.word newSuggestions, Cmd.none )
+
+
+-- SUBSCRIPTIONS
+
+port suggestions : (List String -> msg) -> Sub msg
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  suggestions Suggest
+
+
+-- VIEW
+
+view : Model -> Html Msg
+view model =
+  div []
+    [ input [ onInput Change ] []
+    , button [ onClick Check ] [ text "Check" ]
+    , div [] [ text (String.join ", " model.suggestions) ]
+    ]
+```
+
+The two new and important lines are:
+
+```elm
 port check : String -> Cmd msg
 
 port suggestions : (List String -> msg) -> Sub msg
 ```
+
+The first one is creating a port named `check`. You can `subscribe` to it on the JavaScript side. In Elm, we have access to it with the function `check : String -> Cmd msg` which takes strings and turns them into the command "give this string to JavaScript".
+
+The second one is creating a port named `suggestions`. This one is a subscription in Elm though. So you give a function that says "whenever I get a list of strings from JavaScript, convert it into some message my app will understand". On the JavaScript side you can `send` to this port to get values into Elm.
+
+So talking to JavaScript uses the same command and subscription pattern we saw used for HTTP and Web Sockets in the Elm Architecture. Pretty cool!
+
+
+## Usage Advice
+
+I showed an example where the ports were declared in the root module. This is not a strict requirement. You can actually create a `port module` that gets imported by various parts of your app.
+
+It seems like it is probably best to just have one `port module` for your project so it is easier to figure out the API on the JavaScript side. I plan to improve tooling such that you can just ask though.
+
+> **Note:** Port modules are not permitted in the package repository. Imagine you download an Elm package and it just doesn't work. You read the docs and discover you *also* need to get some JS code and hook it up properly. Lame. Bad experience. Now imagine if you had this risk with *every* package out there. It just would feel crappy. So we do not allow that.
 
 
 
