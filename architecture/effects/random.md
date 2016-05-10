@@ -28,7 +28,7 @@ view model =
     ]
 ```
 
-So this is typical. Same stuff we have been doing with the user input examples of The Elm Architecture. When you click our `<button>` it is going to produce a `Roll` messages, so I guess it is time to take a first pass at the `update` function as well.
+So this is typical. Same stuff we have been doing with the user input examples of The Elm Architecture. When you click our `<button>` it is going to produce a `Roll` message, so I guess it is time to take a first pass at the `update` function as well.
 
 ```elm
 type Msg = Roll
