@@ -17,7 +17,7 @@ If you are on the fence, I can safely guarantee that if you give Elm a shot and 
 
 Of course *I* think Elm is good, so look for yourself.
 
-Here is a simple counter. You can increment and decrement the counter:
+Here is [a simple counter](http://elm-lang.org/examples/buttons). If you look at the code, it just lets you increment and decrement the counter:
 
 ```elm
 import Html exposing (Html, button, div, text)
