@@ -61,7 +61,7 @@ type alias Model =
   }
 ```
 
-This time I chose to represent the model as a record. (You can read more about records [here](TODO).) For now, the record stores the user input in the `content` field.
+This time I chose to represent the model as a record. (You can read more about records [here](http://guide.elm-lang.org/core_language.html#records) and [here](http://elm-lang.org/docs/records).) For now, the record stores the user input in the `content` field.
 
 > **Note:** You may be wondering, why bother having a record if it only holds one entry? Couldn't you just use the string directly? Yes, of course! But starting with a record makes it easy to add more fields as our app gets more complicated. When the time comes where we want *two* text inputs, we will have to do much less fiddling around.
 
