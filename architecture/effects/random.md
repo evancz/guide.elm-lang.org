@@ -51,7 +51,7 @@ init =
 
 Here we specify both the initial model and some commands we'd like to run immediately when the app starts. This is exactly the kind of stuff that `update` is producing now too.
 
-At this point, it is possible to wire it all up and take a look. You can click the `<h1>`, but nothing happens. Let's fix that!
+At this point, it is possible to wire it all up and take a look. You can click the `<button>`, but nothing happens. Let's fix that!
 
 
 ## Phase Two - Adding the Cool Stuff
