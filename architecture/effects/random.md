@@ -27,7 +27,7 @@ view model =
     ]
 ```
 
-So this is typical. Same stuff we have been doing with the user input examples of The Elm Architecture. When you click our `<h1>` it is going to produce a `Roll` messages, so I guess it is time to take a first pass at the `update` function as well.
+So this is typical. Same stuff we have been doing with the user input examples of The Elm Architecture. When you click our `<button>` it is going to produce a `Roll` messages, so I guess it is time to take a first pass at the `update` function as well.
 
 ```elm
 type Msg = Roll
@@ -71,16 +71,16 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     Roll ->
-      (model, Random.request NewFace (Random.int 1 6))
+      (model, Random.generate NewFace (Random.int 1 6))
 
     NewFace newFace ->
       (Model newFace, Cmd.none)
 ```
 
-There are two new things here. **First**, there is now a branch for `NewFace` messages. When a `NewFace` comes in, we just step the model forward and do nothing. **Second**, we have added a real command to the `Roll` branch. This uses a couple functions from [the `Random` library](TODO). Most important is `Random.request`:
+There are two new things here. **First**, there is now a branch for `NewFace` messages. When a `NewFace` comes in, we just step the model forward and do nothing. **Second**, we have added a real command to the `Roll` branch. This uses a couple functions from [the `Random` library](TODO). Most important is `Random.generate`:
 
 ```elm
-Random.request : (a -> msg) -> Random.Generator a -> Cmd msg
+Random.generate : (a -> msg) -> Random.Generator a -> Cmd msg
 ```
 
 This function takes two arguments. The first is a function to tag random values. In our case we want to use `NewFace : Int -> Msg` to turn the random number into a message for our `update` function. The second argument is a "generator" which is like a recipe for producing certain types of random values. You can have generators for simple types like `Int` or `Float` or `Bool`, but also for fancy types like big custom records with lots of fields. In this case, we use one of the simplest generators:
