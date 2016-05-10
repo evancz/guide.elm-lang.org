@@ -50,7 +50,7 @@ Notice that the `update` and `view` are entirely decoupled. You describe your HT
 
 ## Why a *functional* language?
 
-Forget about functional programming. Fancy words, weird ideas, bad tooling. Barf. Elm is about:
+Forget what you have heard about functional programming. Fancy words, weird ideas, bad tooling. Barf. Elm is about:
 
   - No runtime errors in practice. No `null`. No `undefined` is not a function.
   - Friendly error messages that help you add features more quickly.
