@@ -1,5 +1,7 @@
 # HTTP
 
+[**See Code**](http://elm-lang.org/examples/http)
+
 We are about to make an app that fetches a random GIF when the user asks for another image.
 
 Now, I am going to assume you just read the randomness example. It (1) introduces a two step process for writing apps like this and (2) shows the simplest kind of commands possible. Here we will be using the same two step process to build up to fancier kinds of commands, so I very highly recommend going back one page. I swear you will reach your goals faster if you start with a solid foundation!
