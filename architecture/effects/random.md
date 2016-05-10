@@ -1,5 +1,6 @@
 # Random
 
+[**See Code**](http://elm-lang.org/examples/random)
 
 We are about to make an app that "rolls dice", producing a random number between 1 and 6.
 
