@@ -1,5 +1,7 @@
 # Web Sockets
 
+[**See Code**](http://elm-lang.org/examples/websocket)
+
 We are going to make a simple chat app. There will be a text field so you can type things in and a region that shows all the messages we have received so far. Web sockets are great for this scenario because they let us set up a persistent connection with the server. This means:
 
   1. You can send messages cheaply whenever you want.
