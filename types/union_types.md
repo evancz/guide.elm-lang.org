@@ -84,7 +84,7 @@ So say you want to add `Recent` as a fourth possible `Visibility` value. The com
 
 > **Problem:** We have a chat room where people can post whatever they want. Some users are logged in and some are anonymous. How should we represent a user?
 
-Again, whenever there is weird shaped data, you want to reach for a unino type. For this case, we want one where users are either anonymous or named:
+Again, whenever there is weird shaped data, you want to reach for a union type. For this case, we want one where users are either anonymous or named:
 
 ```elm
 > type User = Anonymous | Named String
