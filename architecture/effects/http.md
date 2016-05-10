@@ -1,6 +1,6 @@
 # HTTP
 
-[**See Code**](http://elm-lang.org/examples/http)
+**[See Code](http://elm-lang.org/examples/http)**
 
 We are about to make an app that fetches a random GIF when the user asks for another image.
 
@@ -63,7 +63,7 @@ Alright, the obvious thing missing right now is the HTTP request. I think it is 
 type Msg
   = MorePlease
   | FetchSucceed String
-  | FetchFail
+  | FetchFail Http.Error
 ```
 
 We still have `MorePlease` from before, but for the HTTP results, we add `FetchSucceed` that holds the new gif URL and `FetchFail` that indicates there was some HTTP issue (server is down, bad URL, etc.)
@@ -80,7 +80,7 @@ update action model =
     FetchSucceed newUrl ->
       (Model model.topic newUrl, Cmd.none)
 
-    FetchFail ->
+    FetchFail _ ->
       (model, Cmd.none)
 ```
 
@@ -97,22 +97,25 @@ getRandomGif topic =
     url =
       "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" ++ topic
   in
-    Http.simpleGet FetchFail FetchSuccess decodeGifUrl url
+    Task.perform FetchFail FetchSuccess (Http.get decodeGifUrl url)
 
 decodeGifUrl : Json.Decoder String
 decodeGifUrl =
   Json.at ["data", "image_url"] Json.string
 ```
 
-Okay, so the `getRandomGif` function is not exceptionally crazy. We first define the `url` we need to hit to get random gifs. Next we have [this `Http.simpleGet` function](TODO) which is going to GET some JSON from the `url` we give it. The other arguments all clarify what to do with the result of this GET.
+Okay, so the `getRandomGif` function is not exceptionally crazy. We first define the `url` we need to hit to get random gifs. Next we have [this `Http.get` function](http://package.elm-lang.org/packages/evancz/elm-http/3.0.1/Http#get) which is going to GET some JSON from the `url` we give it. The interesting part there is The `decodeGifUrl` argument which describes how to turn JSON into Elm values. In our case, we are saying &ldquo;try to get the value at `json.data.image_url` and it should be a string.&rdquo;
 
-  1. The first argument `FetchFail` is a message for when the GET fails. If the server is down or the URL is a 404, we want the `FetchFail` message to be fed into our `update` function.
-  2. The second argument `FetchSuccess` is a way to tag the result of a successful GET. So when we get some URL back like `http://example.com/json`, we convert it into  `FetchSuccess "http://example.com/json"` so that it can be fed into our `update` function.
-  3. The third argument `decodeGifUrl` is a JSON decoder. This value describes how to turn a JSON string into an Elm value. In our case, we are saying "try to get the value at `json.data.image_url` and it should be a string. (If you want a deeper understanding of JSON decoders, check out the full section on it later in this guide! For now you just need to know that it converts JSON into Elm values.)
+> **Note:** See [this](http://guide.elm-lang.org/interop/json.html) for more information on JSON decoders. It will clarify how it works, but for now, you really just need a high-level understanding. It turns JSON into Elm.
 
-Ultimately, `Http.simpleGet` is not doing anything too crazy. It GETs JSON from a URL, and turns the result into a message for our `update` function.
+The `Task.perform` part is clarifying what to do with the result of this GET:
 
-So now when you click the "More" button, it actually goes and fetches a random gif!
+  1. The first argument `FetchFail` is a for when the GET fails. If the server is down or the URL is a 404, we tag the resulting error with `FetchFail` and feed it into our `update` function.
+  2. The second argument `FetchSuccess` is for when the GET succeeds. When we get some URL back like `http://example.com/json`, we convert it into  `FetchSuccess "http://example.com/json"` so that it can be fed into our `update` function.
+
+We will get into the details of how this all works later in this guide, but for now, if you just follow the pattern here, you will be fine using HTTP.
+
+And now when you click the "More" button, it actually goes and fetches a random gif!
 
 > **Exercises:** To get more comfortable with this code, try augmenting it with skills we learned in previous sections:
 > 
