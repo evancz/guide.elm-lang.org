@@ -22,7 +22,8 @@ We specify that the output file is a JS file. The compiler will generate a JavaS
 var Elm = {};
 Elm.MyThing = {
     fullscreen: function() { /* take over the <body> */ },
-    embed: function(node) { /* take over the given node */ }
+    embed: function(node) { /* take over the given node */ },
+    worker: function() { /* run the program with no UI */ }
 };
 ```
 
