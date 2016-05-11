@@ -75,7 +75,7 @@ viewValidation model =
     div [ style [("color", color)] ] [ text message ]
 ```
 
-This is pretty much exactly our [text field example](TODO) looked, just with more fields. Let's walk through how it came to be!
+This is pretty much exactly how our [text field example](TODO) looked, just with more fields. Let's walk through how it came to be!
 
 As always, you start out by guessing at the `Model`. We know there are going to be three text fields, so let's just go with that:
 
