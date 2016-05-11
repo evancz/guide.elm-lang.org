@@ -12,19 +12,19 @@ Elm's *union types* let you represent complex data much more naturally. We will 
 
 > **Problem:** We are creating a [todo list](http://evancz.github.io/elm-todomvc/) full of tasks. We want to have three views: show *all* tasks, show only *active* tasks, and show only *completed* tasks. How do we represent which of these three states we are in?
 
-Whenever you have weird shaped data in Elm, you want to reach for a union type. In this case, we would create a type `Visiblity` that has three possible values:
+Whenever you have weird shaped data in Elm, you want to reach for a union type. In this case, we would create a type `Visibility` that has three possible values:
 
 ```elm
-> type Visiblity = All | Active | Completed
+> type Visibility = All | Active | Completed
 
 > All
-All : Visiblity
+All : Visibility
 
 > Active
-Active : Visiblity
+Active : Visibility
 
 > Completed
-Completed : Visiblity
+Completed : Visibility
 ```
 
 Now that we have these three cases defined, we want to create a function `keep` that will properly filter our tasks. It should work like this:
