@@ -15,7 +15,7 @@ Nothing : Maybe a
 Just "hello" : Maybe String
 
 > Just 1.618
-Just 1.628 : Maybe Float
+Just 1.618 : Maybe Float
 ```
 
 If you want to have a `Maybe` value, you have to use the `Nothing` or `Just` constructors to create it. This means that to deal with the data, you have to use a `case` expression. This means the compiler can ensure that you have definitely covered both possibilities!
