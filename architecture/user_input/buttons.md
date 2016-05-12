@@ -48,13 +48,13 @@ view model =
 
 That's everything!
 
-When writing this program from scratch, I always start by taking a guess at the model. To make a counter, we at least need to keep track of a number that is going up and down. So let's just start with that!
+When writing this program from scratch, I always start by taking a guess at the model. To make a counter, we at least need to keep track of a number that is going up and down. So let's just start with that! We use a [type alias](http://guide.elm-lang.org/types/type_aliases.html) for this:
 
 ```elm
 type alias Model = Int
 ```
 
-Now that we have a model to work with, we need to define how it changes over time. I always start my `UPDATE` section by defining a set of messages that we will get from the UI:
+Now that we have a model, we need to define how it changes over time. I always start my `UPDATE` section by defining a set of messages that we will get from the UI:
 
 ```elm
 type Msg = Increment | Decrement
