@@ -186,7 +186,7 @@ A record is a set of key-value pairs, similar to objects in JavaScript or Python
 "Gates"
 ```
 
-So we can create records using curly braces and access fields using a dot. Elm also has a version of record access that works like a function. By starting the variable with a dot, you are saying please access the field with the following name, so `.name` accesses the `name` field of the record.
+So we can create records using curly braces and access fields using a dot. Elm also has a version of record access that works like a function. By starting the variable with a dot, you are saying *please access the field with the following name*. This means that `.name` is a function that gets the `name` field of the record.
 
 ```elm
 > .name bill
