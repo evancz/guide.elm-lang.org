@@ -74,7 +74,7 @@ Now the cool thing is that we are forced to use a `case` to pattern match on the
 
 Sometimes you want a function that gives an answer sometimes, but just does not in other cases. 
 
-Let's say Mountain Dew wants to do some add buys for people ages 13 to 18. Honestly, it is better to start kids on Mountain Dew younger than that, but it is illegal for kids under 13 to be on our site.
+Let's say Mountain Dew wants to do some ad buys for people ages 13 to 18. Honestly, it is better to start kids on Mountain Dew younger than that, but it is illegal for kids under 13 to be on our site.
 
 So let's say we want to write a function that will tell us a user's age, but only if they are between 13 and 18:
 
