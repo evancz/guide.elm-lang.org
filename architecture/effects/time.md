@@ -9,14 +9,16 @@ So far we have focused on commands. With the randomness example, we *asked* for 
 The code is not too crazy here, so I am going to include it in full. After you read through, we will come back to normal words that explain it in more depth.
 
 ```elm
-import Html.App as Html
+import Html exposing (Html)
+import Html.App as App
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
-import Time exposing (second)
+import Time exposing (Time, second)
+
 
 
 main =
-  Html.program
+  App.program
     { init = init
     , view = view
     , update = update
@@ -41,8 +43,8 @@ type Msg
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
-  case msg of
+update action model =
+  case action of
     Tick newTime ->
       (newTime, Cmd.none)
 
@@ -60,7 +62,7 @@ view : Model -> Html Msg
 view model =
   let
     angle =
-      turns (Time.inMinutes time)
+      turns (Time.inMinutes model)
 
     handX =
       toString (50 + 40 * cos angle)
@@ -68,10 +70,11 @@ view model =
     handY =
       toString (50 + 40 * sin angle)
   in
-    svg [ viewBox="0 0 100 100" ]
-      [ circle [ cx "50", cy "50", r "45" ] []
-      , line [ x1 "50", y1 "50", x2 handX, y2 handY ] []
+    svg [ viewBox "0 0 100 100", width "300px" ]
+      [ circle [ cx "50", cy "50", r "45", fill "#0B79CE" ] []
+      , line [ x1 "50", y1 "50", x2 handX, y2 handY, stroke "#023963" ] []
       ]
+
 ```
 
 There is nothing new in the `MODEL` or `UPDATE` sections. Same old stuff. The `view` function is kind of interesting. Instead of using HTML, we use the `Svg` library to draw some shapes. It works just like HTML though. You provide a list of attributes and a list of children for every node.
