@@ -48,7 +48,9 @@ view model =
 
 That's everything!
 
-When writing this program from scratch, I always start by taking a guess at the model. To make a counter, we at least need to keep track of a number that is going up and down. So let's just start with that! We use a [type alias](http://guide.elm-lang.org/types/type_aliases.html) for this:
+> **Note:** This section has `type` and `type alias` declarations. You can read all about these in the upcoming section on [types](http://guide.elm-lang.org/types/index.html). You do not *need* to deeply understand that stuff now, but you are free to jump ahead if it helps.
+
+When writing this program from scratch, I always start by taking a guess at the model. To make a counter, we at least need to keep track of a number that is going up and down. So let's just start with that!
 
 ```elm
 type alias Model = Int
