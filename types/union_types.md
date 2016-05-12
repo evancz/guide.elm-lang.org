@@ -133,7 +133,7 @@ Now imagine we have a bunch of users in a chat room and we want to show their pi
 ```elm
 activeUsers : List User
 activeUsers =
-  [ Anonymous, LoggedIn "catface420", LoggedIn "AzureDiamond", Anonymous ]
+  [ Anonymous, Named "catface420", Named "AzureDiamond", Anonymous ]
 
 photos : List String
 photos =
