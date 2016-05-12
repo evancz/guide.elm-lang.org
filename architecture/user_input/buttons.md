@@ -18,7 +18,9 @@ main =
 
 type alias Model = Int
 
-model = 0
+model : Model
+model =
+  0
 
 
 -- UPDATE
