@@ -1,6 +1,6 @@
 # HTTP
 
-**[See Code](http://elm-lang.org/examples/http)**
+**[See Online](http://elm-lang.org/examples/http) / [Run Locally](https://github.com/evancz/elm-architecture-tutorial/)**
 
 We are about to make an app that fetches a random GIF when the user asks for another image.
 
