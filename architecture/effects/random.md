@@ -1,6 +1,6 @@
 # Random
 
-[**See Code**](http://elm-lang.org/examples/random)
+**[See Online](http://elm-lang.org/examples/random) / [Run Locally](https://github.com/evancz/elm-architecture-tutorial/)**
 
 We are about to make an app that "rolls dice", producing a random number between 1 and 6.
 
