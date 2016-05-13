@@ -1,6 +1,6 @@
 # Time
 
-[**See Code**](http://elm-lang.org/examples/time)
+**[See Online](http://elm-lang.org/examples/time) / [Run Locally](https://github.com/evancz/elm-architecture-tutorial/)**
 
 We are going to make a simple clock.
 
