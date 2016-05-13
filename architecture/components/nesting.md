@@ -26,3 +26,5 @@ type alias Model =
 ```
 
 Whenever you have to deal with a `Counter.Model` you use the relevant publicly exposed functions.
+
+You can check out some full examples of this in the `nesting/` directory of [this repo](https://github.com/evancz/elm-architecture-tutorial).
