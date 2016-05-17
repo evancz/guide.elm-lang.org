@@ -18,3 +18,18 @@ So we see the URL as the argument, and it is giving back a *task*. Again, this d
 The interesting thing here is the return type `Task Error String`. This is saying: I have a task that may fail with an [`Http.Error`](http://package.elm-lang.org/packages/evancz/elm-http/3.0.1/Http#Error) or succeed with a `String`. This makes it impossible to forget about the bad possibilities. The server may be down. The internet connection may be down. The server may respond with bad data. Etc. By making these possibilities explicit, an Elm programmer has to consider these cases. In the end, it means they build more reliable applications.
 
 > **Note:** This is very similar to the [`Result`](http://package.elm-lang.org/packages/elm-lang/core/latest/Result) type we saw in [the previous section](result.md). You explicitly model failure and success. You then put things together with `map` and `andThen`. The key difference is that a `Result` is already done and a `Task` is not. You can pattern match on a `Result` and see if it is `Ok` or `Err` because it is complete. But a task still needs to be performed, so you do not have that ability anymore.
+
+## Chaining Tasks
+
+It is great to do one task, but to do anything interesting, you probably need to do a bunch of tasks in a row. We use the `andThen` function to do this:
+
+```elm
+andThen : Task x a -> (a -> Task x b) -> Task x b
+```
+
+This function takes two arguments:
+
+  1. A task that may succeed with a value of type `a`
+  2. A callback that takes a value of type `a` and produces a task.
+
+Together, these mean &ldquo;Try to do the first task, and if it is successful, create a second task and try to do that one too.&rdquo; The cool think is that if either task fails, we bail on the whole thing.
