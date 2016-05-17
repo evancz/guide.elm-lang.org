@@ -4,15 +4,7 @@
 
 Think of a task as a todo list. Like if you need to make a doctor's appointment there are a series of steps you follow: **Call the doctor's office, schedule a time, show up at that time, wait around for a while, see the doctor.** Okay, are you sitting in front of a doctor right now? No! Tasks in Elm are like tasks in real life. Just because you *describe* a task does not mean you *did* the task. Elm is not a magician.
 
-To be a bit more concrete, tasks in Elm are useful for things like HTTP requests, getting the current time, and printing things out to the console. Basically, if you are doing something that:
-
-  1. **Observes the world.** For example, &ldquo;get the current time&rdquo; is a task that will give different results depending on when you do it. To keep the guarantee that Elm functions always give the same results if given the same inputs, we cannot just be getting the current time willy nilly.
-
-  2. **Blocks.** For example, &ldquo;GET some JSON from my server&rdquo; may take quite a long time. If it takes 5 seconds, we do not want the whole application to freeze while we wait for the result. Tasks make it possible for this waiting to happen behind the scenes so we can do other things until the task is done. (This is usually a superset of point 1. Most things that take a long time also involve observing the world.)
-
-  3. **Can Fail.** Again, the example of making a GET request works well here. Not only does that take a long time, but the request may just totally fail. Tasks handle potential failures in a uniform way. (This is usually a superset of point 1. If you observe the world, there are all sorts of things that can go wrong.)
-
-We will see some &ldquo;building block&rdquo; tasks and learn how to put them together into more complex sequences.
+To be a bit more concrete, tasks in Elm are useful for things like HTTP requests, getting the current time, and printing things out to the console. Generally stuff that interacts with services outside your program, takes a long time, or may fail. Let&rsquo;s see some examples of tasks.
 
 
 ## Building Blocks
