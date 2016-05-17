@@ -17,6 +17,7 @@
    * [Nesting Components](architecture/components/README.md)
        * [Nesting](architecture/components/nesting.md)
        * [Communication](architecture/components/communication.md)
+   * Component Communication
 * [Types](types/README.md)
    * [Reading Types](types/reading_types.md)
    * [Type Aliases](types/type_aliases.md)
