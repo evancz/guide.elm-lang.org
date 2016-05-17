@@ -14,7 +14,7 @@
        * [Time](architecture/effects/time.md)
        * [Animation](architecture/effects/animation.md)
        * [Web Sockets](architecture/effects/web_sockets.md)
-   * [Nesting Components](architecture/components/README.md)
+   * [Nesting](architecture/components/README.md)
        * [Nesting](architecture/components/nesting.md)
        * [Communication](architecture/components/communication.md)
    * Component Communication
