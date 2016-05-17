@@ -19,6 +19,7 @@ The interesting thing here is the return type `Task Error String`. This is sayin
 
 > **Note:** This is very similar to the [`Result`](http://package.elm-lang.org/packages/elm-lang/core/latest/Result) type we saw in [the previous section](result.md). You explicitly model failure and success. You then put things together with `map` and `andThen`. The key difference is that a `Result` is already done and a `Task` is not. You can pattern match on a `Result` and see if it is `Ok` or `Err` because it is complete. But a task still needs to be performed, so you do not have that ability anymore.
 
+
 ## Chaining Tasks
 
 It is great to do one task, but to do anything interesting, you probably need to do a bunch of tasks in a row. We use the `andThen` function to do this:
