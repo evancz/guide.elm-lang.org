@@ -125,8 +125,8 @@ This function lets us say, we have this HTML that was going to produce `a` value
 
 The basic pattern here is:
 
-  1. Create a **strong contract** that follows The Elm Architecture.
-  2. Build everything you need using that contract.
+  1. Create a **strong contract** that follows The Elm Architecture to wrap up a &ldquo;component*rdquo;.
+  2. Build everything you need in terms of other people&rsquo;s work. You need a model, use theirs. You need to update that model, use their `update` function. Need a view? Use theirs.
 
 
 > **Exercises:**
