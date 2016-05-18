@@ -17,7 +17,6 @@
    * [Modularity](architecture/components/README.md)
        * [Pair of Counters](architecture/components/nesting.md)
        * List of Counters
-   * Communication
 * [Types](types/README.md)
    * [Reading Types](types/reading_types.md)
    * [Type Aliases](types/type_aliases.md)
