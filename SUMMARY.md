@@ -15,7 +15,7 @@
        * [Animation](architecture/effects/animation.md)
        * [Web Sockets](architecture/effects/web_sockets.md)
    * [Modularity](architecture/modularity/README.md)
-       * [Pair of Counters](architecture/components/counter_pair.md)
+       * [Pair of Counters](architecture/modularity/counter_pair.md)
        * [List of Counters](architecture/components/counter_list.md)
 * [Types](types/README.md)
    * [Reading Types](types/reading_types.md)
