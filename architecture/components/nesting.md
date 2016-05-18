@@ -18,7 +18,7 @@ Take a moment to check out [the `Counter` module](https://github.com/evancz/elm-
 module Counter exposing ( Model, Msg, init, update, view )
 ```
 
-This is creating a module called `Counter` that publicly exposes a limited subset of details. When used effectively, **modules create strong contracts.** I will do exactly X and Y. Do not worry about how I do it. Do not worry about if I change how I do it. I am only guaranteeing X and Y.
+This is creating a module called `Counter` that publicly exposes a limited subset of details. When used effectively, **modules create strong contracts.** I will do exactly X and Y. Do not worry about how I do it. Do not worry about if I change how I do it. All you need to know is that X and Y will work as we agreed.
 
 As an example from our `Counter` module, an outsider will know that the `Msg` type exists, but they will not know that `Increment` and `Decrement` are the only values of this type. This means that it is *impossible* for an outsider to write code dependent on the particulars of a `Msg`. So the maintainer of the `Counter` module is free to add and remove messages with no risk of breaking code far away. These details are private.
 
