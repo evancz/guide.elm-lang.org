@@ -129,12 +129,14 @@ The basic pattern here is:
   2. Build everything you need in terms of other people&rsquo;s work. You need a model, use theirs. You need to update that model, use their `update` function. Need a view? Use theirs.
 
 
-> **Exercises:**
+> **Exercises:** This code will make more sense if you start playing around with it, so here are a few ideas of how to extend what we have now.
+> 
+> First, just add a button that swaps the two counters.
+> 
+> Okay, now add some of the following features to the `Counter` module:
 >
->   - Add a button that swaps the two counters.
->   - Add features to `Counter` without touching the parent module at all.
->       - Track the maximum number reached.
->       - Track the minimum number reached.
->       - Count how many times the user has clicked one of the buttons
+>   - Track the maximum number reached.
+>   - Track the minimum number reached.
+>   - Count how many times the user has clicked one of the buttons
 >
->     The important thing is these features should &ldquo;just work&rdquo; without any changes in the parent module.
+> Now the only rule here is **you *cannot* touch the parent module**. You need to implement all these features by changing the `Counter` module only. The pair of counters should just keep working with no changes.
