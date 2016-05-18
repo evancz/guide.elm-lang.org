@@ -5,9 +5,9 @@
 The very first thing we created with The Elm Architecture was [a simple counter](../user_input/buttons.md) that you could increment and decrement. In this example, we will:
 
   1. Turn our counter code into a *module* that can be reused again and again.
-  2. Use that module to make a pair of counters.
+  2. Use that module to make a pair of counters. The counters can be changed independently, and we will have a reset button to put them both back to zero.
 
-This will be the foundation for all sorts of other tricks.
+We will start with the `Counter` module.
 
 
 ## The Counter Module
@@ -60,6 +60,7 @@ init top bottom =
 
 The `Counter` module gives us exactly one way to create a `Counter.Model` so that is what we have to use. You give `Counter.init` an integer, it gives you a `Counter.Model`.
 
+Okay, so far so good. Now we should figure out what kinds of messages we may get from user interactions. 
 
 ```elm
 type Msg
