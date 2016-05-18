@@ -24,10 +24,67 @@ As an example from our `Counter` module, an outsider will know that the `Msg` ty
 
 As another example, an outsider is able to use `view` without knowing about the `countStyle` helper function. We could add twenty helper functions, but all you would see from the outside is `init`, `update`, and `view`. Again, this gives the maintainer of the `Counter` module the freedom to change the implementation dramatically without breaking tons of far away code in surprising ways.
 
-By creating a **strong contract**, we give ourselves the freedom to change and evolve our code more efficiently. When working in a large team setting, these contracts can be an extremely powerful way of collaborating. If you create a contract at the beginning of your project (much like the `Counter` module does) you can split off into two groups. One to make the `Counter` and one to pretend it is done and work on the code it is embedded in.
+By creating a **strong contract**, we give ourselves the freedom to change and evolve our code more efficiently. When working in a large team setting, these contracts can be an extremely powerful way of collaborating. If you create a contract at the beginning of your project (much like the `Counter` module does) you can split off into two groups. One to make the `Counter` and one to pretend it is done and work on the code that uses it.
 
-Speaking of the code it is embedded in.
+Speaking of the code that uses it, let&rsquo;s take a look!
 
 
 ## A Pair of Counters
 
+[The counter pair code](https://github.com/evancz/elm-architecture-tutorial/blob/master/nesting/1-counter-pair.elm) starts by importing the `Counter` module:
+
+```elm
+import Counter
+```
+
+This gives us access to `Counter.Model`, `Counter.init`, etc. so we can use these things without knowing how they work. From there, it is exactly like all the code we have written before. We just follow The Elm Architecture.
+
+So let&rsquo;s start by guessing at the model. We know we want to have two counters. We also know that we already have a complete representation of a counter thanks to the `Counter.Model` type. So let&rsquo;s just reuse that:
+
+```elm
+type alias Model =
+  { topCounter : Counter.Model
+  , bottomCounter : Counter.Model
+  }
+```
+
+Our model is a top counter and a bottom counter. Now let&rsquo;s write an `init` to create a new pair of counters:
+
+```elm
+init : Int -> Int -> Model
+init top bottom =
+  { topCounter = Counter.init top
+  , bottomCounter = Counter.init bottom
+  }
+```
+
+The `Counter` module gives us exactly one way to create a `Counter.Model` so that is what we have to use. You give `Counter.init` an integer, it gives you a `Counter.Model`.
+
+
+```elm
+type Msg
+  = Reset
+  | Top Counter.Msg
+  | Bottom Counter.Msg
+
+
+update : Msg -> Model -> Model
+update msg model =
+  case msg of
+    Reset ->
+      init 0 0
+
+    Top topMsg ->
+      let
+        newCounter =
+          Counter.update topMsg model.topCounter
+      in
+        { model | topCounter = newCounter }
+
+    Bottom bottomMsg ->
+      let
+        newCounter =
+          Counter.update bottomMsg model.bottomCounter
+      in
+        { model | bottomCounter = newCounter }
+```
