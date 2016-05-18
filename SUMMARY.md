@@ -16,6 +16,7 @@
        * [Web Sockets](architecture/effects/web_sockets.md)
    * [Modularity](architecture/components/README.md)
        * [Pair of Counters](architecture/components/nesting.md)
+       * List of Counters
    * Communication
 * [Types](types/README.md)
    * [Reading Types](types/reading_types.md)
