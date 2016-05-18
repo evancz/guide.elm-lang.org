@@ -18,27 +18,16 @@ Take a moment to check out [the `Counter` module](https://github.com/evancz/elm-
 module Counter exposing ( Model, Msg, init, update, view )
 ```
 
-This is creating a module called `Counter` that publicly exposes a limited subset of details. For example, an outsider will know that the `Msg` type exists, but they will not know that `Increment` and `Decrement` are the only values of this type. This means that it is *impossible* for an outsider to write code dependent on the particulars of a `Msg`. So the maintainer of the `Counter` module is free to add and remove messages with no risk of breaking code far away. These details are private. As another example, an outsider is able to use `view` without knowing about the `countStyle` helper function. We could add twenty helper functions, but all you would see from the outside is `init`, `update`, and `view`. Again, this gives the maintainer of the `Counter` module the freedom to change the implementation dramatically without breaking tons of far away code in surprising ways.
+This is creating a module called `Counter` that publicly exposes a limited subset of details. When used effectively, **modules create strong contracts.** I will do exactly X and Y. Do not worry about how I do it. Do not worry about if I change how I do it. I am only guaranteeing X and Y.
+
+As an example from our `Counter` module, an outsider will know that the `Msg` type exists, but they will not know that `Increment` and `Decrement` are the only values of this type. This means that it is *impossible* for an outsider to write code dependent on the particulars of a `Msg`. So the maintainer of the `Counter` module is free to add and remove messages with no risk of breaking code far away. These details are private.
+
+As another example, an outsider is able to use `view` without knowing about the `countStyle` helper function. We could add twenty helper functions, but all you would see from the outside is `init`, `update`, and `view`. Again, this gives the maintainer of the `Counter` module the freedom to change the implementation dramatically without breaking tons of far away code in surprising ways.
+
+By creating a **strong contract**, we give ourselves the freedom to change and evolve our code more efficiently. When working in a large team setting, these contracts can be an extremely powerful way of collaborating. If you create a contract at the beginning of your project (much like the `Counter` module does) you can split off into two groups. One to make the `Counter` and one to pretend it is done and work on the code it is embedded in.
+
+Speaking of the code it is embedded in.
 
 
+## A Pair of Counters
 
-It is only exposing the definitions necessary for The Elm Architecture.
-
-From there you create the "parent" module and import the "child".
-
-```elm
-module CounterPair exposing (..)
-
-import Counter
-
-type alias Model =
-  { top : Counter.Model
-  , bottom : Counter.Model
-  }
-  
-...
-```
-
-Whenever you have to deal with a `Counter.Model` you use the relevant publicly exposed functions.
-
-You can check out some full examples of this in the `nesting/` directory of [this repo](https://github.com/evancz/elm-architecture-tutorial).
