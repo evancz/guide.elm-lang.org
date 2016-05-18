@@ -16,7 +16,7 @@
        * [Web Sockets](architecture/effects/web_sockets.md)
    * [Modularity](architecture/components/README.md)
        * [Pair of Counters](architecture/components/counter_pair.md)
-       * List of Counters
+       * [List of Counters](architecture/components/counter_list.md)
 * [Types](types/README.md)
    * [Reading Types](types/reading_types.md)
    * [Type Aliases](types/type_aliases.md)
