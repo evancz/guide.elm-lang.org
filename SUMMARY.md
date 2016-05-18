@@ -14,7 +14,7 @@
        * [Time](architecture/effects/time.md)
        * [Animation](architecture/effects/animation.md)
        * [Web Sockets](architecture/effects/web_sockets.md)
-   * [Reusable Components](architecture/components/README.md)
+   * [Modularity](architecture/components/README.md)
        * [Pair of Counters](architecture/components/nesting.md)
    * Communication
 * [Types](types/README.md)
