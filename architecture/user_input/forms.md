@@ -156,5 +156,3 @@ On these same lines, you may notice that the `<input>` nodes all are created wit
 >  - Add a "Submit" button. Only show errors *after* it has been pressed.
 >
 > Be sure to use the helpers in [the `String` library](http://package.elm-lang.org/packages/elm-lang/core/latest/String) if you try any of these! Also, we need to learn more before we start talking to servers, so before you try that here, keep reading until HTTP is introduced. It will be significantly easier with proper guidance!
->
->  **Note:** If you are wondering why `view` gives back `Html Msg` and `viewValidation` gives back `Html msg`, you should take a look at the upcoming section on [reading types](../../types/reading_types.md).
