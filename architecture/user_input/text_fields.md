@@ -79,7 +79,7 @@ update : Msg -> Model -> Model
 update msg model =
   case msg of
     Change newContent ->
-      { model | fieldContent = newContent }
+      { model | content = newContent }
 ```
 
 When we receive new content, we use the record update syntax to update the contents of `content`.
@@ -91,7 +91,7 @@ view : Model -> Html Msg
 view model =
   div []
     [ input [ placeholder "Text to reverse", onInput Change ] []
-    , div [] [ text (String.reverse model.fieldContent) ]
+    , div [] [ text (String.reverse model.content) ]
     ]
 ```
 
