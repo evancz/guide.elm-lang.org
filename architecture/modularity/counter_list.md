@@ -9,7 +9,7 @@ In this example we will make a *list* of counters. You will be able to create an
 
 In the last example, we saw a pair of counters. The `Counter` module created a abstraction barrier, allowing us to use counters without knowing any of their internal details. To get two counters, we had two entries in our model. But if we want the user to be able to add unlimited counters, we cannot just keep adding fields to our model by hand!
 
-So to have a list of counters, **we will associate each counter with a unique ID**. This will allow us to refer to each counter uniquely. &ldquo;Please update counter 42 with this message.&rdquo; or &ldquo;Please delete counter 13 immediately.&rdquo;
+So to have a list of counters, **we will associate each counter with a unique ID**. This will allow us to refer to each counter uniquely. &ldquo;Please update counter 42 with this message.&rdquo; or &ldquo;Please delete counter 13.&rdquo;
 
 The code in this example is really just an exercise in instantiating that core trick into code.
 
@@ -24,7 +24,7 @@ import Counter
 
 We will be relying on the exact same `Counter` module as in the last example. Yay, reuse! You can check out [that code](https://github.com/evancz/elm-architecture-tutorial/blob/master/nesting/Counter.elm) again, but all you need to know is that it exposes `Model`, `Msg`, `init`, `update`, and `view`.
 
-From there, we will set up our model:
+From there, we will set up our model which tracks a list of counters with unique IDs:
 
 ```elm
 type alias Model =
@@ -50,6 +50,8 @@ init =
 
 No counters and the first ID we will hand out is zero.
 
+Now that we have a model, we need to figure out how to update it. Our requirements are pretty simple. First, we want to be able to add and remove counters. Second, we need to be able to update each of those counters independently. Our `Msg` type covers these three cases:
+
 ```elm
 type Msg
   = Insert
@@ -57,7 +59,7 @@ type Msg
   | Modify Int Counter.Msg
 ```
 
-
+Notice that `Modify` holds an `Int` and a `Counter.Msg`. This way we can refer to the unique ID of a particular counter, ensuring the messages get to the right place. From there, we do our `update` function:
 
 ```elm
 update : Msg -> Model -> Model
@@ -79,12 +81,21 @@ update message ({counters, uid} as model) =
 updateHelp : Int -> Counter.Msg -> IndexedCounter -> IndexedCounter
 updateHelp targetId msg {id, model} =
   IndexedCounter id (if targetId == id then Counter.update msg model else model)
+```
 
+Let&rsquo;s say a few words about each case:
 
+  - `Insert` &mdash; First we create a new counter with `Counter.init` and pair it with the latest unique ID. The new model for our app is the result of adding that new counter to our list and incrementing the &ldquo;next&rdquo; ID.
 
--- VIEW
+  - `Remove` &mdash; Just remove one counter from the list.
 
+  - `Modify` &mdash; Go through the counters, and update when you find the one with a matching ID.
 
+> **Note:** It might be better to use a data structure like `Dict` here so that updating individual counters is quicker. I have kept it simple for the sake of this guide though.
+
+Finally we get to the `view`:
+
+```elm
 view : Model -> Html Msg
 view model =
   let
@@ -105,3 +116,4 @@ viewIndexedCounter {id, model} =
   App.map (Modify id) (Counter.view model)
 ```
 
+We need buttons for adding and removing counters. Those work like normal. The kind of new thing here is the `viewIndexedCounter` helper. It uses the `Counter.view` function to actually generate HTML, and then uses [`Html.App.map`](http://package.elm-lang.org/packages/elm-lang/html/latest/Html-App#map) to associate any counter messages with their unique ID. From there, we use `List.map` to turn all of our indexed counters into HTML nodes like the add and remove buttons.
