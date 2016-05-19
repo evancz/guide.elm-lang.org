@@ -41,6 +41,6 @@ andThen : Task x a -> (a -> Task x b) -> Task x b
 This function takes two arguments:
 
   1. A task that may succeed with a value of type `a`
-  2. A callback that takes a value of type `a` and produces a task.
+  2. A callback that takes a value of type `a` and produces another task.
 
 Together, these mean &ldquo;Try to do the first task, and if it is successful, create a second task and try to do that one too.&rdquo; The cool think is that if either task fails, we bail on the whole thing.
