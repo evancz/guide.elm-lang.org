@@ -17,7 +17,7 @@
    * [Modularity](architecture/modularity/README.md)
        * [Pair of Counters](architecture/modularity/counter_pair.md)
        * [List of Counters](architecture/modularity/counter_list.md)
-       * More
+       * [More](architecture/modularity/more.md)
 * [Types](types/README.md)
    * [Reading Types](types/reading_types.md)
    * [Type Aliases](types/type_aliases.md)
