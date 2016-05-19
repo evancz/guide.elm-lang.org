@@ -38,9 +38,21 @@ It is great to do one task, but to do anything interesting, you probably need to
 andThen : Task x a -> (a -> Task x b) -> Task x b
 ```
 
-This function takes two arguments:
+The short summary is: we try one task **and then** we try another task.
+
+But to break it down a bit more, `andThen` takes two arguments:
 
   1. A task that may succeed with a value of type `a`
   2. A callback that takes a value of type `a` and produces a new task.
 
-Together, these mean &ldquo;Try to do the first task, and if it is successful, create a second task and try to do that one too.&rdquo; The cool think is that if either task fails, we bail on the whole thing.
+First you try to do `Task x a`. If it fails, the whole thing fails. If it succeeds, we take the resulting `a` value and create a second task. We then try to do that task too. This gives us the ability to chain together as many tasks as we want.
+
+For example, maybe we want to GET stock quotes from a particular time. We could do something like this:
+
+```elm
+getStockQuotes =
+  Time.now `andThen` \time ->
+    Http.getString ("//www.example.com/stocks?time=" ++ toString time)
+```
+
+So we get the current time **and then** we make a GET request.
