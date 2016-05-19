@@ -32,7 +32,7 @@ There are a few things to notice here. First, notice that `Time.now` has no argu
 
 ## Chaining Tasks
 
-It is great to do one task, but to do anything interesting, you probably need to do a bunch of tasks in a row. We use the `andThen` function to do this:
+It is great to do one task, but to do anything interesting, you probably need to do a bunch of tasks in a row. This is where the `andThen` function comes in:
 
 ```elm
 andThen : Task x a -> (a -> Task x b) -> Task x b
