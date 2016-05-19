@@ -25,8 +25,9 @@ type alias Model =
   { content : String
   }
 
+model : Model
 model =
-  Model ""
+  { content = "" }
 
 
 -- UPDATE
