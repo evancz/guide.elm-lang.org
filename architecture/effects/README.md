@@ -8,7 +8,7 @@ This section builds on the basic pattern we have seen so far, giving you the abi
 
   - **Subscriptions** &mdash; A subscription lets you register that you are interested in something. Maybe you want to hear about geolocation changes? Maybe you want to hear all the messages coming in on a web socket? Subscriptions let you sit passively and only get updates when they exist.
 
-Together, commands and subscriptions make it possible for your Elm components to talk the outside world. But how do these new concepts fit into what we already know?
+Together, commands and subscriptions make it possible for your Elm components to talk to the outside world. But how do these new concepts fit into what we already know?
 
 
 ## Extending the Architecture Skeleton
