@@ -14,7 +14,7 @@ fullName =
   toFullName { fistName = "Hermann", lastName = "Hesse" }
 ```
 
-Just writing down the code with no extra clutter like in JavaScript or Python. Do you see the bug though? 
+Like in JavaScript or Python, we just write the code with no extra clutter. Do you see the bug though? 
 
 In JavaScript, the equivalent code spits out `"undefined Hesse"`. Not even an error! Hopefully one of your users will tell you about it when they see it in the wild. In contrast, the Elm compiler just looks at the source code and tells you:
 
