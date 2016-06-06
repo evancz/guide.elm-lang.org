@@ -1,2 +1,2 @@
-# More
+# More about The Elm Architecture
 
