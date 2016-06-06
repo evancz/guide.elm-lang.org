@@ -27,7 +27,7 @@
    * [JSON](interop/json.md)
    * [HTML](interop/html.md)
    * [JavaScript and Ports](interop/javascript.md)
-* [Modularity](architecture/modularity/README.md)
+* [Modularity](modularity/README.md)
    * [Pair of Counters](architecture/modularity/counter_pair.md)
    * [List of Counters](architecture/modularity/counter_list.md)
    * [More](architecture/modularity/more.md)
