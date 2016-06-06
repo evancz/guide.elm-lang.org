@@ -14,6 +14,7 @@
        * [Time](architecture/effects/time.md)
        * [Animation](architecture/effects/animation.md)
        * [Web Sockets](architecture/effects/web_sockets.md)
+   * More
 * [Types](types/README.md)
    * [Reading Types](types/reading_types.md)
    * [Type Aliases](types/type_aliases.md)
