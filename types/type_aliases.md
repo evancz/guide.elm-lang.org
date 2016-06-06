@@ -2,7 +2,7 @@
 
 The whole point of type aliases is to make your type annotations easier to read.
 
-As you programs get more complicated, you find yourself working with larger and more complex data. For example, maybe you are making twitter-for-dogs and you need to represent a user. And maybe you want a function that checks to see if a user has a bio or not. You might write a function like this:
+As your programs get more complicated, you find yourself working with larger and more complex data. For example, maybe you are making twitter-for-dogs and you need to represent a user. And maybe you want a function that checks to see if a user has a bio or not. You might write a function like this:
 
 ```elm
 hasBio : { name : String, bio : String, pic : String } -> Bool
