@@ -30,7 +30,7 @@
 * [Modularity](modularity/README.md)
    * [Pair of Counters](modularity/counter_pair.md)
    * [List of Counters](modularity/counter_list.md)
-   * [More](architecture/modularity/more.md)
+   * [More](modularity/more.md)
 * [Effect Managers](effect_managers/README.md)
    * [Caching](effect_managers/caching.md)
    * [Batching](effect_managers/batching.md)
