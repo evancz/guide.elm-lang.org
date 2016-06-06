@@ -29,7 +29,7 @@
    * [JavaScript and Ports](interop/javascript.md)
 * [Modularity](modularity/README.md)
    * [Pair of Counters](modularity/counter_pair.md)
-   * [List of Counters](architecture/modularity/counter_list.md)
+   * [List of Counters](modularity/counter_list.md)
    * [More](architecture/modularity/more.md)
 * [Effect Managers](effect_managers/README.md)
    * [Caching](effect_managers/caching.md)
