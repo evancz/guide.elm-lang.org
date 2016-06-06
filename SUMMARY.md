@@ -28,7 +28,7 @@
    * [HTML](interop/html.md)
    * [JavaScript and Ports](interop/javascript.md)
 * [Modularity](modularity/README.md)
-   * [Pair of Counters](architecture/modularity/counter_pair.md)
+   * [Pair of Counters](modularity/counter_pair.md)
    * [List of Counters](architecture/modularity/counter_list.md)
    * [More](architecture/modularity/more.md)
 * [Effect Managers](effect_managers/README.md)
