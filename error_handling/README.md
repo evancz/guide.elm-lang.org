@@ -13,7 +13,7 @@ Now some of you probably want to jump right to tasks, but trust me that going in
 
 ## Some Historical Context
 
-There are a two popular language features that consistently cause unexpected problems. If you have used Java or C or JavaScript or Python or Ruby, you have almost certainly had your code crash because of `null` values or surprise exceptions from someone else's code.
+There are two popular language features that consistently cause unexpected problems. If you have used Java or C or JavaScript or Python or Ruby, you have almost certainly had your code crash because of `null` values or surprise exceptions from someone else's code.
 
 Now these things are extremely familiar to folks, but that does not mean they are good!
 
