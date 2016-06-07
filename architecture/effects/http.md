@@ -72,8 +72,8 @@ That is enough to start filling in `update`:
 
 ```elm
 update : Msg -> Model -> (Model, Cmd Msg)
-update action model =
-  case action of
+update msg model =
+  case msg of
     MorePlease ->
       (model, getRandomGif model.topic)
 

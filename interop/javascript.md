@@ -67,8 +67,8 @@ type Msg
 port check : String -> Cmd msg
 
 update : Msg -> Model -> (Model, Cmd Msg)
-update action model =
-  case action of
+update msg model =
+  case msg of
     Change newWord ->
       ( Model newWord [], Cmd.none )
 
