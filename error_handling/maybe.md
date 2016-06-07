@@ -1,6 +1,6 @@
 # Maybe
 
-It is best to just start with the definition of `Maybe`. It is a union type just like in all the examples [here](types/union_types.md). It is defined like this:
+It is best to just start with the definition of `Maybe`. It is a union type just like in all the examples [here](http://guide.elm-lang.org/types/union_types.html). It is defined like this:
 
 ```elm
 > type Maybe a = Nothing | Just a
