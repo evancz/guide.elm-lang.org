@@ -9,14 +9,14 @@ Again this is a pretty short program, so I have included the whole thing here. S
 
 ```elm
 import Html exposing (Html, Attribute, div, input, text)
-import Html.App as Html
+import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 import String
 
 
 main =
-  Html.beginnerProgram { model = model, view = view, update = update }
+  App.beginnerProgram { model = model, view = view, update = update }
 
 
 -- MODEL

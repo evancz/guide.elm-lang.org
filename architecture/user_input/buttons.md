@@ -6,12 +6,12 @@ Our first example is a simple counter that can be incremented or decremented. I 
 
 ```elm
 import Html exposing (Html, button, div, text)
-import Html.App as Html
+import Html.App as App
 import Html.Events exposing (onClick)
 
 
 main =
-  Html.beginnerProgram { model = model, view = view, update = update }
+  App.beginnerProgram { model = model, view = view, update = update }
 
 
 -- MODEL
@@ -103,7 +103,7 @@ This pattern is the essence of The Elm Architecture. Every example we see from n
 
 
 > **Exercise:** One cool thing about The Elm Architecture is that it is super easy to extend as our product requirements change. Say your product manager has come up with this amazing "reset" feature. A new button that will reset the counter to zero.
-> 
+>
 > To add the feature you come back to the `Msg` type and add another possibility: `Reset`. You then move on to the `update` function and describe what happens when you get that message. Finally you add a button in your view.
-> 
+>
 > See if you can implement the "reset" feature!

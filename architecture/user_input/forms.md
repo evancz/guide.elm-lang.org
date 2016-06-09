@@ -8,13 +8,13 @@ The code is a bit longer in this case, but I still think it is valuable to look 
 
 ```elm
 import Html exposing (..)
-import Html.App as Html
+import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
 
 main =
-  Html.beginnerProgram { model = model, view = view, update = update }
+  App.beginnerProgram { model = model, view = view, update = update }
 
 
 -- MODEL
