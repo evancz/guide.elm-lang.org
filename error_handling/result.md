@@ -1,6 +1,6 @@
 # Result
 
-A `Result` is useful when you have logic that may "fail". For example, parsing a `String` into a `Int` may fail. What if the string is filled with the letter B? In cases like this, we want a function with this type:
+A `Result` is useful when you have logic that may "fail". For example, parsing a `String` into an `Int` may fail. What if the string is filled with the letter B? In cases like this, we want a function with this type:
 
 ```elm
 String.toInt : String -> Result String Int
