@@ -1,6 +1,6 @@
 # JSON
 
-You will sending lots of JSON in your programs. You use [the `Json.Decode` library](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode) to convert wild and crazy JSON into nicely structured Elm values.
+You will be sending lots of JSON in your programs. You use [the `Json.Decode` library](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode) to convert wild and crazy JSON into nicely structured Elm values.
 
 The core concept for working with JSON is called a **decoder**. It is a value that knows how to turn certain JSON values into Elm values. We will start out by looking at some very basic decoders (how do I get a string?) and then look at how to put them together to handle more complex scenarios.
 

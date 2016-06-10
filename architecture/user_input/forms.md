@@ -40,8 +40,8 @@ type Msg
 
 
 update : Msg -> Model -> Model
-update action model =
-  case action of
+update msg model =
+  case msg of
     Name name ->
       { model | name = name }
 
@@ -100,8 +100,8 @@ This means our `update` is pretty mechanical. Just update the relevant field:
 
 ```elm
 update : Msg -> Model -> Model
-update action model =
-  case action of
+update msg model =
+  case msg of
     Name name ->
       { model | name = name }
 
