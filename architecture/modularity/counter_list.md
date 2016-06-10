@@ -7,7 +7,7 @@ In this example we will make a *list* of counters. You will be able to create an
 
 ## Overall Approach
 
-In the last example, we saw a pair of counters. The `Counter` module created a abstraction barrier, allowing us to use counters without knowing any of their internal details. To get two counters, we had two entries in our model. But if we want the user to be able to add unlimited counters, we cannot just keep adding fields to our model by hand!
+In the last example, we saw a pair of counters. The `Counter` module created an abstraction barrier, allowing us to use counters without knowing any of their internal details. To get two counters, we had two entries in our model. But if we want the user to be able to add unlimited counters, we cannot just keep adding fields to our model by hand!
 
 So to have a list of counters, **we will associate each counter with a unique ID**. This will allow us to refer to each counter uniquely. &ldquo;Please update counter 42 with this message.&rdquo; or &ldquo;Please delete counter 13.&rdquo;
 
