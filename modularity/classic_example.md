@@ -110,4 +110,4 @@ type Queue a =
   Q { front : List a, back : List a }
 ```
 >
-> Sometimes people refer to this as &ldquo;using two stacks to make a queue&rdquo;. Why would this implementation generally be faster than the one we created together?
+> Sometimes people refer to this as &ldquo;using two stacks to make a queue&rdquo;. Why would this implementation be faster than the one we created together?
