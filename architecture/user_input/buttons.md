@@ -11,7 +11,7 @@ import Html.Events exposing (onClick)
 
 
 main =
-  beginnerProgram { model = 0, view = view, update = update }
+  beginnerProgram { model = model, view = view, update = update }
 
 
 -- MODEL
