@@ -89,6 +89,8 @@ The first argument is a time interval. We chose to get ticks every second. The s
 
 That is all there is to setting up a subscription! These messages will be fed to your `update` function whenever they become available.
 
+You use `Sub.batch` to set up more than one subscription. See [this](https://github.com/evancz/elm-architecture-tutorial/blob/master/nesting/3-gif-pair.elm).
+
 
 > **Exercises:**
 > 
