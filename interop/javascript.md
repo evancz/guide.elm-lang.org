@@ -29,14 +29,14 @@ On the Elm side, we have a program like this:
 port module Spelling exposing (..)
 
 import Html exposing (..)
-import Html.App as Html
+import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import String
 
 
 main =
-  Html.program
+  App.program
     { init = init
     , view = view
     , update = update
