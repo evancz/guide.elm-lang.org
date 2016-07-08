@@ -2,7 +2,7 @@
 
 The whole point of type aliases is to make your type annotations easier to read.
 
-As your programs get more complicated, you find yourself working with larger and more complex data. For example, maybe you are making twitter-for-dogs and you need to represent a user. And maybe you want a function that checks to see if a user has a bio or not. You might write a function like this:
+As your programs get more complicated, you find yourself working with larger and more complex data. For example, maybe you are making [twitter-for-dogs](https://www.raspberrypi.org/blog/twitter-for-dogs/) and you need to represent a user. And maybe you want a function that checks to see if a user has a bio or not. You might write a function like this:
 
 ```elm
 hasBio : { name : String, bio : String, pic : String } -> Bool
@@ -51,3 +51,15 @@ User : String -> String -> String -> User
 ```
 > 
 > The arguments are in the order they appear in the type alias declaration. You may want to use this sometimes.
+>
+> ```elm
+User "OliverBarkBark" "Woof ruff ruff bark bark!" "https://pbs.twimg.com/profile_images/650451290288484352/ck7FXb1o.jpg"
+```
+>
+> returns
+>
+> ```elm
+{ name = "OliverBarkBark"
+, bio = "Woof ruff ruff bark bark!"
+, pic = "https://pbs.twimg.com/profile_images/650451290288484352/ck7FXb1o.jpg"
+}
