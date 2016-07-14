@@ -200,7 +200,7 @@ When it comes to making functions with records, you can do some pattern matching
 
 ```elm
 > under70 {age} = age < 70
-<function>
+<function> 
 
 > under70 bill
 True
