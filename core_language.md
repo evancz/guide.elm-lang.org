@@ -169,7 +169,7 @@ This can be quite handy, but when things start becoming more complicated, it is 
 
 ## Records
 
-A record is a set of key-value pairs, similar to objects in JavaScript or Python. You will find that they are extremely common and useful in Elm! Lets see some basic examples.
+A record is a set of key-value pairs, similar to objects in JavaScript and dictionaries in Python. You will find that they are extremely common and useful in Elm! Lets see some basic examples.
 
 
 ```elm
@@ -200,7 +200,7 @@ When it comes to making functions with records, you can do some pattern matching
 
 ```elm
 > under70 {age} = age < 70
-<function> 
+<function>
 
 > under70 bill
 True
