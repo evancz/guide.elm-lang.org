@@ -1,25 +1,24 @@
-# Modularity
+# Big Code
 
-Some of the hardest problems in programming are social:
+No matter what language you are using, front-end code will face the following problems as it grows:
 
-  - How do two people work independently on a single project?
-  - How do *teams* of people work on projects that interact?
+  - **Namespacing** &mdash; Sometimes files just get too big. It makes sense to move functions into multiple files for organization and to avoid name clashes.
 
-Elm cannot sort out your interpersonal issues, but it at least helps you draw clear boundaries between *my* work and *your* work. This is done with Elm&rsquo;s module system.
+  - **Reusing code** &mdash; Sometimes you notice a pattern in two or three places in your code. In *some* of those cases, it may be worthwhile to write a helper that can be configured for each case. Sometimes the complexity introduced by such a move is not worth it though.
+
+  - **Reusing view code** &mdash; Sometimes you want to display data the same way in multiple places. Maybe users should be displayed exactly the same from page to page. This works just like reusing code in Elm!
+
+  - **Reusing *stateful* view code** &mdash; Sometimes you want to display data the same way in multiple places *and* you want the display to be interactive. When designing custom interfaces, this is actually not terribly common for most companies.
+
+With each scenario, there are strategies and patterns that work best. **There is no one-size fits all solution here.** Instead, Elm provides a simple *module system* to help you make the right choice for your particular scenario. We will start digging into that soon!
 
 
-## Modules
+## Mindset
 
-Let&rsquo;s see a couple definitions of the term **module** to get a feel for what this means:
+Elm is different than many languages, especially JavaScript, in that it makes it quite easy to do serious refactors. **When refactoring is easy and low-risk, you need a new mindset for managing large codebases.** My general advice is:
 
-  1. **A module corresponds to an Elm file.** The name of file determines the name of the module, so `src/Feed/Story.elm` would be a module named `Feed.Story`.
+  - **Solve problems as they arise** &mdash; Same as you can start optimizing code to early, you can start modularizing code too early. Since refactoring is easy and reliable in Elm, it makes sense to wait and see how your code grows organically. You may *think* there will be a problem, but it comes out fine. Or you may find a pattern you did not expect. Let your code guide you. The whole point of Elm is that you can organically grow a codebase and have it come out nice!
 
-  2. **A module is a way of assigning responsibility.** You work on the search box over there and I&rsquo;ll work on displaying profiles over here.
+  - **Prefer the simpler approach** &mdash; When you see a pattern in two or thee places, prefer the solution that is easiest to read and understand. Sometimes a helper function obviously improves things. Other times, the code may be *similar* but not actually the same. Now the helper needs a bunch of configuration arguments. At some point, the code is different *enough* that it is just best to leave them as is because the &ldquo;less redundant&rdquo; version is also harder to understand.
 
-  3. **A module creates a contract between author and user.** For example, the `Dict` library promises you a bunch of dictionary functions, but never leaks any details that pin down the implementation. If I ever find a faster implementation, I can switch and everyone&rsquo;s code just keeps working!
-
-Definitions 1 and 2 are true, but they are ultimately distractions. Splitting your code into different files is worthless if you have not *conceptually* separated things. I have seen many many projects with &ldquo;clear boundaries&rdquo;, but implementation details cross those boundaries so easily that you cannot write anything without looking inside.
-
-In other words, definition 3 is the important one. When you have a great contract, the author and the user can proceed without tripping over each other. The user codes against the contract, while the author provides the implementation. Code can evolve independently. Perhaps most importantly, programmers can get things done without loading the whole project into their brain!
-
-Here is the trouble. **It is very hard to design great contracts.** You must understand what your user needs *and* how to provide that in a way that is simple and nice to use. You must foresee many plausible futures *and* design such that things work well in all of them. This chapter will try to share the outlook and strategies that have helped me get better at this!
+Elm is designed to work well *when you follow this advice*. When you are feeling resistence from the language, it is probably a good sign you are trying to modularize things too early.
