@@ -1,56 +1,39 @@
 
-# Module Basics
+# Modules
+
+Elm has *modules* to help you grow your codebase in a nice way. On the most basic level, modules let you break your code into multiple files. Let&rsquo;s learn how that works!
 
 
-## Modules
+## Defining Modules
 
-Every module starts with a *module declaration*. Check it out in this simple `User` module:
+Every module starts with a *module declaration*. So if I wanted to define my own version of the `Maybe` module, I might start with something like this:
 
 ```elm
-module User exposing (User, isNamed)
+module Optional exposing (..)
 
-type User = Anonymous | Named String
+type Optional a = Some a | None
 
-isNamed : User -> Bool
-isNamed user =
-  case user of
-    Anonymous ->
+isNone : Optional a -> Bool
+isNone optional =
+  case optional of
+    Some _ ->
       False
 
-    Named _ ->
+    None ->
       True
-
-isAnonymous : User -> Bool
-isAnonymous user =
-  not (isNamed user)
 ```
 
-The new thing here is that first line. You can read it as &ldquo;This module is named `User` and people on the outside will only be able to see the `User` type and the `isNamed` function.&rdquo;
+The new thing here is that first line. You can read it as &ldquo;This module is named `Optional` and it exposes *everything* to people who use the module.&rdquo;
 
-When you look at the body of the module, you see that we have decided not to expose some things. Specifically, the `isAnonymous` function and the `Anonymous` and `Named` type constructors are all hidden from the outside world. This is the basic mechanism of hiding details.
-
-Now, say we wanted to expose everything for some reason, we could say:
+Exposing everything is fine for prototyping and exploration, but a serious project will want to make the exposed values explicit, like this:
 
 ```elm
-module User exposing ( User(..), isNamed, isAnonymous )
+module Optional exposing ( Optional(..), isNone )
 ```
 
-The most important thing here is the `User(..)` part. This is saying, expose the `User` type as well as all its type constructors. This way outsiders can use `Anonymous` and `Named` in pattern matches or whatever else. This is maybe the most important thing to know about modules. **If you want to hide details, export a union type *without* any type constructors.** That way, no one will be able to create or destructure that type on their own. The will have to go through functions like `isNamed` and `isAnonymous` if they want to find out anything about a `User`.
+Read this as &ldquo;This module is named `Optional` and it exposes the `Optional` type, the `Some` and `None` constructors, and the `isNone` function to people who use the module.&rdquo; Now there is no reason to list *everything* that is defined, so later we will see how this can be used to hide implementation details.
 
-Hiding type constructors is the basic trick behind creating clear contracts. For example, the `Dict` library is currently implemented as a balanced binary tree. Adding and removing elements requires us to very carefully shift branches around. It is hard to do in the library itself, and there would be no chance it would stay balanced if folks could reach in and modify the tree themselves! By hiding the type constructors for `Dict`, we made it impossible for people to reach in and break the invariants, yet they are able to make full use of the data structure through functions like `get` and `size`.
-
-We will use this trick in the next section!
-
-
-> **Note 1:** If you wanted to get super lazy about exposing everything, you could say it this way too:
->
->```elm
-module User exposing (..)
-```
->
-> This is convenient when you are hacking or exploring on your own, but it is not a great idea in a serious codebase. The whole point of modules is to hide details and create contracts, and `exposing (..)` does neither of those things! Serious projects will list the exposed values explicitly.
-
-> **Note 2:** If you forget to add a module declaration, Elm will use this one instead:
+> **Note:** If you forget to add a module declaration, Elm will use this one instead:
 >
 >```elm
 module Main exposing (..)
@@ -59,28 +42,38 @@ module Main exposing (..)
 > This makes things easier for beginners working in just one file. They should not be confronted with the module system on their first day!
 
 
-## Imports
+## Using Modules
 
-Okay, we have a module, but how do we use it? Say we are now working on a `ChatRoom` module that will be managing a bunch of `User` data. We will need to `import` the `User` module like this:
+Okay, we have our `Optional` module, but how do we use it? We can create `import` declarations at the top of files that describe which modules are needed. So if we wanted to make the &ldquo;No shoes, no shirt, no service&rdquo; policy explicit in code, we could write this:
 
 ```elm
-import User
+import Optional
+
+noService : Optional.Optional a -> Optional.Optional a -> Bool
+noService shoes shirt =
+  Optional.isNone shoes && Optional.isNone shirt
 ```
 
-By default, all imported values are *qualified*. This means you need to say `User.User` and `User.isNamed`. The module name is a *qualifier* indicating where that value comes from. Generally speaking, it is best to always use qualified names. In a project with twenty imports, it is extremely helpful to be able to quickly see where a value comes from.
+The `import Optional` line means you can use anything exposed by the module as long as you put `Optional.` before it. So in the `noService` function, you see `Optional.Optional` and `Optional.isNone`. These are called *qualified* names. Which `isNone` is it? The one from the `Optional` module! It says it right there in the code.
+
+Generally, it is best to always use qualified names. In a project with twenty imports, it is extremely helpful to be able to quickly see where a value comes from.
 
 That said, there are a few ways to customize an import that can come in handy.
 
 
-### Shortened Names
+### As
 
-You can use the `as` keyword to provide a shorter name. To stick with the `User` module, we could abbreviate it to just `U` like this:
+You can use the `as` keyword to provide a shorter name. To stick with the `Optional` module, we could abbreviate it to just `Opt` like this:
 
 ```elm
-import User as U
+import Optional as Opt
+
+noService : Opt.Optional a -> Opt.Optional a -> Bool
+noService shoes shirt =
+  Opt.isNone shoes && Opt.isNone shirt
 ```
 
-Now we can refer to `U.User` and `U.isNamed`. This feature is best used on very long module names, so in practice you would probably use it in cases like this:
+Now we can refer to `Opt.Option` and `Opt.isNone`. It is kind of nice in this case, but this feature is best used on very long module names. Cases like this:
 
 ```elm
 import Facebook.News.Story as Story
@@ -89,17 +82,21 @@ import Facebook.News.Story as Story
 It would be annoying to type out the whole module name every time we need a function from it, so we shorten it to a name that is clear and helpful.
 
 
-### Unqualified Names
+### Exposing
 
 You can also use the `exposing` keyword to bring in the contents of the module *without* a qualifier. Often you will see things like this:
 
 ```elm
-import User exposing (User)
+import Optional exposing (Optional)
+
+noService : Optional a -> Optional a -> Bool
+noService shoes shirt =
+  Optional.isNone shoes && Optional.isNone shirt
 ```
 
-This way you can refer to the `User` type directly, but still say `User.isNamed` for everything else.
+This way you can refer to the `Optional` type directly, but still need to say `Optional.isNone` and `Optional.None` for everything else exposed by the module.
 
-This `exposing` keyword works just like it does in module declaraitons. If you want to expose everything you use `exposing (..)` and if you want to expose type constructors you use `exposing ( User(..) )` to bring them in.
+This `exposing` keyword works just like it does in module declaraitons. If you want to expose everything you use `exposing (..)`. If you want to expose everything explicitly, you would say `exposing ( Optional(..), isNone )`.
 
 
 ## Mixing Both
@@ -107,9 +104,62 @@ This `exposing` keyword works just like it does in module declaraitons. If you w
 It is possible to use `as` and `exposing` together. You could write:
 
 ```elm
-import User as U exposing (User)
+import Optional as Opt exposing (Optional)
+
+noService : Optional a -> Optional a -> Bool
+noService shoes shirt =
+  Opt.isNone shoes && Opt.isNone shirt
 ```
 
-This will let you refer to `User` and `U.isNamed`.
-
 No matter how you choose to `import` a module, you will only be able to refer to types and values that the module has made publicly available. You may get to see only one function from a module that has twenty. That is up to the author of the module!
+
+
+## Building Projects with Multiple Modules
+
+We know what the Elm code looks like now, but how do we get `elm-make` to recognize our modules?
+
+Every Elm project has an `elm-package.json` file at its root. It will look something like this:
+
+```json
+{
+    "version": "1.0.0",
+    "summary": "helpful summary of your project, less than 80 characters",
+    "repository": "https://github.com/user/project.git",
+    "license": "BSD3",
+    "source-directories": [
+        "src",
+        "benchmarks/src"
+    ],
+    "exposed-modules": [],
+    "dependencies": {
+        "elm-lang/core": "4.0.2 <= v < 5.0.0",
+        "elm-lang/html": "1.1.0 <= v < 2.0.0"
+    },
+    "elm-version": "0.17.0 <= v < 0.18.0"
+}
+```
+
+There are two important parts for us:
+
+  - `"source-directories"` &mdash; This is a list of all the directories that `elm-make` will search through to find modules. Saying `import Optional` means `elm-make` will search for `src/Optional.elm` and `benchmarks/src/Optional.elm`. Notice that the name of the module needs to match the name of the file exactly.
+
+  - `"dependencies"` &mdash; This lists all the [community packages](http://package.elm-lang.org/) you depend on. Saying `import Optional` means `elm-make` will also search the [`elm-lang/core`](http://package.elm-lang.org/packages/elm-lang/core/latest/) and [`elm-lang/html`](http://package.elm-lang.org/packages/elm-lang/html/latest/) packages for modules named `Optional`.
+
+Typically, you will say `"source-directories": [ "src" ]` and have your project set up like this:
+
+```
+my-project/elm-package.json
+my-project/src/Main.elm
+my-project/src/Optional.elm
+```
+
+And when you want to compile your `Main.elm` file, you say:
+
+```bash
+cd my-project
+elm-make src/Main.elm
+```
+
+With this setup, `elm-make` will know exactly where to find the `Optional` module.
+
+> **Note:** If you want fancier directory structure for your Elm code, you can use module names like `Facebook.Feed.Story`. That module would need to live in a file at `Facebook/Feed/Story.elm` so that the file name matches the module name.
