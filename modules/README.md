@@ -8,7 +8,9 @@ No matter what language you are using, front-end code will face the following pr
 
   - **Reusing view code** &mdash; Sometimes you want to display data the same way in multiple places. Maybe users should be displayed exactly the same from page to page. This works just like reusing code in Elm!
 
-  - **Reusing *stateful* view code** &mdash; Sometimes you want to display data the same way in multiple places *and* you want the display to be interactive. When designing custom interfaces, this is actually not terribly common for most companies.
+  - **Reusing *stateful* view code** &mdash; Sometimes you want things like sortable tables, or different views on different tabs.
+
+  - **Reusing *custom* stateful view code** &mdash; Sometimes you want to display data the same way in multiple places *and* you want the display to be interactive. When designing custom interfaces, this is actually not terribly common for most companies.
 
 With each scenario, there are strategies and patterns that work best. **There is no one-size fits all solution here.** Instead, Elm provides a simple *module system* to help you make the right choice for your particular scenario. We will start digging into that soon!
 
