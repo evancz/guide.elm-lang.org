@@ -111,7 +111,7 @@ Okay, so the `getRandomGif` function is not exceptionally crazy. We first define
 The `Task.perform` part is clarifying what to do with the result of this GET:
 
   1. The first argument `FetchFail` is for when the GET fails. If the server is down or the URL is a 404, we tag the resulting error with `FetchFail` and feed it into our `update` function.
-  2. The second argument `FetchSuccess` is for when the GET succeeds. When we get some URL back like `http://example.com/json`, we convert it into  `FetchSuccess "http://example.com/json"` so that it can be fed into our `update` function.
+  2. The second argument `FetchSucceed` is for when the GET succeeds. When we get some URL back like `http://example.com/json`, we convert it into  `FetchSucceed "http://example.com/json"` so that it can be fed into our `update` function.
 
 We will get into the details of how this all works later in this guide, but for now, if you just follow the pattern here, you will be fine using HTTP.
 
