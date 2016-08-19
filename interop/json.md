@@ -125,7 +125,7 @@ Ok (3,4) : Result String (Int, Int)
 
 There are a bunch of functions like `object2` (like `object3` and `object4`) for handling different sized objects.
 
-> **Note:** Later we will see tricks so you do not need a different function depending on the size of the object you are dealing with. You can also use functions like [`dict`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#dict) and [`keyValuePairs`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#keyValuePairs) if the JSON you are processing is using an object more like a dictionary. 
+> **Note:** Later we will see tricks so you do not need a different function depending on the size of the object you are dealing with. You can also use functions like [`dict`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#dict) and [`keyValuePairs`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#keyValuePairs) if the JSON you are processing is using an object more like a dictionary.
 
 ## Optional Fields
 
@@ -173,7 +173,7 @@ sillyNumber =
     ]
 ```
 
-We first try to just read an integer. If that fails, we try to read a string and then convert it to an integer with `String.toInt`. In your face crazy JSON!
+We first try to just read an integer. If that fails, we try to read a string and then convert it to an integer with `String.toInt`. In your face, crazy JSON!
 
 
 ## Broader Context
@@ -189,9 +189,9 @@ In fact, decoders have revealed weird data coming from NoRedInk's *backend* code
 ### A General Pattern
 
 JSON decoders are actually an instance of a more general pattern in Elm. You see it whenever you want to wrap up complicated logic into small building blocks that snap together easily. Other examples include:
- 
+
   - `Random` &mdash; The `Random` library has the concept of a `Generator`. So a `Generator Int` creates random integers. You start with primitive building blocks that generate random `Int` or `Bool`. From there, you use functions like `map` and `andMap` to build up generators for fancier types.
 
   - `Easing` &mdash; The Easing library has the concept of an `Interpolation`. An `Interpolation Float` describes how to slide between two floating point numbers. You start with interpolations for primitives like `Float` or `Color`. The cool thing is that these interpolations compose, so you can build them up for much fancier types.
- 
+
 As of this writing, there is some early work on Protocol Buffers (binary data format) that uses the same pattern. In the end you get a nice composable API for converting between Elm values and binary!

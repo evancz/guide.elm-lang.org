@@ -30,8 +30,8 @@ type Msg = Submit | ...
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   ...
-  
-  
+
+
 -- VIEW
 
 view : Model -> Html Msg
@@ -44,7 +44,7 @@ view model =
 subscriptions : Model -> Sub Msg
 subscriptions model =
   ...
-  
+
 
 -- INIT
 
@@ -61,16 +61,16 @@ The first three sections are almost exactly the same, but there are a few new th
 
   3. So far `init` has just been the initial model. Now it produces both a model and some commands, just like the new `update`. This lets us provide a starting value *and* kick off any HTTP requests or whatever that are needed for initialization.
 
-Now it is totally okay if this does not really make sense yet! That only really happens when you start seeing it in action, so lets hop right into the examples!
+Now it is totally okay if this does not really make sense yet! That only really happens when you start seeing it in action, so let's hop right into the examples!
 
 
 > **Aside:** One crucial detail here is that commands and subscriptions are *data*. When you create a command, you do not actually *do* it. Same with commands in real life. Let's try it. Eat an entire watermelon in one bite! Did you do it? No! You kept reading before you even *thought* about buying a tiny watermelon.
-> 
-> Point is, commands and subscriptions are data. You hand them to Elm to actually run them, giving Elm a chance to log all of this information. In the end, effects-as-data means Elm can:
-> 
+>
+> The point is, commands and subscriptions are data. You hand them to Elm to actually run them, giving Elm a chance to log all of this information. In the end, effects-as-data means Elm can:
+>
 >   - Have a general purpose time-travel debugger.
 >   - Keep the "same input, same output" guarantee for all Elm functions.
 >   - Avoid setup/teardown phases when testing `update` logic.
 >   - Cache and batch effects, minimizing HTTP connections or other resources.
-> 
+>
 > So without going too crazy on details, pretty much all the nice guarantees and tools you have in Elm come from the choice to treat effects as data! I think this will make more sense as you get deeper into Elm.

@@ -8,12 +8,12 @@ Now, I am going to assume you just read the randomness example. It (1) introduce
 
 ...
 
-Okay, so you read it now right? Good. Let's get started on our random gif fetcher!
+Okay, so you've read it now, right? Good. Let's get started on our random gif fetcher!
 
 
 ## Phase One - The Bare Minimum
 
-At this point in this guide, you should be pretty comfortable smacking down the basic skeleton of an Elm app. Guess at the model, fill in some messages, etc. etc.
+At this point in this guide, you should be pretty comfortable smacking down the basic skeleton of an Elm app. Take a guess at the model, fill in some messages and so on.
 
 ```elm
 -- MODEL
@@ -52,7 +52,7 @@ view model =
 
 For the model, I decided to track a `topic` so I know what kind of gifs to fetch. I do not want to hard code it to `"cats"`, and maybe later we will want to let the user decide the topic too. I also tracked the `gifUrl` which is a URL that points at some random gif.
 
-Like in the randomness example, I just made dummy `init` and `update` functions. None of them actually produce any commands for now. The point is just to get something on screen!
+As in the randomness example, I just made dummy `init` and `update` functions. None of them actually produce any commands for now. The point is just to get something on screen!
 
 
 ## Phase Two - Adding the Cool Stuff
@@ -118,9 +118,7 @@ We will get into the details of how this all works later in this guide, but for 
 And now when you click the "More" button, it actually goes and fetches a random gif!
 
 > **Exercises:** To get more comfortable with this code, try augmenting it with skills we learned in previous sections:
-> 
+>
 >   - Show a message explaining why the image didn't change when you get a `FetchFail`.
 >   - Allow the user to modify the `topic` with a text field.
 >   - Allow the user to modify the `topic` with a drop down menu.
-
-

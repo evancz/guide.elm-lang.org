@@ -10,7 +10,7 @@ Normally when you run the Elm compiler, it will give you an HTML file that sets 
 elm make src/MyThing.elm
 ```
 
-Will result in a `index.html` file that you can just open up and start using. To do fancier stuff, we want to compile to JavaScript, so we modify the command slightly:
+Will result in an `index.html` file that you can just open up and start using. To do fancier stuff, we want to compile to JavaScript, so we modify the command slightly:
 
 ```bash
 elm make src/MyThing.elm --output=my-thing.js
