@@ -54,7 +54,7 @@ tom =
 
 Great, that will be nice on his birthday. But more importantly, Tom is part of a valuable demographic! The advertisers will be pleased.
 
-Alright, so now that we have some users, how can we market alcohol to them without breaking any laws? People would probably be mad if we market to people under 21, so let's check for that:
+Alright, so now that we have some users, how can we market alcohol to them without breaking any laws? People would probably get mad if we marketed to people under 21, so let's check for that:
 
 ```elm
 canBuyAlcohol : User -> Bool
@@ -62,17 +62,17 @@ canBuyAlcohol user =
   case user.age of
     Nothing ->
       False
-      
+
     Just age ->
       age >= 21
 ```
 
-Now the cool thing is that we are forced to use a `case` to pattern match on the users age. It is actually impossible to write code where you forget that users may not have an age. Elm can make sure of it. Now we can advertise alcohol confident that we are not influencing minors directly! Only their older peers.
+Now the cool thing is that we are forced to use a `case` to pattern match on the user's age. It is actually impossible to write code where you forget that users may not have an age. Elm can make sure of it. Now we can advertise alcohol confident that we are not influencing minors directly! Only their older peers.
 
 
 ## Partial Functions
 
-Sometimes you want a function that gives an answer sometimes, but just does not in other cases. 
+Sometimes you want a function that gives an answer sometimes, but just does not in other cases.
 
 Let's say Mountain Dew wants to do some ad buys for people ages 13 to 18. Honestly, it is better to start kids on Mountain Dew younger than that, but it is illegal for kids under 13 to be on our site.
 
@@ -84,11 +84,11 @@ getTeenAge user =
   case user.age of
     Nothing ->
       Nothing
-      
+
     Just age ->
       if 13 <= age && age <= 18 then
         Just age
-        
+
       else
         Nothing
 ```

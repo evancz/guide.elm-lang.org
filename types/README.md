@@ -4,7 +4,7 @@ One of Elm's major benefits is that **users do not see runtime errors in practic
 
 ## An Example of Type Inference
 
-The following code defines a `toFullName` function which extracts a persons full name as a string:
+The following code defines a `toFullName` function which extracts a person's full name as a string:
 
 ```elm
 toFullName person =
@@ -14,7 +14,7 @@ fullName =
   toFullName { fistName = "Hermann", lastName = "Hesse" }
 ```
 
-Like in JavaScript or Python, we just write the code with no extra clutter. Do you see the bug though? 
+As in JavaScript or Python, we just write the code with no extra clutter. Do you see the bug though?
 
 In JavaScript, the equivalent code spits out `"undefined Hesse"`. Not even an error! Hopefully one of your users will tell you about it when they see it in the wild. In contrast, the Elm compiler just looks at the source code and tells you:
 
@@ -34,7 +34,7 @@ But it is:
     { …, fistName : … }
 
 Hint: I compared the record fields and found some potential typos.
-    
+
     firstName <-> fistName
 ```
 
