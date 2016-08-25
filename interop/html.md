@@ -34,7 +34,7 @@ So to actually embed your Elm program in an HTML node, you will want to add some
 <script src="my-thing.js"></script>
 <script>
     var node = document.getElementById('my-thing');
-    var app = Elm.MyThing.embed(node);
+    var app = Elm.Main.embed(node);
 </script>
 ```
 
