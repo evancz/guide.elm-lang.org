@@ -1,26 +1,7 @@
-# Big Code
+# Scaling The Elm Architecture
 
-No matter what language you are using, front-end code will face the following problems as it grows:
+If you are coming from JavaScript, you are probably wondering &ldquo;where are my reusable components?&rdquo; and &ldquo;how do I do parent-child communication between them?&rdquo; A great deal of time and effort is spent on these questions in JavaScript, but it just works different in Elm. **We do not think in terms of reusable components.** Instead, we focus on reusable *functions*. It is a functional language after all!
 
-  - **Namespacing** &mdash; Sometimes files just get too big. It makes sense to move functions into multiple files for organization and to avoid name clashes.
+So this chapter will go through a few examples that show how we create **reusable views** by breaking out helper functions to display our data. We will also learn about Elm&rsquo;s *module system* which helps you break your code into multiple files and hide implementation details. These are the core tools and techniques of building large app with Elm.
 
-  - **Reusing code** &mdash; Sometimes you notice a pattern in two or three places in your code. In *some* of those cases, it may be worthwhile to write a helper that can be configured for each case. Sometimes the complexity introduced by such a move is not worth it though.
-
-  - **Reusing view code** &mdash; Sometimes you want to display data the same way in multiple places. Maybe users should be displayed exactly the same from page to page. This works just like reusing code in Elm!
-
-  - **Reusing *stateful* view code** &mdash; Sometimes you want things like sortable tables, or different views on different tabs.
-
-  - **Reusing *custom* stateful view code** &mdash; Sometimes you want to display data the same way in multiple places *and* you want the display to be interactive. When designing custom interfaces, this is actually not terribly common for most companies.
-
-With each scenario, there are strategies and patterns that work best. **There is no one-size fits all solution here.** Instead, Elm provides a simple *module system* to help you make the right choice for your particular scenario. We will start digging into that soon!
-
-
-## Mindset
-
-Elm is different than many languages, especially JavaScript, in that it makes it quite easy to do serious refactors. **When refactoring is easy and low-risk, you need a new mindset for managing large codebases.** My general advice is:
-
-  - **Solve problems as they arise** &mdash; Same as you can start optimizing code to early, you can start modularizing code too early. Since refactoring is easy and reliable in Elm, it makes sense to wait and see how your code grows organically. You may *think* there will be a problem, but it comes out fine. Or you may find a pattern you did not expect. Let your code guide you. The whole point of Elm is that you can organically grow a codebase and have it come out nice!
-
-  - **Prefer the simpler approach** &mdash; When you see a pattern in two or thee places, prefer the solution that is easiest to read and understand. Sometimes a helper function obviously improves things. Other times, the code may be *similar* but not actually the same. Now the helper needs a bunch of configuration arguments. At some point, the code is different *enough* that it is just best to leave them as is because the &ldquo;less redundant&rdquo; version is also harder to understand.
-
-Elm is designed to work well *when you follow this advice*. When you are feeling resistence from the language, it is probably a good sign you are trying to modularize things too early.
+In the end, I think we end up with something far more flexible and reliable than &ldquo;reusable components&rdquo; and there is no real trick. We will just be using the fundamental tools of functional programming!
