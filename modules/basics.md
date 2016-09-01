@@ -84,7 +84,7 @@ It would be annoying to type out the whole module name every time we need a func
 
 ### Exposing
 
-You can also use the `exposing` keyword to bring in the contents of the module *without* a qualifier. Often you will see things like this:
+You can also use the `exposing` keyword to bring in the contents of the module *without* a qualifier. You will sometimes see things like this:
 
 ```elm
 import Optional exposing (Optional)
