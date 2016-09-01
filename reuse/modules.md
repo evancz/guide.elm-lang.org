@@ -1,7 +1,11 @@
 
 # Modules
 
-Elm has *modules* to help you grow your codebase in a nice way. On the most basic level, modules let you break your code into multiple files. Let&rsquo;s learn how that works!
+In the last few sections, we learned how to create reusable views. Whenever you start seeing a pattern in your `view` code, you can break it out into a helper function. But so far, we have just been growing our files longer and longer. At some point this gets out of control though, we do not want to have 2000 line files!
+
+So Elm has *modules* to help you grow your codebase in a nice way. On the most basic level, modules let you break your code into multiple files. Like everything else in Elm, you should only reach for a fancier tool when you feel you *need* it. So if you have a 400 line file and notice that a bunch of code is all related to showing radio buttons in a certain way, it may be a good idea to move all the relevant functions and types into their own module.
+
+Before we get into the nuances of using modules *appropriately*, let&rsquo;s learn how to use them at all!
 
 
 ## Defining Modules
