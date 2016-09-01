@@ -44,7 +44,7 @@ Math looks normal too:
 20
 ```
 
-Unlike JavaScript, Elm makes a distinction between integers and floating point numbers. Just like Python, there is both floating point division `(/)` and integer division `(//)`.
+Unlike JavaScript, Elm makes a distinction between integers and floating point numbers. Just like Python 3, there is both floating point division `(/)` and integer division `(//)`.
 
 ```elm
 > 9 / 2
