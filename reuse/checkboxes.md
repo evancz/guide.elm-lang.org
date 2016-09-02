@@ -1,6 +1,6 @@
 # Labeled Checkboxes
 
-Your app will probably have some options people can mess with. If something happens, should you send them an email notification? If the come across a video, should it start playing by itself? That kind of thing. So you will need to create some HTML like this:
+Your app will probably have some options people can mess with. If something happens, should you send them an email notification? If they come across a video, should it start playing by itself? That kind of thing. So you will need to create some HTML like this:
 
 ```html
 <fieldset>
