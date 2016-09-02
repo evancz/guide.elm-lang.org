@@ -112,7 +112,7 @@ radio (name, msg) =
     ]
 ```
 
-So if we tant to let users choose a color scheme or toggle serifs, the `view` can reuse `viewPicker` for each case. If we do that, we may want to add additional arguments to the `viewPicker` function. If we want to be able to set a class on each `<fieldset>`, we could add an argument like this:
+So if we want to let users choose a color scheme or toggle serifs, the `view` can reuse `viewPicker` for each case. If we do that, we may want to add additional arguments to the `viewPicker` function. If we want to be able to set a class on each `<fieldset>`, we could add an argument like this:
 
 ```elm
 viewPicker : String -> List (String, msg) -> Html msg
