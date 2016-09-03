@@ -100,7 +100,7 @@ noService shoes shirt =
 
 This way you can refer to the `Optional` type directly, but still need to say `Optional.isNone` and `Optional.None` for everything else exposed by the module.
 
-This `exposing` keyword works just like it does in module declaraitons. If you want to expose everything you use `exposing (..)`. If you want to expose everything explicitly, you would say `exposing ( Optional(..), isNone )`.
+This `exposing` keyword works just like it does in module declarations. If you want to expose everything you use `exposing (..)`. If you want to expose everything explicitly, you would say `exposing ( Optional(..), isNone )`.
 
 
 ## Mixing Both
