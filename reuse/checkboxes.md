@@ -62,7 +62,7 @@ view model =
     ]
 ```
 
-This is not too crazy, but we our repeating ourselves quite a bit. How can we make our `view` function nicer? If you are coming from JavaScript, your first instinct is probably that we should make a &ldquo;labeled checkbox component&rdquo; but your first instinct is wrong! Instead, we will create a helper function!
+This is not too crazy, but we are repeating ourselves quite a bit. How can we make our `view` function nicer? If you are coming from JavaScript, your first instinct is probably that we should make a &ldquo;labeled checkbox component&rdquo; but your first instinct is wrong! Instead, we will create a helper function!
 
 ```elm
 view : Model -> Html Msg
@@ -90,6 +90,6 @@ We now have enough information to do a simple comparison of these approaches. Re
 
   - **It is just functions.** We are not doing anything special here. Functions have all the power we need, and they are very simple to create. It is the most basic building block of Elm!
 
-  - **No parent-child communication.** If we had made a &ldquo;checkbox component&rdquo; we would have to figure out how to synchronize the state in the checkbox component with our overall model. &ldquo;That checkboxs says notifications are on, but the model says they are off!&rdquo; Maybe we need a Flux store now? By using functions instead, we are able to have reuse in our view *without* disrupting our `Model` or `update`. They work exactly the same as before, no need to touch them!
+  - **No parent-child communication.** If we had made a &ldquo;checkbox component&rdquo; we would have to figure out how to synchronize the state in the checkbox component with our overall model. &ldquo;That checkbox says notifications are on, but the model says they are off!&rdquo; Maybe we need a Flux store now? By using functions instead, we are able to have reuse in our view *without* disrupting our `Model` or `update`. They work exactly the same as before, no need to touch them!
 
-This means can always create reusable `view` code without changing our overall architecture or introducing any fancy ideas. Just write smaller functions. That sounds nice, but let&rsquo;s see some more examples to make sure it is true!
+This means we can always create reusable `view` code without changing our overall architecture or introducing any fancy ideas. Just write smaller functions. That sounds nice, but let&rsquo;s see some more examples to make sure it is true!
