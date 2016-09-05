@@ -77,7 +77,7 @@ $ elm-repl
 
 We will be using `elm-repl` in the upcoming &ldquo;Core Language&rdquo; section, and you can read more about how it works [here](https://github.com/elm-lang/elm-repl/blob/master/README.md).
 
-> **Note:** `elm-repl` works by compiling code to JavaScript, so make sure you [Node.js](http://nodejs.org/) installed. We use that to evaluate code.
+> **Note:** `elm-repl` works by compiling code to JavaScript, so make sure you have [Node.js](http://nodejs.org/) installed. We use that to evaluate code.
 
 
 ### elm-reactor
