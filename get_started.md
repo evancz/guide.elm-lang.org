@@ -98,7 +98,7 @@ This starts a server at [`http://localhost:8000`](http://localhost:8000). You ca
   `elm-reactor --port=8123` to get things to run at `http://localhost:8123`.
 - `--address` lets you replace `localhost` with some other address. For
   example, you may want to use `elm-reactor --address=0.0.0.0` if you want to
-  try out an Elm program on a mobile divice through your local network.
+  try out an Elm program on a mobile device through your local network.
 
 
 ## elm-make
