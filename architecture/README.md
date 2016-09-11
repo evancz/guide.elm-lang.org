@@ -51,3 +51,4 @@ view model =
 ```
 
 That is really the essence of The Elm Architecture! We will proceed by filling in this skeleton with increasingly interesting logic.
+If the code above looks like hieroglyphs you might want to quickly skim over the [syntax](http://elm-lang.org/docs/syntax).
