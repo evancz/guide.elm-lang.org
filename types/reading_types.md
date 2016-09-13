@@ -66,10 +66,10 @@ What happens when you do not give a `String` though?
 
 ```elm
 > String.length [1,2,3]
--- error!
+-- compilation error!
 
 > String.length True
--- error!
+-- compilation error!
 ```
 
 A `String -> Int` function *must* get a `String` argument!
