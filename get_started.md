@@ -90,7 +90,7 @@ cd elm-architecture-tutorial
 elm-reactor
 ```
 
-This starts a server at [`http://localhost:8000`](http://localhost:8000). You can navigate to any Elm file and see what it looks like. Try to check out `examples/1-counter.elm`.
+This starts a server at [`http://localhost:8000`](http://localhost:8000). You can navigate to any Elm file and see what it looks like. Try to check out `examples/1-button.elm`.
 
 **Notable flags:**
 
