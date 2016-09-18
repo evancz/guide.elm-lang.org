@@ -66,7 +66,7 @@ Now it is totally okay if this does not really make sense yet! That only really 
 
 > **Aside:** One crucial detail here is that commands and subscriptions are *data*. When you create a command, you do not actually *do* it. Same with commands in real life. Let's try it. Eat an entire watermelon in one bite! Did you do it? No! You kept reading before you even *thought* about buying a tiny watermelon.
 > 
-> Point is, commands and subscriptions are data. You hand them to Elm to actually run them, giving Elm a chance to log all of this information. In the end, effects-as-data means Elm can:
+> The point is, commands and subscriptions are data. You hand them to Elm to actually run them, giving Elm a chance to log all of this information. In the end, effects-as-data means Elm can:
 > 
 >   - Have a general purpose time-travel debugger.
 >   - Keep the "same input, same output" guarantee for all Elm functions.
