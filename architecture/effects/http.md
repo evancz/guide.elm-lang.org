@@ -15,7 +15,27 @@ Okay, so you read it now right? Good. Let's get started on our random gif fetche
 
 At this point in this guide, you should be pretty comfortable smacking down the basic skeleton of an Elm app. Guess at the model, fill in some messages, etc. etc.
 
+You will need [`Http` package](http://package.elm-lang.org/packages/evancz/elm-http/latest). Install it with `$ elm-package install evancz/elm-http`.
+
 ```elm
+import Html exposing (..)
+import Html.App as App
+import Html.Events exposing (..)
+import Html.Attributes exposing (..)
+import Http
+import Task
+import Json.Decode exposing (Decoder, at, string)
+
+
+main =
+  App.program
+    { init = init
+    , view = view
+    , update = update
+    , subscriptions = subscriptions
+    }
+
+
 -- MODEL
 
 type alias Model =
@@ -37,6 +57,13 @@ update msg model =
   case msg of
     MorePlease ->
       (model, Cmd.none)
+
+
+-- SUBSCRIPTIONS
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
 
 
 -- VIEW
@@ -99,9 +126,9 @@ getRandomGif topic =
   in
     Task.perform FetchFail FetchSucceed (Http.get decodeGifUrl url)
 
-decodeGifUrl : Json.Decoder String
+decodeGifUrl : Decoder String
 decodeGifUrl =
-  Json.at ["data", "image_url"] Json.string
+  at ["data", "image_url"] string
 ```
 
 Okay, so the `getRandomGif` function is not exceptionally crazy. We first define the `url` we need to hit to get random gifs. Next we have [this `Http.get` function](http://package.elm-lang.org/packages/evancz/elm-http/3.0.1/Http#get) which is going to GET some JSON from the `url` we give it. The interesting part there is The `decodeGifUrl` argument which describes how to turn JSON into Elm values. In our case, we are saying &ldquo;try to get the value at `json.data.image_url` and it should be a string.&rdquo;
