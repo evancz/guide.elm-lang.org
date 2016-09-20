@@ -24,7 +24,7 @@ import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import Http
 import Task
-import Json.Decode exposing (Decoder, at, string)
+import Json.Decode as Json
 
 
 main =
@@ -126,9 +126,9 @@ getRandomGif topic =
   in
     Task.perform FetchFail FetchSucceed (Http.get decodeGifUrl url)
 
-decodeGifUrl : Decoder String
+decodeGifUrl : Json.Decoder String
 decodeGifUrl =
-  at ["data", "image_url"] string
+  Json.at ["data", "image_url"] Json.string
 ```
 
 Okay, so the `getRandomGif` function is not exceptionally crazy. We first define the `url` we need to hit to get random gifs. Next we have [this `Http.get` function](http://package.elm-lang.org/packages/evancz/elm-http/3.0.1/Http#get) which is going to GET some JSON from the `url` we give it. The interesting part there is The `decodeGifUrl` argument which describes how to turn JSON into Elm values. In our case, we are saying &ldquo;try to get the value at `json.data.image_url` and it should be a string.&rdquo;
