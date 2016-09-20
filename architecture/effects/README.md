@@ -16,6 +16,23 @@ Together, commands and subscriptions make it possible for your Elm components to
 So far our architecture skeleton has focused on creating `Model` types and `update` and `view` functions. To handle commands and subscriptions, we need to extend the basic architecture skeleton a little bit:
 
 ```elm
+import Html exposing (..)
+import Html.App as App
+import Html.Events exposing (..)
+import Random
+
+
+
+main =
+  App.program
+    { init = init
+    , view = view
+    , update = update
+    , subscriptions = subscriptions
+    }
+
+
+
 -- MODEL
 
 type alias Model =
@@ -43,8 +60,8 @@ view model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  ...
-  
+  Sub.none
+
 
 -- INIT
 
@@ -55,11 +72,13 @@ init =
 
 The first three sections are almost exactly the same, but there are a few new things overall:
 
-  1. The `update` function now returns more than just a new model. It returns a new model and some commands you want to run. These commands are all going to produce `Msg` values that will get fed right back into our `update` function.
+  1. We call `App.program` instead of `App.beginnerProgram` and add `subscriptions` key.
 
-  2. There is a `subscriptions` function. This function lets you declare any event sources you need to subscribe to given the current model. Just like with `Html Msg` and `Cmd Msg`, these subscriptions will produce `Msg` values that get fed right back into our `update` function.
+  2. The `update` function now returns more than just a new model. It returns a new model and some commands you want to run. These commands are all going to produce `Msg` values that will get fed right back into our `update` function.
 
-  3. So far `init` has just been the initial model. Now it produces both a model and some commands, just like the new `update`. This lets us provide a starting value *and* kick off any HTTP requests or whatever that are needed for initialization.
+  3. There is a `subscriptions` function. This function lets you declare any event sources you need to subscribe to given the current model. Just like with `Html Msg` and `Cmd Msg`, these subscriptions will produce `Msg` values that get fed right back into our `update` function. But for now we won't be using it.
+
+  4. So far `init` has just been the initial model. Now it produces both a model and some commands, just like the new `update`. This lets us provide a starting value *and* kick off any HTTP requests or whatever that are needed for initialization.
 
 Now it is totally okay if this does not really make sense yet! That only really happens when you start seeing it in action, so lets hop right into the examples!
 
