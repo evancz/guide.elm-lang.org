@@ -1,14 +1,26 @@
 # The Elm Architecture + Effects
 
-The last section showed how to handle all sorts of user input, but what can we *do* with it?
+The last section showed how to handle all sorts of user input. You can think of those programs like this:
 
-This section builds on the basic pattern we have seen so far, giving you the ability to make HTTP requests or subscribe to messages from web sockets. All of these effects are built on two important concepts:
+![](beginnerProgram.svg)
 
-  - **Commands** &mdash; A command is a way of demanding some effect. Maybe this is asking for a random number or making an HTTP request. Anything where you are asking for some value and the answer may be different depending on what is going on in the world.
+From our perspective, we just receive messages and produce new `Html` to get rendered on screen. The &ldquo;Elm Runtime&rdquo; is sitting there behind the scenes. When it gets `Html` it figures out how to render it on screen [really fast][vdom]. When a user clicks on something, it figures out how to pipe that into our program as a `Msg`. So the Elm Runtime is in charge of *doing* stuff. We just transform data.
 
-  - **Subscriptions** &mdash; A subscription lets you register that you are interested in something. Maybe you want to hear about geolocation changes? Maybe you want to hear all the messages coming in on a web socket? Subscriptions let you sit passively and only get updates when they exist.
+[vdom]: http://elm-lang.org/blog/blazing-fast-html-round-two
 
-Together, commands and subscriptions make it possible for your Elm components to talk to the outside world. But how do these new concepts fit into what we already know?
+This section builds on that pattern, giving you the ability to make HTTP requests or subscribe to messages from web sockets. Think of it like this:
+
+![](program.svg)
+
+Instead of just producing `Html`, we will now be producing commands and subscriptions:
+
+  - **Commands** &mdash; A command lets you *do* stuff: generate a random number, send an HTTP request, etc. You send these commands to the Elm Runtime which knows how to actually do them.
+
+  - **Subscriptions** &mdash; A subscription lets you register that you are interested in something: tell me about location changes, listen for web socket messages, etc. You just tell the Elm Runtime about all the things you want to subscribe to, and it manages the dirty details.
+
+If you squint, commands and subscriptions are pretty similar to `Html` values. With `Html`, we never touch the DOM by hand. Instead we represent the desired HTML as *data* and let the Elm Runtime do some clever stuff to make it render [really fast][vdom]. It is the same with commands and subscriptions. We create data, and the Elm Runtime does the dirty work and figures out how to send us `Msg` values like normal.
+
+Don&rsquo;t worry if it seems a bit confusing for now, the examples will help! So first let&rsquo;s look at how to fit these concepts into the code we have seen before.
 
 
 ## Extending the Architecture Skeleton
@@ -30,8 +42,8 @@ type Msg = Submit | ...
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   ...
-  
-  
+
+
 -- VIEW
 
 view : Model -> Html Msg
@@ -44,7 +56,7 @@ view model =
 subscriptions : Model -> Sub Msg
 subscriptions model =
   ...
-  
+
 
 -- INIT
 
@@ -65,12 +77,12 @@ Now it is totally okay if this does not really make sense yet! That only really 
 
 
 > **Aside:** One crucial detail here is that commands and subscriptions are *data*. When you create a command, you do not actually *do* it. Same with commands in real life. Let's try it. Eat an entire watermelon in one bite! Did you do it? No! You kept reading before you even *thought* about buying a tiny watermelon.
-> 
+>
 > Point is, commands and subscriptions are data. You hand them to Elm to actually run them, giving Elm a chance to log all of this information. In the end, effects-as-data means Elm can:
-> 
+>
 >   - Have a general purpose time-travel debugger.
 >   - Keep the "same input, same output" guarantee for all Elm functions.
 >   - Avoid setup/teardown phases when testing `update` logic.
 >   - Cache and batch effects, minimizing HTTP connections or other resources.
-> 
+>
 > So without going too crazy on details, pretty much all the nice guarantees and tools you have in Elm come from the choice to treat effects as data! I think this will make more sense as you get deeper into Elm.
