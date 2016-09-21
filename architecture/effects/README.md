@@ -14,11 +14,11 @@ This section builds on that pattern, giving you the ability to make HTTP request
 
 Instead of just producing `Html`, we will now be producing commands and subscriptions:
 
-  - **Commands** &mdash; A command lets you *do* stuff: generate a random number, send an HTTP request, etc. You send these commands to the Elm Runtime which knows how to actually do them.
+  - **Commands** &mdash; A `Cmd` lets you *do* stuff: generate a random number, send an HTTP request, etc.
 
-  - **Subscriptions** &mdash; A subscription lets you register that you are interested in something: tell me about location changes, listen for web socket messages, etc. You just tell the Elm Runtime about all the things you want to subscribe to, and it manages the dirty details.
+  - **Subscriptions** &mdash; A `Sub` lets you register that you are interested in something: tell me about location changes, listen for web socket messages, etc.
 
-If you squint, commands and subscriptions are pretty similar to `Html` values. With `Html`, we never touch the DOM by hand. Instead we represent the desired HTML as *data* and let the Elm Runtime do some clever stuff to make it render [really fast][vdom]. It is the same with commands and subscriptions. We create data, and the Elm Runtime does the dirty work and figures out how to send us `Msg` values like normal.
+If you squint, commands and subscriptions are pretty similar to `Html` values. With `Html`, we never touch the DOM by hand. Instead we represent the desired HTML as *data* and let the Elm Runtime do some clever stuff to make it render [really fast][vdom]. It is the same with commands and subscriptions. We create data that *describes* what we want to do, and the Elm Runtime does the dirty work.
 
 Don&rsquo;t worry if it seems a bit confusing for now, the examples will help! So first let&rsquo;s look at how to fit these concepts into the code we have seen before.
 
