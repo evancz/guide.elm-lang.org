@@ -151,7 +151,7 @@ var app = Elm.MyApp.fullscreen({
 
 // if you want to embed your app
 var node = document.getElementById('my-app');
-var app = Elm.MyApp.fullscreen(node, {
+var app = Elm.MyApp.embed(node, {
     user: 'Tom',
     token: '12345'
 });
