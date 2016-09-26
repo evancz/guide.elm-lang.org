@@ -52,7 +52,7 @@ There are two major ways for Elm and JavaScript to talk to each other: **ports**
 
 ### Ports
 
-Say we have a nice Elm program and everything is going fine, but we want use some JavaScript spell-checking library to get a feature done real quick. The final result is shown [here][spelling], and we will walk through the most important parts here.
+Say we have a nice Elm program and everything is going fine, but we want to use some JavaScript spell-checking library to get a feature done real quick. The final result is shown [here][spelling], and we will walk through the most important parts here.
 
 [spelling]: https://gist.github.com/evancz/e69723b23958e69b63d5b5502b0edf90
 
