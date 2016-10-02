@@ -51,7 +51,7 @@ For example, maybe we want to GET stock quotes from a particular time. We could 
 
 ```elm
 getStockQuotes =
-  Time.now `andThen` \time ->
+  Time.now andThen \time ->
     Http.getString ("//www.example.com/stocks?time=" ++ toString time)
 ```
 
