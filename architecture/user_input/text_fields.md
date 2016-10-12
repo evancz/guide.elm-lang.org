@@ -1,6 +1,8 @@
 # Text Fields
 
-**[See Online](http://elm-lang.org/examples/field) / [Run Locally](https://github.com/evancz/elm-architecture-tutorial/)**
+---
+### Follow along in the [online editor](http://elm-lang.org/examples/field) or [clone the code](https://github.com/evancz/elm-architecture-tutorial/).
+---
 
 We are about to create a simple app that reverses the contents of a text field. This example also introduces some new stuff that will help us out in our next example.
 

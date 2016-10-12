@@ -1,6 +1,8 @@
 # Forms
 
-**[See Online](http://elm-lang.org/examples/form) / [Run Locally](https://github.com/evancz/elm-architecture-tutorial/)**
+---
+### Follow along in the [online editor](http://elm-lang.org/examples/form) or [clone the code](https://github.com/evancz/elm-architecture-tutorial/).
+---
 
 Here we will make a rudimentary form. It has a field for your name, a field for your password, and a field to verify that password. We will also do some very simple validation (do the two passwords match?) just because it is simple to add.
 
