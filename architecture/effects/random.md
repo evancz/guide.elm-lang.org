@@ -1,6 +1,8 @@
 # Random
 
-**[See Online](http://elm-lang.org/examples/random) / [Run Locally](https://github.com/evancz/elm-architecture-tutorial/)**
+---
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](http://elm-lang.org/examples/random).
+---
 
 We are about to make an app that "rolls dice", producing a random number between 1 and 6.
 
@@ -103,12 +105,12 @@ So the big lessons here are:
 At this point, the best way to improve your understanding of commands is just to see more of them! They will appear prominently with the `Http` and `WebSocket` libraries, so if you are feeling shaky, the only path forward is practicing with randomness and playing with other examples of commands!
 
 > **Exercises:** Here are some that build on stuff that has already been introduced:
-> 
+>
 >   - Instead of showing a number, show the die face as an image.
 >   - Add a second die and have them both roll at the same time.
 >
 > And here are some that require new skills:
-> 
+>
 >   - Instead of showing an image of a die face, use the `elm-lang/svg` library to draw it yourself.
 >   - After you have learned about tasks and animation, have the die flip around randomly before they settle on a final value.
 

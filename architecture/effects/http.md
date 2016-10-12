@@ -1,6 +1,8 @@
 # HTTP
 
-**[See Online](http://elm-lang.org/examples/http) / [Run Locally](https://github.com/evancz/elm-architecture-tutorial/)**
+---
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](http://elm-lang.org/examples/http).
+---
 
 We are about to make an app that fetches a random GIF when the user asks for another image.
 
@@ -118,7 +120,7 @@ We will get into the details of how this all works later in this guide, but for 
 And now when you click the "More" button, it actually goes and fetches a random gif!
 
 > **Exercises:** To get more comfortable with this code, try augmenting it with skills we learned in previous sections:
-> 
+>
 >   - Show a message explaining why the image didn't change when you get a `FetchFail`.
 >   - Allow the user to modify the `topic` with a text field.
 >   - Allow the user to modify the `topic` with a drop down menu.

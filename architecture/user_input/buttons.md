@@ -1,7 +1,7 @@
 # Buttons
 
 ---
-### Follow along in the [online editor](http://elm-lang.org/examples/buttons) or [clone the code](https://github.com/evancz/elm-architecture-tutorial/).
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](http://elm-lang.org/examples/buttons).
 ---
 
 Our first example is a simple counter that can be incremented or decremented. I find that it can be helpful to see the entire program in one place, so here it is! We will break it down afterwards.

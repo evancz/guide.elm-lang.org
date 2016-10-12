@@ -1,6 +1,8 @@
 # Time
 
-**[See Online](http://elm-lang.org/examples/time) / [Run Locally](https://github.com/evancz/elm-architecture-tutorial/)**
+---
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](http://elm-lang.org/examples/time).
+---
 
 We are going to make a simple clock.
 
@@ -91,6 +93,6 @@ That is all there is to setting up a subscription! These messages will be fed to
 
 
 > **Exercises:**
-> 
+>
 >   - Add a button to pause the clock, turning the `Time` subscription off.
 >   - Make the clock look nicer. Add an hour and minute hand. Etc.
