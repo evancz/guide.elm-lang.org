@@ -139,7 +139,7 @@ photos : List String
 photos =
   List.map userPhoto activeUsers
 
--- [ "anon.png", "users/catface420.jpg", "users/AzureDiamond.jpg", "anon.png" ]
+-- [ "anon.png", "users/catface420.png", "users/AzureDiamond.png", "anon.png" ]
 ```
 
 The nice thing about creating a type like `User` is that no one in your whole codebase can ever "forget" that some users may be anonymous. Anyone who can get a hold of a `User` needs to use a `case` to get any information out of it, and the compiler guarantees every `case` and handles all possible scenarios!
