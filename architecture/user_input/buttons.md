@@ -8,12 +8,11 @@ Our first example is a simple counter that can be incremented or decremented. I 
 
 ```elm
 import Html exposing (Html, button, div, text)
-import Html.App as App
 import Html.Events exposing (onClick)
 
 
 main =
-  App.beginnerProgram { model = model, view = view, update = update }
+  Html.beginnerProgram { model = model, view = view, update = update }
 
 
 -- MODEL
