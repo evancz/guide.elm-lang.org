@@ -132,7 +132,7 @@ It starts out normal: We create a `<div>` and put a couple `<input>` nodes in it
 But for the last child we do not directly use an HTML function. Instead we call the `viewValidation` function, passing in the current model.
 
 ```elm
-viewValidation : Model -> Html msg
+viewValidation : Model -> Html Msg
 viewValidation model =
   let
     (color, message) =
