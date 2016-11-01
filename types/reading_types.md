@@ -207,8 +207,9 @@ Because all functions in Elm work this way, you do not need to give all the argu
 <function> : String -> String
 ```
 
-This is called *partial application*. It lets us use [the `(|>)` operator](http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#|>) to chain functions together in a nice way, and it is why function types have so many arrows!
+This is called *partial application*. It lets us use [the `|>` operator][pipe] to chain functions together in a nice way, and it is why function types have so many arrows!
 
+[pipe]: http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#|&gt;
 
 
 ## Type Annotations
