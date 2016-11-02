@@ -46,19 +46,19 @@ view model =
   div []
     [ fieldset []
         [ label []
-            [ input [ type' "radio", onClick (SwitchTo Small) ] []
+            [ input [ type' "radio", onClick (SwitchTo Small), checked (model.fontSize == Small) ] []
             , text "Small"
             ]
         , label []
-            [ input [ type' "radio", onClick (SwitchTo Medium) ] []
+            [ input [ type' "radio", onClick (SwitchTo Medium), checked (model.fontSize == Medium) ] []
             , text "Medium"
             ]
         , label []
-            [ input [ type' "radio", onClick (SwitchTo Large) ] []
+            [ input [ type' "radio", onClick (SwitchTo Large), checked (model.fontSize == Large) ] []
             , text "Large"
             ]
         ]
-    , section [] [ text model.content ]
+    , section [ style [("font-size", toString model.fontSize) ] [ text model.content ]
     ]
 ```
 
@@ -69,17 +69,17 @@ view : Model -> Html Msg
 view model =
   div []
     [ fieldset []
-        [ radio (SwitchTo Small) "Small"
-        , radio (SwitchTo Medium) "Medium"
-        , radio (SwitchTo Large) "Large"
+        [ radio (SwitchTo Small) "Small" (model.fontSize == Small)
+        , radio (SwitchTo Medium) "Medium" (model.fontSize == Medium)
+        , radio (SwitchTo Large) "Large" (model.fontSize == Large)
         ]
-    , section [] [ text model.content ]
+    , section [ style [("font-size", toString model.fontSize) ] [ text model.content ]
     ]
 
-radio : msg -> String -> Html msg
-radio msg name =
+radio : msg -> String -> Bool -> Html msg
+radio msg name isChecked =
   label []
-    [ input [ type' "radio", onClick msg ] []
+    [ input [ type' "radio", onClick msg, checked isChecked ] []
     , text name
     ]
 ```
@@ -93,21 +93,21 @@ view : Model -> Html Msg
 view model =
   div []
     [ viewPicker
-        [ ("Small", SwitchTo Small)
-        , ("Medium", SwitchTo Medium)
-        , ("Large", SwitchTo Large)
+        [ ("Small", SwitchTo Small, (model.fontSize == Small))
+        , ("Medium", SwitchTo Medium, (model.fontSize == Medium))
+        , ("Large", SwitchTo Large, (model.fontSize == Large))
         ]
-    , section [] [ text model.content ]
+    , section [ style [("font-size", toString model.fontSize) ] [ text model.content ]
     ]
 
-viewPicker : List (String, msg) -> Html msg
+viewPicker : List (String, msg, Bool) -> Html msg
 viewPicker options =
   fieldset [] (List.map radio options)
 
-radio : (String, msg) -> Html msg
-radio (name, msg) =
+radio : (String, msg, Bool) -> Html msg
+radio (name, msg, isChecked) =
   label []
-    [ input [ type' "radio", onClick msg ] []
+    [ input [ type' "radio", onClick msg, checked isChecked ] []
     , text name
     ]
 ```
@@ -115,7 +115,7 @@ radio (name, msg) =
 So if we want to let users choose a color scheme or toggle serifs, the `view` can reuse `viewPicker` for each case. If we do that, we may want to add additional arguments to the `viewPicker` function. If we want to be able to set a class on each `<fieldset>`, we could add an argument like this:
 
 ```elm
-viewPicker : String -> List (String, msg) -> Html msg
+viewPicker : String -> List (String, msg, Bool) -> Html msg
 viewPicker pickerClass options =
   fieldset [ class pickerClass ] (List.map radio options)
 ```
@@ -123,7 +123,7 @@ viewPicker pickerClass options =
 Or if we wanted even more flexibility, we could let people pass in whatever attributes they please, like this:
 
 ```elm
-viewPicker : List (Attribute msg) -> List (String, msg) -> Html msg
+viewPicker : List (Attribute msg) -> List (String, msg, Bool) -> Html msg
 viewPicker attributes options =
   fieldset attributes (List.map radio options)
 ```
