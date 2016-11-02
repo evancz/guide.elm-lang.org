@@ -59,10 +59,10 @@ We can combine this with all the primitive decoders now:
 > import Json.Decode exposing (..)
 
 > int
-<decoder> : Decode Int
+<decoder> : Decoder Int
 
 > list int
-<decoder> : Decode (List Int)
+<decoder> : Decoder (List Int)
 
 > decodeString (list int) "[1,2,3]"
 Ok [1,2,3] : Result String (List Int)
@@ -84,7 +84,7 @@ Ok [[0],[1,2,3],[4,5]] : Result String (List (List Int))
 Decoding JSON objects is slightly fancier than using the `list` function, but it is the same idea. The important functions for decoding objects is an infix operator:
 
 ```elm
-(:=) : String -> Decode a -> Decode a
+(:=) : String -> Decoder a -> Decoder a
 ```
 
 This says "look into a given field, and try to decode it in a certain way". So using it looks like this:
@@ -93,7 +93,7 @@ This says "look into a given field, and try to decode it in a certain way". So u
 > import Json.Decode exposing (..)
 
 > "x" := int
-<decoder> : Decode Int
+<decoder> : Decoder Int
 
 > decodeString ("x" := int) """{ "x": 3, "y": 4 }"""
 Ok 3 : Result String Int
@@ -117,7 +117,7 @@ This function takes in two different decoders. If they are both successful, it u
 <function> : a -> b -> (a, b)
 
 > point = object2 (,) ("x" := int) ("y" := int)
-<decoder> : Decode (Int, Int)
+<decoder> : Decoder (Int, Int)
 
 > decodeString point """{ "x": 3, "y": 4 }"""
 Ok (3,4) : Result String (Int, Int)
@@ -143,7 +143,7 @@ It is saying, try to use this decoder, but it is fine if it does not work.
 > type alias User = { name : String, age : Maybe Int }
 
 > user = object2 User ("name" := string) (maybe ("age" := int))
-<decoder> : Decode User
+<decoder> : Decoder User
 
 > decodeString user """{ "name": "Tom", "age": 42 }"""
 Ok { name = "Tom", age = Just 42 } : Result String User
