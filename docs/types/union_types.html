@@ -1,0 +1,994 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Union Types · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../error_handling/" />
+    
+    
+    <link rel="prev" href="type_aliases.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../get_started.html">
+            
+                <a href="../get_started.html">
+            
+                    
+                    Get Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../core_language.html">
+            
+                <a href="../core_language.html">
+            
+                    
+                    Core Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../architecture/">
+            
+                <a href="../architecture/">
+            
+                    
+                    The Elm Architecture
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../architecture/user_input/">
+            
+                <a href="../architecture/user_input/">
+            
+                    
+                    User Input
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../architecture/user_input/buttons.html">
+            
+                <a href="../architecture/user_input/buttons.html">
+            
+                    
+                    Buttons
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../architecture/user_input/text_fields.html">
+            
+                <a href="../architecture/user_input/text_fields.html">
+            
+                    
+                    Text Fields
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="../architecture/user_input/forms.html">
+            
+                <a href="../architecture/user_input/forms.html">
+            
+                    
+                    Forms
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.4" data-path="../architecture/user_input/more.html">
+            
+                <a href="../architecture/user_input/more.html">
+            
+                    
+                    More
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../architecture/effects/">
+            
+                <a href="../architecture/effects/">
+            
+                    
+                    Effects
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../architecture/effects/random.html">
+            
+                <a href="../architecture/effects/random.html">
+            
+                    
+                    Random
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../architecture/effects/http.html">
+            
+                <a href="../architecture/effects/http.html">
+            
+                    
+                    HTTP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../architecture/effects/time.html">
+            
+                <a href="../architecture/effects/time.html">
+            
+                    
+                    Time
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="../architecture/effects/web_sockets.html">
+            
+                <a href="../architecture/effects/web_sockets.html">
+            
+                    
+                    Web Sockets
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../architecture/more.html">
+            
+                <a href="../architecture/more.html">
+            
+                    
+                    More
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Types
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="reading_types.html">
+            
+                <a href="reading_types.html">
+            
+                    
+                    Reading Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="type_aliases.html">
+            
+                <a href="type_aliases.html">
+            
+                    
+                    Type Aliases
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.3" data-path="union_types.html">
+            
+                <a href="union_types.html">
+            
+                    
+                    Union Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../error_handling/">
+            
+                <a href="../error_handling/">
+            
+                    
+                    Error Handling and Tasks
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../error_handling/maybe.html">
+            
+                <a href="../error_handling/maybe.html">
+            
+                    
+                    Maybe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../error_handling/result.html">
+            
+                <a href="../error_handling/result.html">
+            
+                    
+                    Result
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../error_handling/task.html">
+            
+                <a href="../error_handling/task.html">
+            
+                    
+                    Task
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../interop/">
+            
+                <a href="../interop/">
+            
+                    
+                    Interop
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../interop/json.html">
+            
+                <a href="../interop/json.html">
+            
+                    
+                    JSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../interop/javascript.html">
+            
+                <a href="../interop/javascript.html">
+            
+                    
+                    JavaScript
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../reuse/">
+            
+                <a href="../reuse/">
+            
+                    
+                    Scaling The Elm Architecture
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../reuse/checkboxes.html">
+            
+                <a href="../reuse/checkboxes.html">
+            
+                    
+                    Labeled Checkboxes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../reuse/radio_buttons.html">
+            
+                <a href="../reuse/radio_buttons.html">
+            
+                    
+                    Radio Buttons
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../reuse/modules.html">
+            
+                <a href="../reuse/modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../reuse/more.html">
+            
+                <a href="../reuse/more.html">
+            
+                    
+                    More
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../effect_managers/">
+            
+                <a href="../effect_managers/">
+            
+                    
+                    Effect Managers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../effect_managers/caching.html">
+            
+                <a href="../effect_managers/caching.html">
+            
+                    
+                    Caching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../effect_managers/batching.html">
+            
+                <a href="../effect_managers/batching.html">
+            
+                    
+                    Batching
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Union Types</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="union-types">Union Types</h1>
+<p>Many languages have trouble expressing data with weird shapes. They give you a small set of built-in types, and you have to represent everything with them. So you often find yourself using <code>null</code> or booleans or strings to encode details in a way that is quite error prone.</p>
+<p>Elm&apos;s <em>union types</em> let you represent complex data much more naturally. We will go through a couple concrete examples to build some intuition about how and when to use union types.</p>
+<blockquote>
+<p><strong>Note:</strong> Union types are sometimes called <a href="https://en.wikipedia.org/wiki/Tagged_union" target="_blank">tagged unions</a>. Some communities call them <a href="https://en.wikipedia.org/wiki/Algebraic_data_type" target="_blank">ADTs</a>.</p>
+</blockquote>
+<h2 id="filtering-a-todo-list">Filtering a Todo List</h2>
+<blockquote>
+<p><strong>Problem:</strong> We are creating a <a href="http://evancz.github.io/elm-todomvc/" target="_blank">todo list</a> full of tasks. We want to have three views: show <em>all</em> tasks, show only <em>active</em> tasks, and show only <em>completed</em> tasks. How do we represent which of these three states we are in?</p>
+</blockquote>
+<p>Whenever you have weird shaped data in Elm, you want to reach for a union type. In this case, we would create a type <code>Visibility</code> that has three possible values:</p>
+<pre><code class="lang-elm">&gt; <span class="hljs-keyword">type</span> <span class="hljs-type">Visibility</span> = <span class="hljs-type">All</span> | <span class="hljs-type">Active</span> | <span class="hljs-type">Completed</span>
+
+&gt; <span class="hljs-type">All</span>
+<span class="hljs-type">All</span> : <span class="hljs-type">Visibility</span>
+
+&gt; <span class="hljs-type">Active</span>
+<span class="hljs-type">Active</span> : <span class="hljs-type">Visibility</span>
+
+&gt; <span class="hljs-type">Completed</span>
+<span class="hljs-type">Completed</span> : <span class="hljs-type">Visibility</span>
+</code></pre>
+<p>Now that we have these three cases defined, we want to create a function <code>keep</code> that will properly filter our tasks. It should work like this:</p>
+<pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Task</span> = { task : <span class="hljs-type">String</span>, complete : <span class="hljs-type">Bool</span> }
+
+<span class="hljs-title">buy</span> : <span class="hljs-type">Task</span>
+<span class="hljs-title">buy</span> =
+  { task = <span class="hljs-string">&quot;Buy milk&quot;</span>, complete = <span class="hljs-type">True</span> }
+
+<span class="hljs-title">drink</span> : <span class="hljs-type">Task</span>
+<span class="hljs-title">drink</span> =
+  { task = <span class="hljs-string">&quot;Drink milk&quot;</span>, complete = <span class="hljs-type">False</span> }
+
+<span class="hljs-title">tasks</span> : <span class="hljs-type">List</span> <span class="hljs-type">Task</span>
+<span class="hljs-title">tasks</span> =
+  [ buy, drink ]
+
+
+<span class="hljs-comment">-- keep : Visibility -&gt; List Task -&gt; List Task</span>
+
+<span class="hljs-comment">-- keep All tasks == [buy,drink]</span>
+<span class="hljs-comment">-- keep Active tasks == [drink]</span>
+<span class="hljs-comment">-- keep Complete tasks == [buy]</span>
+</code></pre>
+<p>So the <code>keep</code> function needs to look at its first argument, and depending on what it is, filter the list in various ways. We use a <code>case</code> expression to do this. It is like an <code>if</code> on steroids:</p>
+<pre><code class="lang-elm"><span class="hljs-title">keep</span> : <span class="hljs-type">Visibility</span> -&gt; <span class="hljs-type">List</span> <span class="hljs-type">Task</span> -&gt; <span class="hljs-type">List</span> <span class="hljs-type">Task</span>
+<span class="hljs-title">keep</span> visibility tasks =
+  <span class="hljs-keyword">case</span> visibility <span class="hljs-keyword">of</span>
+    <span class="hljs-type">All</span> -&gt;
+      tasks
+
+    <span class="hljs-type">Active</span> -&gt;
+      <span class="hljs-type">List</span>.filter (\task -&gt; not task.complete) tasks
+
+    <span class="hljs-type">Completed</span> -&gt;
+      <span class="hljs-type">List</span>.filter (\task -&gt; task.complete) tasks
+</code></pre>
+<p>The <code>case</code> is saying, look at the structure of <code>visibility</code>. If it is <code>All</code>, just give back all the tasks. If it is <code>Active</code>, keep only the tasks that are not complete. If it is <code>Completed</code>, keep only the tasks that are complete.</p>
+<p>The cool thing about <code>case</code> expressions is that all the branches are checked by the compiler. This has some nice benefits:</p>
+<ol>
+<li>If you mistype <code>Compleet</code> by accident, you get a hint about the typo.</li>
+<li>If you forget to handle a case, the compiler will figure it out and tell you.</li>
+</ol>
+<p>So say you want to add <code>Recent</code> as a fourth possible <code>Visibility</code> value. The compiler will find all the <code>case</code> expressions in your code that work with <code>Visibility</code> values and remind you to handle the new possibility! This means you can change and extend <code>Visibility</code> without the risk of silently creating bugs in existing code.</p>
+<blockquote>
+<p><strong>Exercise:</strong> Imagine how you would solve this same problem in JavaScript. Three strings? A boolean that can be <code>null</code>? What would the definition of <code>keep</code> look like? What sort of tests would you want to write to make sure adding new code later was safe.</p>
+</blockquote>
+<h2 id="anonymous-users">Anonymous Users</h2>
+<blockquote>
+<p><strong>Problem:</strong> We have a chat room where people can post whatever they want. Some users are logged in and some are anonymous. How should we represent a user?</p>
+</blockquote>
+<p>Again, whenever there is weird shaped data, you want to reach for a union type. For this case, we want one where users are either anonymous or named:</p>
+<pre><code class="lang-elm">&gt; <span class="hljs-keyword">type</span> <span class="hljs-type">User</span> = <span class="hljs-type">Anonymous</span> | <span class="hljs-type">Named</span> <span class="hljs-type">String</span>
+
+&gt; <span class="hljs-type">Anonymous</span>
+<span class="hljs-type">Anonymous</span> : <span class="hljs-type">User</span>
+
+&gt; <span class="hljs-type">Named</span>
+&lt;function&gt; : <span class="hljs-type">String</span> -&gt; <span class="hljs-type">User</span>
+
+&gt; <span class="hljs-type">Named</span> <span class="hljs-string">&quot;AzureDiamond&quot;</span>
+<span class="hljs-type">Named</span> <span class="hljs-string">&quot;AzureDiamond&quot;</span> : <span class="hljs-type">User</span>
+
+&gt; <span class="hljs-type">Named</span> <span class="hljs-string">&quot;abraham-lincoln&quot;</span>
+<span class="hljs-type">Named</span> <span class="hljs-string">&quot;abraham-lincoln&quot;</span> : <span class="hljs-type">User</span>
+</code></pre>
+<p>So creating the type <code>User</code> also created constructors named <code>Anonymous</code> and <code>Named</code>. If you want to create a <code>User</code> you <em>must</em> use one of these two constructors. This guarantees that all the possible <code>User</code> values are things like:</p>
+<pre><code class="lang-elm">  <span class="hljs-type">Anonymous</span>
+  <span class="hljs-type">Named</span> <span class="hljs-string">&quot;AzureDiamond&quot;</span>
+  <span class="hljs-type">Named</span> <span class="hljs-string">&quot;abraham-lincoln&quot;</span>
+  <span class="hljs-type">Named</span> <span class="hljs-string">&quot;catface420&quot;</span>
+  <span class="hljs-type">Named</span> <span class="hljs-string">&quot;Tom&quot;</span>
+  ...
+</code></pre>
+<p>Now that we have a representation of a user, lets say we want to get a photo of them to show next to their posts. Again, we need to use a <code>case</code> expression to work with our <code>User</code> type:</p>
+<pre><code class="lang-elm"><span class="hljs-title">userPhoto</span> : <span class="hljs-type">User</span> -&gt; <span class="hljs-type">String</span>
+<span class="hljs-title">userPhoto</span> user =
+  <span class="hljs-keyword">case</span> user <span class="hljs-keyword">of</span>
+    <span class="hljs-type">Anonymous</span> -&gt;
+      <span class="hljs-string">&quot;anon.png&quot;</span>
+
+    <span class="hljs-type">Named</span> name -&gt;
+      <span class="hljs-string">&quot;users/&quot;</span> ++ name ++ <span class="hljs-string">&quot;.png&quot;</span>
+</code></pre>
+<p>There are two possible cases when we have a <code>User</code>. If they are <code>Anonymous</code> we show a dummy picture. If they are <code>Named</code> we construct the URL of their photo. This <code>case</code> is slightly fancier than the one we saw before. Notice that the second branch has a lower case variable <code>name</code>. This means that when we see a value like <code>Named &quot;AzureDiamond&quot;</code>, the <code>name</code> variable will be bound to <code>&quot;AzureDiamond&quot;</code> so we can do other things with it. This is called <em>pattern matching</em>.</p>
+<p>Now imagine we have a bunch of users in a chat room and we want to show their pictures.</p>
+<pre><code class="lang-elm"><span class="hljs-title">activeUsers</span> : <span class="hljs-type">List</span> <span class="hljs-type">User</span>
+<span class="hljs-title">activeUsers</span> =
+  [ <span class="hljs-type">Anonymous</span>, <span class="hljs-type">Named</span> <span class="hljs-string">&quot;catface420&quot;</span>, <span class="hljs-type">Named</span> <span class="hljs-string">&quot;AzureDiamond&quot;</span>, <span class="hljs-type">Anonymous</span> ]
+
+<span class="hljs-title">photos</span> : <span class="hljs-type">List</span> <span class="hljs-type">String</span>
+<span class="hljs-title">photos</span> =
+  <span class="hljs-type">List</span>.map userPhoto activeUsers
+
+<span class="hljs-comment">-- [ &quot;anon.png&quot;, &quot;users/catface420.png&quot;, &quot;users/AzureDiamond.png&quot;, &quot;anon.png&quot; ]</span>
+</code></pre>
+<p>The nice thing about creating a type like <code>User</code> is that no one in your whole codebase can ever &quot;forget&quot; that some users may be anonymous. Anyone who can get a hold of a <code>User</code> needs to use a <code>case</code> to get any information out of it, and the compiler guarantees every <code>case</code> and handles all possible scenarios!</p>
+<blockquote>
+<p><strong>Exercise:</strong> Think about how you would solve this problem in some other language. A string where empty string means they are anonymous? A string that can be null? How much testing would you want to do to make sure that everyone handles these special cases correctly?</p>
+</blockquote>
+<h2 id="widget-dashboard">Widget Dashboard</h2>
+<blockquote>
+<p><strong>Problem:</strong> You are creating a dashboard with three different kinds of widgets. One shows recent log data, one shows time plots, and one shows scatter plots. How do you represent a widget?</p>
+</blockquote>
+<p>Alright, we are getting a bit fancier now. In Elm, you want to start by solving each case individually. (As you get more experience, you will see that Elm <em>wants</em> you to build programs out of small, reusable parts. It is weird.) So I would create representations for each of our three scenarios, along with <code>view</code> functions to actually turn them into HTML or SVG or whatever:</p>
+<pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">LogsInfo</span> =
+  { logs : <span class="hljs-type">List</span> <span class="hljs-type">String</span>
+  }
+
+<span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">TimeInfo</span> =
+  { events : <span class="hljs-type">List</span> (<span class="hljs-type">Time</span>, <span class="hljs-type">Float</span>)
+  , yAxis : <span class="hljs-type">String</span>
+  }
+
+<span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">ScatterInfo</span> =
+  { points : <span class="hljs-type">List</span> (<span class="hljs-type">Float</span>, <span class="hljs-type">Float</span>)
+  , xAxis : <span class="hljs-type">String</span>
+  , yAxis : <span class="hljs-type">String</span>
+  }
+
+<span class="hljs-comment">-- viewLogs : LogsInfo -&gt; Html msg</span>
+<span class="hljs-comment">-- viewTime : TimeInfo -&gt; Html msg</span>
+<span class="hljs-comment">-- viewScatter : ScatterInfo -&gt; Html msg</span>
+</code></pre>
+<p>At this point, you have created all the helper functions needed to work with these three cases totally independent from each other. Someone can come along later and say, &quot;I need a nice way to show scatter plots&quot; and use just that part of the code.</p>
+<p>So the question is really: how do I put these three standalone things together for my particular scenario?</p>
+<p>Again, union types are there to put together a bunch of different types!</p>
+<pre><code class="lang-elm">&gt; <span class="hljs-keyword">type</span> <span class="hljs-type">Widget</span> = <span class="hljs-type">Logs</span> <span class="hljs-type">LogsInfo</span> | <span class="hljs-type">TimePlot</span> <span class="hljs-type">TimeInfo</span> | <span class="hljs-type">ScatterPlot</span> <span class="hljs-type">ScatterInfo</span>
+
+&gt; <span class="hljs-type">Logs</span>
+&lt;function&gt; : <span class="hljs-type">LogsInfo</span> -&gt; <span class="hljs-type">Widget</span>
+
+&gt; <span class="hljs-type">TimePlot</span>
+&lt;function&gt; : <span class="hljs-type">TimeInfo</span> -&gt; <span class="hljs-type">Widget</span>
+
+&gt; <span class="hljs-type">ScatterPlot</span>
+&lt;function&gt; : <span class="hljs-type">ScatterInfo</span> -&gt; <span class="hljs-type">Widget</span>
+</code></pre>
+<p>So we created a <code>Widget</code> type that can only be created with these constructor functions. You can think of these constructors as <em>tagging</em> the data so we can tell it apart at runtime. Now we can write something to render a widget like this:</p>
+<pre><code class="lang-elm"><span class="hljs-title">view</span> : <span class="hljs-type">Widget</span> -&gt; <span class="hljs-type">Html</span> msg
+<span class="hljs-title">view</span> widget =
+  <span class="hljs-keyword">case</span> widget <span class="hljs-keyword">of</span>
+    <span class="hljs-type">Logs</span> info -&gt;
+      viewLogs info
+
+    <span class="hljs-type">TimePlot</span> info -&gt;
+      viewTime info
+
+    <span class="hljs-type">ScatterPlot</span> info -&gt;
+      viewScatter info
+</code></pre>
+<p>One nice thing about this approach is that there is no mystery about what kind of widgets are supported. There are exactly three. If someone wants to add a fourth, they modify the <code>Widget</code> type. This means you can never be surprised by the data you get, even if someone on a different team is messing with your code.</p>
+<blockquote>
+<p><strong>Takeaways:</strong></p>
+<ul>
+<li>Solve each subproblem first.</li>
+<li>Use union types to put together all the solutions.</li>
+<li>Creating a union type generates a bunch of <em>constructors</em>.</li>
+<li>These constuctors <em>tag</em> data so that we can differentiate it at runtime.</li>
+<li>A <code>case</code> expression lets us tear data apart based on these tags.</li>
+</ul>
+<p>The same strategies can be used if you are making a game and have a bunch of different bad guys. Goombas should update one way, but Koopa Troopas do something totally different. Solve each problem independently, and then use a union type to put them all together.</p>
+</blockquote>
+<h2 id="linked-lists">Linked Lists</h2>
+<blockquote>
+<p><strong>Problem:</strong> You are stuck on a bus speeding down the highway. If the bus slows down, it will blow up. The only way to save yourself and everyone on the bus is to reimplement linked lists in Elm. HURRY, WE ARE RUNNING OUT OF GAS!</p>
+</blockquote>
+<p>Yeah, yeah, the problem is contrived this time, but it is important to see some of the more advanced things you can do with union types!</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Linked_list" target="_blank">linked list</a> is a sequence of values. If you are looking at a linked list, it is either empty or it is a value and more list. That list is either empty or is a value and more list. etc. This intuitive definition works pretty directly in Elm. Let&apos;s see it for lists of integers:</p>
+<pre><code class="lang-elm">&gt; <span class="hljs-keyword">type</span> <span class="hljs-type">IntList</span> = <span class="hljs-type">Empty</span> | <span class="hljs-type">Node</span> <span class="hljs-type">Int</span> <span class="hljs-type">IntList</span>
+
+&gt; <span class="hljs-type">Empty</span>
+<span class="hljs-type">Empty</span> : <span class="hljs-type">IntList</span>
+
+&gt; <span class="hljs-type">Node</span>
+&lt;function&gt; : <span class="hljs-type">Int</span> -&gt; <span class="hljs-type">IntList</span> -&gt; <span class="hljs-type">IntList</span>
+
+&gt; <span class="hljs-type">Node</span> <span class="hljs-number">42</span> <span class="hljs-type">Empty</span>
+<span class="hljs-type">Node</span> <span class="hljs-number">42</span> <span class="hljs-type">Empty</span> : <span class="hljs-type">IntList</span>
+
+&gt; <span class="hljs-type">Node</span> <span class="hljs-number">64</span> (<span class="hljs-type">Node</span> <span class="hljs-number">128</span> <span class="hljs-type">Empty</span>)
+<span class="hljs-type">Node</span> <span class="hljs-number">64</span> (<span class="hljs-type">Node</span> <span class="hljs-number">128</span> <span class="hljs-type">Empty</span>) : <span class="hljs-type">IntList</span>
+</code></pre>
+<p>Now we did two new things here:</p>
+<ol>
+<li>The <code>Node</code> constructor takes <em>two</em> arguments instead of one. This is fine. In fact, you can have them take as many arguments as you want.</li>
+<li>Our union type is <em>recursive</em>. An <code>IntList</code> may hold another <code>IntList</code>. Again, this is fine if you are using union types.</li>
+</ol>
+<p>The nice thing about our <code>IntList</code> type is that now we can only build valid linked lists. Every linked list needs to start with <code>Empty</code> and the only way to add a new value is with <code>Node</code>.</p>
+<p>It is equally nice to work with. Let&apos;s say we want to compute the sum of all of the numbers in a list. Just like with any other union type, we need to use a <code>case</code> and handle all possible scenarios:</p>
+<pre><code class="lang-elm"><span class="hljs-title">sum</span> : <span class="hljs-type">IntList</span> -&gt; <span class="hljs-type">Int</span>
+<span class="hljs-title">sum</span> numbers =
+  <span class="hljs-keyword">case</span> numbers <span class="hljs-keyword">of</span>
+    <span class="hljs-type">Empty</span> -&gt;
+      <span class="hljs-number">0</span>
+
+    <span class="hljs-type">Node</span> n remainingNumbers -&gt;
+      n + sum remainingNumbers
+</code></pre>
+<p>If we get an <code>Empty</code> value, the sum is 0. If we have a <code>Node</code> we add the first element to the sum of all the remaining ones. So an expression like <code>(sum (Node 1 (Node 2 (Node 3 Empty))))</code> is evaluated like this:</p>
+<pre><code class="lang-elm">  sum (<span class="hljs-type">Node</span> <span class="hljs-number">1</span> (<span class="hljs-type">Node</span> <span class="hljs-number">2</span> (<span class="hljs-type">Node</span> <span class="hljs-number">3</span> <span class="hljs-type">Empty</span>)))
+  <span class="hljs-number">1</span> + sum (<span class="hljs-type">Node</span> <span class="hljs-number">2</span> (<span class="hljs-type">Node</span> <span class="hljs-number">3</span> <span class="hljs-type">Empty</span>))
+  <span class="hljs-number">1</span> + (<span class="hljs-number">2</span> + sum (<span class="hljs-type">Node</span> <span class="hljs-number">3</span> <span class="hljs-type">Empty</span>))
+  <span class="hljs-number">1</span> + (<span class="hljs-number">2</span> + (<span class="hljs-number">3</span> + sum <span class="hljs-type">Empty</span>))
+  <span class="hljs-number">1</span> + (<span class="hljs-number">2</span> + (<span class="hljs-number">3</span> + <span class="hljs-number">0</span>))
+  <span class="hljs-number">1</span> + (<span class="hljs-number">2</span> + <span class="hljs-number">3</span>)
+  <span class="hljs-number">1</span> + <span class="hljs-number">5</span>
+  <span class="hljs-number">6</span>
+</code></pre>
+<p>On each line, we see one evaluation step. When we call <code>sum</code> it transforms the list based on whether it is looking at a <code>Node</code> or an <code>Empty</code> value.</p>
+<blockquote>
+<p><strong>Note:</strong> This is the first recursive function we have written together! Notice that <code>sum</code> calls itself to get the sum. It can be tricky to get into the mindset of writing recursive functions, so I wanted to share one weird trick. <strong>Pretend you are already done.</strong></p>
+<p>I always start with a <code>case</code> and all of the branches listed but not filled in. From there, I solve each branch one at a time, pretending that nothing else exists. So with <code>sum</code> I&apos;d look at <code>Empty -&gt;</code> and say, an empty list has to sum to zero. Then I&apos;d look at the <code>Node n remainingNumbers -&gt;</code> branch and think, well, I know I have a number, a list, and a <code>sum</code> function that definitely already exists and totally works. I can just use that and add a number to it!</p>
+</blockquote>
+<h2 id="generic-data-structures">Generic Data Structures</h2>
+<blockquote>
+<p><strong>Problem:</strong> The last section showed linked lists that only worked for integers. That is pretty lame. How can we make linked lists that hold any kind of value?</p>
+</blockquote>
+<p>Everything is going to be pretty much the same, except we are going to introduce a <em>type variable</em> in our definition of lists:</p>
+<pre><code class="lang-elm">&gt; <span class="hljs-keyword">type</span> <span class="hljs-type">List</span> a = <span class="hljs-type">Empty</span> | <span class="hljs-type">Node</span> a (<span class="hljs-type">List</span> a)
+
+&gt; <span class="hljs-type">Empty</span>
+<span class="hljs-type">Empty</span> : <span class="hljs-type">List</span> a
+
+&gt; <span class="hljs-type">Node</span>
+&lt;function&gt; : a -&gt; <span class="hljs-type">List</span> a -&gt; <span class="hljs-type">List</span> a
+
+&gt; <span class="hljs-type">Node</span> <span class="hljs-string">&quot;hi&quot;</span> <span class="hljs-type">Empty</span>
+<span class="hljs-type">Node</span> <span class="hljs-string">&quot;hi&quot;</span> <span class="hljs-type">Empty</span> : <span class="hljs-type">List</span> <span class="hljs-type">String</span>
+
+&gt; <span class="hljs-type">Node</span> <span class="hljs-number">1.618</span> (<span class="hljs-type">Node</span> <span class="hljs-number">6.283</span> <span class="hljs-type">Empty</span>)
+<span class="hljs-type">Node</span> <span class="hljs-number">1.618</span> (<span class="hljs-type">Node</span> <span class="hljs-number">6.283</span> <span class="hljs-type">Empty</span>) : <span class="hljs-type">List</span> <span class="hljs-type">Float</span>
+</code></pre>
+<p>The fancy part comes in the <code>Node</code> constructor. Instead of pinning the data to <code>Int</code> and <code>IntList</code>, we say that it can hold <code>a</code> and <code>List a</code>. Basically, you can add a value as long as it is the same type of value as everything else in the list.</p>
+<p>Everything else is the same. You pattern match on lists with <code>case</code> and you write recursive functions. The only difference is that our lists can hold anything now!</p>
+<blockquote>
+<p><strong>Exercise:</strong> This is exactly how the <code>List</code> type in Elm works, so take a look at <a href="http://package.elm-lang.org/packages/elm-lang/core/latest/List" target="_blank">the <code>List</code> library</a> and see if you can implement some of those functions yourself.</p>
+</blockquote>
+<h2 id="additional-examples">Additional Examples</h2>
+<p>We have seen a couple scenarios, but the best way to get more comfortable is to use union types more! So here are two examples that are kind of fun.</p>
+<h3 id="binary-trees">Binary Trees</h3>
+<p><a href="https://en.wikipedia.org/wiki/Binary_tree" target="_blank">Binary trees</a> are almost exactly the same as linked lists:</p>
+<pre><code class="lang-elm">&gt; <span class="hljs-keyword">type</span> <span class="hljs-type">Tree</span> a = <span class="hljs-type">Empty</span> | <span class="hljs-type">Node</span> a (<span class="hljs-type">Tree</span> a) (<span class="hljs-type">Tree</span> a)
+
+&gt; <span class="hljs-type">Node</span>
+&lt;function&gt; : a -&gt; <span class="hljs-type">Tree</span> a -&gt; <span class="hljs-type">Tree</span> a -&gt; <span class="hljs-type">Tree</span> a
+
+&gt; <span class="hljs-type">Node</span> <span class="hljs-string">&quot;hi&quot;</span> <span class="hljs-type">Empty</span> <span class="hljs-type">Empty</span>
+<span class="hljs-type">Node</span> <span class="hljs-string">&quot;hi&quot;</span> <span class="hljs-type">Empty</span> <span class="hljs-type">Empty</span> : <span class="hljs-type">Tree</span> <span class="hljs-type">String</span>
+</code></pre>
+<p>A tree is either empty or it is a node with a value and two children. Check out <a href="http://elm-lang.org/examples/binary-tree" target="_blank">this example</a> for more info on this. If you can do all of the exercises at the end of that link, consider yourself a capable user of union types!</p>
+<h3 id="languages">Languages</h3>
+<p>We can even model a programming language as data if we want to go really crazy! In this case, it is one that only deals with <a href="https://en.wikipedia.org/wiki/Boolean_algebra#Operations" target="_blank">Boolean algebra</a>:</p>
+<pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Boolean</span>
+    = <span class="hljs-type">T</span>
+    | <span class="hljs-type">F</span>
+    | <span class="hljs-type">Not</span> <span class="hljs-type">Boolean</span>
+    | <span class="hljs-type">And</span> <span class="hljs-type">Boolean</span> <span class="hljs-type">Boolean</span>
+    | <span class="hljs-type">Or</span> <span class="hljs-type">Boolean</span> <span class="hljs-type">Boolean</span>
+
+<span class="hljs-title">true</span> = <span class="hljs-type">Or</span> <span class="hljs-type">T</span> <span class="hljs-type">F</span>
+<span class="hljs-title">false</span> = <span class="hljs-type">And</span> <span class="hljs-type">T</span> (<span class="hljs-type">Not</span> <span class="hljs-type">T</span>)
+</code></pre>
+<p>Once we have modeled the possible values we can define functions like <code>eval</code> which evaluates any <code>Boolean</code> to <code>True</code> or <code>False</code>. See <a href="http://elm-lang.org/examples/boolean-expressions" target="_blank">this example</a> for more about representing boolean expressions.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="type_aliases.html" class="navigation navigation-prev " aria-label="Previous page: Type Aliases">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../error_handling/" class="navigation navigation-next " aria-label="Next page: Error Handling and Tasks">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Union Types","level":"1.5.3","depth":2,"next":{"title":"Error Handling and Tasks","level":"1.6","depth":1,"path":"error_handling/README.md","ref":"error_handling/README.md","articles":[{"title":"Maybe","level":"1.6.1","depth":2,"path":"error_handling/maybe.md","ref":"error_handling/maybe.md","articles":[]},{"title":"Result","level":"1.6.2","depth":2,"path":"error_handling/result.md","ref":"error_handling/result.md","articles":[]},{"title":"Task","level":"1.6.3","depth":2,"path":"error_handling/task.md","ref":"error_handling/task.md","articles":[]}]},"previous":{"title":"Type Aliases","level":"1.5.2","depth":2,"path":"types/type_aliases.md","ref":"types/type_aliases.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-25827182-1"},"youtube":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"types/union_types.md","mtime":"2016-11-03T07:08:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-03T07:10:54.632Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,748 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>The Elm Architecture · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="user_input/" />
+    
+    
+    <link rel="prev" href="../core_language.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../get_started.html">
+            
+                <a href="../get_started.html">
+            
+                    
+                    Get Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../core_language.html">
+            
+                <a href="../core_language.html">
+            
+                    
+                    Core Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    The Elm Architecture
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="user_input/">
+            
+                <a href="user_input/">
+            
+                    
+                    User Input
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="user_input/buttons.html">
+            
+                <a href="user_input/buttons.html">
+            
+                    
+                    Buttons
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="user_input/text_fields.html">
+            
+                <a href="user_input/text_fields.html">
+            
+                    
+                    Text Fields
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="user_input/forms.html">
+            
+                <a href="user_input/forms.html">
+            
+                    
+                    Forms
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.4" data-path="user_input/more.html">
+            
+                <a href="user_input/more.html">
+            
+                    
+                    More
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="effects/">
+            
+                <a href="effects/">
+            
+                    
+                    Effects
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="effects/random.html">
+            
+                <a href="effects/random.html">
+            
+                    
+                    Random
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="effects/http.html">
+            
+                <a href="effects/http.html">
+            
+                    
+                    HTTP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="effects/time.html">
+            
+                <a href="effects/time.html">
+            
+                    
+                    Time
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="effects/web_sockets.html">
+            
+                <a href="effects/web_sockets.html">
+            
+                    
+                    Web Sockets
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="more.html">
+            
+                <a href="more.html">
+            
+                    
+                    More
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../types/">
+            
+                <a href="../types/">
+            
+                    
+                    Types
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../types/reading_types.html">
+            
+                <a href="../types/reading_types.html">
+            
+                    
+                    Reading Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../types/type_aliases.html">
+            
+                <a href="../types/type_aliases.html">
+            
+                    
+                    Type Aliases
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../types/union_types.html">
+            
+                <a href="../types/union_types.html">
+            
+                    
+                    Union Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../error_handling/">
+            
+                <a href="../error_handling/">
+            
+                    
+                    Error Handling and Tasks
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../error_handling/maybe.html">
+            
+                <a href="../error_handling/maybe.html">
+            
+                    
+                    Maybe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../error_handling/result.html">
+            
+                <a href="../error_handling/result.html">
+            
+                    
+                    Result
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../error_handling/task.html">
+            
+                <a href="../error_handling/task.html">
+            
+                    
+                    Task
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../interop/">
+            
+                <a href="../interop/">
+            
+                    
+                    Interop
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../interop/json.html">
+            
+                <a href="../interop/json.html">
+            
+                    
+                    JSON
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../interop/javascript.html">
+            
+                <a href="../interop/javascript.html">
+            
+                    
+                    JavaScript
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../reuse/">
+            
+                <a href="../reuse/">
+            
+                    
+                    Scaling The Elm Architecture
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../reuse/checkboxes.html">
+            
+                <a href="../reuse/checkboxes.html">
+            
+                    
+                    Labeled Checkboxes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../reuse/radio_buttons.html">
+            
+                <a href="../reuse/radio_buttons.html">
+            
+                    
+                    Radio Buttons
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../reuse/modules.html">
+            
+                <a href="../reuse/modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../reuse/more.html">
+            
+                <a href="../reuse/more.html">
+            
+                    
+                    More
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../effect_managers/">
+            
+                <a href="../effect_managers/">
+            
+                    
+                    Effect Managers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../effect_managers/caching.html">
+            
+                <a href="../effect_managers/caching.html">
+            
+                    
+                    Caching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../effect_managers/batching.html">
+            
+                <a href="../effect_managers/batching.html">
+            
+                    
+                    Batching
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >The Elm Architecture</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="the-elm-architecture">The Elm Architecture</h1>
+<p>The Elm Architecture is a simple pattern for architecting webapps. It is great for modularity, code reuse, and testing. Ultimately, it makes it easy to create complex web apps that stay healthy as you refactor and add features.</p>
+<p>This architecture seems to emerge naturally in Elm. We first observed it in the games the Elm community was making. Then in web apps like <a href="https://github.com/evancz/elm-todomvc" target="_blank">TodoMVC</a> and <a href="https://github.com/rtfeldman/dreamwriter#dreamwriter" target="_blank">dreamwriter</a> too. Now we see it running in production at companies like <a href="https://www.noredink.com/" target="_blank">NoRedInk</a> and <a href="https://www.circuithub.com/" target="_blank">CircuitHub</a>. The architecture seems to be a consequence of the design of Elm itself, so it will happen to you whether you know about it or not. This has proven to be really nice for onboarding new developers. Their code just turns out well-architected. It is kind of spooky.</p>
+<p>So The Elm Architecture is <em>easy</em> in Elm, but it is useful in any front-end project. In fact, projects like Redux have been inspired by The Elm Architecture, so you may have already seen derivatives of this pattern. Point is, even if you ultimately cannot use Elm at work yet, you will get a lot out of using Elm and internalizing this pattern.</p>
+<h2 id="the-basic-pattern">The Basic Pattern</h2>
+<p>The logic of every Elm program will break up into three cleanly separated parts:</p>
+<ul>
+<li><strong>Model</strong> &#x2014; the state of your application</li>
+<li><strong>Update</strong> &#x2014; a way to update your state</li>
+<li><strong>View</strong> &#x2014; a way to view your state as HTML</li>
+</ul>
+<p>This pattern is so reliable that I always start with the following skeleton and fill in details for my particular case.</p>
+<pre><code class="lang-elm"><span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (..)
+
+
+<span class="hljs-comment">-- MODEL</span>
+
+<span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Model</span> = { ... }
+
+
+<span class="hljs-comment">-- UPDATE</span>
+
+<span class="hljs-keyword">type</span> <span class="hljs-type">Msg</span> = <span class="hljs-type">Reset</span> | ...
+
+<span class="hljs-title">update</span> : <span class="hljs-type">Msg</span> -&gt; <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Model</span>
+<span class="hljs-title">update</span> msg model =
+  <span class="hljs-keyword">case</span> msg <span class="hljs-keyword">of</span>
+    <span class="hljs-type">Reset</span> -&gt; ...
+    ...
+
+
+<span class="hljs-comment">-- VIEW</span>
+
+<span class="hljs-title">view</span> : <span class="hljs-type">Model</span> -&gt; <span class="hljs-type">Html</span> <span class="hljs-type">Msg</span>
+<span class="hljs-title">view</span> model =
+  ...
+</code></pre>
+<p>That is really the essence of The Elm Architecture! We will proceed by filling in this skeleton with increasingly interesting logic.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../core_language.html" class="navigation navigation-prev " aria-label="Previous page: Core Language">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="user_input/" class="navigation navigation-next " aria-label="Next page: User Input">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"The Elm Architecture","level":"1.4","depth":1,"next":{"title":"User Input","level":"1.4.1","depth":2,"path":"architecture/user_input/README.md","ref":"architecture/user_input/README.md","articles":[{"title":"Buttons","level":"1.4.1.1","depth":3,"path":"architecture/user_input/buttons.md","ref":"architecture/user_input/buttons.md","articles":[]},{"title":"Text Fields","level":"1.4.1.2","depth":3,"path":"architecture/user_input/text_fields.md","ref":"architecture/user_input/text_fields.md","articles":[]},{"title":"Forms","level":"1.4.1.3","depth":3,"path":"architecture/user_input/forms.md","ref":"architecture/user_input/forms.md","articles":[]},{"title":"More","level":"1.4.1.4","depth":3,"path":"architecture/user_input/more.md","ref":"architecture/user_input/more.md","articles":[]}]},"previous":{"title":"Core Language","level":"1.3","depth":1,"path":"core_language.md","ref":"core_language.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-25827182-1"},"youtube":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"architecture/README.md","mtime":"2016-11-03T07:08:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-03T07:10:54.632Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
