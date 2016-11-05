@@ -58,7 +58,7 @@ view model =
             , text "Large"
             ]
         ]
-    , section [ style [("font-size", toString model.fontSize) ] [ text model.content ]
+    , section [ style [("font-size", toString model.fontSize)] ] [ text model.content ]
     ]
 ```
 
@@ -73,7 +73,7 @@ view model =
         , radio (SwitchTo Medium) "Medium" (model.fontSize == Medium)
         , radio (SwitchTo Large) "Large" (model.fontSize == Large)
         ]
-    , section [ style [("font-size", toString model.fontSize) ] [ text model.content ]
+    , section [ style [("font-size", toString model.fontSize)] ] [ text model.content ]
     ]
 
 radio : msg -> String -> Bool -> Html msg
@@ -97,7 +97,7 @@ view model =
         , ("Medium", SwitchTo Medium, (model.fontSize == Medium))
         , ("Large", SwitchTo Large, (model.fontSize == Large))
         ]
-    , section [ style [("font-size", toString model.fontSize) ] [ text model.content ]
+    , section [ style [("font-size", toString model.fontSize)] ] [ text model.content ]
     ]
 
 viewPicker : List (String, msg, Bool) -> Html msg
