@@ -77,7 +77,7 @@ noService shoes shirt =
   Opt.isNone shoes && Opt.isNone shirt
 ```
 
-Now we can refer to `Opt.Option` and `Opt.isNone`. It is kind of nice in this case, but this feature is best used on very long module names. Cases like this:
+Now we can refer to `Opt.Optional` and `Opt.isNone`. It is kind of nice in this case, but this feature is best used on very long module names. Cases like this:
 
 ```elm
 import Facebook.News.Story as Story
