@@ -73,6 +73,8 @@ $ elm-repl
 4 : Int
 > List.reverse ["Alice","Bob"]
 ["Bob","Alice"] : List String
+> :exit
+$
 ```
 
 We will be using `elm-repl` in the upcoming &ldquo;Core Language&rdquo; section, and you can read more about how it works [here](https://github.com/elm-lang/elm-repl/blob/master/README.md).
