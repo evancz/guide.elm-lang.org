@@ -4,7 +4,7 @@ Your app will probably have some options people can mess with. If something happ
 
 ```html
 <fieldset>
-  <label><input type="checkbox">Email Notifications</label>
+  <label><input type="checkbox" checked>Email Notifications</label>
   <label><input type="checkbox">Video Autoplay</label>
   <label><input type="checkbox">Use Location</label>
 </fieldset>
@@ -48,15 +48,15 @@ view : Model -> Html Msg
 view model =
   fieldset []
     [ label []
-        [ input [ type' "checkbox", onClick ToggleNotifications ] []
+        [ input [ type' "checkbox", onClick ToggleNotifications, checked model.notifications ] []
         , text "Email Notifications"
         ]
     , label []
-        [ input [ type' "checkbox", onClick ToggleAutoplay ] []
+        [ input [ type' "checkbox", onClick ToggleAutoplay, checked model.autoplay ] []
         , text "Video Autoplay"
         ]
     , label []
-        [ input [ type' "checkbox", onClick ToggleLocation ] []
+        [ input [ type' "checkbox", onClick ToggleLocation, checked model.location ] []
         , text "Use Location"
         ]
     ]
@@ -68,20 +68,20 @@ This is not too crazy, but we are repeating ourselves quite a bit. How can we ma
 view : Model -> Html Msg
 view model =
   fieldset []
-    [ checkbox ToggleNotifications "Email Notifications"
-    , checkbox ToggleAutoplay "Video Autoplay"
-    , checkbox ToggleLocation "Use Location"
+    [ checkbox ToggleNotifications "Email Notifications" model.notifications
+    , checkbox ToggleAutoplay "Video Autoplay" model.autoplay
+    , checkbox ToggleLocation "Use Location" model.location
     ]
 
 checkbox : msg -> String -> Html msg
-checkbox msg name =
+checkbox msg name value =
   label []
-    [ input [ type' "checkbox", onClick msg ] []
+    [ input [ type' "checkbox", onClick msg, checked value ] []
     , text name
     ]
 ```
 
-Now we have a highly configurable `checkbox` function. It takes two arguments to configure how it works: the message it produces on clicks and some text to show next to the checkbox. Now if we decide we want all checkboxes to have a certain `class`, we just add it in the `checkbox` function and it shows up everywhere! This is the essense of **reusable views** in Elm. Create helper functions!
+Now we have a highly configurable `checkbox` function. It takes three arguments to configure how it works: the message it produces on clicks, some text to show next to the checkbox and the value to determine whether it is checked or not. Now if we decide we want all checkboxes to have a certain `class`, we just add it in the `checkbox` function and it shows up everywhere! This is the essense of **reusable views** in Elm. Create helper functions!
 
 
 ## Comparing Reusable Views to Reusable Components
