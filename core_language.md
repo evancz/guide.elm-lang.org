@@ -6,7 +6,7 @@ This section will walk you through Elm's simple core language.
 This works best when you follow along, so after [installing](install.md), start up `elm-repl` in the terminal. (Or use the [online REPL](http://elmrepl.cuberoot.in/).) Either way, you should see something like this:
 
 ```elm
----- elm repl 0.17.0 -----------------------------------------------------------
+---- elm repl 0.18.0 -----------------------------------------------------------
  :help for help, :exit to exit, more at <https://github.com/elm-lang/elm-repl>
 --------------------------------------------------------------------------------
 >
