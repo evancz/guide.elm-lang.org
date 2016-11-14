@@ -16,14 +16,13 @@ This program happens to be pretty short, so here is the full thing:
 
 ```elm
 import Html exposing (..)
-import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import WebSocket
 
 
 main =
-  App.program
+  Html.program
     { init = init
     , view = view
     , update = update

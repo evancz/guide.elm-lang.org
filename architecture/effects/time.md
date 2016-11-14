@@ -12,7 +12,6 @@ The code is not too crazy here, so I am going to include it in full. After you r
 
 ```elm
 import Html exposing (Html)
-import Html.App as App
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
 import Time exposing (Time, second)
@@ -20,7 +19,7 @@ import Time exposing (Time, second)
 
 
 main =
-  App.program
+  Html.program
     { init = init
     , view = view
     , update = update

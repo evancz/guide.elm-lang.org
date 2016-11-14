@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Get Started](get_started.md)
+* [Install](install.md)
 * [Core Language](core_language.md)
 * [The Elm Architecture](architecture/README.md)
    * [User Input](architecture/user_input/README.md)

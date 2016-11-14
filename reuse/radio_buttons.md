@@ -46,15 +46,15 @@ view model =
   div []
     [ fieldset []
         [ label []
-            [ input [ type' "radio", onClick (SwitchTo Small) ] []
+            [ input [ type_ "radio", onClick (SwitchTo Small) ] []
             , text "Small"
             ]
         , label []
-            [ input [ type' "radio", onClick (SwitchTo Medium) ] []
+            [ input [ type_ "radio", onClick (SwitchTo Medium) ] []
             , text "Medium"
             ]
         , label []
-            [ input [ type' "radio", onClick (SwitchTo Large) ] []
+            [ input [ type_ "radio", onClick (SwitchTo Large) ] []
             , text "Large"
             ]
         ]
@@ -79,7 +79,7 @@ view model =
 radio : msg -> String -> Html msg
 radio msg name =
   label []
-    [ input [ type' "radio", onClick msg ] []
+    [ input [ type_ "radio", onClick msg ] []
     , text name
     ]
 ```
@@ -107,7 +107,7 @@ viewPicker options =
 radio : (String, msg) -> Html msg
 radio (name, msg) =
   label []
-    [ input [ type' "radio", onClick msg ] []
+    [ input [ type_ "radio", onClick msg ] []
     , text name
     ]
 ```

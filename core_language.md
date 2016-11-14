@@ -3,7 +3,7 @@
 
 This section will walk you through Elm's simple core language.
 
-This works best when you follow along. So first [get everything installed](http://elm-lang.org/install) and then [familiarize yourself with the command line tools](http://elm-lang.org/get-started). Once that is all set, start up `elm-repl` in the terminal. You should see something like this:
+This works best when you follow along, so after [installing](install.md), start up `elm-repl` in the terminal. (Or use the [online REPL](http://elmrepl.cuberoot.in/).) Either way, you should see something like this:
 
 ```elm
 ---- elm repl 0.17.0 -----------------------------------------------------------
@@ -200,7 +200,7 @@ When it comes to making functions with records, you can do some pattern matching
 
 ```elm
 > under70 {age} = age < 70
-<function> 
+<function>
 
 > under70 bill
 True

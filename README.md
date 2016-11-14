@@ -21,11 +21,10 @@ Here is [a simple counter](http://elm-lang.org/examples/buttons). If you look at
 
 ```elm
 import Html exposing (Html, button, div, text)
-import Html.App as App
 import Html.Events exposing (onClick)
 
 main =
-  App.beginnerProgram { model = 0, view = view, update = update }
+  Html.beginnerProgram { model = 0, view = view, update = update }
 
 type Msg = Increment | Decrement
 

@@ -1,33 +1,32 @@
-# Get Started
+> **Note:** If you do not want to install yet, you can follow along in this guide with the [online editor](http://elm-lang.org/try) and the [online REPL](http://elmrepl.cuberoot.in/).
 
 
-## Try Online
-
-Not everyone wants to get installed all at once, so you can follow along in this guide with the [**online editor**](http://elm-lang.org/try). You will not have the REPL for the &ldquo;Core Language&rdquo; section, but everything else will work just fine!
-
-You can see the online editor in action with [these examples](http://elm-lang.org/examples) of small Elm programs.
-
-
-## Install
-
-You can also just install the &ldquo;Elm Platform&rdquo; which includes all the command line tools you will need to work with Elm.
+# Install
 
   * Mac &mdash; [installer][mac]
   * Windows &mdash; [installer][win]
   * Anywhere &mdash; [npm installer][npm] or [build from source][build]
 
-We will go through each tool that comes with Elm Platform lower on this page!
-
-[mac]: http://install.elm-lang.org/Elm-Platform-0.17.1.pkg
-[win]: http://install.elm-lang.org/Elm-Platform-0.17.1.exe
+[mac]: http://install.elm-lang.org/Elm-Platform-0.18.pkg
+[win]: http://install.elm-lang.org/Elm-Platform-0.18.exe
 [npm]: https://www.npmjs.com/package/elm
 [build]: https://github.com/elm-lang/elm-platform
-[slack]: http://elmlang.herokuapp.com/
+
+After installing through any of those routes, you will have the following command line tools:
+
+- [`elm-repl`](#elm-repl) &mdash; play with Elm expressions
+- [`elm-reactor`](#elm-reactor) &mdash; get a project going quickly
+- [`elm-make`](#elm-make) &mdash; compile Elm code directly
+- [`elm-package`](#elm-package) &mdash; download packages
+
+We will go over how they all work in more detail right after we get your editor set up!
+
+> **Troubleshooting:** The fastest way to learn *anything* is to talk with other people in the Elm community. We are friendly and happy to help! So if you get stuck during installation or encounter something weird, visit [the Elm Slack](http://elmlang.herokuapp.com/) and ask about it. In fact, if you run into something confusing at any point while learning or using Elm, come ask us about it. You can save yourself hours. Just do it!
 
 
 ## Configure Your Editor
 
-We know of Elm syntax highlighting modes for at least the following text editors:
+Using Elm is way nicer when you have a code editor to help you out. There are Elm plugins for at least the following editors:
 
   * [Atom](https://atom.io/packages/language-elm)
   * [Brackets](https://github.com/lepinay/elm-brackets)
@@ -40,22 +39,14 @@ We know of Elm syntax highlighting modes for at least the following text editors
 
 If you do not have an editor at all, [Sublime Text](https://www.sublimetext.com/) is a great one to get started with!
 
+You may also want to try out [elm-format][] which makes your code pretty!
 
-## Troubleshooting
-
-The fastest way to learn *anything* is to talk with other people in the Elm community. We are friendly and happy to help! So if you get stuck during installation or encounter something weird, visit [the Elm Slack](http://elmlang.herokuapp.com/) and ask about it. In fact, if you run into something confusing at any point while learning or using Elm, come ask us about it. You can save yourself hours. Just do it!
+[elm-format]: https://github.com/avh4/elm-format
 
 
-## What is the Elm Platform?
+## The Command Line Tools
 
-After installing Elm successfully, you will have the following command line tools available on your computer:
-
-- [`elm-repl`](#elm-repl)
-- [`elm-reactor`](#elm-reactor)
-- [`elm-make`](#elm-make)
-- [`elm-package`](#elm-package)
-
-Each one has a `--help` flag that will show more information. Let's go over them here though!
+So we installed Elm, and it gave us `elm-repl`, `elm-reactor`, `elm-make`, and `elm-package`. But what do they all do exactly?
 
 
 ### elm-repl
@@ -64,15 +55,15 @@ Each one has a `--help` flag that will show more information. Let's go over them
 
 ```bash
 $ elm-repl
----- elm-repl 0.17.1 -----------------------------------------------------------
+---- elm-repl 0.18.0 -----------------------------------------------------------
  :help for help, :exit to exit, more at <https://github.com/elm-lang/elm-repl>
 --------------------------------------------------------------------------------
 > 1 / 2
 0.5 : Float
 > List.length [1,2,3,4]
 4 : Int
-> List.reverse ["Alice","Bob"]
-["Bob","Alice"] : List String
+> String.reverse "stressed"
+"desserts" : String
 > :exit
 $
 ```
@@ -122,13 +113,13 @@ elm-make Main.elm --output=main.html
 
 [`elm-package`](https://github.com/elm-lang/elm-package) downloads and publishes packages from our [package catalog](http://package.elm-lang.org/). As community members solve problems [in a nice way](http://package.elm-lang.org/help/design-guidelines), they share their code in the package catalog for anyone to use!
 
-Say you want to use [`evancz/elm-http`][http] and [`NoRedInk/elm-decode-pipeline`][pipe] to make HTTP requests to a server and turn the resulting JSON into Elm values. You would say:
+Say you want to use [`elm-lang/http`][http] and [`NoRedInk/elm-decode-pipeline`][pipe] to make HTTP requests to a server and turn the resulting JSON into Elm values. You would say:
 
-[http]: http://package.elm-lang.org/packages/evancz/elm-http/latest
+[http]: http://package.elm-lang.org/packages/elm-lang/http/latest
 [pipe]: http://package.elm-lang.org/packages/NoRedInk/elm-decode-pipeline/latest
 
 ```bash
-elm-package install evancz/elm-http
+elm-package install elm-lang/http
 elm-package install NoRedInk/elm-decode-pipeline
 ```
 
