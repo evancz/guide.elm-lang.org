@@ -7,8 +7,8 @@
   * Windows &mdash; [installer][win]
   * Anywhere &mdash; [npm installer][npm] or [build from source][build]
 
-[mac]: http://install.elm-lang.org/Elm-Platform-0.17.1.pkg
-[win]: http://install.elm-lang.org/Elm-Platform-0.17.1.exe
+[mac]: http://install.elm-lang.org/Elm-Platform-0.18.pkg
+[win]: http://install.elm-lang.org/Elm-Platform-0.18.exe
 [npm]: https://www.npmjs.com/package/elm
 [build]: https://github.com/elm-lang/elm-platform
 
@@ -39,6 +39,10 @@ Using Elm is way nicer when you have a code editor to help you out. There are El
 
 If you do not have an editor at all, [Sublime Text](https://www.sublimetext.com/) is a great one to get started with!
 
+You may also want to try out [elm-format][] which makes your code pretty!
+
+[elm-format]: https://github.com/avh4/elm-format
+
 
 ## The Command Line Tools
 
@@ -51,15 +55,15 @@ So we installed Elm, and it gave us `elm-repl`, `elm-reactor`, `elm-make`, and `
 
 ```bash
 $ elm-repl
----- elm-repl 0.17.1 -----------------------------------------------------------
+---- elm-repl 0.18.0 -----------------------------------------------------------
  :help for help, :exit to exit, more at <https://github.com/elm-lang/elm-repl>
 --------------------------------------------------------------------------------
 > 1 / 2
 0.5 : Float
 > List.length [1,2,3,4]
 4 : Int
-> List.reverse ["Alice","Bob"]
-["Bob","Alice"] : List String
+> String.reverse "stressed"
+"desserts" : String
 ```
 
 We will be using `elm-repl` in the upcoming &ldquo;Core Language&rdquo; section, and you can read more about how it works [here](https://github.com/elm-lang/elm-repl/blob/master/README.md).
