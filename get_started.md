@@ -1,1 +1,0 @@
-!REDIRECT "install.html"
