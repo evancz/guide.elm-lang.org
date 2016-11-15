@@ -64,11 +64,10 @@ Alright, the obvious thing missing right now is the HTTP request. I think it is 
 ```elm
 type Msg
   = MorePlease
-  | FetchSucceed String
-  | FetchFail Http.Error
+  | NewGif (Result Http.Error String)
 ```
 
-We still have `MorePlease` from before, but for the HTTP results, we add `FetchSucceed` that holds the new gif URL and `FetchFail` that indicates there was some HTTP issue (server is down, bad URL, etc.)
+We add a case for `NewGif` that holds a `Result`. You can read more about results [here](/error_handling/result.md), but the key idea is that it captures the two possible outcomes of an HTTP request. It either (1) succeeded with the URL of a random gif or (2) failed with some HTTP error (server is down, bad URL, etc.)
 
 That is enough to start filling in `update`:
 
@@ -79,14 +78,14 @@ update msg model =
     MorePlease ->
       (model, getRandomGif model.topic)
 
-    FetchSucceed newUrl ->
-      (Model model.topic newUrl, Cmd.none)
+    NewGif (Ok newUrl) ->
+      ( { model | gifUrl = newUrl }, Cmd.none)
 
-    FetchFail _ ->
+    NewGif (Err _) ->
       (model, Cmd.none)
 ```
 
-So I added branches for our new messages. In the case of `FetchSucceed` we update the `gifUrl` field to have the new URL. In the case of `FetchFail` we pretty much ignore it, giving back the same model and doing nothing.
+So I added branches for our new messages. When `NewGif` holds a success, we update the `gifUrl` field to have the new URL. When `NewGif` holds an error, we ignore it, giving back the same model and doing nothing.
 
 I also changed the `MorePlease` branch a bit. We need an HTTP command, so I called the `getRandomGif` function. The trick is that I made that function up. It does not exist yet. That is the next step!
 
@@ -98,30 +97,34 @@ getRandomGif topic =
   let
     url =
       "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" ++ topic
+
+    request =
+      Http.get url decodeGifUrl
   in
-    Task.perform FetchFail FetchSucceed (Http.get decodeGifUrl url)
+    Http.send NewGif request
 
 decodeGifUrl : Json.Decoder String
 decodeGifUrl =
   Json.at ["data", "image_url"] Json.string
 ```
 
-Okay, so the `getRandomGif` function is not exceptionally crazy. We first define the `url` we need to hit to get random gifs. Next we have [this `Http.get` function](http://package.elm-lang.org/packages/evancz/elm-http/3.0.1/Http#get) which is going to GET some JSON from the `url` we give it. The interesting part there is The `decodeGifUrl` argument which describes how to turn JSON into Elm values. In our case, we are saying &ldquo;try to get the value at `json.data.image_url` and it should be a string.&rdquo;
+With that added, the "More" button actually goes and fetches a random gif. Check it out [here](http://elm-lang.org/examples/http)! But how does `getRandomGif` work exactly?
 
-> **Note:** See [this](http://guide.elm-lang.org/interop/json.html) for more information on JSON decoders. It will clarify how it works, but for now, you really just need a high-level understanding. It turns JSON into Elm.
+It starts out simple, we define `url` to be some giphy endpoint for random gifs. Next we create an HTTP `request` with [`Http.get`](http://package.elm-lang.org/packages/elm-lang/http/latest/Http#get). Finally, we turn it into a command with [`Http.send`](http://package.elm-lang.org/packages/elm-lang/http/latest/Http#send). Let’s break those steps down a bit more:
 
-The `Task.perform` part is clarifying what to do with the result of this GET:
+  - `Http.get : String -> Json.Decoder value -> Http.Request value`
 
-  1. The first argument `FetchFail` is for when the GET fails. If the server is down or the URL is a 404, we tag the resulting error with `FetchFail` and feed it into our `update` function.
-  2. The second argument `FetchSucceed` is for when the GET succeeds. When we get some URL back like `http://example.com/json`, we convert it into  `FetchSucceed "http://example.com/json"` so that it can be fed into our `update` function.
+  This function takes a URL and a JSON decoder. This is our first time seeing a JSON decoder (and we will cover them in depth [later](/interop/json.md)), but for now, you really just need a high-level understanding. It turns JSON into Elm. In our case, we defined `decodeGifUrl` which tries to find a string value at `json.data.image_url`. Between the URL and the JSON decoder, we create an `Http.Request`. This is similar to a `Random.Generator` like we saw in [the previous example](random.md). It does not actually *do* anything. It just describes how to make an HTTP request.
 
-We will get into the details of how this all works later in this guide, but for now, if you just follow the pattern here, you will be fine using HTTP.
+  - `Http.send : (Result Error value -> msg) -> Http.Request value -> Cmd msg`
 
-And now when you click the "More" button, it actually goes and fetches a random gif!
+  Once we have an HTTP request, we can turn it into a command with `Http.send`. This is just like how we used `Random.generate` to create a command with a random generator. The first argument is a way to turn the result of the HTTP request into a message for our `update` function. In this case, we create a `NewGif` message.
+
+This has been a very quick introduction, but the key idea is that you must (1) create an HTTP request and (2) turn that into a command so Elm will actually *do* it. You can go pretty far using the basic pattern here, and we will be looking into JSON decoders [later on](/interop/json.md), which will let you deal with whatever crazy JSON you run into.
 
 > **Exercises:** To get more comfortable with this code, try augmenting it with skills we learned in previous sections:
 >
->   - Show a message explaining why the image didn't change when you get a `FetchFail`.
+>   - Show a message explaining why the image didn't change when you get an [`Http.Error`](http://package.elm-lang.org/packages/elm-lang/http/latest/Http#Error).
 >   - Allow the user to modify the `topic` with a text field.
 >   - Allow the user to modify the `topic` with a drop down menu.
 
