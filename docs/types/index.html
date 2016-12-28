@@ -632,7 +632,7 @@
   person.firstName ++ <span class="hljs-string">&quot; &quot;</span> ++ person.lastName
 
 <span class="hljs-title">fullName</span> =
-  toFullName { fistName = <span class="hljs-string">&quot;Hermann&quot;</span>, lastName = <span class="hljs-string">&quot;Hesse&quot;</span> }
+  toFullName { firstName = <span class="hljs-string">&quot;Hermann&quot;</span>, lastName = <span class="hljs-string">&quot;Hesse&quot;</span> }
 </code></pre>
 <p>Like in JavaScript or Python, we just write the code with no extra clutter. Do you see the bug though? </p>
 <p>In JavaScript, the equivalent code spits out <code>&quot;undefined Hesse&quot;</code>. Not even an error! Hopefully one of your users will tell you about it when they see it in the wild. In contrast, the Elm compiler just looks at the source code and tells you:</p>
