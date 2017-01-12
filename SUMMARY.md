@@ -31,7 +31,3 @@
    * [Radio Buttons](reuse/radio_buttons.md)
    * [Modules](reuse/modules.md)
    * [More](reuse/more.md)
-* [Effect Managers](effect_managers/README.md)
-   * [Caching](effect_managers/caching.md)
-   * [Batching](effect_managers/batching.md)
-
