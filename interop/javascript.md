@@ -119,8 +119,8 @@ The second way to talk to JavaScript is with *flags*. You can think of this as s
 
 Instead of creating a `Program` with the [`program`][program] function, we can use the [`programWithFlags`][programWithFlags]. So say we want to get a value like this from JavaScript on initialization:
 
-[program]: http://package.elm-lang.org/packages/elm-lang/html/latest/Html-App#program
-[programWithFlags]: http://package.elm-lang.org/packages/elm-lang/html/latest/Html-App#programWithFlags
+[program]: http://package.elm-lang.org/packages/elm-lang/html/latest/Html#program
+[programWithFlags]: http://package.elm-lang.org/packages/elm-lang/html/latest/Html#programWithFlags
 
 ```elm
 type alias Flags =
