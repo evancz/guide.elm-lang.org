@@ -2,13 +2,13 @@
 
 # 설치
 
-* 맥 & mdash; [인스톨러](http://install.elm-lang.org/Elm-Platform-0.18.pkg)
-* 윈도우 & mdash; \[인스톨러\]\[win\]
-* 다른 OS & mdash; \[npm 인스톨러\]\[npm\] 또는 \[소스를 빌드하기\]\[build\]
+* 맥 &mdash; [인스톨러](http://install.elm-lang.org/Elm-Platform-0.18.pkg)
+* 윈도우 &mdash; \[인스톨러\]\[win\]
+* 다른 OS &mdash; \[npm 인스톨러\]\[npm\] 또는 \[소스를 빌드하기\]\[build\]
 
-\[win\] : [http://install.elm-lang.org/Elm-Platform-0.18.exe](http://install.elm-lang.org/Elm-Platform-0.18.exe)  
-\[npm\] : [https://www.npmjs.com/package/elm](https://www.npmjs.com/package/elm)  
-\[build\] : [https://github.com/elm-lang/elm-platform](https://github.com/elm-lang/elm-platform)
+\[win\]: [http://install.elm-lang.org/Elm-Platform-0.18.exe](http://install.elm-lang.org/Elm-Platform-0.18.exe)  
+\[npm\]: [https://www.npmjs.com/package/elm](https://www.npmjs.com/package/elm)  
+\[build\]: [https://github.com/elm-lang/elm-platform](https://github.com/elm-lang/elm-platform)
 
 설치가 끝나면, 다음의 커맨드라인 도구들을 사용해보세요.
 
@@ -81,9 +81,9 @@ elm-reactor
 
 **알고 넘어가기!**
 
--`--port`는 8000번 포트 외에 다른 포트를 선택할 수 있어요.   
+-`--port`는 8000번 포트 외에 다른 포트를 선택할 수 있어요.  
   `elm-reactor --port=8123` 와 같이 실행한다면 `http://localhost:8123`에서 동작하죠.  
--`--address`는 `localhost`외에 다른 주소로 동작되도록 할 수 있어요.   
+-`--address`는 `localhost`외에 다른 주소로 동작되도록 할 수 있어요.  
   예를들어, `elm-reactor --address=0.0.0.0`와 같이 쓴다면,  
   다른 모바일 기기로 여러분의 로컬 네트워크를 통해 Elm 프로그램에 접속할 수 있죠.
 
