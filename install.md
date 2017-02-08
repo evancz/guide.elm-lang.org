@@ -3,12 +3,12 @@
 # 설치
 
 * 맥 &mdash; [인스톨러](http://install.elm-lang.org/Elm-Platform-0.18.pkg)
-* 윈도우 &mdash; \[인스톨러\]\[win\]
-* 다른 OS &mdash; \[npm 인스톨러\]\[npm\] 또는 \[소스를 빌드하기\]\[build\]
+* 윈도우 &mdash; [인스톨러][win]
+* 다른 OS &mdash; [npm 인스톨러][npm] 또는 [소스를 빌드하기][build]
 
-\[win\]: [http://install.elm-lang.org/Elm-Platform-0.18.exe](http://install.elm-lang.org/Elm-Platform-0.18.exe)  
-\[npm\]: [https://www.npmjs.com/package/elm](https://www.npmjs.com/package/elm)  
-\[build\]: [https://github.com/elm-lang/elm-platform](https://github.com/elm-lang/elm-platform)
+[win]: [http://install.elm-lang.org/Elm-Platform-0.18.exe](http://install.elm-lang.org/Elm-Platform-0.18.exe)  
+[npm]: [https://www.npmjs.com/package/elm](https://www.npmjs.com/package/elm)  
+[build]: [https://github.com/elm-lang/elm-platform](https://github.com/elm-lang/elm-platform)
 
 설치가 끝나면, 다음의 커맨드라인 도구들을 사용해보세요.
 
