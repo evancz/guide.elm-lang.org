@@ -45,7 +45,7 @@ view model =
 
 `update`와 `view` 가 완벽하게 분리된 걸 보세요. 여러분은 서술적인 HTML 만들고 Elm이 지저분한 DOM을 처리해주죠.
 
-## Why a _functional_ language?
+## 왜 함수형 언어를 사용해야하죠?
 
 Forget what you have heard about functional programming. Fancy words, weird ideas, bad tooling. Barf. Elm is about:
 
