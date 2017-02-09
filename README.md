@@ -1,22 +1,22 @@
 # Elm에 대하여
 
-**Elm은 JavaScript로 컴파일 되는 함수형 언어입니다.** React와 같은 웹 사이트나 웹 어플리케이션을 만드는 데 사용하는 툴과 경쟁하고 있죠. Elm은 쉬운 간결함과 쉬운 사용성, 코드 품질등에 초점을 맞추고 있어요. 
+**Elm은 JavaScript로 컴파일 되는 함수형 언어입니다.** React와 같은 웹 사이트나 웹 어플리케이션을 만드는 데 사용하는 툴과 경쟁하고 있죠. Elm은 간결함과 쉬운 사용성, 코드 품질등에 초점을 맞추고 있어요.
 
 이 가이드에서 알려드릴 것들:
 
-* Teach you the fundamentals of programming in Elm.
-* Show you how to make interactive apps with _The Elm Architecture_.
-* Emphasize the principles and patterns that generalize to programming in any language.
+* Elm 프로그래밍 기초를 배울 수 있어요.
+* Elm 아키텍쳐를 통해 인터랙티브 어플리케이션을 어떻게 만들 수 있는지 보여드릴게요.
+* 다른 프로그래밍 언어에도 적용되는 원칙과 패턴을 강조할 거에요.
 
-By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use.
+가이드를 마치고 나서, Elm으로 훌륭한 웹 어플리케이션을 만들기를 바라요. 또한 Elm을 멋있게 사용할 수 있는 핵심적인 관념도 가지셨으면 좋겠어요.
 
-If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript and React code. The ideas transfer pretty easily!
+아직도 망설이고 계신다면, 제가 도움이 될 것이라는 걸 보증할게요. Elm으로 실제 프로젝트를 만들어보신다면, 프로젝트가 끝났을 때 더 나은 JavaScript와 React 코드를 작성할 수 있을 거에요. 사고 전환이 쉬워질 거에요!
 
-## A Quick Sample
+## 간단한 예제
 
-Of course _I_ think Elm is good, so look for yourself.
+Elm은 물론 좋아요! 한번 직접 봐보세요.
 
-Here is [a simple counter](http://elm-lang.org/examples/buttons). If you look at the code, it just lets you increment and decrement the counter:
+이건 [간단한 카운트 앱](http://elm-lang.org/examples/buttons)이에요. 코드를 보시면 알겠지만, 그냥 카운트를 증가시키고 감소시킬 수 있는 거죠.
 
 ```elm
 import Html exposing (Html, button, div, text)
@@ -43,7 +43,7 @@ view model =
     ]
 ```
 
-Notice that the `update` and `view` are entirely decoupled. You describe your HTML in a declarative way and Elm takes care of messing with the DOM.
+`update`와 `view` 가 완벽하게 분리된 걸 보세요. 여러분은 서술적인 HTML 만들고 Elm이 지저분한 DOM을 처리해주죠.
 
 ## Why a _functional_ language?
 
