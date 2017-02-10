@@ -2,7 +2,7 @@
 
 이 단원에선 간단하게 Elm을 살펴볼거에요.
 
-This works best when you follow along, so after [installing](install.md), start up `elm-repl` in the terminal. \(Or use the [online REPL](http://elmrepl.cuberoot.in/).\) Either way, you should see something like this:
+여러분이 따라서 해보는 방법이 가장 좋습니다. 그러니 [설치](install.md) 부분을 마치신 뒤 , `elm-repl`을 터미널에서 실행시켜보세요. \(또는 [온라인 REPL](http://elmrepl.cuberoot.in/)을 사용하세요\) 어떤 방법으로 하셨든 여러분은 다음과 같은 걸 보실 수 있을 거에요.
 
 ```elm
 ---- elm repl 0.18.0 -----------------------------------------------------------
