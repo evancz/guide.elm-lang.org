@@ -45,16 +45,16 @@ view model =
 
 `update`와 `view` 가 완벽하게 분리된 걸 보세요. 여러분은 서술적인 HTML 만들고 Elm이 지저분한 DOM을 처리해주죠.
 
-## 왜 함수형 언어를 사용해야하죠?
+## 왜 함수형 언어인가요?
 
-Forget what you have heard about functional programming. Fancy words, weird ideas, bad tooling. Barf. Elm is about:
+그동안 함수형 프로그래밍에 대해 들어왔던 것들은 잊으세요. 멋진 단어들로 형용된, 이상한 생각들이 합쳐진 안좋은 도구... 으익! Elm은 그냥 다음과 같은 거에요.
 
-* No runtime errors in practice. No `null`. No `undefined` is not a function.
-* Friendly error messages that help you add features more quickly.
-* Well-architected code that _stays_ well-architected as your app grows.
-* Automatically enforced semantic versioning for all Elm packages.
+* 실행중 런타임 예외가 발생하지 않아요. Null이 없고 undefined도 없죠. 이것들은 함수가 아니기 때문이죠.
+* 친절한 에러 메시지가 기능을 빨리 추가할 때 도움이 되요.
+* 잘 구조화 된 코드가 앱의 규모가 커져도 지속적으로 구조화가 잘됩니다.
+* 모든 Elm 패키지에 대해 자동적으로 유의전 버전을 강제해요.
 
-No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are _only_ possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because the practical benefits are worth the couple hours you'll spend reading this guide.
+JS 라이브러리를 조합해서 사용할 순 없지만 Elm에선 모든 것이 쉽고 자유롭답니다. 현재 이런 게 가능한 이유는 Elm이 40년 이상의 역사를 갖는 타입 함수형 언어 기반이기 때문이죠. 그렇기 때문에 함수형 언어인 Elm을 배우고, 이 가이드를 읽기 위해 몇 시간을 투자하는 하는 것은 실제로 가치가 있는 일이에요.
 
-I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised!
+전 Elm을 쉽게 배우고 사용하는데에 초점을 맞췄어요. 여러분들께서 엘름을 접해보고 판단하시길 부탁드려요. 개인적으론 여러분들이 너무 좋아서 깜짝 놀라길 바랍니다!
 
