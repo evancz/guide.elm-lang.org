@@ -11,13 +11,13 @@
 >
 ```
 
-The REPL prints out the type of every result, but **we will leave the type annotations off in this tutorial** for the sake of introducing concepts gradually.
+REPL은 모든 결과마다 타입을 설명해주지만, 이 튜토리얼에서는 점차적으로 개념을 소개하기 위해 **해당 기능이 없는 생태로 진행할 거에요. **
 
-We will cover [values](#values), [functions](#functions), [lists](#lists), [tuples](#tuples), and [records](#records). These building blocks all correspond pretty closely with structures in languages like JavaScript, Python, and Java.
+우리는 [값\(values\)](#values), [함수\(functions\)](#functions), [리스트\(lists\)](#lists), [튜플\(tuples\)](#tuples), 그리고 [레코드\(records\)](#records)에 대해 배워볼텐데요. 이 부분들의 구조는 JavaScript, Python, Java와 비슷한 구조를 가지고 있어요.
 
-## Values
+## 값
 
-Let's get started with some strings:
+일단 문자열\(strings\)부터 시작해봅시다.
 
 ```elm
 > "hello"
@@ -30,9 +30,9 @@ Let's get started with some strings:
 "hello world"
 ```
 
-Elm uses the `(++)` operator to put strings together. Notice that both strings are preserved exactly as is when they are put together so when we combine `"hello"` and `"world"` the result has no spaces.
+Elm은 `(++)` 연산자를 사용해 문자열을 합쳐요. 두개의 문자열은 해당 형태를 유지하면서 정확하게 합쳐지기 때문에, `"hello"`와 `"world"` 를 합친 결과는 공백이 없습니다.
 
-Math looks normal too:
+수학도 일반적으로 동작합니다.
 
 ```elm
 > 2 + 3 * 4
@@ -42,7 +42,7 @@ Math looks normal too:
 20
 ```
 
-Unlike JavaScript, Elm makes a distinction between integers and floating point numbers. Just like Python 3, there is both floating point division `(/)` and integer division `(//)`.
+JavaScript와는 다르게 Elm은 부동소수점과 정수와는 차이가 있습니다. Python3 처럼 부동소수점 연산자인 `(/)` 와 정수 연산자 `(//)`가 존재합니다.
 
 ```elm
 > 9 / 2
