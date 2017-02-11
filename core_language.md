@@ -52,9 +52,9 @@ JavaScript와는 다르게 Elm은 부동소수점과 정수와는 차이가 있�
 4
 ```
 
-## Functions
+## 함수
 
-Let's start by writing a function `isNegative` that takes in some number and checks if it is less than zero. The result will be `True` or `False`.
+자 이제 함수를 작생해 봅시다. `isNegative` 함수는 숫자를 받아서 해당 숫자가 0보다 작은지를 확인하고, True 또는 False가 결과가 될 거에요.
 
 ```elm
 > isNegative n = n < 0
