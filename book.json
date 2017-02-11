@@ -1,12 +1,34 @@
 {
-    "plugins": ["ga","youtube","bulk-redirect"],
+    "plugins": [
+        "ga",
+        "youtube",
+        "bulk-redirect",
+        "github"
+    ],
     "pluginsConfig": {
         "ga": {
-            "token": "UA-25827182-1"
+            "token": "UA-91741564-1",
+            "configuration": "auto"
         },
         "bulk-redirect": {
             "basepath": "/",
             "redirectsFile": "redirects.json"
+        },
+        "sharing": {
+            "facebook": true,
+            "twitter": true,
+            "google": false,
+            "weibo": false,
+            "instapaper": false,
+            "vk": false,
+            "all": "facebook,google,twitter,weibo,instapaper"
+        },
+        "lunr": {
+            "maxIndexSize": 1000000,
+            "ignoreSpecialCharacters": false
+        },
+        "github": {
+            "url": "https://github.com/kyunooh/guide.elm-lang.org"
         }
     }
 }
