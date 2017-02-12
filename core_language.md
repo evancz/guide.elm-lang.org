@@ -70,7 +70,7 @@ True
 False
 ```
 
-Notice that function application looks different than in languages like JavaScript and Python and Java. Instead of wrapping all arguments in parentheses and separating them with commas, we use spaces to apply the function. So `(add(3,4))` becomes `(add 3 4)` which ends up avoiding a bunch of parens and commas as things get bigger. Ultimately, this looks much cleaner once you get used to it! [The elm-html package](http://elm-lang.org/blog/blazing-fast-html) is a good example of how this keeps things feeling light.
+함수 어플리케이션이 JavaScript와 Python, Java 등과는 다르게 보이네요. 괄호를 사용해 모든 인자들을 감싸서 콤마\(comma\)로 구분하는 대신에,  공백을 통하여 함수를 적용하죠. 그래서 `(add(3,4))` 은 `(add 3 4)` 로 표현되어 더 많은 공백과 콤마를 피할 수 있게 됩니다. 궁극적으로는, 익숙해지면 훨씬 깔끔해 보이죠! [elm-html 패키지](http://elm-lang.org/blog/blazing-fast-html) 는 이 방법이 좀 더 가벼운 느낌이 든다는 걸 보여주는 좋은 예제에요.
 
 ## If Expressions
 
