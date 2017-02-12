@@ -11,7 +11,7 @@
 >
 ```
 
-REPL은 모든 결과마다 타입을 설명해주지만, 이 튜토리얼에서는 점차적으로 개념을 소개하기 위해 **해당 기능이 없는 상태로 진행할 거에요. **
+REPL은 모든 결과마다 타입을 설명해주지만, 이 튜토리얼에서는 점차적으로 개념을 소개하기 위해 **해당 기능을 끈 상태로 진행할 거에요. **
 
 우리는 [값\(values\)](#values), [함수\(functions\)](#functions), [리스트\(lists\)](#lists), [튜플\(tuples\)](#tuples), 그리고 [레코드\(records\)](#records)에 대해 배워볼텐데요. 이 부분들의 구조는 JavaScript, Python, Java와 비슷한 구조를 가지고 있어요.
 
@@ -185,7 +185,7 @@ False
 ["Gates","Gates","Gates"]
 ```
 
-When it comes to making functions with records, you can do some pattern matching to make things a bit lighter.
+레코드를 이용한 함수를 만들 땐, 패턴 매칭\(pattern matching\)을 통해 좀 더 가볍게 만들 수 있어요.
 
 ```elm
 > under70 {age} = age < 70
@@ -198,9 +198,9 @@ True
 False
 ```
 
-So we can pass any record in as long as it has an `age` field that holds a number.
+이런식으로, 숫자로 된 age 필드를 가진 어떤 레코드이든 수용할 수 있습니다.
 
-It is often useful to update the values in a record.
+종종 레코드의 값을 수정해야할 때도 유용합니다.It is often useful to update the values in a record.
 
 ```elm
 > { bill | name = "Nye" }
