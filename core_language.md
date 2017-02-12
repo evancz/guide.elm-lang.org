@@ -198,9 +198,9 @@ True
 False
 ```
 
-이런식으로, 숫자로 된 age 필드를 가진 어떤 레코드이든 수용할 수 있습니다.
+이런식으로, 숫자로 된 age 필드를 가진 어떤 레코드이든 수용할 수 있어요.
 
-종종 레코드의 값을 수정해야할 때도 유용합니다.It is often useful to update the values in a record.
+종종 레코드의 값을 수정해야할 때도 유용하죠.
 
 ```elm
 > { bill | name = "Nye" }
@@ -210,17 +210,17 @@ False
 { age = 22, name = "Gates" }
 ```
 
-It is important to notice that we do not make _destructive_ updates. When we update some fields of `bill` we actually create a new record rather than overwriting the existing one. Elm makes this efficient by sharing as much content as possible. If you update one of ten fields, the new record will share the nine unchanged values.
+값을 수정 할 땐 기존의 구조를 건드리지 않는 다는 점이 중요해요. bill의 필드들을 수정하면, 실제론 기존의 레코드를 덮어쓰는 대신 새로운 레코드를 만듭니다. Elm은 내용들을 공유함으로써 가능한한 효율적으로 동작해요. 만약 10개의 필드 중 한개를 수정하면, 새 레코드에선 나머지 9개의 변하지 않는 값들은 공유되요..
 
-### Comparing Records and Objects
+### 레코드와 객체 비교
 
-Records in Elm are _similar_ to objects in JavaScript, but there are some crucial differences. The major differences are that with records:
+Elm의 레코드는 JavaScript의 객체와 비슷해요. 하지만 몇 가지 결정적인 차이점이 있답니다. 다음은 레코드가 가진 대표적인 차이점이에요.
 
-* You cannot ask for a field that does not exist.
-* No field will ever be undefined or null.
-* You cannot create recursive records with a `this` or `self` keyword.
+* 존재하지 않는 필드에 요청할 수 없어요.
+* 필드는 `undefined`나 `null`이 될 수 없어요.
+* `this` 또는 `self` 키워드를 이용한 재귀적인 레코드를 만들 수 없어요.
 
-Elm encourages a strict separation of data and logic, and the ability to say `this` is primarily used to break this separation. This is a systemic problem in Object Oriented languages that Elm is purposely avoiding.
+Elm은 데이터와 로직을 엄격하게 분리하는 걸 권하지만, `this` 키워드의 경우 주로 이런 분리를 깨뜨리죠. Elm은 이런식으로 객체지향 언어에서 발생하는 구조적인 문제를 피해요.
 
-Records also support [structural typing](https://en.wikipedia.org/wiki/Structural_type_system "Structural Types") which means records in Elm can be used in any situation as long as the necessary fields exist. This gives us flexibility without compromising reliability.
+또한 레코드는 Records also support [structural typing](https://en.wikipedia.org/wiki/Structural_type_system "Structural Types") which means records in Elm can be used in any situation as long as the necessary fields exist. This gives us flexibility without compromising reliability.
 
