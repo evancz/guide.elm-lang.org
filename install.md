@@ -1,62 +1,53 @@
-> **Note:** If you do not want to install yet, you can follow along in this guide with the [online editor](http://elm-lang.org/try) and the [online REPL](http://elmrepl.cuberoot.in/).
+> **참고 :**아직 설치하고 싶지 않다면, [온라인 편집기](http://elm-lang.org/try) 및 [온라인 REPL](http://elmrepl.cuberoot.in/)을 사용하세요.
 
+# 설치
 
-# Install
+* 맥 — [인스톨러](http://install.elm-lang.org/Elm-Platform-0.18.pkg)
+* 윈도우 — [인스톨러](http://install.elm-lang.org/Elm-Platform-0.18.exe)
+* 다른 OS — [npm 인스톨러](https://www.npmjs.com/package/elm) 또는 [소스를 빌드하기](https://github.com/elm-lang/elm-platform)
 
-  * Mac &mdash; [installer][mac]
-  * Windows &mdash; [installer][win]
-  * Anywhere &mdash; [npm installer][npm] or [build from source][build]
+설치가 끝나면, 다음의 커맨드라인 도구들을 사용해보세요.
 
-[mac]: http://install.elm-lang.org/Elm-Platform-0.18.pkg
-[win]: http://install.elm-lang.org/Elm-Platform-0.18.exe
-[npm]: https://www.npmjs.com/package/elm
-[build]: https://github.com/elm-lang/elm-platform
+* [`elm-repl`](#elm-repl) — Elm 표현식을 사용해보세요
+* [`elm-reactor`](#elm-reactor) — 프로젝트를 빠르게 체험해보세요.
+* [`elm-make`](#elm-make) — 직접적으로 Elm 코드를 컴파일해보세요.
+* [`elm-package`](#elm-package) — Elm 패키지를 다운받을 수 있습니다.
 
-After installing through any of those routes, you will have the following command line tools:
+여러분이 사용하고 있는 에디터에서 어떻게 Elm설정을 할 수 있는지 짚고 넘어가 봅시다!
 
-- [`elm-repl`](#elm-repl) &mdash; play with Elm expressions
-- [`elm-reactor`](#elm-reactor) &mdash; get a project going quickly
-- [`elm-make`](#elm-make) &mdash; compile Elm code directly
-- [`elm-package`](#elm-package) &mdash; download packages
+> **문제 해결 :** _어떤 것이든 가장 빨리 배울 수 있는 방법_은 Elm 커뮤니티의 다른 사람들과 이야기 해보는 거에요.
 
-We will go over how they all work in more detail right after we get your editor set up!
+저희가 기쁜 마음으로 도와드리겠습니다! 그러니, 설치에 이상이 생기거나 한다면, [Elm 슬랙](http://elmlang.herokuapp.com/)에 방문하셔서 질문해주세요. 사실, Elm을 배우는 동안 언제든지 혼란이 올 수 있을 겁니다. 그럴때마다 물어봐 주세요. 여러분의 시간을 아끼실 수 있을 겁니다. 그냥 물어보세요!
 
-> **Troubleshooting:** The fastest way to learn *anything* is to talk with other people in the Elm community. We are friendly and happy to help! So if you get stuck during installation or encounter something weird, visit [the Elm Slack](http://elmlang.herokuapp.com/) and ask about it. In fact, if you run into something confusing at any point while learning or using Elm, come ask us about it. You can save yourself hours. Just do it!
+## 에디터 설정하기
 
+Elm을 좀 더 잘 사용하기 위해 여러분의 코드 에디터가 도와줄 거에요. 다음은 Elm 플러그인이 있는 코드 에디터입니다.
 
-## Configure Your Editor
+* [Atom](https://atom.io/packages/language-elm)
+* [Brackets](https://github.com/lepinay/elm-brackets)
+* [Emacs](https://github.com/jcollard/elm-mode)
+* [IntelliJ](https://github.com/durkiewicz/elm-plugin)
+* [Light Table](https://github.com/rundis/elm-light)
+* [Sublime Text](https://packagecontrol.io/packages/Elm%20Language%20Support)
+* [Vim](https://github.com/lambdatoast/elm.vim)
+* [VS Code](https://github.com/sbrink/vscode-elm)
 
-Using Elm is way nicer when you have a code editor to help you out. There are Elm plugins for at least the following editors:
+위 목록에 사용하고 있는 에디터가 없는 경우, [Sublime Text](https://www.sublimetext.com/)가 시작하기에 좋은 에디터가 될 거에요!
 
-  * [Atom](https://atom.io/packages/language-elm)
-  * [Brackets](https://github.com/lepinay/elm-brackets)
-  * [Emacs](https://github.com/jcollard/elm-mode)
-  * [IntelliJ](https://github.com/durkiewicz/elm-plugin)
-  * [Light Table](https://github.com/rundis/elm-light)
-  * [Sublime Text](https://packagecontrol.io/packages/Elm%20Language%20Support)
-  * [Vim](https://github.com/lambdatoast/elm.vim)
-  * [VS Code](https://github.com/sbrink/vscode-elm)
+또한 [elm-format](https://github.com/avh4/elm-format)을 통해 여러분의 코드를 예쁘게 만들 수 있어요!
 
-If you do not have an editor at all, [Sublime Text](https://www.sublimetext.com/) is a great one to get started with!
+## 커맨드 라인 도구
 
-You may also want to try out [elm-format][] which makes your code pretty!
-
-[elm-format]: https://github.com/avh4/elm-format
-
-
-## The Command Line Tools
-
-So we installed Elm, and it gave us `elm-repl`, `elm-reactor`, `elm-make`, and `elm-package`. But what do they all do exactly?
-
+자 이제 우리는 Elm을 설치하고 `elm-repl`, `elm-reactor`, `elm-make`, and `elm-package`와 같은 도구들을 얻었어요. 이것들은 대체 언제 사용할 것들일까요?
 
 ### elm-repl
 
-[`elm-repl`](https://github.com/elm-lang/elm-repl) lets you play with simple Elm expressions.
+[`elm-repl`](https://github.com/elm-lang/elm-repl)은 간단한 Elm 표현식을 사용해 볼 수 있도록 도와줘요.
 
 ```bash
 $ elm-repl
 ---- elm-repl 0.18.0 -----------------------------------------------------------
- :help for help, :exit to exit, more at <https://github.com/elm-lang/elm-repl>
+:help for help, :exit to exit, more at <https://github.com/elm-lang/elm-repl>
 --------------------------------------------------------------------------------
 > 1 / 2
 0.5 : Float
@@ -68,14 +59,13 @@ $ elm-repl
 $
 ```
 
-We will be using `elm-repl` in the upcoming &ldquo;Core Language&rdquo; section, and you can read more about how it works [here](https://github.com/elm-lang/elm-repl/blob/master/README.md).
+`elm-repl`은 “Elm 살펴보기” 단원에서 사용할 거에요, 동작하는 원리에 대해 더 자세히 알고 싶다면 [여기](https://github.com/elm-lang/elm-repl/blob/master/README.md)를 참고하세요.
 
-> **Note:** `elm-repl` works by compiling code to JavaScript, so make sure you have [Node.js](http://nodejs.org/) installed. We use that to evaluate code.
-
+> **참고 :** `elm-repl` JavaScript로 컴파일되어 동작합니다. , 그렇기 때문에 [Node.js](http://nodejs.org/)가 설치되어 있어야죠. 이걸로 코드를 평가\(evaluate\) 한답니다.
 
 ### elm-reactor
 
-[`elm-reactor`](https://github.com/elm-lang/elm-reactor) helps you build Elm projects without messing with the command-line too much. You just run it at the root of your project, like this:
+[`elm-reactor`](https://github.com/elm-lang/elm-reactor)는 많은 수의 복잡한 명령어 없이 Elm 프로젝트를 빌드할 수 있게 도와줘요. 그냥 프로젝트 최상단 폴더에서 아래와 같이 입력하면 됩니다.
 
 ```bash
 git clone https://github.com/evancz/elm-architecture-tutorial.git
@@ -83,52 +73,49 @@ cd elm-architecture-tutorial
 elm-reactor
 ```
 
-This starts a server at [`http://localhost:8000`](http://localhost:8000). You can navigate to any Elm file and see what it looks like. Try to check out `examples/01-button.elm`.
+이 서버는 [`http://localhost:8000`](http://localhost:8000)에서 동작됩니다. 여러분의 Elm file들이 어떻게 생겼는지와 구조를 살펴볼 수 있어요. `examples/01-button.elm`를 확인해보세요.
 
-**Notable flags:**
+**알고 넘어가기!**
 
-- `--port` lets you pick something besides port 8000. So you can say
-  `elm-reactor --port=8123` to get things to run at `http://localhost:8123`.
-- `--address` lets you replace `localhost` with some other address. For
-  example, you may want to use `elm-reactor --address=0.0.0.0` if you want to
-  try out an Elm program on a mobile device through your local network.
-
+-`--port`는 8000번 포트 외에 다른 포트를 선택할 수 있어요.  
+  `elm-reactor --port=8123` 와 같이 실행한다면 `http://localhost:8123`에서 동작하죠.  
+-`--address`는 `localhost`외에 다른 주소로 동작되도록 할 수 있어요.  
+  예를들어, `elm-reactor --address=0.0.0.0`와 같이 쓴다면,  
+  다른 모바일 기기로 여러분의 로컬 네트워크를 통해 Elm 프로그램에 접속할 수 있죠.
 
 ## elm-make
 
-[`elm-make`](https://github.com/elm-lang/elm-make) builds Elm projects. It can compile Elm code to HTML or JavaScript. It is the most general way to compile Elm code, so if your project becomes too advanced for `elm-reactor`, you will want to start using `elm-make` directly.
+[`elm-make`](https://github.com/elm-lang/elm-make)는 Elm 프로젝트를 빌드할 때 사용하죠. Elm코드를 HTML 또는 Javascript로 컴파일 해줘요. Elm 코드를 컴파일하는 가장 일반적인 방법이랍니다!
 
-Say you want to compile `Main.elm` to an HTML file named `main.html`. You would run this command:
+`Main.elm`을 `main.html`으로 변환 시키고 싶다면, 다음 명령을 하시면 되요.
 
 ```bash
 elm-make Main.elm --output=main.html
 ```
 
-**Notable flags:**
+**알고 넘어가기!**
 
-- `--warn` prints warnings to improve code quality
-
+* `--warn` 옵션은 코드 품질을 향상시키는 경고를 보여줘요.
 
 ### elm-package
 
-[`elm-package`](https://github.com/elm-lang/elm-package) downloads and publishes packages from our [package catalog](http://package.elm-lang.org/). As community members solve problems [in a nice way](http://package.elm-lang.org/help/design-guidelines), they share their code in the package catalog for anyone to use!
+[`elm-package`](https://github.com/elm-lang/elm-package)는 [패키지 카탈로그](http://package.elm-lang.org/)로 부터 패키지를 다운받거나 올릴 수 있게 해줘요. 커뮤니티 멤버들은 [멋진 방법들로](http://package.elm-lang.org/help/design-guidelines) 문제를 해결하거나, 모두가 사용할 수 있도록 패키지 카탈로그에 공유하죠!
 
-Say you want to use [`elm-lang/http`][http] and [`NoRedInk/elm-decode-pipeline`][pipe] to make HTTP requests to a server and turn the resulting JSON into Elm values. You would say:
-
-[http]: http://package.elm-lang.org/packages/elm-lang/http/latest
-[pipe]: http://package.elm-lang.org/packages/NoRedInk/elm-decode-pipeline/latest
+[`elm-lang/http`](http://package.elm-lang.org/packages/elm-lang/http/latest)와 [`NoRedInk/elm-decode-pipeline`](http://package.elm-lang.org/packages/NoRedInk/elm-decode-pipeline/latest)를 사용하여 서버로 HTTP 요청을 보낸 뒤, 결과를 JSON으로 변환하여 Elm 값으로 집어넣고 싶다면, 다음과 같이 입력하세요.
 
 ```bash
 elm-package install elm-lang/http
 elm-package install NoRedInk/elm-decode-pipeline
 ```
 
-This will add the dependencies to your `elm-package.json` file that describes your project. (Or create it if you do not have one yet!) More information about all this [here](https://github.com/elm-lang/elm-package)!
+명령어를 사용했다면, 프로젝트 정보를 담고 있는 `elm-package.json` 의존성이 들어가 있을 거에요. \(파일이 없는경우 elm-package.json이 생성 되었을 거에요.\) 더욱 자세한 정보는 [here](https://github.com/elm-lang/elm-package)를 참고하세요!
+
+**알고 넘어가기!**
+
+* `install`: `elm-package.json`에 의존성들을 설치해요.
+* `publish`: 여러분의 라이브러리를 Elm 패키지 카탈로그에 공개 할 수 있어요.
+* `bump`: API 변경점을 기반으로 버전을 뭉쳐줍니다.
+* `diff`: 두 API 버전의 차이점을 알려줘요.
 
 
-**Notable commands:**
 
-- `install`: install the dependencies in `elm-package.json`
-- `publish`: publish your library to the Elm Package Catalog
-- `bump`: bump version numbers based on API changes
-- `diff`: get the difference between two APIs
