@@ -140,7 +140,7 @@ False
 
 ## 튜플\(Tuples\)
 
-또 다른 유용한 자료구조 중엔 튜플이 있어요. 튜플은 값의 수를 고정해서 담을 수 있고, 각 값들은 어떤 타입이든 될 수 있어요. 보통 함수에서 한개 이상의 값을 리턴해야 할 때 사용해요. 다음은 이름을 받아서 사용자에게 메시지를 보여주는 함수입니다.
+또 다른 유용한 자료구조 중엔 튜플이 있어요. 튜플은 값의 수를 고정해서 담을 수 있고, 각 값들은 어떤 타입이든 될 수 있어요. 보통 함수에서 한개 이상의 값을 반환해야 할 때 사용해요. 다음은 이름을 받아서 사용자에게 메시지를 주는 함수입니다.
 
 ```elm
 > import String
@@ -155,11 +155,11 @@ False
 (True, "name accepted!")
 ```
 
-This can be quite handy, but when things start becoming more complicated, it is often best to use records instead of tuples.
+튜플은 매우 사용하기 편리해요. 하지만 복잡해지기 시작한다면, 보통 튜플보단 레코드를 사용하는 게 가장 좋은 방법이에요.
 
-## Records
+## 레코드\(Records\)
 
-A record is a set of key-value pairs, similar to objects in JavaScript or Python. You will find that they are extremely common and useful in Elm! Let's see some basic examples.
+레코드는 키와 값이 한쌍을 이뤄요. JavaScript나 Python의 객체\(object\)와 비슷하죠. A record is a set of key-value pairs, similar to objects in JavaScript or Python. You will find that they are extremely common and useful in Elm! Let's see some basic examples.
 
 ```elm
 > point = { x = 3, y = 4 }
