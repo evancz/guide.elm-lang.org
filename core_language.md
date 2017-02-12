@@ -15,7 +15,7 @@ REPL은 모든 결과마다 타입을 설명해주지만, 이 튜토리얼에서
 
 우리는 [값\(values\)](#values), [함수\(functions\)](#functions), [리스트\(lists\)](#lists), [튜플\(tuples\)](#tuples), 그리고 [레코드\(records\)](#records)에 대해 배워볼텐데요. 이 부분들의 구조는 JavaScript, Python, Java와 비슷한 구조를 가지고 있어요.
 
-## 값
+## 값\(values\)
 
 일단 문자열\(strings\)부터 시작해봅시다.
 
@@ -52,7 +52,7 @@ JavaScript와는 다르게 Elm은 부동소수점과 정수와는 차이가 있�
 4
 ```
 
-## 함수
+## 함수\(Functions\)
 
 자 이제 함수를 작생해 봅시다. `isNegative` 함수는 숫자를 받아서 해당 숫자가 0보다 작은지를 확인하고, True 또는 False가 결과가 될 거에요.
 
@@ -72,9 +72,9 @@ False
 
 함수 어플리케이션이 JavaScript와 Python, Java 등과는 다르게 보이네요. 괄호를 사용해 모든 인자들을 감싸서 콤마\(comma\)로 구분하는 대신에,  공백을 통하여 함수를 적용하죠. 그래서 `(add(3,4))` 은 `(add 3 4)` 로 표현되어 더 많은 공백과 콤마를 피할 수 있게 됩니다. 궁극적으로는, 익숙해지면 훨씬 깔끔해 보이죠! [elm-html 패키지](http://elm-lang.org/blog/blazing-fast-html) 는 이 방법이 좀 더 가벼운 느낌이 든다는 걸 보여주는 좋은 예제에요.
 
-## If Expressions
+## If 표현식\(If Expressions\)
 
-When you want to have conditional behavior in Elm, you use an if-expression.
+만약 Elm에서 조건문 같은 걸 사용하고 싶다면, if 표현식을 사용하세요.
 
 ```elm
 > if True then "hello" else "world"
@@ -84,11 +84,11 @@ When you want to have conditional behavior in Elm, you use an if-expression.
 "world"
 ```
 
-The keywords `if` `then` `else` are used to separate the conditional and the two branches so we do not need any parentheses or curly braces.
+키워드인 `if` `then` `else` 등을 사용하여 각 조건별로 분기 처리 할 수 있고, 소괄호\(parentheses\)나 중괄호\(curly braces\) 등을 쓸 필요가 없죠.
 
-Elm does not have a notion of “truthiness” so numbers and strings and lists cannot be used as boolean values. If we try it out, Elm will tell us that we need to work with a real boolean value.
+Elm에선 True로 분류되는 값 이란 개념이 없습니다. 따라서 숫자\(numbers\)와 문자열, 리스트 등을 boolean 값으로 사용할 수 없어요. 만약 이런 짓을 한다면,  Elm은 boolean 값이 필요하다고 알려줘요.
 
-Now let's make a function that tells us if a number is over 9000.
+자 이제 9000이 넘는 숫자인지 알려주는 함수를 만들어 봅시다.
 
 ```elm
 > over9000 powerLevel = \
@@ -102,13 +102,13 @@ Now let's make a function that tells us if a number is over 9000.
 "It's over 9000!!!"
 ```
 
-Using a backslash in the REPL lets us split things on to multiple lines. We use this in the definition of `over9000` above. Furthermore, it is best practice to always bring the body of a function down a line. It makes things a lot more uniform and easy to read, so you want to do this with all the functions and values you define in normal code.
+REPL에선 역슬래시\(\\)를 이용하여 여러줄로 동작을 분리할 수 있습니다. 이를 통해 `over9000` 이라는 함수를 선언할 수 있었죠. 또한, 이렇게 함수 선언부 아래에 내용을 적는 것은 가장 추천하는 방법이에요. 형식을 맞춰 쓰면 읽기도 쉽죠. 일반적인 코드에서도 모든 함수와 값들을 이런식으로 선언할 수 있죠.
 
-## Lists
+## 리스트\(Lists\)
 
-Lists are one of the most common data structures in Elm. They hold a sequence of related things, similar to arrays in JavaScript.
+리스트는 Elm에서 가장 일반적인 자료구조 중 하나에요. 연속적인 관계를 가진 것들을 담으며, JavaScript의 배열\(array\)과 비슷해요.
 
-Lists can hold many values. Those values must all have the same type. Here are a few examples that use functions from [the `List` library](http://package.elm-lang.org/packages/elm-lang/core/latest/List):
+리스트는 많은 값들을 담을 수 있지만, 이 값들은 같은 타입을 가지고 있어야 해요. 다음은[ `리스트` 라이브러리](http://package.elm-lang.org/packages/elm-lang/core/latest/List)를 이용한 몇가지 예제입니다.
 
 ```elm
 > names = [ "Alice", "Bob", "Chuck" ]
@@ -136,11 +136,11 @@ False
 [2,8,6,4]
 ```
 
-Again, all elements of the list must have the same type.
+다시 한번 말씀드리지만, 리스트의 모든 요소들은 같은 타입을 가지고 있어야 해요.
 
-## Tuples
+## 튜플\(Tuples\)
 
-Tuples are another useful data structure. A tuple can hold a fixed number of values, and each value can have any type. A common use is if you need to return more than one value from a function. The following function gets a name and gives a message for the user:
+또 다른 유용한 자료구조 중엔 튜플이 있어요. 튜플은 값의 수를 고정해서 담을 수 있고, 각 값들은 어떤 타입이든 될 수 있어요. 보통 함수에서 한개 이상의 값을 리턴해야 할 때 사용해요. 다음은 이름을 받아서 사용자에게 메시지를 보여주는 함수입니다.
 
 ```elm
 > import String
