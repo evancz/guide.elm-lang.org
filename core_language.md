@@ -11,7 +11,7 @@
 >
 ```
 
-REPL은 모든 결과마다 타입을 설명해주지만, 이 튜토리얼에서는 점차적으로 개념을 소개하기 위해 **해당 기능이 없는 생태로 진행할 거에요. **
+REPL은 모든 결과마다 타입을 설명해주지만, 이 튜토리얼에서는 점차적으로 개념을 소개하기 위해 **해당 기능이 없는 상태로 진행할 거에요. **
 
 우리는 [값\(values\)](#values), [함수\(functions\)](#functions), [리스트\(lists\)](#lists), [튜플\(tuples\)](#tuples), 그리고 [레코드\(records\)](#records)에 대해 배워볼텐데요. 이 부분들의 구조는 JavaScript, Python, Java와 비슷한 구조를 가지고 있어요.
 
@@ -159,7 +159,7 @@ False
 
 ## 레코드\(Records\)
 
-레코드는 키와 값이 한쌍을 이뤄요. JavaScript나 Python의 객체\(object\)와 비슷하죠. A record is a set of key-value pairs, similar to objects in JavaScript or Python. You will find that they are extremely common and useful in Elm! Let's see some basic examples.
+레코드는 키와 값이 한쌍을 이뤄요. JavaScript의 객체\(object\)나 Python의 딕셔너리\(dictionary\)와  비슷하죠. 여러분은 Elm에서 레코드가 엄청나게 유용하다는 걸 알게 되실거에요. 자 기본적인 예제를 살펴봅시다.
 
 ```elm
 > point = { x = 3, y = 4 }
@@ -175,7 +175,7 @@ False
 "Gates"
 ```
 
-So we can create records using curly braces and access fields using a dot. Elm also has a version of record access that works like a function. By starting the variable with a dot, you are saying _please access the field with the following name_. This means that `.name` is a function that gets the `name` field of the record.
+레코드는 중괄호를 사용해서 만들수 있고 점\(dot\)을 이용해서 접근할 수 있어요. Elm의 레코드 접근은 함수처럼 동작 되기도 한답니다. `.name` 과 같이, 점으로 시작되는 변수를 통해 name 필드에 접근이 가능하죠. 즉 `.name` 은 레코드의 name 필드를 가져오는 함수라는 의미입니다.
 
 ```elm
 > .name bill
