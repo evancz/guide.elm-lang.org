@@ -13,7 +13,6 @@ Again this is a pretty short program, so I have included the whole thing here. S
 import Html exposing (Html, Attribute, div, input, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
-import String
 
 
 main =
