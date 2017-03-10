@@ -173,7 +173,7 @@ The particular types that can be sent in and out of ports are quite flexible, co
   * **Lists**   &ndash; correspond to JS arrays
   * **Arrays**  &ndash; correspond to JS arrays
   * **Tuples**  &ndash; correspond to fixed-length, mixed-type JS arrays
-  * **Records** &ndash; correspond to JavaScript objects
+  * **Records** &ndash; correspond to JavaScript objects. You have to tell Elm what keys and value types the object has e.g. as a type alias.
   * **Maybes**  &ndash; `Nothing` and `Just 42` correspond to `null` and `42` in JS
   * **Json**    &ndash; [`Json.Encode.Value`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Encode#Value) corresponds to arbitrary JSON
 
