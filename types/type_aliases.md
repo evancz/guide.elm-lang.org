@@ -51,3 +51,15 @@ User : String -> String -> String -> User
 ```
 > 
 > The arguments are in the order they appear in the type alias declaration. You may want to use this sometimes.
+>
+> ```elm
+User "OliverBarkBark" "Woof ruff ruff bark bark!" "https://pbs.twimg.com/profile_images/650451290288484352/ck7FXb1o.jpg"
+```
+>
+> returns
+>
+> ```elm
+{ name = "OliverBarkBark"
+, bio = "Woof ruff ruff bark bark!"
+, pic = "https://pbs.twimg.com/profile_images/650451290288484352/ck7FXb1o.jpg"
+}
