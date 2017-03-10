@@ -53,8 +53,9 @@ User : String -> String -> String -> User
 > The arguments are in the order they appear in the type alias declaration, so in the REPL you could do this:
 >
 > ```elm
-> type alias User = { name : String, bio : String, pic : String }
-> User "Tom" "Friendly Carpenter" "http://example.com/tom.jpg"
+>> type alias User = { name : String, bio : String, pic : String }
+>
+>> User "Tom" "Friendly Carpenter" "http://example.com/tom.jpg"
 { name = "Tom", bio = "Friendly Carpenter", pic = "http://example.com/tom.jpg" } : User
 ```
 >
