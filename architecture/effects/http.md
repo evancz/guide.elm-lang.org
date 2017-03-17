@@ -103,16 +103,16 @@ getRandomGif topic =
   in
     Http.send NewGif request
 
-decodeGifUrl : Json.Decoder String
+decodeGifUrl : Decode.Decoder String
 decodeGifUrl =
-  Json.at ["data", "image_url"] Json.string
+  Decode.at ["data", "image_url"] Decode.string
 ```
 
 With that added, the "More" button actually goes and fetches a random gif. Check it out [here](http://elm-lang.org/examples/http)! But how does `getRandomGif` work exactly?
 
 It starts out simple, we define `url` to be some giphy endpoint for random gifs. Next we create an HTTP `request` with [`Http.get`](http://package.elm-lang.org/packages/elm-lang/http/latest/Http#get). Finally, we turn it into a command with [`Http.send`](http://package.elm-lang.org/packages/elm-lang/http/latest/Http#send). Let’s break those steps down a bit more:
 
-  - `Http.get : String -> Json.Decoder value -> Http.Request value`
+  - `Http.get : String -> Decode.Decoder value -> Http.Request value`
 
   This function takes a URL and a JSON decoder. This is our first time seeing a JSON decoder (and we will cover them in depth [later](/interop/json.md)), but for now, you really just need a high-level understanding. It turns JSON into Elm. In our case, we defined `decodeGifUrl` which tries to find a string value at `json.data.image_url`. Between the URL and the JSON decoder, we create an `Http.Request`. This is similar to a `Random.Generator` like we saw in [the previous example](random.md). It does not actually *do* anything. It just describes how to make an HTTP request.
 
