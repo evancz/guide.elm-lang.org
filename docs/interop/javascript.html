@@ -102,12 +102,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../get_started.html">
+        <li class="chapter " data-level="1.2" data-path="../install.html">
             
-                <a href="../get_started.html">
+                <a href="../install.html">
             
                     
-                    Get Started
+                    Install
             
                 </a>
             
@@ -534,51 +534,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="../effect_managers/">
-            
-                <a href="../effect_managers/">
-            
-                    
-                    Effect Managers
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../effect_managers/caching.html">
-            
-                <a href="../effect_managers/caching.html">
-            
-                    
-                    Caching
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../effect_managers/batching.html">
-            
-                <a href="../effect_managers/batching.html">
-            
-                    
-                    Batching
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
 
     
 
@@ -710,7 +665,7 @@
 </blockquote>
 <h3 id="flags">Flags</h3>
 <p>The second way to talk to JavaScript is with <em>flags</em>. You can think of this as some static configuration for your Elm program.</p>
-<p>Instead of creating a <code>Program</code> with the <a href="http://package.elm-lang.org/packages/elm-lang/html/latest/Html-App#program" target="_blank"><code>program</code></a> function, we can use the <a href="http://package.elm-lang.org/packages/elm-lang/html/latest/Html-App#programWithFlags" target="_blank"><code>programWithFlags</code></a>. So say we want to get a value like this from JavaScript on initialization:</p>
+<p>Instead of creating a <code>Program</code> with the <a href="http://package.elm-lang.org/packages/elm-lang/html/latest/Html#program" target="_blank"><code>program</code></a> function, we can use the <a href="http://package.elm-lang.org/packages/elm-lang/html/latest/Html#programWithFlags" target="_blank"><code>programWithFlags</code></a>. So say we want to get a value like this from JavaScript on initialization:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">Flags</span> =
   { user : <span class="hljs-type">String</span>
   , token : <span class="hljs-type">String</span>
@@ -807,7 +762,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JavaScript","level":"1.7.2","depth":2,"next":{"title":"Scaling The Elm Architecture","level":"1.8","depth":1,"path":"reuse/README.md","ref":"reuse/README.md","articles":[{"title":"Labeled Checkboxes","level":"1.8.1","depth":2,"path":"reuse/checkboxes.md","ref":"reuse/checkboxes.md","articles":[]},{"title":"Radio Buttons","level":"1.8.2","depth":2,"path":"reuse/radio_buttons.md","ref":"reuse/radio_buttons.md","articles":[]},{"title":"Modules","level":"1.8.3","depth":2,"path":"reuse/modules.md","ref":"reuse/modules.md","articles":[]},{"title":"More","level":"1.8.4","depth":2,"path":"reuse/more.md","ref":"reuse/more.md","articles":[]}]},"previous":{"title":"JSON","level":"1.7.1","depth":2,"path":"interop/json.md","ref":"interop/json.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-25827182-1"},"youtube":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"interop/javascript.md","mtime":"2016-11-03T07:08:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-03T07:10:54.632Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"JavaScript","level":"1.7.2","depth":2,"next":{"title":"Scaling The Elm Architecture","level":"1.8","depth":1,"path":"reuse/README.md","ref":"reuse/README.md","articles":[{"title":"Labeled Checkboxes","level":"1.8.1","depth":2,"path":"reuse/checkboxes.md","ref":"reuse/checkboxes.md","articles":[]},{"title":"Radio Buttons","level":"1.8.2","depth":2,"path":"reuse/radio_buttons.md","ref":"reuse/radio_buttons.md","articles":[]},{"title":"Modules","level":"1.8.3","depth":2,"path":"reuse/modules.md","ref":"reuse/modules.md","articles":[]},{"title":"More","level":"1.8.4","depth":2,"path":"reuse/more.md","ref":"reuse/more.md","articles":[]}]},"previous":{"title":"JSON","level":"1.7.1","depth":2,"path":"interop/json.md","ref":"interop/json.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube","bulk-redirect"],"pluginsConfig":{"youtube":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"ga":{"configuration":"auto","token":"UA-25827182-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"interop/javascript.md","mtime":"2017-03-17T03:38:57.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-27T19:29:53.562Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

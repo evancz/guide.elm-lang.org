@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Install · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="install.html" />
+    <link rel="next" href="core_language.html" />
     
+    
+    <link rel="prev" href="./" />
     
 
     </head>
@@ -87,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -100,7 +102,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="install.html">
+        <li class="chapter active" data-level="1.2" data-path="install.html">
             
                 <a href="install.html">
             
@@ -562,7 +564,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Install</a>
     </h1>
 </div>
 
@@ -577,53 +579,99 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="an-introduction-to-elm">An Introduction to Elm</h1>
-<p><strong>Elm is a functional language that compiles to JavaScript.</strong> It competes with projects like React as a tool for creating websites and web apps. Elm has a very strong emphasis on simplicity, ease-of-use, and quality tooling.</p>
-<p>This guide will:</p>
+                                <blockquote>
+<p><strong>Note:</strong> If you do not want to install yet, you can follow along in this guide with the <a href="http://elm-lang.org/try" target="_blank">online editor</a> and the <a href="http://elmrepl.cuberoot.in/" target="_blank">online REPL</a>.</p>
+</blockquote>
+<h1 id="install">Install</h1>
 <ul>
-<li>Teach you the fundamentals of programming in Elm.</li>
-<li>Show you how to make interactive apps with <em>The Elm Architecture</em>.</li>
-<li>Emphasize the principles and patterns that generalize to programming in any language.</li>
+<li>Mac &#x2014; <a href="http://install.elm-lang.org/Elm-Platform-0.18.pkg" target="_blank">installer</a></li>
+<li>Windows &#x2014; <a href="http://install.elm-lang.org/Elm-Platform-0.18.exe" target="_blank">installer</a></li>
+<li>Anywhere &#x2014; <a href="https://www.npmjs.com/package/elm" target="_blank">npm installer</a> or <a href="https://github.com/elm-lang/elm-platform" target="_blank">build from source</a></li>
 </ul>
-<p>By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use.</p>
-<p>If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript and React code. The ideas transfer pretty easily!</p>
-<h2 id="a-quick-sample">A Quick Sample</h2>
-<p>Of course <em>I</em> think Elm is good, so look for yourself.</p>
-<p>Here is <a href="http://elm-lang.org/examples/buttons" target="_blank">a simple counter</a>. If you look at the code, it just lets you increment and decrement the counter:</p>
-<pre><code class="lang-elm"><span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Html</span>, button, div, text)
-<span class="hljs-keyword">import</span> Html.Events <span class="hljs-keyword">exposing</span> (onClick)
-
-<span class="hljs-title">main</span> =
-  <span class="hljs-type">Html</span>.beginnerProgram { model = <span class="hljs-number">0</span>, view = view, update = update }
-
-<span class="hljs-keyword">type</span> <span class="hljs-type">Msg</span> = <span class="hljs-type">Increment</span> | <span class="hljs-type">Decrement</span>
-
-<span class="hljs-title">update</span> msg model =
-  <span class="hljs-keyword">case</span> msg <span class="hljs-keyword">of</span>
-    <span class="hljs-type">Increment</span> -&gt;
-      model + <span class="hljs-number">1</span>
-
-    <span class="hljs-type">Decrement</span> -&gt;
-      model - <span class="hljs-number">1</span>
-
-<span class="hljs-title">view</span> model =
-  div []
-    [ button [ onClick <span class="hljs-type">Decrement</span> ] [ text <span class="hljs-string">&quot;-&quot;</span> ]
-    , div [] [ text (toString model) ]
-    , button [ onClick <span class="hljs-type">Increment</span> ] [ text <span class="hljs-string">&quot;+&quot;</span> ]
-    ]
+<p>After installing through any of those routes, you will have the following command line tools:</p>
+<ul>
+<li><a href="#elm-repl"><code>elm-repl</code></a> &#x2014; play with Elm expressions</li>
+<li><a href="#elm-reactor"><code>elm-reactor</code></a> &#x2014; get a project going quickly</li>
+<li><a href="#elm-make"><code>elm-make</code></a> &#x2014; compile Elm code directly</li>
+<li><a href="#elm-package"><code>elm-package</code></a> &#x2014; download packages</li>
+</ul>
+<p>We will go over how they all work in more detail right after we get your editor set up!</p>
+<blockquote>
+<p><strong>Troubleshooting:</strong> The fastest way to learn <em>anything</em> is to talk with other people in the Elm community. We are friendly and happy to help! So if you get stuck during installation or encounter something weird, visit <a href="http://elmlang.herokuapp.com/" target="_blank">the Elm Slack</a> and ask about it. In fact, if you run into something confusing at any point while learning or using Elm, come ask us about it. You can save yourself hours. Just do it!</p>
+</blockquote>
+<h2 id="configure-your-editor">Configure Your Editor</h2>
+<p>Using Elm is way nicer when you have a code editor to help you out. There are Elm plugins for at least the following editors:</p>
+<ul>
+<li><a href="https://atom.io/packages/language-elm" target="_blank">Atom</a></li>
+<li><a href="https://github.com/lepinay/elm-brackets" target="_blank">Brackets</a></li>
+<li><a href="https://github.com/jcollard/elm-mode" target="_blank">Emacs</a></li>
+<li><a href="https://github.com/durkiewicz/elm-plugin" target="_blank">IntelliJ</a></li>
+<li><a href="https://github.com/rundis/elm-light" target="_blank">Light Table</a></li>
+<li><a href="https://packagecontrol.io/packages/Elm%20Language%20Support" target="_blank">Sublime Text</a></li>
+<li><a href="https://github.com/lambdatoast/elm.vim" target="_blank">Vim</a></li>
+<li><a href="https://github.com/sbrink/vscode-elm" target="_blank">VS Code</a></li>
+</ul>
+<p>If you do not have an editor at all, <a href="https://www.sublimetext.com/" target="_blank">Sublime Text</a> is a great one to get started with!</p>
+<p>You may also want to try out <a href="https://github.com/avh4/elm-format" target="_blank">elm-format</a> which makes your code pretty!</p>
+<h2 id="the-command-line-tools">The Command Line Tools</h2>
+<p>So we installed Elm, and it gave us <code>elm-repl</code>, <code>elm-reactor</code>, <code>elm-make</code>, and <code>elm-package</code>. But what do they all do exactly?</p>
+<h3 id="elm-repl">elm-repl</h3>
+<p><a href="https://github.com/elm-lang/elm-repl" target="_blank"><code>elm-repl</code></a> lets you play with simple Elm expressions.</p>
+<pre><code class="lang-bash">$ elm-repl
+---- elm-repl 0.18.0 -----------------------------------------------------------
+ :<span class="hljs-built_in">help</span> <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>, :<span class="hljs-built_in">exit</span> to <span class="hljs-built_in">exit</span>, more at &lt;https://github.com/elm-lang/elm-repl&gt;
+--------------------------------------------------------------------------------
+&gt; 1 / 2
+0.5 : Float
+&gt; List.length [1,2,3,4]
+4 : Int
+&gt; String.reverse <span class="hljs-string">&quot;stressed&quot;</span>
+<span class="hljs-string">&quot;desserts&quot;</span> : String
+&gt; :<span class="hljs-built_in">exit</span>
+$
 </code></pre>
-<p>Notice that the <code>update</code> and <code>view</code> are entirely decoupled. You describe your HTML in a declarative way and Elm takes care of messing with the DOM.</p>
-<h2 id="why-a-functional-language">Why a <em>functional</em> language?</h2>
-<p>Forget what you have heard about functional programming. Fancy words, weird ideas, bad tooling. Barf. Elm is about:</p>
+<p>We will be using <code>elm-repl</code> in the upcoming &#x201C;Core Language&#x201D; section, and you can read more about how it works <a href="https://github.com/elm-lang/elm-repl/blob/master/README.md" target="_blank">here</a>.</p>
+<blockquote>
+<p><strong>Note:</strong> <code>elm-repl</code> works by compiling code to JavaScript, so make sure you have <a href="http://nodejs.org/" target="_blank">Node.js</a> installed. We use that to evaluate code.</p>
+</blockquote>
+<h3 id="elm-reactor">elm-reactor</h3>
+<p><a href="https://github.com/elm-lang/elm-reactor" target="_blank"><code>elm-reactor</code></a> helps you build Elm projects without messing with the command-line too much. You just run it at the root of your project, like this:</p>
+<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://github.com/evancz/elm-architecture-tutorial.git
+<span class="hljs-built_in">cd</span> elm-architecture-tutorial
+elm-reactor
+</code></pre>
+<p>This starts a server at <a href="http://localhost:8000" target="_blank"><code>http://localhost:8000</code></a>. You can navigate to any Elm file and see what it looks like. Try to check out <code>examples/01-button.elm</code>.</p>
+<p><strong>Notable flags:</strong></p>
 <ul>
-<li>No runtime errors in practice. No <code>null</code>. No <code>undefined</code> is not a function.</li>
-<li>Friendly error messages that help you add features more quickly.</li>
-<li>Well-architected code that <em>stays</em> well-architected as your app grows.</li>
-<li>Automatically enforced semantic versioning for all Elm packages.</li>
+<li><code>--port</code> lets you pick something besides port 8000. So you can say
+<code>elm-reactor --port=8123</code> to get things to run at <code>http://localhost:8123</code>.</li>
+<li><code>--address</code> lets you replace <code>localhost</code> with some other address. For
+example, you may want to use <code>elm-reactor --address=0.0.0.0</code> if you want to
+try out an Elm program on a mobile device through your local network.</li>
 </ul>
-<p>No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are <em>only</em> possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because the practical benefits are worth the couple hours you&apos;ll spend reading this guide.</p>
-<p>I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised!</p>
+<h2 id="elm-make">elm-make</h2>
+<p><a href="https://github.com/elm-lang/elm-make" target="_blank"><code>elm-make</code></a> builds Elm projects. It can compile Elm code to HTML or JavaScript. It is the most general way to compile Elm code, so if your project becomes too advanced for <code>elm-reactor</code>, you will want to start using <code>elm-make</code> directly.</p>
+<p>Say you want to compile <code>Main.elm</code> to an HTML file named <code>main.html</code>. You would run this command:</p>
+<pre><code class="lang-bash">elm-make Main.elm --output=main.html
+</code></pre>
+<p><strong>Notable flags:</strong></p>
+<ul>
+<li><code>--warn</code> prints warnings to improve code quality</li>
+</ul>
+<h3 id="elm-package">elm-package</h3>
+<p><a href="https://github.com/elm-lang/elm-package" target="_blank"><code>elm-package</code></a> downloads and publishes packages from our <a href="http://package.elm-lang.org/" target="_blank">package catalog</a>. As community members solve problems <a href="http://package.elm-lang.org/help/design-guidelines" target="_blank">in a nice way</a>, they share their code in the package catalog for anyone to use!</p>
+<p>Say you want to use <a href="http://package.elm-lang.org/packages/elm-lang/http/latest" target="_blank"><code>elm-lang/http</code></a> and <a href="http://package.elm-lang.org/packages/NoRedInk/elm-decode-pipeline/latest" target="_blank"><code>NoRedInk/elm-decode-pipeline</code></a> to make HTTP requests to a server and turn the resulting JSON into Elm values. You would say:</p>
+<pre><code class="lang-bash">elm-package install elm-lang/http
+elm-package install NoRedInk/elm-decode-pipeline
+</code></pre>
+<p>This will add the dependencies to your <code>elm-package.json</code> file that describes your project. (Or create it if you do not have one yet!) More information about all this <a href="https://github.com/elm-lang/elm-package" target="_blank">here</a>!</p>
+<p><strong>Notable commands:</strong></p>
+<ul>
+<li><code>install</code>: install the dependencies in <code>elm-package.json</code></li>
+<li><code>publish</code>: publish your library to the Elm Package Catalog</li>
+<li><code>bump</code>: bump version numbers based on API changes</li>
+<li><code>diff</code>: get the difference between two APIs</li>
+</ul>
 
                                 
                                 </section>
@@ -651,8 +699,12 @@
 
             
                 
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="install.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Install">
+                
+                <a href="core_language.html" class="navigation navigation-next " aria-label="Next page: Core Language">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -663,7 +715,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Install","level":"1.2","depth":1,"path":"install.md","ref":"install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube","bulk-redirect"],"pluginsConfig":{"youtube":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"ga":{"configuration":"auto","token":"UA-25827182-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-02-16T07:29:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-27T19:29:53.562Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Install","level":"1.2","depth":1,"next":{"title":"Core Language","level":"1.3","depth":1,"path":"core_language.md","ref":"core_language.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube","bulk-redirect"],"pluginsConfig":{"youtube":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"ga":{"configuration":"auto","token":"UA-25827182-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"install.md","mtime":"2017-02-16T07:29:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-27T19:29:53.562Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

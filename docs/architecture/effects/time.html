@@ -102,12 +102,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../../get_started.html">
+        <li class="chapter " data-level="1.2" data-path="../../install.html">
             
-                <a href="../../get_started.html">
+                <a href="../../install.html">
             
                     
-                    Get Started
+                    Install
             
                 </a>
             
@@ -534,51 +534,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="../../effect_managers/">
-            
-                <a href="../../effect_managers/">
-            
-                    
-                    Effect Managers
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../../effect_managers/caching.html">
-            
-                <a href="../../effect_managers/caching.html">
-            
-                    
-                    Caching
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../../effect_managers/batching.html">
-            
-                <a href="../../effect_managers/batching.html">
-            
-                    
-                    Batching
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
 
     
 
@@ -632,7 +587,6 @@
 <p>So far we have focused on commands. With the randomness example, we <em>asked</em> for a random value. With the HTTP example, we <em>asked</em> for info from a server. That pattern does not really work for a clock. In this case, we want to sit around and hear about clock ticks whenever they happen. This is where <strong>subscriptions</strong> come in.</p>
 <p>The code is not too crazy here, so I am going to include it in full. After you read through, we will come back to normal words that explain it in more depth.</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">import</span> Html <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Html</span>)
-<span class="hljs-keyword">import</span> Html.App <span class="hljs-keyword">as</span> App
 <span class="hljs-keyword">import</span> Svg <span class="hljs-keyword">exposing</span> (..)
 <span class="hljs-keyword">import</span> Svg.Attributes <span class="hljs-keyword">exposing</span> (..)
 <span class="hljs-keyword">import</span> Time <span class="hljs-keyword">exposing</span> (<span class="hljs-type">Time</span>, second)
@@ -640,7 +594,7 @@
 
 
 <span class="hljs-title">main</span> =
-  <span class="hljs-type">App</span>.program
+  <span class="hljs-type">Html</span>.program
     { init = init
     , view = view
     , update = update
@@ -753,7 +707,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Time","level":"1.4.2.3","depth":3,"next":{"title":"Web Sockets","level":"1.4.2.4","depth":3,"path":"architecture/effects/web_sockets.md","ref":"architecture/effects/web_sockets.md","articles":[]},"previous":{"title":"HTTP","level":"1.4.2.2","depth":3,"path":"architecture/effects/http.md","ref":"architecture/effects/http.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-25827182-1"},"youtube":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"architecture/effects/time.md","mtime":"2016-11-03T07:08:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-03T07:10:54.632Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Time","level":"1.4.2.3","depth":3,"next":{"title":"Web Sockets","level":"1.4.2.4","depth":3,"path":"architecture/effects/web_sockets.md","ref":"architecture/effects/web_sockets.md","articles":[]},"previous":{"title":"HTTP","level":"1.4.2.2","depth":3,"path":"architecture/effects/http.md","ref":"architecture/effects/http.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube","bulk-redirect"],"pluginsConfig":{"youtube":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"ga":{"configuration":"auto","token":"UA-25827182-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"architecture/effects/time.md","mtime":"2017-02-16T07:29:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-27T19:29:53.562Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

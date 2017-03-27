@@ -102,12 +102,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../get_started.html">
+        <li class="chapter " data-level="1.2" data-path="../install.html">
             
-                <a href="../get_started.html">
+                <a href="../install.html">
             
                     
-                    Get Started
+                    Install
             
                 </a>
             
@@ -534,51 +534,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="../effect_managers/">
-            
-                <a href="../effect_managers/">
-            
-                    
-                    Effect Managers
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../effect_managers/caching.html">
-            
-                <a href="../effect_managers/caching.html">
-            
-                    
-                    Caching
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../effect_managers/batching.html">
-            
-                <a href="../effect_managers/batching.html">
-            
-                    
-                    Batching
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
 
     
 
@@ -660,15 +615,15 @@
   div []
     [ fieldset []
         [ label []
-            [ input [ <span class="hljs-keyword">type</span>&apos; &quot;radio&quot;, onClick (<span class="hljs-type">SwitchTo</span> <span class="hljs-type">Small</span>) ] []
+            [ input [ type_ &quot;radio&quot;, onClick (<span class="hljs-type">SwitchTo</span> <span class="hljs-type">Small</span>) ] []
             , text <span class="hljs-string">&quot;Small&quot;</span>
             ]
         , label []
-            [ input [ <span class="hljs-keyword">type</span>&apos; &quot;radio&quot;, onClick (<span class="hljs-type">SwitchTo</span> <span class="hljs-type">Medium</span>) ] []
+            [ input [ type_ &quot;radio&quot;, onClick (<span class="hljs-type">SwitchTo</span> <span class="hljs-type">Medium</span>) ] []
             , text <span class="hljs-string">&quot;Medium&quot;</span>
             ]
         , label []
-            [ input [ <span class="hljs-keyword">type</span>&apos; &quot;radio&quot;, onClick (<span class="hljs-type">SwitchTo</span> <span class="hljs-type">Large</span>) ] []
+            [ input [ type_ &quot;radio&quot;, onClick (<span class="hljs-type">SwitchTo</span> <span class="hljs-type">Large</span>) ] []
             , text <span class="hljs-string">&quot;Large&quot;</span>
             ]
         ]
@@ -690,7 +645,7 @@
 <span class="hljs-title">radio</span> : msg -&gt; <span class="hljs-type">String</span> -&gt; <span class="hljs-type">Html</span> msg
 <span class="hljs-title">radio</span> msg name =
   label []
-    [ input [ <span class="hljs-keyword">type</span>&apos; &quot;radio&quot;, onClick msg ] []
+    [ input [ type_ &quot;radio&quot;, onClick msg ] []
     , text name
     ]
 </code></pre>
@@ -714,7 +669,7 @@
 <span class="hljs-title">radio</span> : (<span class="hljs-type">String</span>, msg) -&gt; <span class="hljs-type">Html</span> msg
 <span class="hljs-title">radio</span> (name, msg) =
   label []
-    [ input [ <span class="hljs-keyword">type</span>&apos; &quot;radio&quot;, onClick msg ] []
+    [ input [ type_ &quot;radio&quot;, onClick msg ] []
     , text name
     ]
 </code></pre>
@@ -783,7 +738,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Radio Buttons","level":"1.8.2","depth":2,"next":{"title":"Modules","level":"1.8.3","depth":2,"path":"reuse/modules.md","ref":"reuse/modules.md","articles":[]},"previous":{"title":"Labeled Checkboxes","level":"1.8.1","depth":2,"path":"reuse/checkboxes.md","ref":"reuse/checkboxes.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-25827182-1"},"youtube":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"reuse/radio_buttons.md","mtime":"2016-11-03T07:08:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-03T07:10:54.632Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Radio Buttons","level":"1.8.2","depth":2,"next":{"title":"Modules","level":"1.8.3","depth":2,"path":"reuse/modules.md","ref":"reuse/modules.md","articles":[]},"previous":{"title":"Labeled Checkboxes","level":"1.8.1","depth":2,"path":"reuse/checkboxes.md","ref":"reuse/checkboxes.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube","bulk-redirect"],"pluginsConfig":{"youtube":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"ga":{"configuration":"auto","token":"UA-25827182-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"reuse/radio_buttons.md","mtime":"2017-02-16T07:29:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-27T19:29:53.562Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

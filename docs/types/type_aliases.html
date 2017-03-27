@@ -102,12 +102,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../get_started.html">
+        <li class="chapter " data-level="1.2" data-path="../install.html">
             
-                <a href="../get_started.html">
+                <a href="../install.html">
             
                     
-                    Get Started
+                    Install
             
                 </a>
             
@@ -534,51 +534,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="../effect_managers/">
-            
-                <a href="../effect_managers/">
-            
-                    
-                    Effect Managers
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../effect_managers/caching.html">
-            
-                <a href="../effect_managers/caching.html">
-            
-                    
-                    Caching
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../effect_managers/batching.html">
-            
-                <a href="../effect_managers/batching.html">
-            
-                    
-                    Batching
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
 
     
 
@@ -656,7 +611,13 @@
 <p><strong>Note:</strong> When you create a type alias specifically for a record, it also generates a <em>record constructor</em>. So our <code>User</code> type alias will also generate this function:</p>
 <pre><code class="lang-elm"><span class="hljs-type">User</span> : <span class="hljs-type">String</span> -&gt; <span class="hljs-type">String</span> -&gt; <span class="hljs-type">String</span> -&gt; <span class="hljs-type">User</span>
 </code></pre>
-<p>The arguments are in the order they appear in the type alias declaration. You may want to use this sometimes.</p>
+<p>The arguments are in the order they appear in the type alias declaration, so in the REPL you could do this:</p>
+<pre><code class="lang-elm">&gt; <span class="hljs-keyword">type</span> <span class="hljs-keyword">alias</span> <span class="hljs-type">User</span> = { name : <span class="hljs-type">String</span>, bio : <span class="hljs-type">String</span>, pic : <span class="hljs-type">String</span> }
+
+&gt; <span class="hljs-type">User</span> <span class="hljs-string">&quot;Tom&quot;</span> <span class="hljs-string">&quot;Friendly Carpenter&quot;</span> <span class="hljs-string">&quot;http://example.com/tom.jpg&quot;</span>
+{ name = <span class="hljs-string">&quot;Tom&quot;</span>, bio = <span class="hljs-string">&quot;Friendly Carpenter&quot;</span>, pic = <span class="hljs-string">&quot;http://example.com/tom.jpg&quot;</span> } : <span class="hljs-type">User</span>
+</code></pre>
+<p>This can be pretty handy!</p>
 </blockquote>
 
                                 
@@ -701,7 +662,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Type Aliases","level":"1.5.2","depth":2,"next":{"title":"Union Types","level":"1.5.3","depth":2,"path":"types/union_types.md","ref":"types/union_types.md","articles":[]},"previous":{"title":"Reading Types","level":"1.5.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-25827182-1"},"youtube":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"types/type_aliases.md","mtime":"2016-11-03T07:08:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-03T07:10:54.632Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Type Aliases","level":"1.5.2","depth":2,"next":{"title":"Union Types","level":"1.5.3","depth":2,"path":"types/union_types.md","ref":"types/union_types.md","articles":[]},"previous":{"title":"Reading Types","level":"1.5.1","depth":2,"path":"types/reading_types.md","ref":"types/reading_types.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube","bulk-redirect"],"pluginsConfig":{"youtube":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"ga":{"configuration":"auto","token":"UA-25827182-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"types/type_aliases.md","mtime":"2017-03-17T03:38:57.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-27T19:29:53.562Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

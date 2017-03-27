@@ -102,12 +102,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../../get_started.html">
+        <li class="chapter " data-level="1.2" data-path="../../install.html">
             
-                <a href="../../get_started.html">
+                <a href="../../install.html">
             
                     
-                    Get Started
+                    Install
             
                 </a>
             
@@ -534,51 +534,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="../../effect_managers/">
-            
-                <a href="../../effect_managers/">
-            
-                    
-                    Effect Managers
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../../effect_managers/caching.html">
-            
-                <a href="../../effect_managers/caching.html">
-            
-                    
-                    Caching
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../../effect_managers/batching.html">
-            
-                <a href="../../effect_managers/batching.html">
-            
-                    
-                    Batching
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
 
     
 
@@ -673,10 +628,9 @@
 <p>Alright, the obvious thing missing right now is the HTTP request. I think it is easiest to start this process by adding new kinds of messages. Now remember, <strong>when you give a command, you have to wait for it to happen.</strong> So when we command Elm to do an HTTP request, it is eventually going to tell you &quot;hey, here is what you wanted&quot; or it is going to say &quot;oops, something went wrong with the HTTP request&quot;. We need this to be reflected in our messages:</p>
 <pre><code class="lang-elm"><span class="hljs-keyword">type</span> <span class="hljs-type">Msg</span>
   = <span class="hljs-type">MorePlease</span>
-  | <span class="hljs-type">FetchSucceed</span> <span class="hljs-type">String</span>
-  | <span class="hljs-type">FetchFail</span> <span class="hljs-type">Http</span>.<span class="hljs-type">Error</span>
+  | <span class="hljs-type">NewGif</span> (<span class="hljs-type">Result</span> <span class="hljs-type">Http</span>.<span class="hljs-type">Error</span> <span class="hljs-type">String</span>)
 </code></pre>
-<p>We still have <code>MorePlease</code> from before, but for the HTTP results, we add <code>FetchSucceed</code> that holds the new gif URL and <code>FetchFail</code> that indicates there was some HTTP issue (server is down, bad URL, etc.)</p>
+<p>We add a case for <code>NewGif</code> that holds a <code>Result</code>. You can read more about results <a href="../../error_handling/result.html">here</a>, but the key idea is that it captures the two possible outcomes of an HTTP request. It either (1) succeeded with the URL of a random gif or (2) failed with some HTTP error (server is down, bad URL, etc.)</p>
 <p>That is enough to start filling in <code>update</code>:</p>
 <pre><code class="lang-elm"><span class="hljs-title">update</span> : <span class="hljs-type">Msg</span> -&gt; <span class="hljs-type">Model</span> -&gt; (<span class="hljs-type">Model</span>, <span class="hljs-type">Cmd</span> <span class="hljs-type">Msg</span>)
 <span class="hljs-title">update</span> msg model =
@@ -684,13 +638,13 @@
     <span class="hljs-type">MorePlease</span> -&gt;
       (model, getRandomGif model.topic)
 
-    <span class="hljs-type">FetchSucceed</span> newUrl -&gt;
-      (<span class="hljs-type">Model</span> model.topic newUrl, <span class="hljs-type">Cmd</span>.none)
+    <span class="hljs-type">NewGif</span> (<span class="hljs-type">Ok</span> newUrl) -&gt;
+      ( { model | gifUrl = newUrl }, <span class="hljs-type">Cmd</span>.none)
 
-    <span class="hljs-type">FetchFail</span> _ -&gt;
+    <span class="hljs-type">NewGif</span> (<span class="hljs-type">Err</span> _) -&gt;
       (model, <span class="hljs-type">Cmd</span>.none)
 </code></pre>
-<p>So I added branches for our new messages. In the case of <code>FetchSucceed</code> we update the <code>gifUrl</code> field to have the new URL. In the case of <code>FetchFail</code> we pretty much ignore it, giving back the same model and doing nothing.</p>
+<p>So I added branches for our new messages. When <code>NewGif</code> holds a success, we update the <code>gifUrl</code> field to have the new URL. When <code>NewGif</code> holds an error, we ignore it, giving back the same model and doing nothing.</p>
 <p>I also changed the <code>MorePlease</code> branch a bit. We need an HTTP command, so I called the <code>getRandomGif</code> function. The trick is that I made that function up. It does not exist yet. That is the next step!</p>
 <p>Defining <code>getRandomGif</code> might look something like this:</p>
 <pre><code class="lang-elm"><span class="hljs-title">getRandomGif</span> : <span class="hljs-type">String</span> -&gt; <span class="hljs-type">Cmd</span> <span class="hljs-type">Msg</span>
@@ -698,28 +652,31 @@
   <span class="hljs-keyword">let</span>
     url =
       <span class="hljs-string">&quot;https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&amp;tag=&quot;</span> ++ topic
-  <span class="hljs-keyword">in</span>
-    <span class="hljs-type">Task</span>.perform <span class="hljs-type">FetchFail</span> <span class="hljs-type">FetchSucceed</span> (<span class="hljs-type">Http</span>.get decodeGifUrl url)
 
-<span class="hljs-title">decodeGifUrl</span> : <span class="hljs-type">Json</span>.<span class="hljs-type">Decoder</span> <span class="hljs-type">String</span>
+    request =
+      <span class="hljs-type">Http</span>.get url decodeGifUrl
+  <span class="hljs-keyword">in</span>
+    <span class="hljs-type">Http</span>.send <span class="hljs-type">NewGif</span> request
+
+<span class="hljs-title">decodeGifUrl</span> : <span class="hljs-type">Decode</span>.<span class="hljs-type">Decoder</span> <span class="hljs-type">String</span>
 <span class="hljs-title">decodeGifUrl</span> =
-  <span class="hljs-type">Json</span>.at [<span class="hljs-string">&quot;data&quot;</span>, <span class="hljs-string">&quot;image_url&quot;</span>] <span class="hljs-type">Json</span>.string
+  <span class="hljs-type">Decode</span>.at [<span class="hljs-string">&quot;data&quot;</span>, <span class="hljs-string">&quot;image_url&quot;</span>] <span class="hljs-type">Decode</span>.string
 </code></pre>
-<p>Okay, so the <code>getRandomGif</code> function is not exceptionally crazy. We first define the <code>url</code> we need to hit to get random gifs. Next we have <a href="http://package.elm-lang.org/packages/evancz/elm-http/3.0.1/Http#get" target="_blank">this <code>Http.get</code> function</a> which is going to GET some JSON from the <code>url</code> we give it. The interesting part there is The <code>decodeGifUrl</code> argument which describes how to turn JSON into Elm values. In our case, we are saying &#x201C;try to get the value at <code>json.data.image_url</code> and it should be a string.&#x201D;</p>
-<blockquote>
-<p><strong>Note:</strong> See <a href="http://guide.elm-lang.org/interop/json.html" target="_blank">this</a> for more information on JSON decoders. It will clarify how it works, but for now, you really just need a high-level understanding. It turns JSON into Elm.</p>
-</blockquote>
-<p>The <code>Task.perform</code> part is clarifying what to do with the result of this GET:</p>
-<ol>
-<li>The first argument <code>FetchFail</code> is for when the GET fails. If the server is down or the URL is a 404, we tag the resulting error with <code>FetchFail</code> and feed it into our <code>update</code> function.</li>
-<li>The second argument <code>FetchSucceed</code> is for when the GET succeeds. When we get some URL back like <code>http://example.com/json</code>, we convert it into  <code>FetchSucceed &quot;http://example.com/json&quot;</code> so that it can be fed into our <code>update</code> function.</li>
-</ol>
-<p>We will get into the details of how this all works later in this guide, but for now, if you just follow the pattern here, you will be fine using HTTP.</p>
-<p>And now when you click the &quot;More&quot; button, it actually goes and fetches a random gif!</p>
+<p>With that added, the &quot;More&quot; button actually goes and fetches a random gif. Check it out <a href="http://elm-lang.org/examples/http" target="_blank">here</a>! But how does <code>getRandomGif</code> work exactly?</p>
+<p>It starts out simple, we define <code>url</code> to be some giphy endpoint for random gifs. Next we create an HTTP <code>request</code> with <a href="http://package.elm-lang.org/packages/elm-lang/http/latest/Http#get" target="_blank"><code>Http.get</code></a>. Finally, we turn it into a command with <a href="http://package.elm-lang.org/packages/elm-lang/http/latest/Http#send" target="_blank"><code>Http.send</code></a>. Let&#x2019;s break those steps down a bit more:</p>
+<ul>
+<li><p><code>Http.get : String -&gt; Decode.Decoder value -&gt; Http.Request value</code></p>
+<p>This function takes a URL and a JSON decoder. This is our first time seeing a JSON decoder (and we will cover them in depth <a href="../../interop/json.html">later</a>), but for now, you really just need a high-level understanding. It turns JSON into Elm. In our case, we defined <code>decodeGifUrl</code> which tries to find a string value at <code>json.data.image_url</code>. Between the URL and the JSON decoder, we create an <code>Http.Request</code>. This is similar to a <code>Random.Generator</code> like we saw in <a href="random.html">the previous example</a>. It does not actually <em>do</em> anything. It just describes how to make an HTTP request.</p>
+</li>
+<li><p><code>Http.send : (Result Error value -&gt; msg) -&gt; Http.Request value -&gt; Cmd msg</code></p>
+<p>Once we have an HTTP request, we can turn it into a command with <code>Http.send</code>. This is just like how we used <code>Random.generate</code> to create a command with a random generator. The first argument is a way to turn the result of the HTTP request into a message for our <code>update</code> function. In this case, we create a <code>NewGif</code> message.</p>
+</li>
+</ul>
+<p>This has been a very quick introduction, but the key idea is that you must (1) create an HTTP request and (2) turn that into a command so Elm will actually <em>do</em> it. You can go pretty far using the basic pattern here, and we will be looking into JSON decoders <a href="../../interop/json.html">later on</a>, which will let you deal with whatever crazy JSON you run into.</p>
 <blockquote>
 <p><strong>Exercises:</strong> To get more comfortable with this code, try augmenting it with skills we learned in previous sections:</p>
 <ul>
-<li>Show a message explaining why the image didn&apos;t change when you get a <code>FetchFail</code>.</li>
+<li>Show a message explaining why the image didn&apos;t change when you get an <a href="http://package.elm-lang.org/packages/elm-lang/http/latest/Http#Error" target="_blank"><code>Http.Error</code></a>.</li>
 <li>Allow the user to modify the <code>topic</code> with a text field.</li>
 <li>Allow the user to modify the <code>topic</code> with a drop down menu.</li>
 </ul>
@@ -767,7 +724,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"HTTP","level":"1.4.2.2","depth":3,"next":{"title":"Time","level":"1.4.2.3","depth":3,"path":"architecture/effects/time.md","ref":"architecture/effects/time.md","articles":[]},"previous":{"title":"Random","level":"1.4.2.1","depth":3,"path":"architecture/effects/random.md","ref":"architecture/effects/random.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube"],"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-25827182-1"},"youtube":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"architecture/effects/http.md","mtime":"2016-11-03T07:08:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-11-03T07:10:54.632Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"HTTP","level":"1.4.2.2","depth":3,"next":{"title":"Time","level":"1.4.2.3","depth":3,"path":"architecture/effects/time.md","ref":"architecture/effects/time.md","articles":[]},"previous":{"title":"Random","level":"1.4.2.1","depth":3,"path":"architecture/effects/random.md","ref":"architecture/effects/random.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["ga","youtube","bulk-redirect"],"pluginsConfig":{"youtube":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"bulk-redirect":{"basepath":"/","redirectsFile":"redirects.json"},"ga":{"configuration":"auto","token":"UA-25827182-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"architecture/effects/http.md","mtime":"2017-03-17T03:38:57.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-27T19:29:53.562Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
