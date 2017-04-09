@@ -54,6 +54,18 @@ init =
 
 Here we specify both the initial model and some commands we'd like to run immediately when the app starts. This is exactly the kind of stuff that `update` is producing now too.
 
+While we aren't using subscriptions in this example, remember that the architecture skeleton has changed to include them. The `main` should reflect this, since we aren't using the `Html.beginnerProgram` anymore.
+
+```elm
+main =
+  Html.program
+    { init = init
+    , view = view
+    , update = update
+    , subscriptions = subscriptions
+    }
+```
+
 At this point, it is possible to wire it all up and take a look. You can click the `<button>`, but nothing happens. Let's fix that!
 
 
