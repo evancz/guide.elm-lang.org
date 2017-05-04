@@ -1,5 +1,9 @@
 # Labeled Checkboxes
 
+---
+#### Follow along in the [online editor](http://elm-lang.org/examples/checkboxes).
+---
+
 Your app will probably have some options people can mess with. If something happens, should you send them an email notification? If they come across a video, should it start playing by itself? That kind of thing. So you will need to create some HTML like this:
 
 ```html
@@ -10,7 +14,7 @@ Your app will probably have some options people can mess with. If something happ
 </fieldset>
 ```
 
-That will let people toggle the checkboxes, and using `<label>` means they get a much bigger area they can click on. Let&rsquo;s write an Elm program that manages all this interaction! As always, we will take a guess at our `Model`. We know we need to track the user&rsquo;s settings so we will put them in our model:
+That will let people toggle the checkboxes, and using `<label>` means they get a much bigger area they can click on. Let’s write an Elm program that manages all this interaction! As always, we will take a guess at our `Model`. We know we need to track the user’s settings so we will put them in our model:
 
 ```elm
 type alias Model =
@@ -62,7 +66,7 @@ view model =
     ]
 ```
 
-This is not too crazy, but we are repeating ourselves quite a bit. How can we make our `view` function nicer? If you are coming from JavaScript, your first instinct is probably that we should make a &ldquo;labeled checkbox component&rdquo; but your first instinct is wrong! Instead, we will create a helper function!
+This is not too crazy, but we are repeating ourselves a bit. How can we make our `view` function nicer? If you are coming from JavaScript, your first instinct is probably that we should make a &ldquo;labeled checkbox component&rdquo; but it is easier to just create a helper function! Here is the `view` function with a `checkbox` helper function:
 
 ```elm
 view : Model -> Html Msg
@@ -92,4 +96,4 @@ We now have enough information to do a simple comparison of these approaches. Re
 
   - **No parent-child communication.** If we had made a &ldquo;checkbox component&rdquo; we would have to figure out how to synchronize the state in the checkbox component with our overall model. &ldquo;That checkbox says notifications are on, but the model says they are off!&rdquo; Maybe we need a Flux store now? By using functions instead, we are able to have reuse in our view *without* disrupting our `Model` or `update`. They work exactly the same as before, no need to touch them!
 
-This means we can always create reusable `view` code without changing our overall architecture or introducing any fancy ideas. Just write smaller functions. That sounds nice, but let&rsquo;s see some more examples to make sure it is true!
+This means we can always create reusable `view` code without changing our overall architecture or introducing any fancy ideas. Just write smaller functions. That sounds nice, but let’s see some more examples to make sure it is true!

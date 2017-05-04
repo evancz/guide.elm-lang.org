@@ -34,7 +34,7 @@ Using Elm is way nicer when you have a code editor to help you out. There are El
   * [IntelliJ](https://github.com/durkiewicz/elm-plugin)
   * [Light Table](https://github.com/rundis/elm-light)
   * [Sublime Text](https://packagecontrol.io/packages/Elm%20Language%20Support)
-  * [Vim](https://github.com/lambdatoast/elm.vim)
+  * [Vim](https://github.com/ElmCast/elm-vim)
   * [VS Code](https://github.com/sbrink/vscode-elm)
 
 If you do not have an editor at all, [Sublime Text](https://www.sublimetext.com/) is a great one to get started with!
