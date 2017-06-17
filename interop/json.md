@@ -80,7 +80,7 @@ So now we can handle JSON arrays. If we want to get extra crazy, we can even nes
 Ok [[0],[1,2,3],[4,5]] : Result String (List (List Int))
 ```
 
-So that is `list`, but `Json.Decode` can handle many other data structures too. For example, [`dict`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#dict) helps you turn a JSON object into an Elm `Dict` and [`keyValuePairs`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#keyValuePairs) helps you turn a JSON object into an Elm list of keys and values.
+So that is `list`, but `Json.Decode` can handle many other data structures too. For example, [`dict`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#dict) helps you turn a JSON object into an Elm [`Dict`](http://package.elm-lang.org/packages/elm-lang/core/latest/Dict) and [`keyValuePairs`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#keyValuePairs) helps you turn a JSON object into an Elm list of keys and values.
 
 
 ## Decoding Objects
