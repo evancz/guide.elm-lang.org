@@ -54,7 +54,18 @@ init =
 
 Here we specify both the initial model and some commands we'd like to run immediately when the app starts. This is exactly the kind of stuff that `update` is producing now too.
 
-At this point, it is possible to wire it all up and take a look. You can click the `<button>`, but nothing happens. Let's fix that!
+To wire it all up, you'll need these lines at the top:
+```elm
+import Html exposing (Html, div, h1, text, button, program)
+import Html.Events exposing (onClick)
+
+
+main = program {init = init, update = update, view = view, subscriptions = subscriptions}
+```
+
+And for `subscriptions` you can simply return `Sub.none` for now.
+
+At this point, it is possible to load the program in a browser and take a look. You can click the `<button>`, but nothing happens. Let's fix that!
 
 
 ## Phase Two - Adding the Cool Stuff
