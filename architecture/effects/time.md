@@ -78,6 +78,8 @@ view model =
 
 ```
 
+(If you're following along on your computer, you may need to `elm package install elm-lang/svg`.)
+
 There is nothing new in the `MODEL` or `UPDATE` sections. Same old stuff. The `view` function is kind of interesting. Instead of using HTML, we use the `Svg` library to draw some shapes. It works just like HTML though. You provide a list of attributes and a list of children for every node.
 
 The important thing comes in `SUBSCRIPTIONS` section. The `subscriptions` function takes in the model, and instead of returning `Sub.none` like in the examples we have seen so far, it gives back a real life subscription! In this case `Time.every`:
@@ -95,3 +97,4 @@ That is all there is to setting up a subscription! These messages will be fed to
 >
 >   - Add a button to pause the clock, turning the `Time` subscription off.
 >   - Make the clock look nicer. Add an hour and minute hand. Etc.
+>   - Send a command from `init` to make the first view of the clock show the correct time. (Hint: see [Task.perform](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Task#perform))
