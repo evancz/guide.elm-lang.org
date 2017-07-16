@@ -48,7 +48,6 @@ In the first case, we have a `List` filled with `String` values. In the second, 
 Let's see the type of some functions:
 
 ```elm
-> import String
 > String.length
 <function> : String -> Int
 ```
@@ -190,7 +189,6 @@ So if you actually wrote down all the parentheses in the type, it would instead 
 It is the same with all functions in Elm:
 
 ```elm
-> import String
 > String.repeat
 <function> : Int -> String -> String
 ```
