@@ -91,7 +91,7 @@ update msg model =
       (Model newFace, Cmd.none)
 ```
 
-There are two new things here. **First**, there is now a branch for `NewFace` messages. When a `NewFace` comes in, we just step the model forward and do nothing. **Second**, we have added a real command to the `Roll` branch. This uses a couple functions from [the `Random` library](http://package.elm-lang.org/packages/elm-lang/core/latest/Random). Most important is `Random.generate`:
+There are two new things here. **First**, there is now a branch for `NewFace` messages. When a `NewFace` comes in, we just step the model forward and do nothing. **Second**, we have added a real command to the `Roll` branch. This uses a couple functions from [the `Random` library](http://package.elm-lang.org/packages/elm-lang/core/latest/Random). (Don't forget to `import Random` near the top of your program.) Most important is `Random.generate`:
 
 ```elm
 Random.generate : (a -> msg) -> Random.Generator a -> Cmd msg
