@@ -154,8 +154,6 @@ Again, all elements of the list must have the same type.
 Tuples are another useful data structure. A tuple can hold a fixed number of values, and each value can have any type. A common use is if you need to return more than one value from a function. The following function gets a name and gives a message for the user:
 
 ```elm
-> import String
-
 > goodName name = \
 |   if String.length name <= 20 then \
 |     (True, "name accepted!") \
