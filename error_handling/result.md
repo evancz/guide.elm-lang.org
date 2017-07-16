@@ -19,8 +19,6 @@ type Result error value
 You have two constructors: `Err` to tag errors and `Ok` to tag successes. Let's see what happens when we actually use `String.toInt` in the REPL:
 
 ```elm
-> import String
-
 > String.toInt "128"
 Ok 128 : Result String Int
 
