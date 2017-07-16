@@ -10,7 +10,7 @@ Now, I am going to assume you just read the randomness example. It (1) introduce
 
 ...
 
-Okay, so you read it now right? Good. Let's get started on our random gif fetcher!
+Okay, so you read it now, right? Good. Let's get started on our random gif fetcher!
 
 
 ## Phase One - The Bare Minimum
@@ -53,6 +53,8 @@ view model =
 ```
 
 For the model, I decided to track a `topic` so I know what kind of gifs to fetch. I do not want to hard code it to `"cats"`, and maybe later we will want to let the user decide the topic too. I also tracked the `gifUrl` which is a URL that points at some random gif.
+
+(The compiler should be reminding you to expose the `h2` and `img` functions from `Html`; you'll also need to `import Html.Attributes exposing (src)`.)
 
 Like in the randomness example, I just made dummy `init` and `update` functions. None of them actually produce any commands for now. The point is just to get something on screen!
 
@@ -108,9 +110,19 @@ decodeGifUrl =
   Decode.at ["data", "image_url"] Decode.string
 ```
 
-With that added, the "More" button actually goes and fetches a random gif. Check it out [here](http://elm-lang.org/examples/http)! But how does `getRandomGif` work exactly?
+With that added, the "More" button actually goes and fetches a random gif.
 
-It starts out simple, we define `url` to be some giphy endpoint for random gifs. Next we create an HTTP `request` with [`Http.get`](http://package.elm-lang.org/packages/elm-lang/http/latest/Http#get). Finally, we turn it into a command with [`Http.send`](http://package.elm-lang.org/packages/elm-lang/http/latest/Http#send). Let’s break those steps down a bit more:
+If you're following along, you'll need to `elm package install elm-lang/http` at this point. You'll also need the following import statements:
+
+```elm
+
+import Http exposing (get, send)
+import Json.Decode as Decode
+```
+
+Now our code should compile and run. Check it out [here](http://elm-lang.org/examples/http)! But how does `getRandomGif` work exactly?
+
+It starts out simple: we define `url` to be some giphy endpoint for random gifs. Next we create an HTTP `request` with [`Http.get`](http://package.elm-lang.org/packages/elm-lang/http/latest/Http#get). Finally, we turn it into a command with [`Http.send`](http://package.elm-lang.org/packages/elm-lang/http/latest/Http#send). Let’s break those steps down a bit more:
 
   - `Http.get : String -> Decode.Decoder value -> Http.Request value`
 
@@ -127,5 +139,7 @@ This has been a very quick introduction, but the key idea is that you must (1) c
 >   - Show a message explaining why the image didn't change when you get an [`Http.Error`](http://package.elm-lang.org/packages/elm-lang/http/latest/Http#Error).
 >   - Allow the user to modify the `topic` with a text field.
 >   - Allow the user to modify the `topic` with a drop down menu.
+>   - Replace our broken "waiting" image with a real one.
+>   - Send the command to fetch a gif from within our `init` function to avoid seeing the "waiting" image.
 
 
