@@ -30,15 +30,15 @@ Completed : Visibility
 Now that we have these three cases defined, we want to create a function `keep` that will properly filter our tasks. It should work like this:
 
 ```elm
-type alias Task = { task : String, complete : Bool }
+type alias Task = { task : String, completed : Bool }
 
 buy : Task
 buy =
-  { task = "Buy milk", complete = True }
+  { task = "Buy milk", completed = True }
 
 drink : Task
 drink =
-  { task = "Drink milk", complete = False }
+  { task = "Drink milk", completed = False }
 
 tasks : List Task
 tasks =
@@ -49,7 +49,7 @@ tasks =
 
 -- keep All tasks == [buy,drink]
 -- keep Active tasks == [drink]
--- keep Complete tasks == [buy]
+-- keep Completed tasks == [buy]
 ```
 
 So the `keep` function needs to look at its first argument, and depending on what it is, filter the list in various ways. We use a `case` expression to do this. It is like an `if` on steroids:
@@ -62,13 +62,13 @@ keep visibility tasks =
       tasks
 
     Active ->
-      List.filter (\task -> not task.complete) tasks
+      List.filter (\task -> not task.completed) tasks
 
     Completed ->
-      List.filter (\task -> task.complete) tasks
+      List.filter (\task -> task.completed) tasks
 ```
 
-The `case` is saying, look at the structure of `visibility`. If it is `All`, just give back all the tasks. If it is `Active`, keep only the tasks that are not complete. If it is `Completed`, keep only the tasks that are complete.
+The `case` is saying, look at the structure of `visibility`. If it is `All`, just give back all the tasks. If it is `Active`, keep only the tasks that were not completed. If it is `Completed`, keep only the tasks that were completed.
 
 The cool thing about `case` expressions is that all the branches are checked by the compiler. This has some nice benefits:
 
