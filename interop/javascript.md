@@ -7,7 +7,7 @@ At some point your Elm program is probably going to need to talk to JavaScript. 
 This way we can have access to full power of JavaScript, the good and the bad, without giving up on all the things that are nice about Elm.
 
 
-## Step 1: Embed in HTML
+## Step 1: Explicitly Build Javascript
 
 Normally when you run the Elm compiler, it will give you an HTML file that sets everything up for you. So running this:
 
@@ -21,7 +21,16 @@ Will result in a `index.html` file that you can just open up and start using. To
 elm-make src/Main.elm --output=main.js
 ```
 
-Now the compiler will generate a JavaScript file that lets you initialize your program like this:
+Now the compiler will generate a JavaScript file that lets you customize your program initialization.
+
+
+## Step 2: Initialize Elm App
+
+There are two types of Elm app, embedded and fullscreen.
+
+### Embedded App
+
+To embed your program in a DOM node, initialize your program like this:
 
 ```html
 <div id="main"></div>
@@ -42,7 +51,7 @@ This is doing three important things:
 
 So now we can set Elm up in any `<div>` we want. So if you are using React, you can create a component that just sets this kind of thing up. If you are using Angular or Ember or something else, it should not be too crazy either. Just take over a `<div>`.
 
-### Fullscreen Embed in HTML
+### Fullscreen App
 
 If you don't need the app to be tied to a specific node, you can also get an elm app object by using the fullscreen method:
 
@@ -57,7 +66,7 @@ If you don't need the app to be tied to a specific node, you can also get an elm
 The next section gets into how to get your Elm and JavaScript code to communicate with each other in a nice way.
 
 
-## Step 2: Talk to JavaScript
+## Step 3: Talk to JavaScript
 
 There are two major ways for Elm and JavaScript to talk to each other: **ports** and **flags**.
 
