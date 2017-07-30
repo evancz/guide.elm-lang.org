@@ -42,6 +42,17 @@ This is doing three important things:
 
 So now we can set Elm up in any `<div>` we want. So if you are using React, you can create a component that just sets this kind of thing up. If you are using Angular or Ember or something else, it should not be too crazy either. Just take over a `<div>`.
 
+### Fullscreen Embed in HTML
+
+If you don't need the app to be tied to a specific node, you can also get an elm app object by using the fullscreen method:
+
+```html
+<div id="main"></div>
+<script src="main.js"></script>
+<script>
+    var app = Elm.Main.fullscreen();
+```
+
 The next section gets into how to get your Elm and JavaScript code to communicate with each other in a nice way.
 
 
