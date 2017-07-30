@@ -63,7 +63,7 @@ If you don't need the app to be tied to a specific node, you can also get an elm
 </script>
 ```
 
-The next section gets into how to get your Elm and JavaScript code to communicate with each other in a nice way.
+The next section gets into how to get your Elm and JavaScript code to communicate with each other.
 
 
 ## Step 3: Talk to JavaScript
