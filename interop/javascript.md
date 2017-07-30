@@ -51,6 +51,7 @@ If you don't need the app to be tied to a specific node, you can also get an elm
 <script src="main.js"></script>
 <script>
     var app = Elm.Main.fullscreen();
+</script>
 ```
 
 The next section gets into how to get your Elm and JavaScript code to communicate with each other in a nice way.
