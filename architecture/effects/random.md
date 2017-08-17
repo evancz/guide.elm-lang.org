@@ -112,6 +112,6 @@ At this point, the best way to improve your understanding of commands is just to
 > And here are some that require new skills:
 >
 >   - Instead of showing an image of a die face, use the `elm-lang/svg` library to draw it yourself.
->   - After you have learned about tasks and animation, have the die flip around randomly before they settle on a final value.
+>   - After you have learned about tasks and animation, have the dice flip around randomly before they settle on a final value.
 
 
