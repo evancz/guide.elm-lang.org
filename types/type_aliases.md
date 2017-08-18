@@ -10,7 +10,7 @@ hasBio user =
   String.length user.bio > 0
 ```
 
-That type annotation is kind of a mess, and users do not even have that many details! Imagine if there were ten fields. Or if you had a function that took users as an argument and gave users as the result.
+That type annotation is kind of a mess, and `user` does not even have that many details! Imagine if there were ten fields. Or if you had a function that took users as an argument and gave users as the result.
 
 In cases like this, you should create a *type alias* for your data:
 
