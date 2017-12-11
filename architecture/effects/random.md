@@ -44,7 +44,7 @@ update msg model =
 
 Now the `update` function has the same overall shape as before, but the return type is a bit different. Instead of just giving back a `Model`, it produces both a `Model` and a command. The idea is: **we still want to step the model forward, but we also want to do some stuff.** In our case, we want to ask Elm to give us a random value. For now, I just fill it in with [`Cmd.none`](http://package.elm-lang.org/packages/elm-lang/core/latest/Platform-Cmd#none) which means "I have no commands, do nothing." We will fill this in with the good stuff in phase two.
 
-Finally, I would create an `init` value like this:
+After that, I would create an `init` value like this:
 
 ```elm
 init : (Model, Cmd Msg)
@@ -53,6 +53,24 @@ init =
 ```
 
 Here we specify both the initial model and some commands we'd like to run immediately when the app starts. This is exactly the kind of stuff that `update` is producing now too.
+
+This example does not do anything on the initial render, so it will have no
+subscriptions.
+
+```elm
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
+```
+
+Finally, our program can no longer use `Html.beginnerProgram` because now we
+need to support commands and subscriptions. This is possible with `Html.program`
+
+```elm
+main : Program Never Model Msg
+main =
+  Html.program { init = init, view = view, update = update, subscriptions = subscriptions }
+```
 
 At this point, it is possible to wire it all up and take a look. You can click the `<button>`, but nothing happens. Let's fix that!
 
@@ -113,5 +131,3 @@ At this point, the best way to improve your understanding of commands is just to
 >
 >   - Instead of showing an image of a die face, use the `elm-lang/svg` library to draw it yourself.
 >   - After you have learned about tasks and animation, have the dice flip around randomly before they settle on a final value.
-
-
