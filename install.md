@@ -7,8 +7,8 @@
   * Windows &mdash; [installer][win]
   * Anywhere &mdash; [npm installer][npm] or [build from source][build]
 
-[mac]: http://install.elm-lang.org/Elm-Platform-0.18.pkg
-[win]: http://install.elm-lang.org/Elm-Platform-0.18.exe
+[mac]: https://44a95588fe4cc47efd96-ec3c2a753a12d2be9f23ba16873acc23.ssl.cf2.rackcdn.com/Elm-Platform-0.18.pkg
+[win]: https://44a95588fe4cc47efd96-ec3c2a753a12d2be9f23ba16873acc23.ssl.cf2.rackcdn.com/Elm-Platform-0.18.exe
 [npm]: https://www.npmjs.com/package/elm
 [build]: https://github.com/elm-lang/elm-platform
 
