@@ -62,7 +62,7 @@ canBuyAlcohol user =
   case user.age of
     Nothing ->
       False
-      
+
     Just age ->
       age >= 21
 ```
@@ -72,7 +72,7 @@ Now the cool thing is that we are forced to use a `case` to pattern match on the
 
 ## Partial Functions
 
-Sometimes you want a function that gives an answer sometimes, but just does not in other cases. 
+Sometimes you want a function that gives an answer sometimes, but just does not in other cases.
 
 Let's say Mountain Dew wants to do some ad buys for people ages 13 to 18. Honestly, it is better to start kids on Mountain Dew younger than that, but it is illegal for kids under 13 to be on our site.
 
@@ -84,18 +84,18 @@ getTeenAge user =
   case user.age of
     Nothing ->
       Nothing
-      
+
     Just age ->
       if 13 <= age && age <= 18 then
         Just age
-        
+
       else
         Nothing
 ```
 
 Again, we are reminded that users may not have an age, but if they do, we only want to return it if it is between 13 and 18. Now Elm can guarantee that anyone who calls `getTeenAge` will have to handle the possibility that the age is out of range.
 
-This gets pretty cool when you start combining it with library functions like [`List.filterMap`](http://package.elm-lang.org/packages/elm-lang/core/latest/List#filterMap) that help you process more data. For example, maybe we want to figure out the distribution of ages between 13 and 18. We could do it like this:
+This gets pretty cool when you start combining it with library functions like [`List.filterMap`](https://package.elm-lang.org/packages/elm-lang/core/latest/List#filterMap) that help you process more data. For example, maybe we want to figure out the distribution of ages between 13 and 18. We could do it like this:
 
 ```elm
 > alice = User "Alice" (Just 14)

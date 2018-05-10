@@ -118,7 +118,7 @@ Lists are one of the most common data structures in Elm. They hold a sequence of
 
 Lists can hold many values. Those values must all have the same type. Here are a few examples that use functions from [the `List` library][list]:
 
-[list]: http://package.elm-lang.org/packages/elm-lang/core/latest/List
+[list]: https://package.elm-lang.org/packages/elm-lang/core/latest/List
 
 ```elm
 > names = [ "Alice", "Bob", "Chuck" ]

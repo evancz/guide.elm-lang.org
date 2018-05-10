@@ -147,7 +147,7 @@ There are two important parts for us:
 
   - `"source-directories"` &mdash; This is a list of all the directories that `elm-make` will search through to find modules. Saying `import Optional` means `elm-make` will search for `src/Optional.elm` and `benchmarks/src/Optional.elm`. Notice that the name of the module needs to match the name of the file exactly.
 
-  - `"dependencies"` &mdash; This lists all the [community packages](http://package.elm-lang.org/) you depend on. Saying `import Optional` means `elm-make` will also search the [`elm-lang/core`](http://package.elm-lang.org/packages/elm-lang/core/latest/) and [`elm-lang/html`](http://package.elm-lang.org/packages/elm-lang/html/latest/) packages for modules named `Optional`.
+  - `"dependencies"` &mdash; This lists all the [community packages](https://package.elm-lang.org/) you depend on. Saying `import Optional` means `elm-make` will also search the [`elm-lang/core`](https://package.elm-lang.org/packages/elm-lang/core/latest/) and [`elm-lang/html`](https://package.elm-lang.org/packages/elm-lang/html/latest/) packages for modules named `Optional`.
 
 Typically, you will say `"source-directories": [ "src" ]` and have your project set up like this:
 

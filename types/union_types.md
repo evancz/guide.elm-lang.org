@@ -218,7 +218,7 @@ One nice thing about this approach is that there is no mystery about what kind o
 >   - Creating a union type generates a bunch of *constructors*.
 >   - These constuctors *tag* data so that we can differentiate it at runtime.
 >   - A `case` expression lets us tear data apart based on these tags.
-> 
+>
 > The same strategies can be used if you are making a game and have a bunch of different bad guys. Goombas should update one way, but Koopa Troopas do something totally different. Solve each problem independently, and then use a union type to put them all together.
 
 
@@ -282,7 +282,7 @@ If we get an `Empty` value, the sum is 0. If we have a `Node` we add the first e
 On each line, we see one evaluation step. When we call `sum` it transforms the list based on whether it is looking at a `Node` or an `Empty` value.
 
 > **Note:** This is the first recursive function we have written together! Notice that `sum` calls itself to get the sum. It can be tricky to get into the mindset of writing recursive functions, so I wanted to share one weird trick. **Pretend you are already done.**
-> 
+>
 > I always start with a `case` and all of the branches listed but not filled in. From there, I solve each branch one at a time, pretending that nothing else exists. So with `sum` I'd look at `Empty ->` and say, an empty list has to sum to zero. Then I'd look at the `Node n remainingNumbers ->` branch and think, well, I know I have a number, a list, and a `sum` function that definitely already exists and totally works. I can just use that and add a number to it!
 
 ## Generic Data Structures
@@ -311,7 +311,7 @@ The fancy part comes in the `Node` constructor. Instead of pinning the data to `
 
 Everything else is the same. You pattern match on lists with `case` and you write recursive functions. The only difference is that our lists can hold anything now!
 
-> **Exercise:** This is exactly how the `List` type in Elm works, so take a look at [the `List` library](http://package.elm-lang.org/packages/elm-lang/core/latest/List) and see if you can implement some of those functions yourself.
+> **Exercise:** This is exactly how the `List` type in Elm works, so take a look at [the `List` library](https://package.elm-lang.org/packages/elm-lang/core/latest/List) and see if you can implement some of those functions yourself.
 
 
 ## Additional Examples

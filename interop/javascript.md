@@ -119,8 +119,8 @@ The second way to talk to JavaScript is with *flags*. You can think of this as s
 
 Instead of creating a `Program` with the [`program`][program] function, we can use the [`programWithFlags`][programWithFlags]. So say we want to get a value like this from JavaScript on initialization:
 
-[program]: http://package.elm-lang.org/packages/elm-lang/html/latest/Html#program
-[programWithFlags]: http://package.elm-lang.org/packages/elm-lang/html/latest/Html#programWithFlags
+[program]: https://package.elm-lang.org/packages/elm-lang/html/latest/Html#program
+[programWithFlags]: https://package.elm-lang.org/packages/elm-lang/html/latest/Html#programWithFlags
 
 ```elm
 type alias Flags =
@@ -175,7 +175,7 @@ The particular types that can be sent in and out of ports are quite flexible, co
   * **Tuples**  &ndash; correspond to fixed-length, mixed-type JS arrays
   * **Records** &ndash; correspond to JavaScript objects
   * **Maybes**  &ndash; `Nothing` and `Just 42` correspond to `null` and `42` in JS
-  * **Json**    &ndash; [`Json.Encode.Value`](http://package.elm-lang.org/packages/elm-lang/core/latest/Json-Encode#Value) corresponds to arbitrary JSON
+  * **Json**    &ndash; [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm-lang/core/latest/Json-Encode#Value) corresponds to arbitrary JSON
 
 Now say Elm wants a `List String`, but someone calls `app.ports.suggestions.send(42)` on the JavaScript side. We *know* it will cause issues in Elm, and we *know* the code producing invalid data is on the JS side. So rather than letting the bad data into Elm and cause a runtime exception *eventually* (the JavaScript way!) we throw a runtime exception *immediately* when you call `send` with invalid data. So we cannot solve the problem of invalid data in JavaScript, but we can at least make sure it stays on the JavaScript side!
 
