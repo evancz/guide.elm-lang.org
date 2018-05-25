@@ -10,30 +10,45 @@ Again this is a pretty short program, so I have included the whole thing here. S
 
 
 ```elm
+import Browser
 import Html exposing (Html, Attribute, div, input, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
 
+
+-- MAIN
+
+
 main =
-  Html.beginnerProgram { model = model, view = view, update = update }
+  Browser.sandbox
+    { init = init
+    , update = update
+    , view = view
+    }
+
 
 
 -- MODEL
+
 
 type alias Model =
   { content : String
   }
 
-model : Model
-model =
+
+init : Model
+init =
   { content = "" }
+
 
 
 -- UPDATE
 
+
 type Msg
   = Change String
+
 
 update : Msg -> Model -> Model
 update msg model =
@@ -42,12 +57,14 @@ update msg model =
       { model | content = newContent }
 
 
+
 -- VIEW
+
 
 view : Model -> Html Msg
 view model =
   div []
-    [ input [ placeholder "Text to reverse", onInput Change ] []
+    [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
     , div [] [ text (String.reverse model.content) ]
     ]
 ```
@@ -91,14 +108,14 @@ Finally we need to say how to view our application:
 view : Model -> Html Msg
 view model =
   div []
-    [ input [ placeholder "Text to reverse", onInput Change ] []
+    [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
     , div [] [ text (String.reverse model.content) ]
     ]
 ```
 
 We create a `<div>` with two children.
 
-The interesting child is the `<input>` node. In addition to the `placeholder` attribute, it uses `onInput` to declare what messages should be sent when the user types into this input.
+The interesting child is the `<input>` node. In addition to the `placeholder` and `value` attributes, it uses `onInput` to declare what messages should be sent when the user types into this input.
 
 This `onInput` function is kind of interesting. It takes one argument, in this case the `Change` function which was created when we declared the `Msg` type:
 
