@@ -1,7 +1,7 @@
 # Buttons
 
 ---
-#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](http://elm-lang.org/examples/buttons).
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/buttons).
 ---
 
 Our first example is a simple counter that can be incremented or decremented. I find that it can be helpful to see the entire program in one place, so here it is! We will break it down afterwards.
@@ -51,7 +51,7 @@ view model =
 
 That's everything!
 
-> **Note:** This section has `type` and `type alias` declarations. You can read all about these in the upcoming section on [types](http://guide.elm-lang.org/types/index.html). You do not *need* to deeply understand that stuff now, but you are free to jump ahead if it helps.
+> **Note:** This section has `type` and `type alias` declarations. You can read all about these in the upcoming section on [types](https://guide.elm-lang.org/types/index.html). You do not *need* to deeply understand that stuff now, but you are free to jump ahead if it helps.
 
 When writing this program from scratch, I always start by taking a guess at the model. To make a counter, we at least need to keep track of a number that is going up and down. So let's just start with that!
 
@@ -92,13 +92,13 @@ view model =
     ]
 ```
 
-You can see more examples of basic HTML [here](http://elm-lang.org/examples).
+You can see more examples of basic HTML [here](https://elm-lang.org/examples).
 
 One thing to notice is that our `view` function is producing a `Html Msg` value. This means that it is a chunk of HTML that can produce `Msg` values. And when you look at the definition, you see the `onClick` attributes are set to give out `Increment` and `Decrement` values. These will get fed directly into our `update` function, driving our whole app forward.
 
 Another thing to notice is that `div` and `button` are just normal Elm functions. These functions take (1) a list of attributes and (2) a list of child nodes. It is just HTML with slightly different syntax. Instead of having `<` and `>` everywhere, we have `[` and `]`. We have found that folks who can read HTML have a pretty easy time learning to read this variation. Okay, but why not have it be *exactly* like HTML? **Since we are using normal Elm functions, we have the full power of the Elm programming language to help us build our views!** We can refactor repetitive code out into functions. We can put helpers in modules and import them just like any other code. We can use the same testing frameworks and libraries as any other Elm code. Everything that is nice about programming in Elm is 100% available to help you with your view. No need for a hacked together templating language!
 
-There is also something a bit deeper going on here. **The view code is entirely declarative**. We take in a `Model` and produce some `Html`. That is it. There is no need to mutate the DOM manually, Elm takes care of that behind the scenes. This gives Elm [much more freedom to make clever optimizations](http://elm-lang.org/blog/blazing-fast-html) and ends up making rendering *faster* overall. So you write less code and the code runs faster. The best kind of abstraction!
+There is also something a bit deeper going on here. **The view code is entirely declarative**. We take in a `Model` and produce some `Html`. That is it. There is no need to mutate the DOM manually, Elm takes care of that behind the scenes. This gives Elm [much more freedom to make clever optimizations](https://elm-lang.org/blog/blazing-fast-html) and ends up making rendering *faster* overall. So you write less code and the code runs faster. The best kind of abstraction!
 
 This pattern is the essence of The Elm Architecture. Every example we see from now on will be a slight variation on this basic pattern: `Model`, `update`, `view`.
 

@@ -99,8 +99,8 @@ Elm projects all have an `elm.json` file (like [this](https://github.com/elm-lan
 
 Say you want to use [`elm-lang/http`][http] and [`NoRedInk/json-decode-pipeline`][pipe] to make HTTP requests to a server and turn the resulting JSON into Elm values. You would say:
 
-[http]: https://package.elm-lang.org/packages/elm-lang/http/latest
-[json]: https://package.elm-lang.org/packages/elm-lang/json/latest
+[http]: https://package.elm-lang.org/packages/elm/http/latest
+[json]: https://package.elm-lang.org/packages/elm/json/latest
 [pipe]: https://package.elm-lang.org/packages/NoRedInk/json-decode-pipeline/latest
 
 ```bash

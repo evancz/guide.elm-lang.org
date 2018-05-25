@@ -6,7 +6,7 @@ The last section showed how to handle all sorts of user input. You can think of 
 
 From our perspective, we just receive messages and produce new `Html` to get rendered on screen. The &ldquo;Elm Runtime&rdquo; is sitting there behind the scenes. When it gets `Html` it figures out how to render it on screen [really fast][vdom]. When a user clicks on something, it figures out how to pipe that into our program as a `Msg`. So the Elm Runtime is in charge of *doing* stuff. We just transform data.
 
-[vdom]: http://elm-lang.org/blog/blazing-fast-html-round-two
+[vdom]: https://elm-lang.org/blog/blazing-fast-html-round-two
 
 This section builds on that pattern, giving you the ability to make HTTP requests or subscribe to messages from web sockets. Think of it like this:
 

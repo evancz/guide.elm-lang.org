@@ -1,7 +1,7 @@
 # HTTP
 
 ---
-#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](http://elm-lang.org/examples/http).
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/http).
 ---
 
 We are about to make an app that fetches a random GIF when the user asks for another image.
@@ -108,9 +108,9 @@ decodeGifUrl =
   Decode.at ["data", "image_url"] Decode.string
 ```
 
-With that added, the "More" button actually goes and fetches a random gif. Check it out [here](http://elm-lang.org/examples/http)! But how does `getRandomGif` work exactly?
+With that added, the "More" button actually goes and fetches a random gif. Check it out [here](https://elm-lang.org/examples/http)! But how does `getRandomGif` work exactly?
 
-It starts out simple, we define `url` to be some giphy endpoint for random gifs. Next we create an HTTP `request` with [`Http.get`](https://package.elm-lang.org/packages/elm-lang/http/latest/Http#get). Finally, we turn it into a command with [`Http.send`](https://package.elm-lang.org/packages/elm-lang/http/latest/Http#send). Let’s break those steps down a bit more:
+It starts out simple, we define `url` to be some giphy endpoint for random gifs. Next we create an HTTP `request` with [`Http.get`](https://package.elm-lang.org/packages/elm/http/latest/Http#get). Finally, we turn it into a command with [`Http.send`](https://package.elm-lang.org/packages/elm/http/latest/Http#send). Let’s break those steps down a bit more:
 
   - `Http.get : String -> Decode.Decoder value -> Http.Request value`
 
@@ -124,7 +124,7 @@ This has been a very quick introduction, but the key idea is that you must (1) c
 
 > **Exercises:** To get more comfortable with this code, try augmenting it with skills we learned in previous sections:
 >
->   - Show a message explaining why the image didn't change when you get an [`Http.Error`](https://package.elm-lang.org/packages/elm-lang/http/latest/Http#Error).
+>   - Show a message explaining why the image didn't change when you get an [`Http.Error`](https://package.elm-lang.org/packages/elm/http/latest/Http#Error).
 >   - Allow the user to modify the `topic` with a text field.
 >   - Allow the user to modify the `topic` with a drop down menu.
 

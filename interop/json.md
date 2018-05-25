@@ -2,7 +2,7 @@
 
 # JSON
 
-You will be sending lots of JSON in your programs. You use [the `Json.Decode` library](https://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode) to convert wild and crazy JSON into nicely structured Elm values.
+You will be sending lots of JSON in your programs. You use [the `Json.Decode` library](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode) to convert wild and crazy JSON into nicely structured Elm values.
 
 The core concept for working with JSON is called a **decoder**. It decodes JSON values into Elm values. We will start out by looking at some very basic decoders and then look at how to put them together to handle more complex scenarios.
 
@@ -49,7 +49,7 @@ Now that we can handle the simplest JSON values, how can we deal with more compl
 
 ## Combining Decoders
 
-The cool thing about decoders is that they snap together like building blocks. So if we want to handle a list of values, we would reach for the [`list`](https://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#list) function:
+The cool thing about decoders is that they snap together like building blocks. So if we want to handle a list of values, we would reach for the [`list`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#list) function:
 
 ```elm
 list : Decoder a -> Decoder (List a)
@@ -80,12 +80,12 @@ So now we can handle JSON arrays. If we want to get extra crazy, we can even nes
 Ok [[0],[1,2,3],[4,5]] : Result String (List (List Int))
 ```
 
-So that is `list`, but `Json.Decode` can handle many other data structures too. For example, [`dict`](https://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#dict) helps you turn a JSON object into an Elm `Dict` and [`keyValuePairs`](https://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#keyValuePairs) helps you turn a JSON object into an Elm list of keys and values.
+So that is `list`, but `Json.Decode` can handle many other data structures too. For example, [`dict`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#dict) helps you turn a JSON object into an Elm `Dict` and [`keyValuePairs`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#keyValuePairs) helps you turn a JSON object into an Elm list of keys and values.
 
 
 ## Decoding Objects
 
-We decode JSON objects with the [`field`](https://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#field) function. It snaps together decoders just like `list`:
+We decode JSON objects with the [`field`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#field) function. It snaps together decoders just like `list`:
 
 ```elm
 field : String -> Decoder a -> Decoder a
@@ -106,7 +106,7 @@ Ok 3 : Result String Int
 Ok 4 : Result String Int
 ```
 
-Notice that the `field "x" int` decoder only cares about field `x`. The object can have other fields with other content. That is all separate. But what happens when you want to get information from *many* fields? Well, we just need to put together many decoders. This is possible with functions like [`map2`](https://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#map2):
+Notice that the `field "x" int` decoder only cares about field `x`. The object can have other fields with other content. That is all separate. But what happens when you want to get information from *many* fields? Well, we just need to put together many decoders. This is possible with functions like [`map2`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#map2):
 
 ```elm
 map2 : (a -> b -> value) -> Decoder a -> Decoder b -> Decoder value
@@ -129,7 +129,7 @@ This function takes in two different decoders. If they are both successful, it u
 Ok { x = 3, y = 4 } : Result String Point
 ```
 
-Okay, that covers two fields, but what about three? Or four? The core library provides [`map3`](https://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#map3), [`map4`](https://package.elm-lang.org/packages/elm-lang/core/latest/Json-Decode#map4), and others for handling larger objects.
+Okay, that covers two fields, but what about three? Or four? The core library provides [`map3`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#map3), [`map4`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#map4), and others for handling larger objects.
 
 As you start working with larger JSON objects, it is worth checking out [`NoRedInk/elm-decode-pipeline`](https://package.elm-lang.org/packages/NoRedInk/elm-decode-pipeline/latest). It builds on top of the core `Json.Decode` module described here and lets you write stuff like this:
 

@@ -6,7 +6,7 @@ This architecture seems to emerge naturally in Elm. We first observed it in the 
 
 So The Elm Architecture is *easy* in Elm, but it is useful in any front-end project. In fact, projects like Redux have been inspired by The Elm Architecture, so you may have already seen derivatives of this pattern. Point is, even if you ultimately cannot use Elm at work yet, you will get a lot out of using Elm and internalizing this pattern.
 
-[Elm]: http://elm-lang.org/
+[Elm]: https://elm-lang.org/
 [TodoMVC]: https://github.com/evancz/elm-todomvc
 [dreamwriter]: https://github.com/rtfeldman/dreamwriter#dreamwriter
 [NoRedInk]: https://www.noredink.com/

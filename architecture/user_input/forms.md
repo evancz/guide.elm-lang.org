@@ -1,7 +1,7 @@
 # Forms
 
 ---
-#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](http://elm-lang.org/examples/form).
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/form).
 ---
 
 Here we will make a rudimentary form. It has a field for your name, a field for your password, and a field to verify that password. We will also do some very simple validation (do the two passwords match?) just because it is simple to add.
@@ -156,4 +156,4 @@ On these same lines, you may notice that the `<input>` nodes all are created wit
 >  - Add an additional field for `age` and check that it is a number.
 >  - Add a "Submit" button. Only show errors *after* it has been pressed.
 >
-> Be sure to use the helpers in [the `String` library](https://package.elm-lang.org/packages/elm-lang/core/latest/String) if you try any of these! Also, we need to learn more before we start talking to servers, so before you try that here, keep reading until HTTP is introduced. It will be significantly easier with proper guidance!
+> Be sure to use the helpers in [the `String` library](https://package.elm-lang.org/packages/elm/core/latest/String) if you try any of these! Also, we need to learn more before we start talking to servers, so before you try that here, keep reading until HTTP is introduced. It will be significantly easier with proper guidance!

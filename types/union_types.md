@@ -311,7 +311,7 @@ The fancy part comes in the `Node` constructor. Instead of pinning the data to `
 
 Everything else is the same. You pattern match on lists with `case` and you write recursive functions. The only difference is that our lists can hold anything now!
 
-> **Exercise:** This is exactly how the `List` type in Elm works, so take a look at [the `List` library](https://package.elm-lang.org/packages/elm-lang/core/latest/List) and see if you can implement some of those functions yourself.
+> **Exercise:** This is exactly how the `List` type in Elm works, so take a look at [the `List` library](https://package.elm-lang.org/packages/elm/core/latest/List) and see if you can implement some of those functions yourself.
 
 
 ## Additional Examples
@@ -333,7 +333,7 @@ We have seen a couple scenarios, but the best way to get more comfortable is to 
 Node "hi" Empty Empty : Tree String
 ```
 
-A tree is either empty or it is a node with a value and two children. Check out [this example](http://elm-lang.org/examples/binary-tree) for more info on this. If you can do all of the exercises at the end of that link, consider yourself a capable user of union types!
+A tree is either empty or it is a node with a value and two children. Check out [this example](https://elm-lang.org/examples/binary-tree) for more info on this. If you can do all of the exercises at the end of that link, consider yourself a capable user of union types!
 
 
 ### Languages
@@ -352,4 +352,4 @@ true = Or T F
 false = And T (Not T)
 ```
 
-Once we have modeled the possible values we can define functions like `eval` which evaluates any `Boolean` to `True` or `False`. See [this example](http://elm-lang.org/examples/boolean-expressions) for more about representing boolean expressions.
+Once we have modeled the possible values we can define functions like `eval` which evaluates any `Boolean` to `True` or `False`. See [this example](https://elm-lang.org/examples/boolean-expressions) for more about representing boolean expressions.

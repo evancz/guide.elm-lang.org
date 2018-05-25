@@ -1,7 +1,7 @@
 # Random
 
 ---
-#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](http://elm-lang.org/examples/random).
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/random).
 ---
 
 We are about to make an app that "rolls dice", producing a random number between 1 and 6.
@@ -42,7 +42,7 @@ update msg model =
       (model, Cmd.none)
 ```
 
-Now the `update` function has the same overall shape as before, but the return type is a bit different. Instead of just giving back a `Model`, it produces both a `Model` and a command. The idea is: **we still want to step the model forward, but we also want to do some stuff.** In our case, we want to ask Elm to give us a random value. For now, I just fill it in with [`Cmd.none`](https://package.elm-lang.org/packages/elm-lang/core/latest/Platform-Cmd#none) which means "I have no commands, do nothing." We will fill this in with the good stuff in phase two.
+Now the `update` function has the same overall shape as before, but the return type is a bit different. Instead of just giving back a `Model`, it produces both a `Model` and a command. The idea is: **we still want to step the model forward, but we also want to do some stuff.** In our case, we want to ask Elm to give us a random value. For now, I just fill it in with [`Cmd.none`](https://package.elm-lang.org/packages/elm/core/latest/Platform-Cmd#none) which means "I have no commands, do nothing." We will fill this in with the good stuff in phase two.
 
 Finally, I would create an `init` value like this:
 
@@ -80,7 +80,7 @@ update msg model =
       (Model newFace, Cmd.none)
 ```
 
-There are two new things here. **First**, there is now a branch for `NewFace` messages. When a `NewFace` comes in, we just step the model forward and do nothing. **Second**, we have added a real command to the `Roll` branch. This uses a couple functions from [the `Random` library](https://package.elm-lang.org/packages/elm-lang/core/latest/Random). Most important is `Random.generate`:
+There are two new things here. **First**, there is now a branch for `NewFace` messages. When a `NewFace` comes in, we just step the model forward and do nothing. **Second**, we have added a real command to the `Roll` branch. This uses a couple functions from [the `Random` library](https://package.elm-lang.org/packages/elm/core/latest/Random). Most important is `Random.generate`:
 
 ```elm
 Random.generate : (a -> msg) -> Random.Generator a -> Cmd msg
