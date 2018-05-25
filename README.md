@@ -17,14 +17,15 @@ If you are on the fence, I can safely guarantee that if you give Elm a shot and 
 
 Of course *I* think Elm is good, so look for yourself.
 
-Here is [a simple counter](http://elm-lang.org/examples/buttons). If you look at the code, it just lets you increment and decrement the counter:
+Here is [a simple counter](https://elm-lang.org/examples/buttons). If you look at the code, it just lets you increment and decrement the counter:
 
 ```elm
+import Browser
 import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
 
 main =
-  Html.beginnerProgram { model = 0, view = view, update = update }
+  Browser.sandbox { init = 0, update = update, view = view }
 
 type Msg = Increment | Decrement
 
@@ -39,7 +40,7 @@ update msg model =
 view model =
   div []
     [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (toString model) ]
+    , div [] [ text (String.fromInt model) ]
     , button [ onClick Increment ] [ text "+" ]
     ]
 ```
