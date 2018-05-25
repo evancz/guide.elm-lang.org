@@ -7,20 +7,21 @@
 Our first example is a simple counter that can be incremented or decremented. I find that it can be helpful to see the entire program in one place, so here it is! We will break it down afterwards.
 
 ```elm
+import Browser
 import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
 
 
 main =
-  Html.beginnerProgram { model = model, view = view, update = update }
+  Browser.sandbox { init = init, update = update, view = view }
 
 
 -- MODEL
 
 type alias Model = Int
 
-model : Model
-model =
+init : Model
+init =
   0
 
 
@@ -44,14 +45,14 @@ view : Model -> Html Msg
 view model =
   div []
     [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (toString model) ]
+    , div [] [ text (String.fromInt model) ]
     , button [ onClick Increment ] [ text "+" ]
     ]
 ```
 
 That's everything!
 
-> **Note:** This section has `type` and `type alias` declarations. You can read all about these in the upcoming section on [types](https://guide.elm-lang.org/types/index.html). You do not *need* to deeply understand that stuff now, but you are free to jump ahead if it helps.
+> **Note:** This section has `type` and `type alias` declarations. You can read all about these in the upcoming section on [types](/types/index.html). You do not *need* to deeply understand that stuff now, but you are free to jump ahead if it helps.
 
 When writing this program from scratch, I always start by taking a guess at the model. To make a counter, we at least need to keep track of a number that is going up and down. So let's just start with that!
 
@@ -80,14 +81,14 @@ update msg model =
 
 If you get an `Increment` message, you increment the model. If you get a `Decrement` message, you decrement the model. Pretty straight-forward stuff.
 
-Okay, so that's all good, but how do we actually make some HTML and show it on screen? Elm has a library called `elm-lang/html` that gives you full access to HTML5 as normal Elm functions:
+Okay, so that's all good, but how do we actually make some HTML and show it on screen? Elm has a library called `elm/html` that gives you full access to HTML5 as normal Elm functions:
 
 ```elm
 view : Model -> Html Msg
 view model =
   div []
     [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (toString model) ]
+    , div [] [ text (String.fromInt model) ]
     , button [ onClick Increment ] [ text "+" ]
     ]
 ```

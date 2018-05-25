@@ -9,16 +9,27 @@ Here we will make a rudimentary form. It has a field for your name, a field for 
 The code is a bit longer in this case, but I still think it is valuable to look through it before you get into the description of what is going on.
 
 ```elm
+import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 
 
+
+-- MAIN
+
+
 main =
-  Html.beginnerProgram { model = model, view = view, update = update }
+  Browser.sandbox
+    { init = init
+    , update = update
+    , view = view
+    }
+
 
 
 -- MODEL
+
 
 type alias Model =
   { name : String
@@ -27,17 +38,19 @@ type alias Model =
   }
 
 
-model : Model
-model =
+init : Model
+init =
   Model "" "" ""
+
 
 
 -- UPDATE
 
+
 type Msg
-    = Name String
-    | Password String
-    | PasswordAgain String
+  = Name String
+  | Password String
+  | PasswordAgain String
 
 
 update : Msg -> Model -> Model
@@ -53,30 +66,34 @@ update msg model =
       { model | passwordAgain = password }
 
 
+
 -- VIEW
+
 
 view : Model -> Html Msg
 view model =
   div []
-    [ input [ type_ "text", placeholder "Name", onInput Name ] []
-    , input [ type_ "password", placeholder "Password", onInput Password ] []
-    , input [ type_ "password", placeholder "Re-enter Password", onInput PasswordAgain ] []
+    [ viewInput "text" "Name" model.name Name
+    , viewInput "password" "Password" model.password Password
+    , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
     , viewValidation model
     ]
 
+
+viewInput : String -> String -> String -> msg -> Html msg
+viewInput t p v msg =
+  input [ type_ t, placeholder p, value v, onInput msg ] []
+
+
 viewValidation : Model -> Html msg
 viewValidation model =
-  let
-    (color, message) =
-      if model.password == model.passwordAgain then
-        ("green", "OK")
-      else
-        ("red", "Passwords do not match!")
-  in
-    div [ style [("color", color)] ] [ text message ]
+  if model.password == model.passwordAgain then
+    div [ style "color" "green" ] [ text "OK" ]
+  else
+    div [ style "color" "red" ] [ text "Passwords do not match!" ]
 ```
 
-This is pretty much exactly how our [text field example](text_fields.md) looked, just with more fields. Let's walk through how it came to be!
+This is pretty similar to our [text field example](text_fields.md), just with more fields. Let's walk through how it came to be!
 
 As always, you start out by guessing at the `Model`. We know there are going to be three text fields, so let's just go with that:
 
@@ -92,9 +109,9 @@ Great, seems reasonable. We expect that each of these fields can be changed sepa
 
 ```elm
 type Msg
-    = Name String
-    | Password String
-    | PasswordAgain String
+  = Name String
+  | Password String
+  | PasswordAgain String
 ```
 
 This means our `update` is pretty mechanical. Just update the relevant field:
@@ -119,41 +136,45 @@ We get a little bit fancier than normal in our `view` though.
 view : Model -> Html Msg
 view model =
   div []
-    [ input [ type_ "text", placeholder "Name", onInput Name ] []
-    , input [ type_ "password", placeholder "Password", onInput Password ] []
-    , input [ type_ "password", placeholder "Re-enter Password", onInput PasswordAgain ] []
+    [ viewInput "text" "Name" model.name Name
+    , viewInput "password" "Password" model.password Password
+    , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
     , viewValidation model
     ]
 ```
 
-It starts out normal: We create a `<div>` and put a couple `<input>` nodes in it. Each one has an `onInput` attribute that will tag any changes appropriately for our `update` function. (This is all building off of the text field example in the previous section.)
+We start by creating a `<div>` with four child nodes. But instead of using functions from `elm/html` directly, we call Elm functions to make our code more concise! We start with three calls to `viewInput`:
 
-But for the last child we do not directly use an HTML function. Instead we call the `viewValidation` function, passing in the current model.
+```elm
+viewInput : String -> String -> String -> msg -> Html msg
+viewInput t p v msg =
+  input [ type_ t, placeholder p, value v, onInput msg ] []
+```
+
+So `viewInput "text" "Name" model.name Name` can create a node like `<input type="text" placeholder="Name" value="tom">`. That node will also send messages like `Name "toma"` to `update` on user input.
+
+The fourth entry is more interesting. It is a call to `viewValidation`:
 
 ```elm
 viewValidation : Model -> Html msg
 viewValidation model =
-  let
-    (color, message) =
-      if model.password == model.passwordAgain then
-        ("green", "OK")
-      else
-        ("red", "Passwords do not match!")
-  in
-    div [ style [("color", color)] ] [ text message ]
+  if model.password == model.passwordAgain then
+    div [ style "color" "green" ] [ text "OK" ]
+  else
+    div [ style "color" "red" ] [ text "Passwords do not match!" ]
 ```
 
-This function first compares the two passwords. If they match, you want green text and a positive message. If they do not match, you want red text and a helpful message. With that info, we produce a `<div>` filled with a colorful message explaining the situation.
+This function first compares the two passwords. If they match, you get green text and a positive message. If they do not match, you get red text and a helpful message.
 
-This starts to show the benefits of having our HTML library be normal Elm code. It would have looked really weird to jam all that code into our `view`. In Elm, you just refactor like you would with any other code!
-
-On these same lines, you may notice that the `<input>` nodes all are created with pretty similar code. Say we made each input fancier: there is an outer `<div>` that holds a `<span>` and an `<input>` with certain classes. It would make total sense to break that pattern out into a `viewInput` function so you never have to repeat yourself. This also means you change it in one place and everyone gets the updated HTML.
+These helper functions begin to show the benefits of having our HTML library be normal Elm code. We _could_ jam all that code into our `view`, but in Elm, it is normal to refactor view functions like you would any other code! Is this getting hard to understand? Maybe I can break out a helper function!
 
 > **Exercises:** One cool thing about breaking `viewValidation` out is that it is pretty easy to augment. If you are messing with the code as you read through this (as you should be!) you should try to:
 >
 >  - Check that the password is longer than 8 characters.
 >  - Make sure the password contains upper case, lower case, and numeric characters.
 >  - Add an additional field for `age` and check that it is a number.
->  - Add a "Submit" button. Only show errors *after* it has been pressed.
+>  - Add a `Submit` button. Only show errors *after* it has been pressed.
 >
-> Be sure to use the helpers in [the `String` library](https://package.elm-lang.org/packages/elm/core/latest/String) if you try any of these! Also, we need to learn more before we start talking to servers, so before you try that here, keep reading until HTTP is introduced. It will be significantly easier with proper guidance!
+> Be sure to use the helpers in the [`String`](https://package.elm-lang.org/packages/elm/core/latest/String) module if you try any of these! Also, we need to learn more before we start talking to servers, so before you try that here, keep reading until HTTP is introduced. It will be significantly easier with proper guidance!
+
+> **Note:** It seems like efforts to make generic validation libraries have not been too successful. I think the problem is that the checks are usually best captured by normal Elm functions. Take some args, give back a `Bool` or `Maybe`. E.g. Why use a library to check if two strings are equal? So as far as we know, the simplest code comes from writing the logic for your particular scenario without any special extras. So definitely give that a shot before deciding you need something more complex!
