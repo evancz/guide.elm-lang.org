@@ -3,11 +3,11 @@
 
 This section will walk you through Elm's simple core language.
 
-This works best when you follow along, so after [installing](install.md), start up `elm-repl` in the terminal. (Or use the [online REPL](http://elmrepl.cuberoot.in/).) Either way, you should see something like this:
+This works best when you follow along, so after [installing](install.md), run `elm repl` in the terminal. You should see something like this:
 
 ```elm
----- elm repl 0.18.0 -----------------------------------------------------------
- :help for help, :exit to exit, more at <https://github.com/elm-lang/elm-repl>
+---- Elm 0.19.0 ----------------------------------------------------------------
+Read <https://elm-lang.org/0.19.0/repl> to learn more: exit, help, imports, etc.
 --------------------------------------------------------------------------------
 >
 ```
@@ -72,9 +72,9 @@ True
 False
 ```
 
-Notice that function application looks different than in languages like JavaScript and Python and Java. Instead of wrapping all arguments in parentheses and separating them with commas, we use spaces to apply the function. So `(add(3,4))` becomes `(add 3 4)` which ends up avoiding a bunch of parens and commas as things get bigger. Ultimately, this looks much cleaner once you get used to it! [The elm-html package][elm-html] is a good example of how this keeps things feeling light.
+Notice that function application looks different than in languages like JavaScript and Python and Java. Instead of wrapping all arguments in parentheses and separating them with commas, we use spaces to apply the function. So `(add(3,4))` becomes `(add 3 4)` which ends up avoiding a bunch of parens and commas as things get bigger. Ultimately, this looks much cleaner once you get used to it! The [elm/html][html] package is a good example of how this keeps things feeling light.
 
-[elm-html]: http://elm-lang.org/blog/blazing-fast-html
+[html]: https://elm-lang.org/blog/blazing-fast-html-round-two
 
 
 ## If Expressions
@@ -116,9 +116,9 @@ Using a backslash in the REPL lets us split things on to multiple lines. We use 
 
 Lists are one of the most common data structures in Elm. They hold a sequence of related things, similar to arrays in JavaScript.
 
-Lists can hold many values. Those values must all have the same type. Here are a few examples that use functions from [the `List` library][list]:
+Lists can hold many values. Those values must all have the same type. Here are a few examples that use functions from the [`List`][list] module:
 
-[list]: https://package.elm-lang.org/packages/elm-lang/core/latest/List
+[list]: https://package.elm-lang.org/packages/elm/core/latest/List
 
 ```elm
 > names = [ "Alice", "Bob", "Chuck" ]
@@ -171,8 +171,7 @@ This can be quite handy, but when things start becoming more complicated, it is 
 
 ## Records
 
-A record is a set of key-value pairs, similar to objects in JavaScript or Python. You will find that they are extremely common and useful in Elm! Let's see some basic examples.
-
+A record is a fixed set of key-value pairs, similar to objects in JavaScript or Python. You will find that they are extremely common and useful in Elm! Let's see some basic examples.
 
 ```elm
 > point = { x = 3, y = 4 }
@@ -181,8 +180,8 @@ A record is a set of key-value pairs, similar to objects in JavaScript or Python
 > point.x
 3
 
-> bill = { name = "Gates", age = 57 }
-{ age = 57, name = "Gates" }
+> bill = { name = "Gates", age = 62 }
+{ age = 62, name = "Gates" }
 
 > bill.name
 "Gates"
@@ -217,7 +216,7 @@ It is often useful to update the values in a record.
 
 ```elm
 > { bill | name = "Nye" }
-{ age = 57, name = "Nye" }
+{ age = 62, name = "Nye" }
 
 > { bill | age = 22 }
 { age = 22, name = "Gates" }
@@ -231,7 +230,7 @@ It is important to notice that we do not make *destructive* updates. When we upd
 Records in Elm are *similar* to objects in JavaScript, but there are some crucial differences. The major differences are that with records:
 
 - You cannot ask for a field that does not exist.
-- No field will ever be undefined or null.
+- No field will ever be `undefined` or `null`.
 - You cannot create recursive records with a `this` or `self` keyword.
 
 Elm encourages a strict separation of data and logic, and the ability to say `this` is primarily used to break this separation. This is a systemic problem in Object Oriented languages that Elm is purposely avoiding.
