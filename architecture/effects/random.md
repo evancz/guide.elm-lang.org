@@ -4,24 +4,91 @@
 #### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/random).
 ---
 
-We are about to make an app that "rolls dice", producing a random number between 1 and 6.
+We are going to make an app that rolls dice, producing a random number between 1 and 6.
 
-When I write code with effects, I usually break it into two phases. Phase one is about getting something on screen, just doing the bare minimum to have something to work from. Phase two is filling in details, gradually approaching the actual goal. We will use this process here too.
+Let&rsquo;s start by installing the [`elm/random`][readme] package in our project:
 
+```bash
+elm install elm/random
+```
 
-## Phase One - The Bare Minimum
+Now we can `import Random` and use anything in the [`Random`][random] module. We need to do that for our dice rolling program:
 
-As always, you start out by guessing at what your `Model` should be:
+[readme]: https://package.elm-lang.org/packages/elm/random/latest
+[random]: https://package.elm-lang.org/packages/elm/random/latest/Random
 
 ```elm
+import Browser
+import Html exposing (..)
+import Html.Events exposing (..)
+import Random
+
+
+
+-- MAIN
+
+
+main =
+  Html.program
+    { init = init
+    , update = update
+    , subscriptions = subscriptions
+    , view = view
+    }
+
+
+
+-- MODEL
+
+
 type alias Model =
   { dieFace : Int
   }
-```
 
-For now we will just track `dieFace` as an integer between 1 and 6. Then I would quickly sketch out the `view` function because it seems like the easiest next step.
 
-```elm
+init : () -> (Model, Cmd Msg)
+init _ =
+  ( Model 1
+  , Cmd.none
+  )
+
+
+
+-- UPDATE
+
+
+type Msg
+  = Roll
+  | NewFace Int
+
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  case msg of
+    Roll ->
+      ( model
+      , Random.generate NewFace (Random.int 1 6)
+      )
+
+    NewFace newFace ->
+      ( Model newFace
+      , Cmd.none
+      )
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
+
+
+
+-- VIEW
+
+
 view : Model -> Html Msg
 view model =
   div []
@@ -30,71 +97,76 @@ view model =
     ]
 ```
 
-So this is typical. Same stuff we have been doing with the user input examples of The Elm Architecture. When you click our `<button>` it is going to produce a `Roll` message, so I guess it is time to take a first pass at the `update` function as well.
-
-```elm
-type Msg = Roll
-
-update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
-  case msg of
-    Roll ->
-      (model, Cmd.none)
-```
-
-Now the `update` function has the same overall shape as before, but the return type is a bit different. Instead of just giving back a `Model`, it produces both a `Model` and a command. The idea is: **we still want to step the model forward, but we also want to do some stuff.** In our case, we want to ask Elm to give us a random value. For now, I just fill it in with [`Cmd.none`](https://package.elm-lang.org/packages/elm/core/latest/Platform-Cmd#none) which means "I have no commands, do nothing." We will fill this in with the good stuff in phase two.
-
-Finally, I would create an `init` value like this:
-
-```elm
-init : (Model, Cmd Msg)
-init =
-  (Model 1, Cmd.none)
-```
-
-Here we specify both the initial model and some commands we'd like to run immediately when the app starts. This is exactly the kind of stuff that `update` is producing now too.
-
-At this point, it is possible to wire it all up and take a look. You can click the `<button>`, but nothing happens. Let's fix that!
+Now there are a couple new things in this program. Let&rsquo;s work through them!
 
 
-## Phase Two - Adding the Cool Stuff
+## `update`
 
-The obvious thing missing right now is the randomness! When the user clicks a button we want to command Elm to reach into its internal random number generator and give us a number between 1 and 6. The first step I would take towards that goal would be adding a new kind of message:
-
-```elm
-type Msg
-  = Roll
-  | NewFace Int
-```
-
-We still have `Roll` from before, but now we add `NewFace` for when Elm hands us our new random number. That is enough to start filling in `update`:
+In the previous examples, the `update` function just produced a new `Model`. The new code is doing a bit more:
 
 ```elm
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     Roll ->
-      (model, Random.generate NewFace (Random.int 1 6))
+      ( model
+      , Random.generate NewFace (Random.int 1 6)
+      )
 
     NewFace newFace ->
-      (Model newFace, Cmd.none)
+      ( Model newFace
+      , Cmd.none
+      )
 ```
 
-There are two new things here. **First**, there is now a branch for `NewFace` messages. When a `NewFace` comes in, we just step the model forward and do nothing. **Second**, we have added a real command to the `Roll` branch. This uses a couple functions from [the `Random` library](https://package.elm-lang.org/packages/elm/core/latest/Random). Most important is `Random.generate`:
+Rather than just giving a new `Model`, we are now producing commands as well. That is what that `Cmd Msg` type means. So when `update` gets a message to `Roll` a new number we:
+
+1. Give back the `model` without changes. Nothing to do right now.
+2. Create a command to generate a random integer between `1` and `6`.
+
+This data goes to Elm&rsquo;s runtime system (RTS) which turns it into effects. So for these two cases:
+
+1. When the RTS gets a new `Model`, it calls your `view` function. Does the DOM need to change? In this case, it does not!
+2. When the RTS gets a command, it immediately starts working on it. In this case, the RTS generates a random number and sends a message like `NewFace 3` or `NewFace 5` back to our `update` function. So `Cmd Msg` is saying &ldquo;this is a command for the RTS, and the RTS will give us back a `Msg` about what happened.&rdquo;
+
+Now when the RTS gives us a message like `NewFace 3` it will trigger the second branch of our `update` function. In this case, we update our `Model` with the new value and give [`Cmd.none`](https://package.elm-lang.org/packages/elm/core/latest/Platform-Cmd#none) to the RTS to indicate that we have no commands this time.
+
+> **Aside:** One crucial detail here is that **commands are data**. So just because you create a command does not mean it is happening. Here are some analogies:
+>
+> - Maybe you find a cake recipe (command) on the internet. It outlines exactly how to make a delicious cake. You have to give it to a baker (RTS) to actually turn it into a cake!
+> - Maybe you have a grocery list (command) on your fridge. You need a sack of potatoes. You can only get those potatoes if you (RTS) go to the store and buy them!
+> - Maybe I tell you to eat an entire watermelon in one bite (command) right this second. Did you do it? No! You (RTS) kept reading before you even *thought* about buying a tiny watermelon.
+>
+> None of these analogies are perfect, particularly because the Elm runtime system is much more reliable than you or a baker! When you give it a command, it starts working on it immediately and it follows your exact directions. Metaphorically, it is a very efficient baker that never deviates from the recipe.
+
+
+## `init`
+
+In previous examples, `init` was a value specifying the initial `Model` for our Elm program. In our new version, it is a function:
 
 ```elm
-Random.generate : (a -> msg) -> Random.Generator a -> Cmd msg
+init : () -> (Model, Cmd Msg)
+init _ =
+  ( Model 1
+  , Cmd.none
+  )
 ```
 
-This function takes two arguments. The first is a function to tag random values. In our case we want to use `NewFace : Int -> Msg` to turn the random number into a message for our `update` function. The second argument is a "generator" which is like a recipe for producing certain types of random values. You can have generators for simple types like `Int` or `Float` or `Bool`, but also for fancy types like big custom records with lots of fields. In this case, we use one of the simplest generators:
+Like our new `update` function, we are now producing (1) a new model and (2) some commands for the RTS. In our dice rolling program, we give `Cmd.none` because we do not need to do anything on initialization, but later you may want to do things like trigger HTTP requests from here.
 
-```elm
-Random.int : Int -> Int -> Random.Generator Int
-```
+> **Note:** Why is it taking that `()` argument though? We are just ignoring it. What is the point? Well, one of the other changes in this program is that we switched from [`Browser.sandbox`][sandbox] to [`Browser.embed`][embed]. That is what enables the extra command features we have been looking at so far. It _also_ allows the program to get &ldquo;flags&rdquo; from JavaScript on initialization. So the `()` is saying that we are not getting any interesting flags for our program. We will talk about this more later!
 
-You provide a lower and upper bound on the integer, and now you have a generator that produces integers in that range!
+[sandbox]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#sandbox
+[embed]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#embed
 
-That is it. Now we can click and see the number flip to some new value!
+
+## `subscriptions`
+
+The final new thing that we need to specify if we subscribe to anything. For now we are saying [`Sub.none`](https://package.elm-lang.org/packages/elm/core/latest/Platform-Sub#none) to indicate that there are no subscriptions. We will get into subscriptions in one of the next examples!
+
+
+# Summary
+
 
 So the big lessons here are:
 
