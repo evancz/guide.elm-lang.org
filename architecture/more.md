@@ -1,14 +1,45 @@
-# More about The Elm Architecture
+# Reviewing The Elm Architecture
 
-The emphasis of this section has been: **how can we get people making cool Elm projects as quickly and smoothly as possible?** So we covered:
 
-  - The basic architecture pattern.
-  - How to create buttons and text fields.
-  - How to make HTTP requests.
-  - How to work with web sockets.
+## `sandbox`
 
-You can go quite far with this knowledge, but there are many important aspects of Elm itself that we have not covered yet. For example, union types are one of the most important features in the whole language and we have not focused on them at all!
+This chapter started by creating programs with [`Browser.sandbox`][sandbox]. We designed a `Model` and wrote functions to `update` and `view` it.
 
-So we are going to take a break from The Elm Architecture for a couple chapters to get a better understanding of Elm itself. We will come back to The Elm Architecture in a few chapters and focus on code reuse in larger applications. In the meantime, when a function gets so big it feels unmanageable in practice, make a helper function! Elm makes refactoring easy, so it is best to improve architecture as needed rather than preemptively. More about that later though!
+You can think of `Browser.sandbox` as setting up a system like this:
 
-P.S. Best not to skip ahead. You can build a bigger house if you have a strong foundation!
+![](diagrams/sandbox.svg)
+
+We get to stay in the world of Elm, writing functions and transforming data. This hooks up to Elm&rsquo;s **runtime system**. The runtime system figures out how to render `Html` efficiently. Did anything change? What is the minimal DOM modification needed? It also figures out when someone clicks a button or types into a text field. It turns that into a `Msg` and feeds it into your Elm code.
+
+By cleanly separating out all the DOM manipulation, it becomes possible to use extremely aggresive optimizations. So Elm&rsquo;s runtime system is a big part of why Elm is [one of the fastest options available][benchmark].
+
+[sandbox]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#sandbox
+[benchmark]: http://elm-lang.org/blog/blazing-fast-html-round-two
+
+
+## `embed`
+
+From there we started creating programs with [`Browser.embed`][embed]. We were working with `Model`, `update`, and `view` like before, but we introduced the ideas of commands and subscriptions. This allowed us to start interacting with the outside world.
+
+You can think of `Browser.embed` as setting up a system like this:
+
+![](diagrams/embed.svg)
+
+Like before, you get to program in the nice Elm world, but now you can send `Cmd` and `Sub` values as well! This lets you make HTTP requests, ask about the current time, generate random values, etc.
+
+[embed]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#embed
+
+
+## Who Cares?
+
+Why have this runtime system? Why have these `Html`, `Cmd`, and `Sub` values that we have to mess around with? Why not just have `Math.random()` like in JavaScript?
+
+Well, pretty much everything that is uniquely nice about Elm is a result of separating **computation** from **effects**! For example, you can compile any Elm program with `--debug` and get access to a time-travel debugger. You can go back through all the messages and see the `Model` and UI at that point in time. How is this possible? Well, we can swap out the runtime system entirely:
+
+![](diagrams/debug.svg)
+
+When we go back in time, our `update` is going to run a second time (computation) but it is up to the runtime system to handle the resulting commands (effects). For example, say you have a `Cmd` to tell the database to erase a user. Or add a comment. Or change some values. What happens when your database gets these requests the second time? Out of order? In reverse order? By having the runtime system sitting between your Elm code and the outside world, it is super simple to handle these questions. Do not send HTTP requests when going back in time! We already know the results, and in fact, we need them to be exactly the same when debugging so lets just reuse them!
+
+If you had unmediated access to effects (like `Math.random()` in JavaScript) this would not be possible. Your debugger would be introducing new stuff on replay. Making new HTTP requests. Generating new random values. Printing new stuff in the console. Modifying local state. Etc. There would be no guarantee that running the code a second time would produce the same results.
+
+More importantly, separating computation from effects is also how we get the **&ldquo;same input, same output&rdquo;** guarantee. No matter how complex your function is, no matter how many functions it calls, when you give it the same arguments, it always gives the same result. This is the source of reliability in Elm. Testing is simplified. Refactoring is less risky. There is no mutation interferring from a file that is not even imported. So debugging is just one example of many!
