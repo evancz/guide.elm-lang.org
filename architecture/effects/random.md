@@ -6,13 +6,7 @@
 
 We are going to make an app that rolls dice, producing a random number between 1 and 6.
 
-Let&rsquo;s start by installing the [`elm/random`][readme] package in our project:
-
-```bash
-elm install elm/random
-```
-
-Now we can `import Random` and use anything in the [`Random`][random] module. We need to do that for our dice rolling program:
+We need the [`elm/random`][readme] package for this. The [`Random`][random] module in particular. Let&rsquo;s start by just looking at all the code. There are some new things, but do not worry. We will go through it all!
 
 [readme]: https://package.elm-lang.org/packages/elm/random/latest
 [random]: https://package.elm-lang.org/packages/elm/random/latest/Random
@@ -119,25 +113,29 @@ update msg model =
       )
 ```
 
-Rather than just giving a new `Model`, we are now producing commands as well. That is what that `Cmd Msg` type means. So when `update` gets a message to `Roll` a new number we:
+Say this `update` function gets a `Roll` message. It is going to produce two values:
 
-1. Give back the `model` without changes. Nothing to do right now.
-2. Create a command to generate a random integer between `1` and `6`.
+1. The `model` without any changes.
+2. A **command** to generate a random integer between `1` and `6`.
 
-This data goes to Elm&rsquo;s runtime system (RTS) which turns it into effects. So for these two cases:
+These both go to Elm&rsquo;s runtime system:
+
+![](diagrams/embed.svg)
+
+The runtime system (RTS) will handle these two values as follows:
 
 1. When the RTS gets a new `Model`, it calls your `view` function. Does the DOM need to change? In this case, it does not!
 2. When the RTS gets a command, it immediately starts working on it. In this case, the RTS generates a random number and sends a message like `NewFace 3` or `NewFace 5` back to our `update` function. So `Cmd Msg` is saying &ldquo;this is a command for the RTS, and the RTS will give us back a `Msg` about what happened.&rdquo;
 
-Now when the RTS gives us a message like `NewFace 3` it will trigger the second branch of our `update` function. In this case, we update our `Model` with the new value and give [`Cmd.none`](https://package.elm-lang.org/packages/elm/core/latest/Platform-Cmd#none) to the RTS to indicate that we have no commands this time.
+Let&rsquo;s say the command produces a `NewFace 3` message. That triggers the second branch of our `update` function. In this case, we update our `Model` with the new value and give [`Cmd.none`](https://package.elm-lang.org/packages/elm/core/latest/Platform-Cmd#none) to indicate that we have no commands this time.
 
-> **Aside:** One crucial detail here is that **commands are data**. So just because you create a command does not mean it is happening. Here are some analogies:
+> **Note:** One crucial detail here is that **commands are data**. So just because you create a command does not mean it is happening. Here are some analogies:
 >
-> - Maybe you find a cake recipe (command) on the internet. It outlines exactly how to make a delicious cake. You have to give it to a baker (RTS) to actually turn it into a cake!
-> - Maybe you have a grocery list (command) on your fridge. You need a sack of potatoes. You can only get those potatoes if you (RTS) go to the store and buy them!
+> - Maybe you find a cake recipe (command) on the internet. It outlines exactly how to make a delicious cake. You have to give it to a baker (RTS) to actually turn it into a cake.
+> - Maybe you have a grocery list (command) on your fridge. You need a sack of potatoes. You can only get those potatoes if you (RTS) go to the store and buy them.
 > - Maybe I tell you to eat an entire watermelon in one bite (command) right this second. Did you do it? No! You (RTS) kept reading before you even *thought* about buying a tiny watermelon.
 >
-> None of these analogies are perfect, particularly because the Elm runtime system is much more reliable than you or a baker! When you give it a command, it starts working on it immediately and it follows your exact directions. Metaphorically, it is a very efficient baker that never deviates from the recipe.
+> None of these analogies are perfect, particularly because the Elm runtime system is much more reliable than you or a baker! When you give it a command, it starts working on it immediately and it follows your directions exactly.
 
 
 ## `init`
@@ -154,7 +152,7 @@ init _ =
 
 Like our new `update` function, we are now producing (1) a new model and (2) some commands for the RTS. In our dice rolling program, we give `Cmd.none` because we do not need to do anything on initialization, but later you may want to do things like trigger HTTP requests from here.
 
-> **Note:** Why is it taking that `()` argument though? We are just ignoring it. What is the point? Well, one of the other changes in this program is that we switched from [`Browser.sandbox`][sandbox] to [`Browser.embed`][embed]. That is what enables the extra command features we have been looking at so far. It _also_ allows the program to get &ldquo;flags&rdquo; from JavaScript on initialization. So the `()` is saying that we are not getting any interesting flags for our program. We will talk about this more later!
+> **Note:** Why is it taking that `()` argument though? We are just ignoring it. What is the point? Well, this program switches from [`Browser.sandbox`][sandbox] to [`Browser.embed`][embed], enabling the command features we have been looking at so far. It _also_ allows the program to get &ldquo;flags&rdquo; from JavaScript on initialization. So the `()` is saying that we are not getting any interesting flags. We will talk about this more in the chapter on interop. It is not too important right now!
 
 [sandbox]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#sandbox
 [embed]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#embed
@@ -167,23 +165,24 @@ The final new thing that we need to specify if we subscribe to anything. For now
 
 # Summary
 
+We have now seen our first **command** to generate random values.
 
-So the big lessons here are:
+Rather than generating random values willy-nilly, you create a [`Random.Generator`][generator] that describes exactly how to generate random values. In our case we used `Random.int 1 6`, but we could have made a weighted die with [`Random.weighted`][weighted] if we wanted.
 
-  - Write your programs bit by bit. Start with a simple skeleton, and gradually add the tougher stuff.
-  - The `update` function now produces a new model *and* a command.
-  - You cannot just get random values willy-nilly. You create a command, and Elm will go do some work behind the scenes to provide it for you. In fact, any time our program needs to get unreliable values (randomness, HTTP, file I/O, database reads, etc.) you have to go through Elm.
+From there we send our command off to the runtime system which (1) dutifully generates a random value to our exact specification and (2) sends it back as a `NewFace 6` or `NewFace 1` message.
 
 At this point, the best way to improve your understanding of commands is just to see more of them! They will appear prominently with the `Http` and `WebSocket` libraries, so if you are feeling shaky, the only path forward is practicing with randomness and playing with other examples of commands!
 
-> **Exercises:** Here are some that build on stuff that has already been introduced:
+[generator]: https://package.elm-lang.org/packages/elm/random/latest/Random#Generator
+[weighted]: https://package.elm-lang.org/packages/elm/random/latest/Random#weighted
+
+
+> **Exercises:** Here are a few ideas to make the program here a bit more interesting!
 >
 >   - Instead of showing a number, show the die face as an image.
+>   - Instead of showing an image of a die face, use [`elm/svg`][svg] to draw it yourself.
+>   - Create a weighted die with [`Random.weighted`][weighted].
 >   - Add a second die and have them both roll at the same time.
->
-> And here are some that require new skills:
->
->   - Instead of showing an image of a die face, use the `elm-lang/svg` library to draw it yourself.
->   - After you have learned about tasks and animation, have the dice flip around randomly before they settle on a final value.
+>   - Have the dice flip around randomly before they settle on a final value.
 
-
+[svg]: https://package.elm-lang.org/packages/elm/svg/latest/
