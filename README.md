@@ -6,7 +6,7 @@ This guide will:
 
   - Teach you the fundamentals of programming in Elm.
   - Show you how to make interactive apps with *The Elm Architecture*.
-  - Emphasize the principles and patterns that generalize to programming in any language.
+  - Emphasize principles and patterns that generalize to programming in any language.
 
 By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use.
 

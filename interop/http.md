@@ -6,51 +6,183 @@
 
 We are about to make an app that fetches a random GIF when the user asks for another image.
 
-Now, I am going to assume you just read the randomness example. It (1) introduces a two step process for writing apps like this and (2) shows the simplest kind of commands possible. Here we will be using the same two step process to build up to fancier kinds of commands, so I very highly recommend going back one page. I swear you will reach your goals faster if you start with a solid foundation!
+Now, I am going to assume you just read the randomness example. It introduces **commands** which are really important for this example!
 
 ...
 
-Okay, so you read it now right? Good. Let's get started on our random gif fetcher!
+Okay, so you read it now right? Good!
 
+In this example we use the [`elm/http`][http], [`elm/url`][url], and [`elm/json`][json] packages. We will talk about all that after you look through the code a bit:
 
-## Phase One - The Bare Minimum
-
-At this point in this guide, you should be pretty comfortable smacking down the basic skeleton of an Elm app. Guess at the model, fill in some messages, etc. etc.
+[http]: https://package.elm-lang.org/packages/elm/http/latest
+[json]: https://package.elm-lang.org/packages/elm/json/latest
+[url]: https://package.elm-lang.org/packages/elm/url/latest
 
 ```elm
+import Browser
+import Html exposing (..)
+import Html.Events exposing (..)
+import Http
+import Json.Decode as Decode
+import Url.Builder as Url
+
+
+
+-- MAIN
+
+
+main =
+  Browser.embed
+    { init = init
+    , update = update
+    , subscriptions = subscriptions
+    , view = view
+    }
+
+
+
 -- MODEL
+
 
 type alias Model =
   { topic : String
-  , gifUrl : String
+  , url : String
   }
 
-init : (Model, Cmd Msg)
-init =
-  (Model "cats" "waiting.gif", Cmd.none)
+
+init : () -> (Model, Cmd Msg)
+init _ =
+  ( Model "cat" "waiting.gif"
+  , getRandomGif "cat"
+  )
+
 
 
 -- UPDATE
 
-type Msg = MorePlease
+
+type Msg
+  = MorePlease
+  | NewGif (Result Http.Error String)
+
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     MorePlease ->
-      (model, Cmd.none)
+      ( model
+      , getRandomGif model.topic
+      )
+
+    NewGif result ->
+      case result of
+        Ok newUrl ->
+          ( { model | url = newUrl }
+          , Cmd.none
+          )
+
+        Err _ ->
+          ( model
+          , Cmd.none
+          )
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
+
 
 
 -- VIEW
 
+
 view : Model -> Html Msg
 view model =
   div []
-    [ h2 [] [text model.topic]
-    , img [src model.gifUrl] []
+    [ h2 [] [ text model.topic ]
     , button [ onClick MorePlease ] [ text "More Please!" ]
+    , br [] []
+    , img [ src model.url ] []
+    ]
+
+
+
+-- HTTP
+
+
+getRandomGif : String -> Cmd Msg
+getRandomGif topic =
+  let
+    request =
+      Http.get (toGiphyUrl topic) gifUrlDecoder
+  in
+  Http.send NewGif request
+
+
+toGiphyUrl : String -> String
+toGiphyUrl topic =
+  Url.crossOrigin "https://api.giphy.com" ["v1","gifs","random"]
+    [ Url.string "api_key" "dc6zaTOxFJmzC"
+    , Url.string "tag" topic
+    ]
+
+
+gifUrlDecoder : Decode.Decoder String
+gifUrlDecoder =
+  Decode.field "data" (Decode.field "image_url" Decode.string)
+
+```
+
+This program is quite similar to the random dice roller we just saw: `Model`, `init`, `update`, `subscriptions`, and `view`. The new stuff is mostly in the `HTTP` section which uses `elm/url`, `elm/json`, and `elm/http`. Let&rsqou;s go through those one-by-one.
+
+
+## `elm/url`
+
+Let&rsquo;s look at the `toGiphyUrl` function first. It may seem like we should have just made a string like this:
+
+```elm
+toBrokenGiphyUrl : String -> String
+toBrokenGiphyUrl topic =
+  "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" ++ topic
+```
+
+It is nice and simple. But it will have quite odd results if `topic` contains characters like `=` or `&`. The user could start adding totally different query parameters!
+
+So instead we use the [`Url.Builder`][builder] module from the `elm/url` package. We use two specific helper functions:
+
+- [`crossOrigin`][crossOrigin] takes three arguments: (1) the domain, (2) each level of the path, and (3) a list of query parameters. It also guarantees that the query parameters will always be properly encoded. That means having `=` or `&` in the `topic` is not a problem anymore.
+- [`string`][string] takes a `key` and a `value`. The `crossOrigin` function will turn them into `?key=value` to make the final URL, and the `value` will always be properly encoded!
+
+So when you put them together, we end up with this `toGiphyUrl` function:
+
+```elm
+toGiphyUrl : String -> String
+toGiphyUrl topic =
+  Url.crossOrigin "https://api.giphy.com" ["v1","gifs","random"]
+    [ Url.string "api_key" "dc6zaTOxFJmzC"
+    , Url.string "tag" topic
     ]
 ```
+
+Okay, but that URL is going to give us back some JSON. How do we handle JSON in Elm?
+
+We are using
+
+[builder]: https://package.elm-lang.org/packages/elm/url/latest/Url-Builder
+[crossOrigin]: https://package.elm-lang.org/packages/elm/url/latest/Url-Builder#crossOrigin
+[string]: https://package.elm-lang.org/packages/elm/url/latest/Url-Builder#string
+
+
+
+
+## `elm/json`
+
+The
+
 
 For the model, I decided to track a `topic` so I know what kind of gifs to fetch. I do not want to hard code it to `"cats"`, and maybe later we will want to let the user decide the topic too. I also tracked the `gifUrl` which is a URL that points at some random gif.
 
@@ -76,13 +208,19 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     MorePlease ->
-      (model, getRandomGif model.topic)
+      ( model
+      , getRandomGif model.topic
+      )
 
     NewGif (Ok newUrl) ->
-      ( { model | gifUrl = newUrl }, Cmd.none)
+      ( { model | gifUrl = newUrl }
+      , Cmd.none
+      )
 
     NewGif (Err _) ->
-      (model, Cmd.none)
+      ( model
+      , Cmd.none
+      )
 ```
 
 So I added branches for our new messages. When `NewGif` holds a success, we update the `gifUrl` field to have the new URL. When `NewGif` holds an error, we ignore it, giving back the same model and doing nothing.
@@ -101,11 +239,11 @@ getRandomGif topic =
     request =
       Http.get url decodeGifUrl
   in
-    Http.send NewGif request
+  Http.send NewGif request
 
 decodeGifUrl : Decode.Decoder String
 decodeGifUrl =
-  Decode.at ["data", "image_url"] Decode.string
+  Decode.at [ "data", "image_url" ] Decode.string
 ```
 
 With that added, the "More" button actually goes and fetches a random gif. Check it out [here](https://elm-lang.org/examples/http)! But how does `getRandomGif` work exactly?
@@ -120,7 +258,7 @@ It starts out simple, we define `url` to be some giphy endpoint for random gifs.
 
   Once we have an HTTP request, we can turn it into a command with `Http.send`. This is just like how we used `Random.generate` to create a command with a random generator. The first argument is a way to turn the result of the HTTP request into a message for our `update` function. In this case, we create a `NewGif` message.
 
-This has been a very quick introduction, but the key idea is that you must (1) create an HTTP request and (2) turn that into a command so Elm will actually *do* it. You can go pretty far using the basic pattern here, and we will be looking into JSON decoders [later on](/interop/json.md), which will let you deal with whatever crazy JSON you run into.
+This has been a very quick introduction, but the key idea is that you must (1) create an HTTP request and (2) turn that into a command so Elm will actually *do* it. You can go pretty far using the basic pattern here, and we will be looking into JSON decoders [later on](/interop/json.md), which will let you deal with whatever JSON you run into.
 
 > **Exercises:** To get more comfortable with this code, try augmenting it with skills we learned in previous sections:
 >

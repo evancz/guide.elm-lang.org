@@ -1,8 +1,12 @@
-# Labeled Checkboxes
+# Checkboxes
 
 ---
 #### Follow along in the [online editor](https://elm-lang.org/examples/checkboxes).
 ---
+
+If you are coming from JavaScript, you may be wondering **&ldquo;where are my components?&rdquo;** and &ldquo;how do I do parent-child communication between them?&rdquo; A great deal of time and effort is spent on these questions in JavaScript, but it just works different in Elm. **We do not think in terms of components. Instead, we focus on functions.** It is a functional language after all!
+
+TODO transition
 
 Your app will probably have some options people can mess with. If something happens, should you send them an email notification? If they come across a video, should it start playing by itself? That kind of thing. So you will need to create some HTML like this:
 
