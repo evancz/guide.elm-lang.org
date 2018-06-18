@@ -145,6 +145,8 @@ viewValidation model =
 
 This function first compares the two passwords. If they match, you want green text and a positive message. If they do not match, you want red text and a helpful message. With that info, we produce a `<div>` filled with a colorful message explaining the situation.
 
+> **Note:** You may have noticed that `viewValidation`'s type signature contains `msg` instead of `Msg`. It is called a type variable and it will be explained in more detail in the [next section on types](https://guide.elm-lang.org/types/index.html). In a nutshell, `msg` could be any concrete type depending on the implementation.
+
 This starts to show the benefits of having our HTML library be normal Elm code. It would have looked really weird to jam all that code into our `view`. In Elm, you just refactor like you would with any other code!
 
 On these same lines, you may notice that the `<input>` nodes all are created with pretty similar code. Say we made each input fancier: there is an outer `<div>` that holds a `<span>` and an `<input>` with certain classes. It would make total sense to break that pattern out into a `viewInput` function so you never have to repeat yourself. This also means you change it in one place and everyone gets the updated HTML.
