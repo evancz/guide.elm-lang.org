@@ -7,6 +7,8 @@
   * Windows &mdash; [installer][win]
   * Anywhere &mdash; [npm installer][npm] or [build from source][build]
 
+> **Warning:** Unfortunately as of March 2018 a lot of people still run into filesystem permission problems when installing with npm. The cause is the default configuration of npm on windows, macOs and linux systems. To avoid frustration it is important that npm is configured properly and no bad workarounds (like using sudo or chowning directories, which may cause problems down the line) are employed. A working npm setup for macOs and Linux systems can be found [here](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md). Please do this **before** installing ELM via npm to avoid permission problems (e.g. EACCES).
+
 [mac]: https://44a95588fe4cc47efd96-ec3c2a753a12d2be9f23ba16873acc23.ssl.cf2.rackcdn.com/Elm-Platform-0.18.pkg
 [win]: https://44a95588fe4cc47efd96-ec3c2a753a12d2be9f23ba16873acc23.ssl.cf2.rackcdn.com/Elm-Platform-0.18.exe
 [npm]: https://www.npmjs.com/package/elm
