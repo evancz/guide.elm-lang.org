@@ -186,7 +186,7 @@ I showed an example where the ports were declared in the root module. This is no
 
 It seems like it is probably best to just have one `port module` for your project so it is easier to figure out the API on the JavaScript side. I plan to improve tooling such that you can just ask though.
 
-> **Note:** Port modules are not permitted in the package repository. Imagine you download an Elm package and it just doesn't work. You read the docs and discover you *also* need to get some JS code and hook it up properly. Lame. Bad experience. Now imagine if you had this risk with *every* package out there. It just would feel crappy, so we do not allow that.
+> **Note:** Port modules are not permitted in the package repository. Imagine you download an Elm package and it just doesn't work. You read the docs and discover you *also* need to get some JS code and hook it up properly. This would be a bad experience. Now imagine if you had this risk with *every* package out there. It just would feel crappy, so we do not allow that.
 
 
 
