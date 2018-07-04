@@ -142,7 +142,7 @@ photos =
 -- [ "anon.png", "users/catface420.png", "users/AzureDiamond.png", "anon.png" ]
 ```
 
-The nice thing about creating a type like `User` is that no one in your whole codebase can ever "forget" that some users may be anonymous. Anyone who can get a hold of a `User` needs to use a `case` to get any information out of it, and the compiler guarantees every `case` and handles all possible scenarios!
+The nice thing about creating a type like `User` is that no one in your whole codebase can ever "forget" that some users may be anonymous. Anyone who can get a hold of a `User` needs to use a `case` to get any information out of it, and the compiler guarantees that every `case` handles all the possible scenarios!
 
 > **Exercise:** Think about how you would solve this problem in some other language. A string where empty string means they are anonymous? A string that can be null? How much testing would you want to do to make sure that everyone handles these special cases correctly?
 
