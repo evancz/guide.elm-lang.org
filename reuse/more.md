@@ -5,7 +5,7 @@ Right now this section gives a brief introduction to **reusable views**. Instead
   - [`evancz/elm-sortable-table`](https://github.com/evancz/elm-sortable-table)
   - [`thebritican/elm-autocomplete`](https://github.com/thebritican/elm-autocomplete)
 
-The [README]() of `elm-sortable-table` has some nice guidance on how to use APIs like these and why they are designed as they are. You can also watch the API design session where Greg and I figured out an API for `elm-autocomplete` here:
+The [README](https://github.com/evancz/elm-sortable-table/blob/master/README.md) of `elm-sortable-table` has some nice guidance on how to use APIs like these and why they are designed as they are. You can also watch the API design session where Greg and I figured out an API for `elm-autocomplete` here:
 
 {% youtube %}https://www.youtube.com/watch?v=KSuCYUqY058{% endyoutube %}
 
