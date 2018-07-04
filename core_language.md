@@ -225,6 +225,27 @@ It is often useful to update the values in a record.
 
 It is important to notice that we do not make *destructive* updates. When we update some fields of `bill` we actually create a new record rather than overwriting the existing one. Elm makes this efficient by sharing as much content as possible. If you update one of ten fields, the new record will share the nine unchanged values.
 
+### Extensible Record Types
+
+An extensible record type is a special kind of record type that allows you to create new types based on the fields of one or more defined record types:
+
+```elm
+-- extensible record type:
+type alias Positioned a = { a | x : Float, y : Float }
+
+-- extended record types:
+type alias Player = Positioned { name : String }
+type alias BadGuy = Positioned { health : Int }
+```
+
+Extensible record types allow you to define functions that act on anything extended by that type:
+
+```elm
+resetPosition : Positioned a -> Positioned a
+resetPosition position = { position | x = 0, y = 0 }
+```
+
+Read more about extensible records in [the Elm lang docs](http://elm-lang.org/docs/records#record-types)
 
 ### Comparing Records and Objects
 
