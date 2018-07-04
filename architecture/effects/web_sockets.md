@@ -87,6 +87,8 @@ viewMessage msg =
   div [] [ text msg ]
 ```
 
+(If you're following along with copy-n-paste, you probably need to `elm package install elm-lang/websocket`.)
+
 The interesting parts are probably the uses of `WebSocket.send` and `WebSocket.listen`.
 
 For simplicity we will target a simple server that just echos back whatever you type. So you will not be able to have the most exciting conversations in the basic version, but that is why we have exercises on these examples!

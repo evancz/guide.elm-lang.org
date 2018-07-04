@@ -68,7 +68,7 @@ keep visibility tasks =
       List.filter (\task -> task.complete) tasks
 ```
 
-The `case` is saying, look at the structure of `visibility`. If it is `All`, just give back all the tasks. If it is `Active`, keep only the tasks that are not complete. If it is `Completed`, keep only the tasks that are complete.
+The `case` is saying, look at the value of `visibility`. If it is `All`, just give back all the tasks. If it is `Active`, keep only the tasks that are not complete. If it is `Completed`, keep only the tasks that are complete.
 
 The cool thing about `case` expressions is that all the branches are checked by the compiler. This has some nice benefits:
 
