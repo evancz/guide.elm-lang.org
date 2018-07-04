@@ -76,9 +76,9 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
   div []
-    [ div [] (List.map viewMessage model.messages)
-    , input [onInput Input] []
+    [ input [onInput Input, value model.input] []
     , button [onClick Send] [text "Send"]
+    , div [] (List.map viewMessage (List.reverse model.messages))
     ]
 
 
