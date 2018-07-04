@@ -21,6 +21,19 @@ After installing through any of those routes, you will have the following comman
 
 We will go over how they all work in more detail right after we get your editor set up!
 
+## Note for GNU/Linux users
+
+Some GNU/Linux distributions use a different version of `ncurses` than
+`elm` expects, resulting in an error like this:
+
+``` shell
+/home/elmer/.node_modules/lib/node_modules/elm/Elm-Platform/0.18.0/.cabal-sandbox/bin/elm-repl: error while loading shared libraries:
+libtinfo.so.5: cannot open shared object file: No such file or directory
+```
+
+Fedora 27 users can install the `ncurses-compat-libs-6.0` library to
+fix this error.
+
 > **Troubleshooting:** The fastest way to learn *anything* is to talk with other people in the Elm community. We are friendly and happy to help! So if you get stuck during installation or encounter something weird, visit [the Elm Slack](http://elmlang.herokuapp.com/) and ask about it. In fact, if you run into something confusing at any point while learning or using Elm, come ask us about it. You can save yourself hours. Just do it!
 
 
