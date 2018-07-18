@@ -76,6 +76,20 @@ Notice that function application looks different than in languages like JavaScri
 
 [html]: https://elm-lang.org/blog/blazing-fast-html-round-two
 
+You can also define _anonymous functions_ like this:
+
+```elm
+> \n -> n < 0
+<function>
+
+> (\n -> n < 0) 4
+False
+```
+
+This anonymous function is the same as `isNegative`, it just is not named! Also, the parentheses in `(\n -> n < 0) 4` are important. After the arrow, Elm is just going to keep reading code as long as it can. The parentheses put bounds on this, indicating where the function body ends. This helps Elm know that `4` is an argument to the function.
+
+> **Note:** The backslash that starts anonymous functions is supposed to look like a lambda `λ` if you squint. This is a possibly ill-conceived wink to the intellectual history that led to languages like Elm.
+
 
 ## If Expressions
 
@@ -225,16 +239,16 @@ It is often useful to update the values in a record.
 It is important to notice that we do not make *destructive* updates. When we update some fields of `bill` we actually create a new record rather than overwriting the existing one. Elm makes this efficient by sharing as much content as possible. If you update one of ten fields, the new record will share the nine unchanged values.
 
 
-### Comparing Records and Objects
+> ### Records vs Objects
+>
+> Records in Elm are *similar* to objects in JavaScript, but there are some important differences. With records:
+>
+> - You cannot ask for a field that does not exist.
+> - No field will ever be `undefined` or `null`.
+> - You cannot create recursive records with a `this` or `self` keyword.
+>
+> Elm encourages a strict separation of data and logic, and the ability to say `this` is primarily used to break this separation. This is a systemic problem in Object Oriented languages that Elm is purposely avoiding.
+>
+> Records also support [structural typing][st] which means records in Elm can be used in any situation as long as the necessary fields exist. This gives us flexibility without compromising reliability.
 
-Records in Elm are *similar* to objects in JavaScript, but there are some crucial differences. The major differences are that with records:
-
-- You cannot ask for a field that does not exist.
-- No field will ever be `undefined` or `null`.
-- You cannot create recursive records with a `this` or `self` keyword.
-
-Elm encourages a strict separation of data and logic, and the ability to say `this` is primarily used to break this separation. This is a systemic problem in Object Oriented languages that Elm is purposely avoiding.
-
-Records also support [structural typing][st] which means records in Elm can be used in any situation as long as the necessary fields exist. This gives us flexibility without compromising reliability.
-
- [st]: https://en.wikipedia.org/wiki/Structural_type_system "Structural Types"
+[st]: https://en.wikipedia.org/wiki/Structural_type_system "Structural Types"
