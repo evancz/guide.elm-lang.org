@@ -1,62 +1,44 @@
 # Type Aliases
 
-The whole point of type aliases is to make your type annotations easier to read.
-
-As your programs get more complicated, you find yourself working with larger and more complex data. For example, maybe you are making twitter-for-dogs and you need to represent a user. And maybe you want a function that checks to see if a user has a bio or not. You might write a function like this:
-
-```elm
-hasBio : { name : String, bio : String, pic : String } -> Bool
-hasBio user =
-  String.length user.bio > 0
-```
-
-That type annotation is kind of a mess, and users do not even have that many details! Imagine if there were ten fields. Or if you had a function that took users as an argument and gave users as the result.
-
-In cases like this, you should create a *type alias* for your data:
+Elm allows you to create a **type alias**. An alias is just a shorter name for some other type. It looks like this:
 
 ```elm
 type alias User =
   { name : String
   , bio : String
-  , pic : String
   }
 ```
 
-This is saying, wherever you see `User`, replace it by all this other stuff. So now we can rewrite our `hasBio` function in a much nicer way:
+So rather than having to type out this record type all the time, we can just say `User` instead. For example, you can shorten type annotations like this:
 
 ```elm
-hasBio : User -> Bool
-hasBio user =
-  String.length user.bio > 0
+hasDecentBio : User -> Bool
+hasDecentBio user =
+  String.length user.bio > 80
 ```
 
-Looks way better! It is important to emphasize that *these two definitions are exactly the same*. We just made an alias so we can say the same thing in fewer key strokes.
-
-So if we write a function to add a bio, it would be like this:
+That would be `{ name : String, bio : String } -> Bool` without the type annotation. **The main point of type aliases is to help us write shorter and clearer type annotations.** This becomes more important as your application grows. Say we have a `updateBio` function:
 
 ```elm
-addBio : String -> User -> User
-addBio bio user =
+updateBio : String -> User -> User
+updateBio bio user =
   { user | bio = bio }
 ```
 
-Imagine what that type annotation would look like if we did not have the `User` type alias. Bad!
+First, think about the type signature without a type alias! Now, imagine that as our application grows we add more fields to represent a user. We could add 10 or 100 fields to the `User` type alias, and we do not need any changes to our `updateBio` function. Nice!
 
-Type aliases are not just about cosmetics though. They can help you think more clearly. When writing Elm programs, it is often best to *start* with the type alias before writing a bunch of functions. I find it helps direct my progress in a way that ends up being more efficient overall. Suddenly you know exactly what kind of data you are working with. If you need to add stuff to it, the compiler will tell you about any existing code that is affected by it. I think most experienced Elm folks use a similar process when working with records especially.
 
-> **Note:** When you create a type alias specifically for a record, it also generates a *record constructor*. So our `User` type alias will also generate this function:
-> 
-> ```elm
-User : String -> String -> String -> User
+## Record Constructors
+
+When you create a type alias specifically for a record, it also generates a **record constructor**. So if we define a `User` type alias in `elm repl` we could start building records like this:
+
+```elm
+> type alias User = { name : String, bio : String }
+
+> User "Tom" "Friendly Carpenter"
+{ name = "Tom", bio = "Friendly Carpenter" }
 ```
-> 
-> The arguments are in the order they appear in the type alias declaration, so in the REPL you could do this:
->
-> ```elm
->> type alias User = { name : String, bio : String, pic : String }
->
->> User "Tom" "Friendly Carpenter" "http://example.com/tom.jpg"
-{ name = "Tom", bio = "Friendly Carpenter", pic = "http://example.com/tom.jpg" } : User
-```
->
-> This can be pretty handy!
+
+The arguments are in the order they appear in the type alias declaration. This can be pretty handy.
+
+And again, this is only for records. Making type aliases for non-record types will not result in a constructor.
