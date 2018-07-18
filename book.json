@@ -3,11 +3,8 @@
     "description": "Learn the basics of Elm. Build applications. Learn functional programming.",
     "author": "Evan Czaplicki",
     "root": "book",
-    "plugins": ["ga","youtube","bulk-redirect"],
+    "plugins": ["youtube","bulk-redirect"],
     "pluginsConfig": {
-        "ga": {
-            "token": "UA-25827182-1"
-        },
         "bulk-redirect": {
             "basepath": "/",
             "redirectsFile": "redirects.json"
