@@ -4,9 +4,9 @@
 #### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/field).
 ---
 
-We are about to create a simple app that reverses the contents of a text field. This example also introduces some new stuff that will help us out in our next example.
+We are about to create a simple app that reverses the contents of a text field.
 
-Again this is a pretty short program, so I have included the whole thing here. Skim through to get an idea of how everything fits together. Right after that we will go into much more detail!
+Again this is a pretty short program, so I have included the whole thing here. Skim through to get an idea of how everything fits together. Right after that we will get into the details!
 
 
 ```elm
@@ -81,7 +81,7 @@ type alias Model =
 
 This time I chose to represent the model as a record. (You can read more about records [here](https://guide.elm-lang.org/core_language.html#records) and [here](https://elm-lang.org/docs/records).) For now, the record stores the user input in the `content` field.
 
-> **Note:** You may be wondering, why bother having a record if it only holds one entry? Couldn't you just use the string directly? Yes, of course! But starting with a record makes it easy to add more fields as our app gets more complicated. When the time comes where we want *two* text inputs, we will have to do much less fiddling around.
+> **Note:** You may be wondering, why bother having a record if it only holds one entry? Couldn't you just use the string directly? Sure! But starting with a record makes it easy to add more fields as our app gets more complicated. When the time comes where we want *two* text inputs, we will have to do much less fiddling around.
 
 Okay, so we have our model. Now in this app there is only one kind of message really. The user can change the contents of the text field.
 
@@ -123,6 +123,6 @@ This `onInput` function is kind of interesting. It takes one argument, in this c
 Change : String -> Msg
 ```
 
-This function is used to tag whatever is currently in the text field. So let's say the text field currently holds `yol` and the user types `o`. This triggers an `input` event, so we will get the message `Change "yolo"` in our `update` function.
+This function is used to tag whatever is currently in the text field. So let's say the text field currently holds `glad` and the user types `e`. This triggers an `input` event, so we will get the message `Change "glade"` in our `update` function.
 
 So now we have a simple text field that can reverse user input. Neat! Now on to putting a bunch of text fields together into a more traditional form.

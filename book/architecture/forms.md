@@ -151,7 +151,7 @@ viewInput t p v msg =
   input [ type_ t, placeholder p, value v, onInput msg ] []
 ```
 
-So `viewInput "text" "Name" model.name Name` can create a node like `<input type="text" placeholder="Name" value="tom">`. That node will also send messages like `Name "toma"` to `update` on user input.
+So `viewInput "text" "Name" model.name Name` can create a node like `<input type="text" placeholder="Name" value="Bill">`. That node will also send messages like `Name "Billy"` to `update` on user input.
 
 The fourth entry is more interesting. It is a call to `viewValidation`:
 
@@ -166,7 +166,7 @@ viewValidation model =
 
 This function first compares the two passwords. If they match, you get green text and a positive message. If they do not match, you get red text and a helpful message.
 
-These helper functions begin to show the benefits of having our HTML library be normal Elm code. We _could_ jam all that code into our `view`, but in Elm, it is normal to refactor view functions like you would any other code! Is this getting hard to understand? Maybe I can break out a helper function!
+These helper functions begin to show the benefits of having our HTML library be normal Elm code. We _could_ put all that code into our `view`, but making helper functions is totally normal in Elm, even in view code. Is this getting hard to understand? Maybe I can break out a helper function!
 
 > **Exercises:** One cool thing about breaking `viewValidation` out is that it is pretty easy to augment. If you are messing with the code as you read through this (as you should be!) you should try to:
 >
@@ -175,6 +175,6 @@ These helper functions begin to show the benefits of having our HTML library be 
 >  - Add an additional field for `age` and check that it is a number.
 >  - Add a `Submit` button. Only show errors *after* it has been pressed.
 >
-> Be sure to use the helpers in the [`String`](https://package.elm-lang.org/packages/elm/core/latest/String) module if you try any of these! Also, we need to learn more before we start talking to servers, so before you try that here, keep reading until HTTP is introduced. It will be significantly easier with proper guidance!
+> Be sure to use the helpers in the [`String`](https://package.elm-lang.org/packages/elm/core/latest/String) module if you try any of these! Also, we need to learn more before we start talking to servers, so make sure you read all the way to the HTTP part before trying that. It will be significantly easier with proper guidance!
 
 > **Note:** It seems like efforts to make generic validation libraries have not been too successful. I think the problem is that the checks are usually best captured by normal Elm functions. Take some args, give back a `Bool` or `Maybe`. E.g. Why use a library to check if two strings are equal? So as far as we know, the simplest code comes from writing the logic for your particular scenario without any special extras. So definitely give that a shot before deciding you need something more complex!
