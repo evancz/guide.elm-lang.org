@@ -74,6 +74,12 @@ What happens when you do not give a `String` though?
 
 A `String -> Int` function *must* get a `String` argument!
 
+> **Note:** Functions that take multiple arguments end up having more and more arrows. For example, here is a function that takes two arguments:
+>
+>     String.repeat : Int -> String -> String
+>
+> Giving two arguments like `String.repeat 3 "ha"` will produce `"hahaha"`. It works to think of `->` as a weird way to separate arguments, but I explain the real reasoning [here](/appendix/function_types.md). It is pretty neat!
+
 
 ## Type Annotations
 
@@ -97,6 +103,57 @@ askVegeta powerLevel =
     "It is " ++ toString powerLevel ++ "."
 ```
 
-People can make mistakes in type annotations, so what happens if they say the wrong thing? Well, the compiler does not make mistakes, so it still figures out the type on its own. It then checks that your annotation matches the real answer. In other words, the compiler will always verify that all the annotations you add are correct.
+People can make mistakes in type annotations, so what happens if they say the wrong thing? The still figures out the type on its own, and it checks that your annotation matches the real answer. In other words, the compiler will always verify that all the annotations you add are correct!
 
 > **Note:** Some folks feel that it is odd that the type annotation goes on the line above the actual definition. The reasoning is that it should be easy and noninvasive to add a type annotation *later*. This way you can turn a sloppy prototype into higher-quality code just by adding lines.
+
+
+## Type Variables
+
+As you look through the functions in [`elm/core`][core], you will see some type signatures with lower-case letters in them. [`List.reverse`][reverse] is a good example:
+
+```elm
+List.reverse : List a -> List a
+```
+
+That lower-case `a` is called a **type variable**. It means we can use `List.reverse` as if it has type:
+
+- `List String -> List String`
+- `List Float -> List Float`
+- `List Int -> List Int`
+- ...
+
+The `a` can vary and match any type. The `List.reverse` function does not care. But once you decide that `a` is a `String` in the argument, it must also be a `String` in the result. That means `List.reverse` can never be `List String -> List Int`. All `a` values must match in any specific reversal!
+
+> **Note:** Type variables must start with a lower-case letter, and they do not have to be just one character! Imagine we create a function that takes an argument and then gives it back without changes. This is often called the identity function:
+>
+>     identity : value -> value
+>     identity x =
+>       x
+>
+> I wrote the type signature as `value -> value`, but it could also be `a -> a`. The only thing that matters is that the type of values going in matches the type of values going out!
+
+[core]: https://package.elm-lang.org/packages/elm/core/latest/
+[reverse]: https://package.elm-lang.org/packages/elm/core/latest/List#reverse
+
+
+## Constrained Type Variables
+
+There are a few “constrained” type variables. The most common example is probably the `number` type. The [`negate`][negate] function uses it:
+
+```elm
+negate : number -> number
+```
+
+Normally type variables can get filled in with _anything_, but `number` can only be filled in by `Int` and `Float` values. It constrains the possibilities.
+
+The full list of constrained type variables is:
+
+- `number` = `Int` or `Float`
+- `appendable` = `String` or `List a`
+- `compappend` = `String` or `List comparable`
+- `comparable` = `Int`, `Float`, `Char`, `String`, lists and tuples of `comparable` values
+
+These constrained type variables exist to make operations like `(+)` and `(<)` a bit more flexible.
+
+[negate]: https://package.elm-lang.org/packages/elm/core/latest/Basics#negate
