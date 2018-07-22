@@ -120,7 +120,7 @@ Say this `update` function gets a `Roll` message. It is going to produce two val
 
 These both go to Elm&rsquo;s runtime system:
 
-![](diagrams/embed.svg)
+![](diagrams/element.svg)
 
 The runtime system (RTS) will handle these two values as follows:
 
@@ -152,10 +152,10 @@ init _ =
 
 Like our new `update` function, we are now producing (1) a new model and (2) some commands for the RTS. In our dice rolling program, we give `Cmd.none` because we do not need to do anything on initialization, but later you may want to do things like trigger HTTP requests from here.
 
-> **Note:** Why is it taking that `()` argument though? We are just ignoring it. What is the point? Well, this program switches from [`Browser.sandbox`][sandbox] to [`Browser.embed`][embed], enabling the command features we have been looking at so far. It _also_ allows the program to get &ldquo;flags&rdquo; from JavaScript on initialization. So the `()` is saying that we are not getting any interesting flags. We will talk about this more in the chapter on interop. It is not too important right now!
+> **Note:** Why is it taking that `()` argument though? We are just ignoring it. What is the point? Well, this program switches from [`Browser.sandbox`][sandbox] to [`Browser.element`][element], enabling the command features we have been looking at so far. It _also_ allows the program to get &ldquo;flags&rdquo; from JavaScript on initialization. So the `()` is saying that we are not getting any interesting flags. We will talk about this more in the chapter on interop. It is not too important right now!
 
 [sandbox]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#sandbox
-[embed]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#embed
+[element]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#element
 
 
 ## `subscriptions`
