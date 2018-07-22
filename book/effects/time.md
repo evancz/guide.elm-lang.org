@@ -8,7 +8,7 @@ Now we are going to make a digital clock. (Analog will be an exercise!)
 
 So far we have focused on commands. With the randomness example, we commanded the runtime system to give us a random value, but that is sort of a weird pattern for a clock. We _always_ want to know the current time. This is where **subscriptions** come in!
 
-After you read through the code, we will talk about how we are using the [`elm-time`][time]
+After you read through the code, we will talk about how we are using the [`elm/time`][time]
  package here:
 
 [time]: https://package.elm-lang.org/packages/elm/time/latest/
@@ -167,7 +167,7 @@ Getting `Time.Zone` is a bit trickier. Our program created a **command** with:
 Task.perform AdjustTimeZone Time.here
 ```
 
-Reading through the [`Task`][task] docs is the best way to understand that line. The docs are written to actually explain the new concepts, and I think it would be too much of a digression to include a worse version of that info here. The point is just that we command the runtime to give us the `Time.Zone` here, where the program is running.
+Reading through the [`Task`][task] docs is the best way to understand that line. The docs are written to actually explain the new concepts, and I think it would be too much of a digression to include a worse version of that info here. The point is just that we command the runtime to give us the `Time.Zone` wherever the code is running.
 
 [utc]: https://package.elm-lang.org/packages/elm/time/latest/Time#utc
 [task]: https://package.elm-lang.org/packages/elm/core/latest/Task
