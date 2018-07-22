@@ -1,3 +1,5 @@
+> **Note:** Custom types used to be referred to as “union types” in Elm. Names from other communities include [tagged unions](https://en.wikipedia.org/wiki/Tagged_union) and [ADTs](https://en.wikipedia.org/wiki/Algebraic_data_type).
+
 # Custom Types
 
 So far we have seen a bunch of types like `Bool`, `Int`, and `String`. But how do we define our own?
