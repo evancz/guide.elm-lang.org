@@ -66,8 +66,9 @@ This will make an object called `Elm` available in global scope. So if you compi
 ```html
 <div id="elm"></div>
 <script>
-var node = document.getElementById('elm')
-var app = Elm.Main.init({ node: node });
+var app = Elm.Main.init({
+  node: document.getElementById('elm')
+});
 </script>
 ```
 
