@@ -1,4 +1,4 @@
-# Web Components
+# Custom Elements
 
 On the last few pages, we have seen (1) how to start Elm programs from JavaScript, (2) how to pass data in as flags on initialization, and (3) how to send messages between Elm and JS with ports. But guess what people? There is another way to do interop!
 
