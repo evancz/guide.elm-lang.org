@@ -56,8 +56,6 @@ We will start with the baseline `Browser.application` program. It just keeps tra
 
 
 ```elm
-module Main exposing (main)
-
 import Browser
 import Browser.Navigation as Nav
 import Html exposing (..)
