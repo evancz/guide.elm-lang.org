@@ -47,14 +47,15 @@ I think commands and subscriptions make more sense when you start seeing example
 >
 > - [`elm/random`](https://package.elm-lang.org/packages/elm/random/latest/)
 > - [`elm/time`](https://package.elm-lang.org/packages/elm/time/latest/)
-> - [`elm/animation`](https://package.elm-lang.org/packages/elm/animation/latest/)
+> - [`elm/json`](https://package.elm-lang.org/packages/elm/json/latest/)
+> - [`elm/http`](https://package.elm-lang.org/packages/elm/http/latest/)
 >
 > There are tons of other packages on `package.elm-lang.org` though! So when you are making your own Elm programs locally, it will probably involve running some commands like this in the terminal:
 >
->    elm init --element
->    elm install elm/random
->    elm install elm/animation
+>     elm init
+>     elm install elm/random
+>     elm install elm/http
 >
-> That would set up a small project with `elm/random` and `elm/animation` as dependencies.
+> That would set up an `elm.json` file with `elm/random` and `elm/http` as dependencies.
 >
 > I will be mentioning the packages we are using in the following examples, so I hope this gives some context on what that is all about!
