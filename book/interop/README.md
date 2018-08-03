@@ -2,7 +2,7 @@
 
 We have seen quite a bit of Elm so far! We learned **The Elm Architecture**. We learned about **types**. We learned how to interact with the outside world through **commands** and **subscriptions**. Things are going well!
 
-But what happens when you need to do something in JavaScript? Maybe there is a JavaScript library you absolutely need? Maybe you want to embed Elm in an existing JavaScript application? Etc. This chapter will outline all the available options: flags, ports, and web components.
+But what happens when you need to do something in JavaScript? Maybe there is a JavaScript library you absolutely need? Maybe you want to embed Elm in an existing JavaScript application? Etc. This chapter will outline all the available options: flags, ports, and custom elements.
 
 Whichever one you use, the first step is to initialize your Elm program.
 
@@ -36,8 +36,9 @@ This produces a JavaScript file that exposes an `Elm.Main.init` function. So onc
 <body>
   <div id="elm"></div>
   <script>
-  var node = document.getElementById('elm')
-  var app = Elm.Main.init({ node: node });
+  var app = Elm.Main.init({
+    node: document.getElementById('elm')
+  });
   </script>
 </body>
 </html>
