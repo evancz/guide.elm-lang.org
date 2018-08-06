@@ -76,7 +76,9 @@ A `String -> Int` function *must* get a `String` argument!
 
 > **Note:** Functions that take multiple arguments end up having more and more arrows. For example, here is a function that takes two arguments:
 >
->     String.repeat : Int -> String -> String
+>```elm
+String.repeat : Int -> String -> String
+```
 >
 > Giving two arguments like `String.repeat 3 "ha"` will produce `"hahaha"`. It works to think of `->` as a weird way to separate arguments, but I explain the real reasoning [here](/appendix/function_types.md). It is pretty neat!
 
@@ -127,9 +129,11 @@ The `a` can vary and match any type. The `List.reverse` function does not care. 
 
 > **Note:** Type variables must start with a lower-case letter, and they do not have to be just one character! Imagine we create a function that takes an argument and then gives it back without changes. This is often called the identity function:
 >
->     identity : value -> value
->     identity x =
->       x
+>```elm
+identity : value -> value
+identity x =
+  x
+```
 >
 > I wrote the type signature as `value -> value`, but it could also be `a -> a`. The only thing that matters is that the type of values going in matches the type of values going out!
 

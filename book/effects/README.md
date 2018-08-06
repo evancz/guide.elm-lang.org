@@ -52,9 +52,11 @@ I think commands and subscriptions make more sense when you start seeing example
 >
 > There are tons of other packages on `package.elm-lang.org` though! So when you are making your own Elm programs locally, it will probably involve running some commands like this in the terminal:
 >
->     elm init
->     elm install elm/random
->     elm install elm/http
+>```bash
+elm init
+elm install elm/random
+elm install elm/http
+```
 >
 > That would set up an `elm.json` file with `elm/random` and `elm/http` as dependencies.
 >
