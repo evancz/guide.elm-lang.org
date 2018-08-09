@@ -7,22 +7,28 @@ Like I was saying on the previous page, **all modules should be built around a c
 - `Page.Search`
 - `Page.Author`
 
-I would have a module for each page, centered around the `Model` type. Those modules will have the typical `Model`, `init`, `update`, `view`, and whatever helper functions you need. From there, I would just keep growing those modules longer and longer. Keep adding the types and functions you need. If I ever notice that I created a custom type with a couple helper functions, I _might_ move that out into its own module.
+I would have a module for each page, centered around the `Model` type. Those modules follow The Elm Architecture with the typical `Model`, `init`, `update`, `view`, and whatever helper functions you need. From there, I would just keep growing those modules longer and longer. Keep adding the types and functions you need. If I ever notice that I created a custom type with a couple helper functions, I _might_ move that out into its own module.
 
-Notice that there was no planning phase here. **Do not plan ahead.** Early in my projects, I always have these grand schemes of how everything will fit together. “The pages for editing and viewing posts both care about posts, so I will have a `Post` module!” But as I write my application, I find that only the viewing page should have a publication date. And I actually need to track editing differently to cache data when tabs are closed. And they actually need to be stored a bit differently on servers as a result. Etc. I end up turning `Post` into a big mess to handle all these competing concerns, and it ends up being worse for both pages.
+Before we see some examples, I want to emphasize an important strategy.
 
-By just starting with pages, it becomes much easier to see when things are merely **similar**. In user interfaces, this is almost always! So with editing and viewing posts, it seems plausible that we could end up with an `EditablePost` type and a `ViewablePost` type, each with different structure, helper functions, and JSON decoders. Maybe those types are complex enough to warrant their own module. Maybe not!
 
-I know it sounds weird to many folks, but **I always get the best results when I let the code evolve organically.** With the help of the compiler, it is really easy to do huge refactors. If I realize I got something majorly wrong across 20 files, I just fix it.
+## Do Not Plan Ahead
+
+Notice that my `Page` modules do not make any guesses about the future. I do not try to define modules that can be used in multiple places. I do not try to share any functions. This is on purpose!
+
+Early in my projects, I always have these grand schemes of how everything will fit together. “The pages for editing and viewing posts both care about posts, so I will have a `Post` module!” But as I write my application, I find that only the viewing page should have a publication date. And I actually need to track editing differently to cache data when tabs are closed. And they actually need to be stored a bit differently on servers as a result. Etc. I end up turning `Post` into a big mess to handle all these competing concerns, and it ends up being worse for both pages.
+
+By just starting with pages, it becomes much easier to see when things are **similar**, but not **the same**. The norm in user interfaces! So with editing and viewing posts, it seems plausible that we could end up with an `EditablePost` type and a `ViewablePost` type, each with different structure, helper functions, and JSON decoders. Maybe those types are complex enough to warrant their own module. Maybe not! I would just write the code and see what happens.
+
+This works because the compiler makes it really easy to do huge refactors. If I realize I got something majorly wrong across 20 files, I just fix it.
 
 
 ## Examples
 
 You can see examples of this structure in the following open-source projects:
 
-- [`package.elm-lang.org`](https://github.com/elm/package.elm-lang.org)
 - [`elm-spa-example`](https://github.com/rtfeldman/elm-spa-example)
-
+- [`package.elm-lang.org`](https://github.com/elm/package.elm-lang.org)
 
 
 > ## Aside: Culture Shock
