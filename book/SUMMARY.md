@@ -25,7 +25,7 @@
    * [Navigation](webapps/navigation.md)
    * [URL Parsing](webapps/url_parsing.md)
    * [Modules](webapps/modules.md)
-   * [Sessions](webapps/sessions.md)
+   * [Structure](webapps/structure.md)
 * [Optimization](optimization/README.md)
    * [Html.lazy](optimization/lazy.md)
    * [Html.keyed](optimization/keyed.md)
