@@ -6,6 +6,6 @@ Browsers seem to be supporting [custom elements](https://developer.mozilla.org/e
 
 I am not particularly experienced with this technique yet, so I will defer to Luke. He has a lot more experience, and I think his Elm Europe talk is an excellent introduction!
 
-{% youtube src="https://www.youtube.com/watch?v=tyFe9Pw6TVE" %}{% endyoutube %}
+{% youtube %} https://www.youtube.com/watch?v=tyFe9Pw6TVE {% endyoutube %}
 
 I would love to provide text and examples here as well, and I hope to come back to this page in a calmer time and write it up myself. But in the meantime, I hope the community can fill the gap with blog posts!
