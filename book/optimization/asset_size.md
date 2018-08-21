@@ -69,6 +69,6 @@ The important commands here are `elm` and `uglifyjs` which work on any platform,
 
 ## Advice
 
-I recommend writing a `Browser.application` and compiling to a single JavaScript file as we have seen here. It will get downloaded (and cached) when people first visit. Elm creates quite small files compared to the popular competitors, as you can see [here](TODO), so this strategy can take you quite far.
+I recommend writing a `Browser.application` and compiling to a single JavaScript file as we have seen here. It will get downloaded (and cached) when people first visit. Elm creates quite small files compared to the popular competitors, as you can see [here](https://elm-lang.org/blog/small-assets-without-the-headache), so this strategy can take you quite far.
 
-> **Note:** In theory, it is possible to get even smaller assets with Elm. It is not possible right now, but if you are working on 10k lines of Elm or more, we would like to learn about your situation as part of a user study. More details [here](TODO)!
+> **Note:** In theory, it is possible to get even smaller assets with Elm. It is not possible right now, but if you are working on 50k lines of Elm or more, we would like to learn about your situation as part of a user study. More details [here](https://gist.github.com/evancz/fc6ff4995395a1643155593a182e2de7)!
