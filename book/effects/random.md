@@ -23,7 +23,7 @@ import Random
 
 
 main =
-  Html.program
+  Browser.element
     { init = init
     , update = update
     , subscriptions = subscriptions
@@ -86,7 +86,7 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
   div []
-    [ h1 [] [ text (toString model.dieFace) ]
+    [ h1 [] [ text (String.fromInt model.dieFace) ]
     , button [ onClick Roll ] [ text "Roll" ]
     ]
 ```

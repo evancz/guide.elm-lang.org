@@ -16,6 +16,7 @@ After you read through the code, we will talk about how we are using the [`elm/t
 ```elm
 import Browser
 import Html exposing (..)
+import Task
 import Time
 
 
@@ -24,7 +25,7 @@ import Time
 
 
 main =
-  Browser.embed
+  Browser.element
     { init = init
     , view = view
     , update = update
@@ -42,9 +43,9 @@ type alias Model =
   }
 
 
-init : (Model, Cmd Msg)
-init =
-  ( Model Time.utc 0
+init : () -> (Model, Cmd Msg)
+init _ =
+  ( Model Time.utc (Time.millisToPosix 0)
   , Task.perform AdjustTimeZone Time.here
   )
 
@@ -94,7 +95,6 @@ view model =
     second = String.fromInt (Time.toSecond model.zone model.time)
   in
   h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
-
 ```
 
 Let&rsquo;s go through the new stuff.
@@ -175,7 +175,7 @@ Reading through the [`Task`][task] docs is the best way to understand that line.
 
 > **Exercises:**
 >
-> - Add a button to pause the clock, turning the `Time` subscription off.
+> - Add a button to pause the clock, turning the `Time.every` subscription off.
 > - Make the digital clock look nicer. Maybe add some [`style`][style] attributes.
 > - Use [`elm/svg`][svg] to make an analog clock with a red second hand!
 

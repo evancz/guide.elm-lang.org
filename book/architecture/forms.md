@@ -76,9 +76,9 @@ view model =
     ]
 
 
-viewInput : String -> String -> String -> msg -> Html msg
-viewInput t p v msg =
-  input [ type_ t, placeholder p, value v, onInput msg ] []
+viewInput : String -> String -> String -> (String -> msg) -> Html msg
+viewInput t p v toMsg =
+  input [ type_ t, placeholder p, value v, onInput toMsg ] []
 
 
 viewValidation : Model -> Html msg
@@ -142,9 +142,9 @@ view model =
 We start by creating a `<div>` with four child nodes. But instead of using functions from `elm/html` directly, we call Elm functions to make our code more concise! We start with three calls to `viewInput`:
 
 ```elm
-viewInput : String -> String -> String -> msg -> Html msg
-viewInput t p v msg =
-  input [ type_ t, placeholder p, value v, onInput msg ] []
+viewInput : String -> String -> String -> (String -> msg) -> Html msg
+viewInput t p v toMsg =
+  input [ type_ t, placeholder p, value v, onInput toMsg ] []
 ```
 
 So `viewInput "text" "Name" model.name Name` can create a node like `<input type="text" placeholder="Name" value="Bill">`. That node will also send messages like `Name "Billy"` to `update` on user input.
