@@ -49,7 +49,7 @@ So we have this `elm` binary now, but what can it do exactly?
 ```elm
 $ elm repl
 ---- Elm 0.19.0 ----------------------------------------------------------------
- :help for help, :exit to exit, more at <https://github.com/elm-lang/elm-repl>
+Read <https://elm-lang.org/0.19.0/repl> to learn more: exit, help, imports, etc.
 --------------------------------------------------------------------------------
 > 1 / 2
 0.5 : Float
@@ -61,7 +61,7 @@ $ elm repl
 $
 ```
 
-We will be using `elm repl` in the upcoming &ldquo;Core Language&rdquo; section, and you can read more about how it works [here](https://github.com/elm-lang/elm-compiler/blob/master/docs/repl.md).
+We will be using `elm repl` in the upcoming &ldquo;Core Language&rdquo; section, and you can read more about how it works [here](https://elm-lang.org/0.19.0/repl).
 
 > **Note:** `elm repl` works by compiling code to JavaScript, so make sure you have [Node.js](http://nodejs.org/) installed. We use that to evaluate code.
 
@@ -93,22 +93,19 @@ elm make Main.elm --output=main.html
 
 The Elm community shares packages at: [`https://package.elm-lang.org/`](https://package.elm-lang.org/)
 
-Elm projects all have an `elm.json` file (like [this](https://github.com/elm-lang/elm-compiler/blob/master/docs/elm.json/application.md)) which lists any packages it depends upon. Do you need [`elm-lang/http`][http]? Do you need [`elm-lang/time`][time]?
+Elm projects all have an `elm.json` file (like [this](https://github.com/elm/compiler/blob/master/docs/elm.json/application.md)) which lists any packages it depends upon. Do you need [`elm/http`][http]? Do you need [`elm/json`][json]?
 
 `elm install` just helps you add dependencies to `elm.json`.
 
-Say you want to use [`elm-lang/http`][http] and [`NoRedInk/elm-json-decode-pipeline`][pipe] to make HTTP requests to a server and turn the resulting JSON into Elm values. You would say:
+Say you want to use [`elm/http`][http] and [`elm/json`][json] to make HTTP requests to a server and turn the resulting JSON into Elm values. You can add these dependencies by running these commands:
 
 [http]: https://package.elm-lang.org/packages/elm/http/latest
 [json]: https://package.elm-lang.org/packages/elm/json/latest
-[pipe]: https://package.elm-lang.org/packages/NoRedInk/elm-json-decode-pipeline/latest
 
 ```bash
-elm install elm-lang/http
-elm install NoRedInk/elm-json-decode-pipeline
+elm install elm/http
+elm install elm/json
 ```
-
-This will add the dependencies to `elm.json` (or create it if needed!)
 
 
 ## Summary
