@@ -168,10 +168,10 @@ If we really wanted to get into the spirit of decoders, we would define `personD
 
 There are a bunch of important functions in `Json.Decode` that we did not cover here:
 
-- `[bool](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#bool) : Decoder Bool`
-- `[list](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#list) : Decoder a -> Decoder (List a)`
-- `[dict](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#dict) : Decoder a -> Decoder (Dict String a)`
-- `[oneOf](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#oneOf) : List (Decoder a) -> Decoder a`
+- [`bool`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#bool) : `Decoder Bool`
+- [`list`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#list) : `Decoder a -> Decoder (List a)`
+- [`dict`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#dict) : `Decoder a -> Decoder (Dict String a)`
+- [`oneOf`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#oneOf) : `List (Decoder a) -> Decoder a`
 
 So there are ways to extract all sorts of data structures. The `oneOf` function is particularly helpful for messy JSON. (e.g. sometimes you get an `Int` and other times you get a `String` containing digits. So annoying!)
 
