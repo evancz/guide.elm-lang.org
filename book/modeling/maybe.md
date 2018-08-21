@@ -25,7 +25,7 @@ There are two major cases where you will see `Maybe` values.
 
 ## Optional Fields
 
-Say we are running a social networking website. Connecting people, friendship, etc. You know the spiel. The Onion outlined our real goals best: [mine as much data as possible for the CIA](http://www.theonion.com/video/cias-facebook-program-dramatically-cut-agencys-cos-19753). And if we want *all* the data, we need to ease people into it. Let them add it later. Add features that encourage them to share more and more information over time.
+Say we are running a social networking website. Connecting people, friendship, etc. You know the spiel. The Onion outlined our real goals best: [mine as much data as possible for the CIA](https://www.theonion.com/cias-facebook-program-dramatically-cut-agencys-costs-1819594988). And if we want *all* the data, we need to ease people into it. Let them add it later. Add features that encourage them to share more and more information over time.
 
 So let's start with a simple model of a user. They must have a name, but we are going to make the age optional.
 
