@@ -44,7 +44,7 @@ So we have this `elm` binary now, but what can it do exactly?
 
 ### `elm repl`
 
-`elm repl` lets interact with Elm expressions in the terminal.
+`elm repl` lets us interact with Elm expressions in the terminal.
 
 ```elm
 $ elm repl
