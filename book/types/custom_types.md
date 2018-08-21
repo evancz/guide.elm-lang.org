@@ -91,7 +91,7 @@ There are quite a few types defined in `elm/core` that you are sure to run into.
 type Bool = True | False
 ```
 
-It has two variants. `True` and `False`. Neither has assiated data.
+It has two variants. `True` and `False`. Neither has associated data.
 
 Another common one is the [`Maybe`][Maybe] type:
 
