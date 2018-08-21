@@ -91,21 +91,19 @@ elm make Main.elm --output=main.html
 
 ### `elm install`
 
-The Elm community shares packages at: [`https://package.elm-lang.org/`](https://package.elm-lang.org/)
+Elm packages all live at [`package.elm-lang.org`](https://package.elm-lang.org/).
 
-Elm projects all have an `elm.json` file (like [this](https://github.com/elm/compiler/blob/master/docs/elm.json/application.md)) which lists any packages it depends upon. Do you need [`elm/http`][http]? Do you need [`elm/json`][json]?
-
-`elm install` just helps you add dependencies to `elm.json`.
-
-Say you want to use [`elm/http`][http] and [`elm/json`][json] to make HTTP requests to a server and turn the resulting JSON into Elm values. You can add these dependencies by running these commands:
-
-[http]: https://package.elm-lang.org/packages/elm/http/latest
-[json]: https://package.elm-lang.org/packages/elm/json/latest
+Say you look around and decide you need [`elm/http`][http] and [`elm/json`][json] to make some HTTP requests. You can get them set up in your project with the following commands:
 
 ```bash
 elm install elm/http
 elm install elm/json
 ```
+
+This will add the dependencies into your `elm.json` file, described in more detail [here](https://github.com/elm/compiler/blob/master/docs/elm.json/application.md).
+
+[http]: https://package.elm-lang.org/packages/elm/http/latest
+[json]: https://package.elm-lang.org/packages/elm/json/latest
 
 
 ## Summary
