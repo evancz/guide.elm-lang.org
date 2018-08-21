@@ -147,6 +147,8 @@ subscriptions model =
 
 We are using the [`Time.every`][every] function here:
 
+[every]: https://package.elm-lang.org/packages/elm/time/latest/Time#every
+
 ```elm
 every : Float -> (Time.Posix -> msg) -> Sub msg
 ```
