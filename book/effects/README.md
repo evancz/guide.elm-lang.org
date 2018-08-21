@@ -36,7 +36,7 @@ I think commands and subscriptions make more sense when you start seeing example
 [element]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#element
 
 
-> **Note 1:** Some readers may be worrying about asset size. &ldquo;A runtime system? That sounds big!&rdquo; It is not. In fact, [Elm assets are exceptionally small](https://elm-lang.org/blog/TODO) when compared to React, Angular, Ember, etc.
+> **Note 1:** Some readers may be worrying about asset size. &ldquo;A runtime system? That sounds big!&rdquo; It is not. In fact, [Elm assets are exceptionally small](https://elm-lang.org/blog/small-assets-without-the-headache) when compared to React, Angular, Vue, etc.
 
 > **Note 2:** We are going to use packages from [`package.elm-lang.org`](https://package.elm-lang.org) in the upcoming examples. We have already been working with a couple:
 >
