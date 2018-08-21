@@ -40,7 +40,7 @@ Say we have some JSON:
 }
 ```
 
-We need to run it through a `Decoder` to to access specific information. So if we wanted to get the `"age"`, we would run the JSON through a `Decoder Int` that describes exactly how to access that information:
+We need to run it through a `Decoder` to access specific information. So if we wanted to get the `"age"`, we would run the JSON through a `Decoder Int` that describes exactly how to access that information:
 
 ![](diagrams/int.svg)
 
@@ -129,7 +129,7 @@ gifDecoder =
   field "data" (field "image_url" string)
 ```
 
-Is there a `"data"` field? If so, does that value have an `"image_url"` field? If so, is value there a string?
+Is there a `"data"` field? If so, does that value have an `"image_url"` field? If so, is the value there a string?
 
 So we are essentially building up a _contract_ of what we expect. &ldquo;If you give me JSON like this, I will turn them into Elm values.&rdquo;
 
@@ -175,7 +175,7 @@ There are a bunch of important functions in `Json.Decode` that we did not cover 
 
 So there are ways to extract all sorts of data structures. The `oneOf` function is particularly helpful for messy JSON. (e.g. sometimes you get an `Int` and other times you get a `String` containing digits. So annoying!)
 
-There are also [`map3`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#map3), [`map4`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#map4), and others for handling objects with more than two fields. But as you start working with larger JSON objects, it is worth checking out [`NoRedInk/elm-json-decode-pipeline`](https://package.elm-lang.org/packages/NoRedInk/elm-json-decode-pipeline/latest). The types there are a bit fancier, but some folks find them much easier to read and work with.
+There are also [`map3`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#map3), [`map4`](https://package.elm-lang.org/packages/elm/core/latest/Json-Decode#map4), and others for handling objects with more than two fields. But as you start working with larger JSON objects, it is worth checking out [`NoRedInk/json-decode-pipeline`](https://package.elm-lang.org/packages/NoRedInk/json-decode-pipeline/latest). The types there are a bit fancier, but some folks find them much easier to read and work with.
 
 
 > **Fun Fact:** I have heard a bunch of stories of folks finding bugs in their _server_ code as they switched from JS to Elm. The decoders people write end up working as a validation phase, catching weird stuff in JSON values. So when NoRedInk switched from React to Elm, it revealed a couple bugs in Ruby code!
