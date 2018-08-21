@@ -89,7 +89,7 @@ checkbox msg name =
     ]
 ```
 
-Now we have a highly configurable `checkbox` function. It takes two arguments to configure how it works: the message it produces on clicks and some text to show next to the checkbox. Now if we decide we want all checkboxes to have a certain `class`, we just add it in the `checkbox` function and it shows up everywhere! This is the essense of **reusable views** in Elm. Create helper functions!
+Now we have a highly configurable `checkbox` function. It takes two arguments to configure how it works: the message it produces on clicks and some text to show next to the checkbox. Now if we decide we want all checkboxes to have a certain `class`, we just add it in the `checkbox` function and it shows up everywhere! This is the essence of **reusable views** in Elm. Create helper functions!
 
 
 ## Comparing Reusable Views to Reusable Components
