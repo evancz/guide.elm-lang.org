@@ -3,6 +3,10 @@
             {
                 "from": "get_started.html",
                 "to": "install.html"
+            },
+            {
+            	"from": "reuse/modules.html",
+            	"to": "webapps/modules.html"
             }
         ]
 }
