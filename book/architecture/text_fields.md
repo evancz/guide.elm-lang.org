@@ -1,7 +1,7 @@
 # Text Fields
 
 ---
-#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/field).
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://ellie-app.com/37gW7sj9wPVa1).
 ---
 
 We are about to create a simple app that reverses the contents of a text field.
