@@ -40,7 +40,7 @@ Say we have some JSON:
 }
 ```
 
-We need to run it through a `Decoder` to to access specific information. So if we wanted to get the `"age"`, we would run the JSON through a `Decoder Int` that describes exactly how to access that information:
+We need to run it through a `Decoder` to access specific information. So if we wanted to get the `"age"`, we would run the JSON through a `Decoder Int` that describes exactly how to access that information:
 
 ![](diagrams/int.svg)
 
@@ -129,7 +129,7 @@ gifDecoder =
   field "data" (field "image_url" string)
 ```
 
-Is there a `"data"` field? If so, does that value have an `"image_url"` field? If so, is value there a string?
+Is there a `"data"` field? If so, does that value have an `"image_url"` field? If so, is the value there a string?
 
 So we are essentially building up a _contract_ of what we expect. &ldquo;If you give me JSON like this, I will turn them into Elm values.&rdquo;
 
