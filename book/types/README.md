@@ -4,7 +4,7 @@ One of Elm's major benefits is that **users do not see runtime errors in practic
 
 ## An Example of Type Inference
 
-The following code defines a `toFullName` function which extracts a persons full name as a string:
+The following code defines a `toFullName` function which extracts a person’s full name as a string:
 
 ```elm
 toFullName person =
