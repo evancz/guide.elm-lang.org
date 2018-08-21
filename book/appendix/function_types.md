@@ -61,7 +61,7 @@ Now remember how `String.repeat 4` had type `String -> String` on its own? Well,
 
 - `List.map (String.repeat 2) ["ha","choo"] == ["haha","choochoo"]`
 
-The expression `(String.repeat 2)` is a `String -> String` function, so we can use it directly. No need to say `(\str -> String.repeat 2 str)`.ß
+The expression `(String.repeat 2)` is a `String -> String` function, so we can use it directly. No need to say `(\str -> String.repeat 2 str)`.
 
 Elm also uses the convention that **the data structure is always the last argument** across the ecosystem. This means that functions are usually designed with this possible usage in mind, making this a pretty common technique.
 
