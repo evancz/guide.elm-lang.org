@@ -43,7 +43,7 @@ kate95 = Visitor "kate95"
 
 The data is attached directly to the variant, so there is no need for the record anymore.
 
-Another benifit of this approach is that each variant can have different associated data. Say that `Regular` users gave their age when they signed up. There is no nice way to capture that with records, but when you define your own `type` it is no problem. We add some associated data to the `Regular` variant:
+Another benefit of this approach is that each variant can have different associated data. Say that `Regular` users gave their age when they signed up. There is no nice way to capture that with records, but when you define your own `type` it is no problem. We add some associated data to the `Regular` variant:
 
 ```elm
 type User
@@ -91,7 +91,7 @@ There are quite a few types defined in `elm/core` that you are sure to run into.
 type Bool = True | False
 ```
 
-It has two variants. `True` and `False`. Neither has assiated data.
+It has two variants. `True` and `False`. Neither has associated data.
 
 Another common one is the [`Maybe`][Maybe] type:
 
