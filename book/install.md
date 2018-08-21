@@ -97,15 +97,15 @@ Elm projects all have an `elm.json` file (like [this](https://github.com/elm-lan
 
 `elm install` just helps you add dependencies to `elm.json`.
 
-Say you want to use [`elm-lang/http`][http] and [`NoRedInk/json-decode-pipeline`][pipe] to make HTTP requests to a server and turn the resulting JSON into Elm values. You would say:
+Say you want to use [`elm-lang/http`][http] and [`NoRedInk/elm-json-decode-pipeline`][pipe] to make HTTP requests to a server and turn the resulting JSON into Elm values. You would say:
 
 [http]: https://package.elm-lang.org/packages/elm/http/latest
 [json]: https://package.elm-lang.org/packages/elm/json/latest
-[pipe]: https://package.elm-lang.org/packages/NoRedInk/json-decode-pipeline/latest
+[pipe]: https://package.elm-lang.org/packages/NoRedInk/elm-json-decode-pipeline/latest
 
 ```bash
 elm install elm-lang/http
-elm install NoRedInk/elm-decode-pipeline
+elm install NoRedInk/elm-json-decode-pipeline
 ```
 
 This will add the dependencies to `elm.json` (or create it if needed!)
