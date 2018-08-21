@@ -1,7 +1,7 @@
 # Random
 
 ---
-#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/random).
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://ellie-app.com/37gXN5G4T2sa1).
 ---
 
 We are going to make an app that rolls dice, producing a random number between 1 and 6.

@@ -1,7 +1,7 @@
 # HTTP
 
 ---
-#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/http).
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://ellie-app.com/37gZn34mDJPa1).
 ---
 
 We are about to make an app that fetches a random GIF when the user asks for another image.

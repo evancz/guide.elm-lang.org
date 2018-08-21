@@ -1,7 +1,7 @@
 # Time
 
 ---
-#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/time).
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://ellie-app.com/37gYpCSxQHGa1).
 ---
 
 Now we are going to make a digital clock. (Analog will be an exercise!)
