@@ -73,9 +73,9 @@ These days, languages tend to do this by storing the **length** of the string. S
 What about tuples? Well, `(Int, Int)` is two `Int` values, and each one is a sequence of bits. Let’s just put those two sequences next to each other in memory and call it a day!
 
 
-## Union Types
+## Custom Types
 
-A union type is all about combining different types. Those different types may have all sorts of different shapes. We will start with the `Color` type:
+A custom type is all about combining different types. Those different types may have all sorts of different shapes. We will start with the `Color` type:
 
 ```elm
 type Color = Red | Yellow | Green
@@ -83,7 +83,7 @@ type Color = Red | Yellow | Green
 
 We can assign each case a number: `Red = 0`, `Yellow = 1`, and `Green = 2`. Now we can use the `Int` representation. Here we only need two bits to cover all the possible cases, so `00` is red, `01` is yellow, `10` is green, and `11` is unused.
 
-But what about union types that hold additional data? Like `Maybe Int`? The typical approach is to set aside some bits to “tag” the data, so we can decide that `Nothing = 0` and `Just = 1`. Here are some examples:
+But what about custom types that hold additional data? Like `Maybe Int`? The typical approach is to set aside some bits to “tag” the data, so we can decide that `Nothing = 0` and `Just = 1`. Here are some examples:
 
 - `Nothing` = `0`
 - `Just 12` = `1` `00001100`
@@ -98,6 +98,6 @@ This “tag” idea is similar to putting the length at the beginning of `String
 
 Eventually, all values need to be represented in bits. This page gives a rough overview of how that actually works.
 
-Normally there is no real reason to think about this, but I found it to be helpful in deepening my understanding of union types and `case` expressions. I hope it is helpful to you as well!
+Normally there is no real reason to think about this, but I found it to be helpful in deepening my understanding of custom types and `case` expressions. I hope it is helpful to you as well!
 
 > **Note:** If you think this is interesting, it may be fun to learn more about garbage collection. I have found [The Garbage Collection Handbook](http://gchandbook.org/) to be an excellent resource on the topic!
