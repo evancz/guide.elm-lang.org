@@ -7,8 +7,8 @@
   * Windows &mdash; [installer][win]
   * Linux &mdash; [instructions][linux]
 
-[mac]: https://44a95588fe4cc47efd96-ec3c2a753a12d2be9f23ba16873acc23.ssl.cf2.rackcdn.com/Elm-0.19.pkg
-[win]: https://44a95588fe4cc47efd96-ec3c2a753a12d2be9f23ba16873acc23.ssl.cf2.rackcdn.com/Elm-0.19.exe
+[mac]: https://github.com/elm/compiler/releases/download/0.19.0/installer-for-mac.pkg
+[win]: https://github.com/elm/compiler/releases/download/0.19.0/installer-for-windows.pkg
 [linux]: https://gist.github.com/evancz/442b56717b528f913d1717f2342a295d
 [npm]: https://www.npmjs.com/package/elm
 
