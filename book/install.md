@@ -5,12 +5,12 @@
 
   * Mac &mdash; [installer][mac]
   * Windows &mdash; [installer][win]
-  * Anywhere &mdash; [npm installer][npm] or [build from source][build]
+  * Linux &mdash; [instructions][linux]
 
-[mac]: https://44a95588fe4cc47efd96-ec3c2a753a12d2be9f23ba16873acc23.ssl.cf2.rackcdn.com/Elm-Platform-0.19.pkg
-[win]: https://44a95588fe4cc47efd96-ec3c2a753a12d2be9f23ba16873acc23.ssl.cf2.rackcdn.com/Elm-Platform-0.19.exe
+[mac]: https://44a95588fe4cc47efd96-ec3c2a753a12d2be9f23ba16873acc23.ssl.cf2.rackcdn.com/Elm-0.19.pkg
+[win]: https://44a95588fe4cc47efd96-ec3c2a753a12d2be9f23ba16873acc23.ssl.cf2.rackcdn.com/Elm-0.19.exe
+[linux]: https://gist.github.com/evancz/442b56717b528f913d1717f2342a295d
 [npm]: https://www.npmjs.com/package/elm
-[build]: https://github.com/elm-lang/elm-platform
 
 After installing through any of those routes, you will have the `elm` binary available in your terminal!
 
