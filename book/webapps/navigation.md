@@ -44,7 +44,7 @@ The resulting message goes to `update` where you can decide how to show the new 
 So rather than loading new HTML, these three additions give you full control over URL changes. Let’s see it in action!
 
 [u]: https://package.elm-lang.org/packages/elm/url/latest/Url#Url
-[ur]: https://package.elm-lang.org/packages/elm/url/latest/Url#UrlRequest
+[ur]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#UrlRequest
 [bn]: https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation
 [bnp]: https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#pushUrl
 [bnl]: https://package.elm-lang.org/packages/elm/browser/latest/Browser-Navigation#load
