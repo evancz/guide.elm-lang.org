@@ -29,7 +29,7 @@
 * [Optimization](optimization/README.md)
    * [Html.lazy](optimization/lazy.md)
    * [Html.keyed](optimization/keyed.md)
-   * [Minification](optimization/minification.md)
+   * [Minification](optimization/asset_size.md)
 * [Next Steps](next_steps.md)
 * Appendix
    * [Types as Sets](appendix/types_as_sets.md)
