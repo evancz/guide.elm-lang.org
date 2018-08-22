@@ -5,8 +5,12 @@
                 "to": "install.html"
             },
             {
-            	"from": "reuse/modules.html",
-            	"to": "webapps/modules.html"
+                "from": "reuse/modules.html",
+                "to": "webapps/modules.html"
+            },
+            {
+                "from": "interop/json.html",
+                "to": "effects/json.html"
             }
         ]
 }
