@@ -10,7 +10,7 @@ I update it like a paper book, with a new edition periodically rather than lots 
 
 There are many ways to improve this book. Many of them require structural changes that would present concepts in a better order. Changes like this are quite difficult, especially in a collaborative way. I want the book to come out coherent more than I want it to address every possible concern.
 
-So the kind of PRs that are practical to handle include:
+**If you want to make a PR**, the kinds of PRs that are practical to handle include:
 
 - Fixing misspellings
 - Fixing broken links
@@ -18,7 +18,7 @@ So the kind of PRs that are practical to handle include:
 
 Make a PR as small as possible. Reviewing a typo is easy. Reviewing 10 typos is hard because 9 may be good. Now there is a bigger coordination overhead.
 
-If you are confused about something, make an issue that explains:
+**If you want to record an issue**, make sure you share:
 
 - Your programming background
 - How you found the guide
