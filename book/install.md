@@ -24,7 +24,7 @@ Using Elm is way nicer when you have a code editor to help you out. There are El
   * [Atom](https://atom.io/packages/language-elm)
   * [Brackets](https://github.com/lepinay/elm-brackets)
   * [Emacs](https://github.com/jcollard/elm-mode)
-  * [IntelliJ](https://github.com/durkiewicz/elm-plugin)
+  * [IntelliJ](https://github.com/klazuka/intellij-elm)
   * [Light Table](https://github.com/rundis/elm-light)
   * [Sublime Text](https://packagecontrol.io/packages/Elm%20Language%20Support)
   * [Vim](https://github.com/ElmCast/elm-vim)
