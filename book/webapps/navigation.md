@@ -89,7 +89,7 @@ type alias Model =
   }
 
 
-init : () -> Url -> Nav.Key -> ( Model, Cmd Msg )
+init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
   ( Model key url, Cmd.none )
 
