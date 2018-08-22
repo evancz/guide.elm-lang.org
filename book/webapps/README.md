@@ -2,7 +2,7 @@
 
 So far we have been creating Elm programs with `Browser.element`, allowing us to take over a single node in a larger application. This is great for _introducing_ Elm at work (as described [here](https://elm-lang.org/blog/how-to-use-elm-at-work)) but what happens after that? How can we use Elm more extensively?
 
-In this chapter, we will learn how to create a “web app” with a bunch of different pages that all intergrate nicely with each other, but we must start by controlling a single page.
+In this chapter, we will learn how to create a “web app” with a bunch of different pages that all integrate nicely with each other, but we must start by controlling a single page.
 
 
 ## Control the Document
