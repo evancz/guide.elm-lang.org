@@ -30,7 +30,7 @@ kate95 = { status = Visitor, name = "kate95" }
 
 So now we can track if someone is a `Regular` with an account or a `Visitor` who is just passing through. It is not too tough, but we can make it simpler!
 
-Rather than creating a `type` and a `type alias`, we can actually represent all this with just a `type` by associating data with each variant. So we can make a new `User` type in which the `Regular` and `Visitor` variants each have an associated `String` value:
+Rather than creating a custom type and a type alias, we can represent all this with just a single custom type. The `Regular` and `Visitor` variants each have an associated data. In our case, the associated data is a `String` value:
 
 ```elm
 type User
@@ -43,7 +43,7 @@ kate95 = Visitor "kate95"
 
 The data is attached directly to the variant, so there is no need for the record anymore.
 
-Another benefit of this approach is that each variant can have different associated data. Say that `Regular` users gave their age when they signed up. There is no nice way to capture that with records, but when you define your own `type` it is no problem. We add some associated data to the `Regular` variant:
+Another benefit of this approach is that each variant can have different associated data. Say that `Regular` users gave their age when they signed up. There is no nice way to capture that with records, but when you define your own custom type it is no problem. We add some associated data to the `Regular` variant:
 
 ```elm
 type User
