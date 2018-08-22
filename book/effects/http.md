@@ -137,7 +137,7 @@ gifDecoder =
   Decode.field "data" (Decode.field "image_url" Decode.string)
 ```
 
-This program is quite similar to the random dice roller we just saw: `Model`, `init`, `update`, `subscriptions`, and `view`. The new stuff is mostly in the `HTTP` section which uses `elm/url`, `elm/json`, and `elm/http`. Let&rsqou;s go through those one-by-one.
+This program is quite similar to the random dice roller we just saw: `Model`, `init`, `update`, `subscriptions`, and `view`. The new stuff is mostly in the `HTTP` section which uses `elm/url`, `elm/json`, and `elm/http`. Let&rsquo;s go through those one-by-one.
 
 
 ## `elm/url`
