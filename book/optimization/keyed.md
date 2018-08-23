@@ -17,7 +17,7 @@ When the diffing algorithm (described on the previous page) gets to a long list 
 
 But when you you change the sort order, all of these are going to be different! So you end up doing a lot of work on the DOM when you could have just shuffled some nodes around.
 
-This issue shows exists with insertion and removal as well. Say you remove the 1st of 100 items. Everything is going to be off-by-one and look different. So you get 99 diffs and one removal at the end. No good!
+This issue exists with insertion and removal as well. Say you remove the 1st of 100 items. Everything is going to be off-by-one and look different. So you get 99 diffs and one removal at the end. No good!
 
 
 ## The Solution
