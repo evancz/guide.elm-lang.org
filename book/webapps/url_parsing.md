@@ -15,7 +15,7 @@ Say we have an art website where the following addresses should be valid:
 
 - `/topic/architecture`
 - `/topic/painting`
-- `/topic/scuplture`
+- `/topic/sculpture`
 - `/blog/42`
 - `/blog/123`
 - `/blog/451`
