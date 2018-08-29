@@ -148,7 +148,7 @@ This function takes in two decoders. It tries them both and combines their resul
 import Json.Decode exposing (Decoder, map2, field, string, int)
 
 type alias Person =
-  { name : Int
+  { name : String
   , age : Int
   }
 
