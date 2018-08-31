@@ -84,7 +84,7 @@ type Msg
   = Searched String
   | Changed E.Value
 
-port activeUsers : (E.Value -> msg) -> Sub msg
+port activeUsers : (E.Value -> Msg) -> Sub Msg
 ```
 
 Again, the important line is the `port` declaration. It creates a `activeUsers` function, and if we subscribe to `activeUsers Changed`, we will get a `Msg` whenever folks send values in from JavaScript.
