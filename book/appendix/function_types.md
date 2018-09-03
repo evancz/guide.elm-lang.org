@@ -39,7 +39,7 @@ It is a function that takes an `Int` and then produces _another_ function. So if
 
 So conceptually, **every function accepts one argument.** It may return another function that accepts one argument. Etc. At some point it will stop returning functions.
 
-We _could_ always put the parentheses to indicate that this is what is really happening, but it starts to get pretty unweildy when you have multiple arguments. It is the same logic behind writing `4 * 2 + 5 * 3` instead of `(4 * 2) + (5 * 3)`. It means there is a bit extra to learn, but it is so common that it is worth it.
+We _could_ always put the parentheses to indicate that this is what is really happening, but it starts to get pretty unwieldy when you have multiple arguments. It is the same logic behind writing `4 * 2 + 5 * 3` instead of `(4 * 2) + (5 * 3)`. It means there is a bit extra to learn, but it is so common that it is worth it.
 
 Fine, but what is the point of this feature in the first place? Why not do `(Int, String) -> String` and give all the arguments at once?
 
