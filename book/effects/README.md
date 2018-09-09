@@ -15,7 +15,7 @@ You can think of `Browser.sandbox` as setting up a system like this:
 
 We get to stay in the world of Elm, writing functions and transforming data. This hooks up to Elm&rsquo;s **runtime system**. The runtime system figures out how to render `Html` efficiently. Did anything change? What is the minimal DOM modification needed? It also figures out when someone clicks a button or types into a text field. It turns that into a `Msg` and feeds it into your Elm code.
 
-By cleanly separating out all the DOM manipulation, it becomes possible to use extremely aggresive optimizations. So Elm&rsquo;s runtime system is a big part of why Elm is [one of the fastest options available][benchmark].
+By cleanly separating out all the DOM manipulation, it becomes possible to use extremely aggressive optimizations. So Elm&rsquo;s runtime system is a big part of why Elm is [one of the fastest options available][benchmark].
 
 [sandbox]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#sandbox
 [benchmark]: http://elm-lang.org/blog/blazing-fast-html-round-two
