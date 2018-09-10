@@ -16,7 +16,7 @@ Okay, so you read those sections, right?
 
 Good!
 
-In this example uses The Elm Architecture, just like we have seen in all the previous examples. The new parts are all because we are using the [`elm/http`][http] and [`elm/url`][url] packages. We will talk about all that after you look through the code a bit:
+This example uses The Elm Architecture, just like we have seen in all the previous examples. The new parts are all because we are using the [`elm/http`][http] and [`elm/url`][url] packages. We will talk about all that after you look through the code a bit:
 
 [http]: https://package.elm-lang.org/packages/elm/http/latest
 [json]: https://package.elm-lang.org/packages/elm/json/latest
