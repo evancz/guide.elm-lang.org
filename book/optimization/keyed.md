@@ -33,7 +33,7 @@ import Html.Lazy exposing (lazy)
 
 viewPresidents : List President -> Html msg
 viewPresidents presidents =
-  Keyed.node "ul" (List.map viewKeyedPresident presidents)
+  Keyed.node "ul" [] (List.map viewKeyedPresident presidents)
 
 viewKeyedPresident : President -> (String, Html msg)
 viewKeyedPresident president =
