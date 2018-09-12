@@ -1,20 +1,8 @@
 {
     "redirects": [
-            {
-                "from": "get_started.html",
-                "to": "install.html"
-            },
-            {
-                "from": "reuse/modules.html",
-                "to": "webapps/modules.html"
-            },
-            {
-                "from": "interop/json.html",
-                "to": "effects/json.html"
-            },
-            {
-                "from": "types/union_types.html",
-                "to": "types/custom_types.html"
-            }
-        ]
+        { "from": "get_started.html", "to": "install.html" },
+        { "from": "reuse/modules.html", "to": "webapps/modules.html" },
+        { "from": "interop/json.html", "to": "effects/json.html" },
+        { "from": "types/union_types.html", "to": "types/custom_types.html" }
+    ]
 }
