@@ -11,6 +11,10 @@
             {
                 "from": "interop/json.html",
                 "to": "effects/json.html"
+            },
+            {
+                "from": "types/union_types.html",
+                "to": "types/custom_types.html"
             }
         ]
 }
