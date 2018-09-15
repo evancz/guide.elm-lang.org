@@ -11,7 +11,7 @@ toFullName person =
   person.firstName ++ " " ++ person.lastName
 
 fullName =
-  toFullName { fistName = "Hermann", lastName = "Hesse" }
+  toFullName { firstName = "Hermann", lastName = "Hesse" }
 ```
 
 Like in JavaScript or Python, we just write the code with no extra clutter. Do you see the bug though?
@@ -23,7 +23,7 @@ In JavaScript, the equivalent code spits out `"undefined Hesse"`. Not even an er
 
 The argument to function `toFullName` is causing a mismatch.
 
-6│   toFullName { fistName = "Hermann", lastName = "Hesse" }
+6│   toFullName { firstName = "Hermann", lastName = "Hesse" }
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Function `toFullName` is expecting the argument to be:
 
@@ -31,11 +31,11 @@ Function `toFullName` is expecting the argument to be:
 
 But it is:
 
-    { …, fistName : … }
+    { …, firstName : … }
 
 Hint: I compared the record fields and found some potential typos.
 
-    firstName <-> fistName
+    firstName <-> firstName
 ```
 
 It sees that `toFullName` is getting the wrong *type* of argument. Like the hint in the error message says, someone accidentally wrote `fist` instead of `first`.
