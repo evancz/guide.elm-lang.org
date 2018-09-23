@@ -11,7 +11,7 @@ toFullName person =
   person.firstName ++ " " ++ person.lastName
 
 fullName =
-  toFullName { fistName = "Hermann", lastName = "Hesse" }
+  toFullName { firstName = "Hermann", lastName = "Hesse" }
 ```
 
 Like in JavaScript or Python, we just write the code with no extra clutter. Do you see the bug though?
