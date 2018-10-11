@@ -113,7 +113,7 @@ We create a `<div>` with two children.
 
 The interesting child is the `<input>` node. In addition to the `placeholder` and `value` attributes, it uses `onInput` to declare what messages should be sent when the user types into this input.
 
-This `onInput` function is kind of interesting. It takes one argument, in this case the `Change` function which was created when we declared the `Msg` type:
+This `onInput` function is kind of interesting. It takes one argument, in this case the `Change` function. You can't see it in the code listing above, but under the hood, that function got created by elm when we declared the `Msg` type:
 
 ```elm
 Change : String -> Msg
