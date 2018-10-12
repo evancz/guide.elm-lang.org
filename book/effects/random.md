@@ -160,7 +160,7 @@ Like our new `update` function, we are now producing (1) a new model and (2) som
 
 ## `subscriptions`
 
-The final new thing that we need to specify if we subscribe to anything. For now we are saying [`Sub.none`](https://package.elm-lang.org/packages/elm/core/latest/Platform-Sub#none) to indicate that there are no subscriptions. We will get into subscriptions in one of the next examples!
+The final new thing is that we need to specify if we subscribe to anything. For now we are saying [`Sub.none`](https://package.elm-lang.org/packages/elm/core/latest/Platform-Sub#none) to indicate that there are no subscriptions. We will get into subscriptions in one of the next examples!
 
 
 # Summary
