@@ -8,7 +8,7 @@ Elm has **modules** to help you grow your codebase in a nice way. On the most ba
 Elm modules work best when you define them around a central type. Like how the `List` module is all about the `List` type. So say we want to build a module around a `Post` type for a blogging website. We can create something like this:
 
 ```elm
-module Post exposing (Post, estimatedReadTime, encode, decode)
+module Post exposing (Post, estimatedReadTime, encode, decoder)
 
 import Json.Decode as D
 import Json.Encode as E
