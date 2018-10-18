@@ -102,7 +102,7 @@ askVegeta powerLevel =
     "It's over 9000!!!"
 
   else
-    "It is " ++ toString powerLevel ++ "."
+    "It is " ++ String.fromInt powerLevel ++ "."
 ```
 
 People can make mistakes in type annotations, so what happens if they say the wrong thing? The compiler still figures out the type on its own, and it checks that your annotation matches the real answer. In other words, the compiler will always verify that all the annotations you add are correct!
