@@ -93,8 +93,10 @@ view model =
     hour   = String.fromInt (Time.toHour   model.zone model.time)
     minute = String.fromInt (Time.toMinute model.zone model.time)
     second = String.fromInt (Time.toSecond model.zone model.time)
+    paddedMinute = String.padLeft 2 '0' minute
+    paddedSecond = String.padLeft 2 '0' second
   in
-  h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
+  h1 [] [ text (hour ++ ":" ++ paddedMinute ++ ":" ++ paddedSecond) ]
 ```
 
 Let&rsquo;s go through the new stuff.
@@ -119,8 +121,10 @@ view model =
     hour   = String.fromInt (Time.toHour   model.zone model.time)
     minute = String.fromInt (Time.toMinute model.zone model.time)
     second = String.fromInt (Time.toSecond model.zone model.time)
+    paddedMinute = String.padLeft 2 '0' minute
+    paddedSecond = String.padLeft 2 '0' second
   in
-  h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
+  h1 [] [ text (hour ++ ":" ++ paddedMinute ++ ":" ++ paddedSecond) ]
 ```
 
 The [`Time.toHour`][toHour] function takes `Time.Zone` and `Time.Posix` gives us back an `Int` from `0` to `23` indicating what hour it is in _your_ time zone.
