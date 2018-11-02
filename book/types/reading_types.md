@@ -1,6 +1,6 @@
 # Reading Types
 
-In the [Core Language](../core_language.md) section of this book, we ran a bunch of code in the REPL. Well, we are going to do it again, but now with an emphasis on the types that are getting spit out. So type `elm repl` in your terminal again. You should see this:
+In the [Core Language](/core_language.html) section of this book, we ran a bunch of code in the REPL. Well, we are going to do it again, but now with an emphasis on the types that are getting spit out. So type `elm repl` in your terminal again. You should see this:
 
 ```elm
 ---- Elm 0.19.0 ----------------------------------------------------------------
@@ -48,7 +48,6 @@ In the first case, we have a `List` filled with `String` values. In the second, 
 Let's see the type of some functions:
 
 ```elm
-> import String
 > String.length
 <function> : String -> Int
 ```
@@ -85,59 +84,80 @@ String.repeat : Int -> String -> String
 
 ## Type Annotations
 
-So far we have just let Elm figure out the types, but it also lets you write a *type annotation* on the line above a definition if you want. So when you are writing code, you can say things like this:
+So far we have just let Elm figure out the types, but it also lets you write a **type annotation** on the line above a definition if you want. So when you are writing code, you can say things like this:
 
 ```elm
 half : Float -> Float
 half n =
   n / 2
 
-divide : Float -> Float -> Float
-divide x y =
-  x / y
+-- half 256 == 128
+-- half "3" -- error!
 
-askVegeta : Int -> String
-askVegeta powerLevel =
-  if powerLevel > 9000 then
-    "It's over 9000!!!"
+hypotenuse : Float -> Float -> Float
+hypotenuse a b =
+  sqrt (a^2 + b^2)
 
-  else
-    "It is " ++ toString powerLevel ++ "."
+-- hypotenuse 3 4  == 5
+-- hypotenuse 5 12 == 13
+
+checkPower : Int -> String
+checkPower powerLevel =
+  if powerLevel > 9000 then "It's over 9000!!!" else "Meh"
+
+-- checkPower 9001 == "It's over 9000!!!"
+-- checkPower True -- error!
 ```
 
-People can make mistakes in type annotations, so what happens if they say the wrong thing? The compiler still figures out the type on its own, and it checks that your annotation matches the real answer. In other words, the compiler will always verify that all the annotations you add are correct!
+Adding type annotations is not required, but it is definitely recommended! Benefits include:
 
-> **Note:** Some folks feel that it is odd that the type annotation goes on the line above the actual definition. The reasoning is that it should be easy and noninvasive to add a type annotation *later*. This way you can turn a sloppy prototype into higher-quality code just by adding lines.
+1. **Error Message Quality** &mdash; When you add a type annotation, it tells the compiler what you are _trying_ to do. Your implementation may have mistakes, and now the compiler can compare against your stated intent. &ldquo;You said argument `powerLevel` was an `Int`, but it is getting used as a `String`!&rdquo;
+2. **Documentation** &mdash; When you revisit code later (or when a colleague visits it for the first time) it can be really helpful to see exactly what is going in and out of the function without having to read the implementation super carefully.
+
+People can make mistakes in type annotations though, so what happens if the annotation does not match the implementation? The compiler figures out all the types on its own, and it checks that your annotation matches the real answer. In other words, the compiler will always verify that all the annotations you add are correct. So you get better error messages _and_ documentation always stays up to date!
 
 
 ## Type Variables
 
-As you look through the functions in [`elm/core`][core], you will see some type signatures with lower-case letters in them. [`List.reverse`][reverse] is a good example:
+As you look through the functions in [`elm/core`][core], you will see some type signatures with lower-case letters in them. We can check some of them out in `elm repl`:
 
 ```elm
-List.reverse : List a -> List a
+> List.length
+<function> : List a -> Int
 ```
 
-That lower-case `a` is called a **type variable**. It means we can use `List.reverse` as if it has type:
+Notice that lower-case `a` in the type? That is called a **type variable**. It can vary depending on how [`List.length`][length] is used:
 
-- `List String -> List String`
-- `List Float -> List Float`
-- `List Int -> List Int`
-- ...
+```elm
+> List.length [1,1,2,3,5,8]
+6 : Int
 
-The `a` can vary and match any type. The `List.reverse` function does not care. But once you decide that `a` is a `String` in the argument, it must also be a `String` in the result. That means `List.reverse` can never be `List String -> List Int`. All `a` values must match in any specific reversal!
+> List.length [ "a", "b", "c" ]
+3 : Int
 
-> **Note:** Type variables must start with a lower-case letter, and they do not have to be just one character! Imagine we create a function that takes an argument and then gives it back without changes. This is often called the identity function:
->
->```elm
-identity : value -> value
-identity x =
-  x
+> List.length [ True, False ]
+2 : Int
 ```
->
-> I wrote the type signature as `value -> value`, but it could also be `a -> a`. The only thing that matters is that the type of values going in matches the type of values going out!
+
+We just want the length, so it does not matter what is in the list. So the type variable `a` is saying that we can match any type. Let&rsquo;s look at another common example:
+
+```elm
+> List.reverse
+<function> : List a -> List a
+
+> List.reverse [ "a", "b", "c" ]
+["c","b","a"] : List String
+
+> List.reverse [ True, False ]
+[False,True] : List Bool
+```
+
+Again, the type variable `a` can vary depending on how [`List.reverse`][reverse] is used. But in this case, we have an `a` in the argument and in the result. This means that if you give a `List Int` you must get a `List Int` as well. Once we decide what `a` is, that’s what it is everywhere.
+
+> **Note:** Type variables must start with a lower-case letter, but they can be full words. We could write the type of `List.length` as `List value -> Int` and we could write the type of `List.reverse` as `List element -> List element`. It is fine as long as they start with a lower-case letter. Type variables `a` and `b` are used by convention in many places, but some type annotations benefit from more specific names.
 
 [core]: https://package.elm-lang.org/packages/elm/core/latest/
+[length]: https://package.elm-lang.org/packages/elm/core/latest/List#length
 [reverse]: https://package.elm-lang.org/packages/elm/core/latest/List#reverse
 
 
@@ -153,11 +173,11 @@ Normally type variables can get filled in with _anything_, but `number` can only
 
 The full list of constrained type variables is:
 
-- `number` = `Int` or `Float`
-- `appendable` = `String` or `List a`
-- `compappend` = `String` or `List comparable`
-- `comparable` = `Int`, `Float`, `Char`, `String`, lists and tuples of `comparable` values
+- `number` permits `Int` and `Float`
+- `appendable` permits `String` and `List a`
+- `comparable` permits `Int`, `Float`, `Char`, `String`, and lists/tuples of `comparable` values
+- `compappend` permits `String` and `List comparable`
 
-These constrained type variables exist to make operations like `(+)` and `(<)` a bit more flexible.
+These constrained type variables exist to make operators like `(+)` and `(<)` a bit more flexible.
 
 [negate]: https://package.elm-lang.org/packages/elm/core/latest/Basics#negate
