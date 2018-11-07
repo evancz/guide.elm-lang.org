@@ -4,32 +4,18 @@
 #### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://ellie-app.com/37gZn34mDJPa1).
 ---
 
-We are about to make an app that fetches a random GIF when the user asks for another image.
+It is often helpful to grab information from elsewhere on the internet.
 
-I know some readers are skipping around, but this example assumes you read (1) [Random](/effects/random.md) which introduced `update` and `init` functions that can produce commands and (2) [JSON](/effects/json.md) which introduced JSON decoders. This example will not make sense without that background knowledge!
+For example, say we want to load the full text of _Public Opinion_ by Walter Lippmann. Published in 1922, this book provides a historical perspective on the rise of mass media and its implications for democracy. For our purposes here, we will focus on how to use the [`elm/http`][http] package to get this book into our app!
 
-...
-
-Okay, so you read those sections, right?
-
-...
-
-Good!
-
-This example uses The Elm Architecture, just like we have seen in all the previous examples. The new parts are all because we are using the [`elm/http`][http] and [`elm/url`][url] packages. We will talk about all that after you look through the code a bit:
+Let&rsquo;s start by just looking at all the code. There are some new things, but do not worry. We will go through it all!
 
 [http]: https://package.elm-lang.org/packages/elm/http/latest
-[json]: https://package.elm-lang.org/packages/elm/json/latest
-[url]: https://package.elm-lang.org/packages/elm/url/latest
 
 ```elm
 import Browser
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
+import Html exposing (Html, text, pre)
 import Http
-import Json.Decode as Decode
-import Url.Builder as Url
 
 
 
@@ -49,16 +35,19 @@ main =
 -- MODEL
 
 
-type alias Model =
-  { topic : String
-  , url : String
-  }
+type Model
+  = Failure
+  | Loading
+  | Success String
 
 
 init : () -> (Model, Cmd Msg)
 init _ =
-  ( Model "cat" "waiting.gif"
-  , getRandomGif "cat"
+  ( Loading
+  , Http.get
+      { url = "http://www.gutenberg.org/cache/epub/6456/pg6456.txt"
+      , expect = Http.expectString GotText
+      }
   )
 
 
@@ -67,29 +56,19 @@ init _ =
 
 
 type Msg
-  = MorePlease
-  | NewGif (Result Http.Error String)
+  = GotText (Result Http.Error String)
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    MorePlease ->
-      ( model
-      , getRandomGif model.topic
-      )
-
-    NewGif result ->
+    GotText result ->
       case result of
-        Ok newUrl ->
-          ( { model | url = newUrl }
-          , Cmd.none
-          )
+        Ok fullText ->
+          (Success fullText, Cmd.none)
 
         Err _ ->
-          ( model
-          , Cmd.none
-          )
+          (Failure, Cmd.none)
 
 
 
@@ -107,142 +86,92 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ h2 [] [ text model.topic ]
-    , button [ onClick MorePlease ] [ text "More Please!" ]
-    , br [] []
-    , img [ src model.url ] []
-    ]
+  case model.content of
+    Failure ->
+      text "I was unable to load your book."
 
+    Loading ->
+      text "Loading..."
 
+    Success fullText ->
+      pre [] [ text fullText ]
 
--- HTTP
-
-
-getRandomGif : String -> Cmd Msg
-getRandomGif topic =
-  Http.send NewGif (Http.get (toGiphyUrl topic) gifDecoder)
-
-
-toGiphyUrl : String -> String
-toGiphyUrl topic =
-  Url.crossOrigin "https://api.giphy.com" ["v1","gifs","random"]
-    [ Url.string "api_key" "dc6zaTOxFJmzC"
-    , Url.string "tag" topic
-    ]
-
-
-gifDecoder : Decode.Decoder String
-gifDecoder =
-  Decode.field "data" (Decode.field "image_url" Decode.string)
 ```
 
-This program is quite similar to the random dice roller we just saw: `Model`, `init`, `update`, `subscriptions`, and `view`. The new stuff is mostly in the `HTTP` section which uses `elm/url`, `elm/json`, and `elm/http`. Let&rsquo;s go through those one-by-one.
+Some parts of this should be familiar from previous examples of The Elm Architecture. We still have a `Model` of our application. We still have an `update` that reacts to messages. We still have a `view` function that shows everything on screen.
+
+The new parts extend the core pattern we saw before with some changes in `init` and `update`, and with the addition of `subscription`.
 
 
-## `elm/url`
+## `init`
 
-Let&rsquo;s look at the `toGiphyUrl` function first. It may seem like we should have just made a string like this:
+The `init` function describes how to initialize our program:
 
 ```elm
-toBrokenGiphyUrl : String -> String
-toBrokenGiphyUrl topic =
-  "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" ++ topic
+init : () -> (Model, Cmd Msg)
+init _ =
+  ( Loading
+  , Http.get
+      { url = "http://www.gutenberg.org/cache/epub/6456/pg6456.txt"
+      , expect = Http.expectString GotText
+      }
+  )
 ```
 
-This is nice and simple. But it will have quite odd results if `topic` contains characters like `=` or `&`. The user could start adding totally different query parameters!
+Like always, we have to produce the initial `Model`, but now we are also producing some **command** of what we want to do immediately. That command will eventually produce a `Msg` that gets fed into the `update` function.
 
-So instead we use the [`Url.Builder`][builder] module from the `elm/url` package. We use two specific helper functions:
+Our book website starts in the `Loading` state, and we want to GET the full text of our book. When making a GET request with [`Http.get`][get], we specify the `url` of the data we want to fetch, and we specify what we `expect` that data to be.
 
-- [`crossOrigin`][crossOrigin] takes three arguments: (1) the domain, (2) each level of the path, and (3) a list of query parameters. It also guarantees that the query parameters are properly encoded. That means having `=` or `&` in the `topic` is not a problem anymore.
-- [`string`][string] takes a `key` and a `value`. The `crossOrigin` function will turn them into `?key=value` to make the final URL, and the `value` will always be properly encoded.
+So in our case, the `url` is pointing at some data on the Project Gutenberg website, and we `expect` it to be a big `String` we can show on screen.
 
-So when you put them together, we end up with this `toGiphyUrl` function:
+The `Http.expectString GotText` line is saying a bit more than that we `expect` a `String` though. It is also saying that when we get a response, it should be turned into a `GotText` message:
 
 ```elm
-toGiphyUrl : String -> String
-toGiphyUrl topic =
-  Url.crossOrigin "https://api.giphy.com" ["v1","gifs","random"]
-    [ Url.string "api_key" "dc6zaTOxFJmzC"
-    , Url.string "tag" topic
-    ]
+type Msg
+  = GotText (Result Http.Error String)
+
+-- GotText (Ok "The Project Gutenberg EBook of ...")
+-- GotText (Err Http.NetworkError)
+-- GotText (Err (Http.BadStatus 404))
 ```
 
-In this version, the `topic` will definitely be encoded correctly!
+Notice that we are using the `Result` type from a couple sections back. This allows us to fully account for the possible failures in our `update` function. Speaking of `update` functions...
 
-[builder]: https://package.elm-lang.org/packages/elm/url/latest/Url-Builder
-[crossOrigin]: https://package.elm-lang.org/packages/elm/url/latest/Url-Builder#crossOrigin
-[string]: https://package.elm-lang.org/packages/elm/url/latest/Url-Builder#string
+[get]: https://package.elm-lang.org/packages/elm/http/latest/Http#get
+
+> **Note:** If you are wondering why `init` is a function (and why we are ignoring the argument) we will talk about it later. It is relevant when we get to [the chapter on JavaScript interop](/interop/README.md).
 
 
-## `elm/json`
+## `update`
 
-That URL is going to send back some JSON like this:
-
-```json
-{
-  "data": {
-    "type": "gif",
-    "id": "l2JhxfHWMBWuDMIpi",
-    "title": "cat love GIF by The Secret Life Of Pets",
-    "image_url": "https://media1.giphy.com/media/l2JhxfHWMBWuDMIpi/giphy.gif",
-    "caption": "",
-    ...
-  },
-  "meta": {
-    "status": 200,
-    "msg": "OK",
-    "response_id": "5b105e44316d3571456c18b3"
-  }
-}
-```
-
-We actually saw this exact JSON on the previous page, and we learned how to create a JSON decoder to extract the info we need:
+Our `update` function is returning a bit more information as well:
 
 ```elm
-gifDecoder : Decode.Decoder String
-gifDecoder =
-  Decode.field "data" (Decode.field "image_url" Decode.string)
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  case msg of
+    GotText result ->
+      case result of
+        Ok fullText ->
+          (Success fullText, Cmd.none)
+
+        Err _ ->
+          (Failure, Cmd.none)
 ```
 
-In the `"data"` field, in the `"image_url"` field, we want to read a `String`.
+Looking at the type signature, we see that we are not just returning an updated model. We are _also_ producing a **command** of what we want Elm to do.
+
+Moving on to the implementation, we pattern match on messages like normal. When a `GotText` message comes in, we inspect the `Result` of our HTTP request and update our model depending on whether it was a success or failure. The new part is that we also provide a command.
+
+So in the case that we got the full text successfully, we say `Cmd.none` to indicate that there is no more work to do. We already got the full text!
+
+And in the case that there was some error, we also say `Cmd.none` and just give up. The text of the book did not load. If we wanted to get fancier, we could pattern match on the [`Http.Error`][Error] and retry the request if we got a timeout or something.
+
+The point here is that however we decide to update our model, we are also free to issue new commands. I need more data! I want a random number! Etc.
+
+[Error]: https://package.elm-lang.org/packages/elm/http/latest/Http#Error
 
 
-## `elm/http`
+## `subscription`
 
-Alright, the only thing missing now is the HTTP request! It is created with the following function:
-
-```elm
-getRandomGif : String -> Cmd Msg
-getRandomGif topic =
-  Http.send NewGif (Http.get (toGiphyUrl topic) gifDecoder)
-```
-
-We need to break this down into smaller parts!
-
-First we use [`Http.get`](https://package.elm-lang.org/packages/elm/http/latest/Http#get) to describe our request:
-
-```elm
-get : String -> Decode.Decoder value -> Http.Request value
-```
-
-This function lets us describe GET requests. We must provide (1) the URL we want to access and (2) a JSON decoder to process the information in the response. We happen to have both prepared already! So we call `Http.get (toGiphyUrl topic) gifDecoder` and end up with a `Http.Request String`, describing a GET request that will produce a `String` value if successful.
-
-Now we have not actually sent the request yet. We have only described what we want to happen. We still need to turn it into a **command** and give it to the Elm runtime system. The runtime system will do its best, but there are all sorts of ways the HTTP request might fail: the URL may not exist, the request may time out, the JSON sent back may be unexpected, etc. So our command must also describe what to do with all those possible failures! That is the role of [`Http.send`](https://package.elm-lang.org/packages/elm/http/latest/Http#send):
-
-```elm
-send : (Result Http.Error value -> msg) -> Http.Request value -> Cmd msg
-```
-
-The second argument should be familiar. That is the request we have built up so far. In our case an `Http.Request String`. Now the result of that request will be a `Result Http.Error String`, meaning that it can succeed with `Ok "..."` or fail with `Err ...`. The first argument turns that result into a `Msg` for our `update` function.
-
-So rather than defaulting to ignoring errors like in JavaScript, this API requires that you handle them. There are no surprises here. Maybe you will decide not to do anything special on failure (like we do in our `update` function) but it is always a _decision_
-.
-
-> **Exercises:**
->
-> - Show a message explaining why the image didn't change when you get an [`Http.Error`](https://package.elm-lang.org/packages/elm/http/latest/Http#Error).
-> - Allow the user to modify the `topic` with a text field.
-> - Allow the user to modify the `topic` with a drop down menu.
-> - Try decoding other parts of the JSON received from `api.giphy.com`.
-
+The other new thing in this program is the `subscription` function. It lets you look at the `Model` and decide if you want to subscribe to certain information. In our example, we say `Sub.none` to indicate that we do not need to subscribe to anything, but we will soon see an example of a clock where we want to subscribe to the current time!
