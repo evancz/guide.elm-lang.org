@@ -50,7 +50,7 @@ type User
   = Regular String Int
   | Visitor String
 
-thomas = Regular "Thomas" 33
+thomas = Regular "Thomas" 44
 kate95 = Visitor "kate95"
 ```
 
@@ -80,43 +80,21 @@ type Msg
 
 We have four variants. Some variants have no associated data, others have a bunch. Notice that `ReceivedMessage` actually has a record as associated data. That is totally fine. Any type can be associated data! This allows you to describe interactions in your application very precisely.
 
-So you will be defining your own custom types, but you will also run into types defined by others.
 
+## Modeling
 
-## Common Examples
-
-There are quite a few types defined in `elm/core` that you are sure to run into. For example, the [`Bool`][Bool] type:
+Custom types become extremely powerful when you start modeling situations very precisely. For example, if you are waiting for some data to load, you might want to model it with a custom type like this:
 
 ```elm
-type Bool = True | False
+type Profile
+  = Failure
+  | Loading
+  | Success { name : String, description : String }
 ```
 
-It has two variants. `True` and `False`. Neither has associated data.
+So you can start in the `Loading` state and then transition to `Failure` or `Success` depending on what happens. This makes it really simple to write a `view` function that always shows something reasonable when data is loading.
 
-Another common one is the [`Maybe`][Maybe] type:
-
-```elm
-type Maybe a = Just a | Nothing
-```
-
-This is useful for functions that may not succeed. The function [`String.toInt`][toInt] has type `String -> Maybe Int`, making it a great example:
-
-- `String.toInt "abc" == Nothing`
-- `String.toInt "2x4" == Nothing`
-- `String.toInt "403" == Just 403`
-- `String.toInt "100" == Just 100`
-
-Not all `String` values can become `Int` values in a reasonable way. By using `Maybe` we are able to capture that explicitly.
-
-[Bool]: https://package.elm-lang.org/packages/elm-lang/core/latest/Basics#Bool
-[Maybe]: https://package.elm-lang.org/packages/elm-lang/core/latest/Maybe#Maybe
-[toInt]: https://package.elm-lang.org/packages/elm-lang/core/latest/String#toInt
+Now we know how to create custom types, the next section will show how to use them!
 
 
-> **Note: Custom types are the most important feature in Elm.**
->
-> They may seem sort of boring on the surface, but do not be fooled! I think of them like kitchen knives. They may seem like any other boring utensil, but they have surprising depth. From [design](https://youtu.be/LO35cdWL1MQ) to [maintenance](https://youtu.be/SIw5ChGOADE) to [use](https://youtu.be/RjWkO9A-Ckk), there are so many techniques that are both foundational and totally invisible.
->
-> For example, if no one tells you that knives must be sharpened with a whetstone periodically, your knives become dull and annoying. And then cooking becomes dull and annoying. The more you practice, the worse it gets. But once you know about whetstones, chopping becomes easier and more fun. Cooking becomes easier and more fun. The more you practice, the better it gets. It is a cruel pair of feedback loops, seperated only by technique. And until you know to look for it, you cannot see it!
->
-> Point is, ~~knives~~ custom types are extremely important. I tried to share some of the hidden knowledge in [Types as Sets](/appendix/types_as_sets.html) and [Types as Bits](/appendix/types_as_bits.html) in the appendix. I hope you find them helpful!
+> **Note: Custom types are the most important feature in Elm.** They have a lot of depth, especially once you get in the habit of trying to model scenarios more precisely. I tried to share some of this depth in [Types as Sets](/appendix/types_as_sets.html) and [Types as Bits](/appendix/types_as_bits.html) in the appendix. I hope you find them helpful!
