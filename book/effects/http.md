@@ -45,7 +45,7 @@ init : () -> (Model, Cmd Msg)
 init _ =
   ( Loading
   , Http.get
-      { url = "http://www.gutenberg.org/cache/epub/6456/pg6456.txt"
+      { url = "https://elm-lang.org/assets/public-opinion.txt"
       , expect = Http.expectString GotText
       }
   )
