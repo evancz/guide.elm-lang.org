@@ -86,7 +86,7 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-  case model.content of
+  case model of
     Failure ->
       text "I was unable to load your book."
 
