@@ -1,6 +1,140 @@
 # JSON
 
-On the next page we are going to ask `api.giphy.com` for some random GIFs. The endpoint [here](https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cat) is going to give us JSON like this:
+We just saw an example that uses HTTP to get the content of a book. That is great, but a ton of servers return data in a special format called JavaScript Object Notation, or JSON for short.
+
+So our next example shows how to fetch some JSON data, allowing us to press a button to show random cat GIFs.
+
+
+```elm
+import Browser
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Http
+import Json.Decode exposing (Decoder, field, string)
+
+
+
+-- MAIN
+
+
+main =
+  Browser.element
+    { init = init
+    , update = update
+    , subscriptions = subscriptions
+    , view = view
+    }
+
+
+
+-- MODEL
+
+
+type Model
+  = Failure
+  | Loading
+  | Success String
+
+
+init : () -> (Model, Cmd Msg)
+init _ =
+  (Loading, getRandomCatGif)
+
+
+
+-- UPDATE
+
+
+type Msg
+  = MorePlease
+  | GotGif (Result Http.Error String)
+
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  case msg of
+    MorePlease ->
+      (Loading, getRandomCatGif)
+
+    GotGif result ->
+      case result of
+        Ok url ->
+          (Success url, Cmd.none)
+
+        Err _ ->
+          (Failure, Cmd.none)
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
+
+
+
+-- VIEW
+
+
+view : Model -> Html Msg
+view model =
+  div []
+    [ h2 [] [ text "Random Cats" ]
+    , viewGif model
+    ]
+
+
+viewGif : Model -> Html Msg
+viewGif model =
+  case model of
+    Failure ->
+      div []
+        [ text "I could not load a random cat for some reason. "
+        , button [ onClick MorePlease ] [ text "Try Again!" ]
+        ]
+
+    Loading ->
+      text "Loading..."
+
+    Success url ->
+      div []
+        [ button [ onClick MorePlease, style "display" "block" ] [ text "More Please!" ]
+        , img [ src url ] []
+        ]
+
+
+
+-- HTTP
+
+
+getRandomCatGif : Cmd Msg
+getRandomCatGif =
+  Http.get
+    { url = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cat"
+    , expect = Http.expectJson GotGif gifDecoder
+    }
+
+
+gifDecoder : Decoder String
+gifDecoder =
+  field "data" (field "image_url" string)
+```
+
+This example is pretty similar to the last one:
+
+- `init` starts us off in the `Loading` state, with a command to get a random cat GIF.
+- `update` handles the `GotGif` message for whenever a new GIF is available. Whatever happens there, we do not have any additional commands. It also handles the `MorePlease` message when someone presses the button, issuing a command to get more random cats.
+- `view` shows you the cats!
+
+The main diferrence is in the `getRandomCatGif` definition. Instead of using `Http.expectString`, we have switched to `Http.expectJson`. What is the deal with that?
+
+
+## JSON
+
+When you ask [`api.giphy.com`](https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cat) for a random cat GIF, their server produces a big string of JSON like this:
 
 ```json
 {
@@ -20,13 +154,11 @@ On the next page we are going to ask `api.giphy.com` for some random GIFs. The e
 }
 ```
 
-But how do we deal with data like this in Elm?
+We have no guarantees about any of the information here. The server can change the names of fields, and the fields may have different types in different situations. It is a wild world!
 
-In JavaScript you can run `JSON.parse` and get a JavaScript object. You then start accessing fields like `response.data.image_url` to get the random GIF. One would expect JavaScript Object Notation (JSON) to integrate easily with JavaScript! But what happens if `api.giphy.com` makes a change to the JSON? We crash! What happens if we have a typo in a field access? We crash! What happens if the endpoint is managed by your backend team and it produces different results in different scenarios? We crash!
+In JavaScript, the approach is to just turn JSON into JavaScript objects and hope nothing goes wrong. But if there is some typo or unexpected data, you get a runtime exception somewhere in your code. Was the code wrong? Was the data wrong? It is time to start digging around to find out!
 
-So turning JSON directly into JavaScript values is easy _at first_, but you pay for it later. Is this `null`? Is this an integer or a string containing an integer? Does this field exist? Etc. You end up with complicated logic, unpredictable behavior, and a bunch of tests to prove to yourself that it cannot be otherwise.
-
-In Elm, we validate JSON _before_ it gets into our code. Let&rsquo;s see how!
+In Elm, we validate the JSON before it comes into our program. So if the data has an unexpected structure, we learn about it immediately. There is no way for bad data to sneak through and cause a runtime exception three files over. This is accomplished with JSON decoders.
 
 
 ## JSON Decoders
@@ -129,14 +261,12 @@ gifDecoder =
   field "data" (field "image_url" string)
 ```
 
-Is there a `"data"` field? If so, does that value have an `"image_url"` field? If so, is the value there a string?
-
-So we are essentially building up a _contract_ of what we expect. &ldquo;If you give me JSON like this, I will turn them into Elm values.&rdquo;
+This is the exact `gifDecoder` definition we used in our example program above! Is there a `"data"` field? Does that value have an `"image_url"` field? Is the value there a string? All our expectations are written out explicitly, allowing us to safely extract Elm values from JSON.
 
 
 ## Combining Decoders
 
-So far we have only been accessing one field at a time, but what if we want _two_ fields? We snap decoders together with [`map2`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map2):
+That is all we needed for our HTTP example, but decoders can do more! For example, what if we want _two_ fields? We snap decoders together with [`map2`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map2):
 
 ```elm
 map2 : (a -> b -> value) -> Decoder a -> Decoder b -> Decoder value
