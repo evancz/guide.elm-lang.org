@@ -95,12 +95,11 @@ view model =
 
     Success fullText ->
       pre [] [ text fullText ]
-
 ```
 
 Some parts of this should be familiar from previous examples of The Elm Architecture. We still have a `Model` of our application. We still have an `update` that reacts to messages. We still have a `view` function that shows everything on screen.
 
-The new parts extend the core pattern we saw before with some changes in `init` and `update`, and with the addition of `subscription`.
+The new parts extend the core pattern we saw before with some changes in `init` and `update`, and the addition of `subscription`.
 
 
 ## `init`
@@ -120,9 +119,7 @@ init _ =
 
 Like always, we have to produce the initial `Model`, but now we are also producing some **command** of what we want to do immediately. That command will eventually produce a `Msg` that gets fed into the `update` function.
 
-Our book website starts in the `Loading` state, and we want to GET the full text of our book. When making a GET request with [`Http.get`][get], we specify the `url` of the data we want to fetch, and we specify what we `expect` that data to be.
-
-So in our case, the `url` is pointing at some data on the Project Gutenberg website, and we `expect` it to be a big `String` we can show on screen.
+Our book website starts in the `Loading` state, and we want to GET the full text of our book. When making a GET request with [`Http.get`][get], we specify the `url` of the data we want to fetch, and we specify what we `expect` that data to be. So in our case, the `url` is pointing at some data on the Project Gutenberg website, and we `expect` it to be a big `String` we can show on screen.
 
 The `Http.expectString GotText` line is saying a bit more than that we `expect` a `String` though. It is also saying that when we get a response, it should be turned into a `GotText` message:
 
@@ -139,7 +136,7 @@ Notice that we are using the `Result` type from a couple sections back. This all
 
 [get]: https://package.elm-lang.org/packages/elm/http/latest/Http#get
 
-> **Note:** If you are wondering why `init` is a function (and why we are ignoring the argument) we will talk about it later. It is relevant when we get to [the chapter on JavaScript interop](/interop/README.md).
+> **Note:** If you are wondering why `init` is a function (and why we are ignoring the argument) we will talk about it in the upcoming chapter on JavaScript interop! (Preview: the argument lets us get information from JS on initialization.)
 
 
 ## `update`
@@ -175,3 +172,12 @@ The point here is that however we decide to update our model, we are also free t
 ## `subscription`
 
 The other new thing in this program is the `subscription` function. It lets you look at the `Model` and decide if you want to subscribe to certain information. In our example, we say `Sub.none` to indicate that we do not need to subscribe to anything, but we will soon see an example of a clock where we want to subscribe to the current time!
+
+
+## Summary
+
+When we create a program with `Browser.element`, we set up a system like this:
+
+![](diagrams/element.svg)
+
+We get the ability to issue **commands** from `init` and `update`. This allows us to do things like make HTTP requests whenever we want. We also get the ability to **subscribe** to interesting information. (We will see an example of subscriptions later!)
