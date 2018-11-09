@@ -33,7 +33,7 @@ You can see examples of this structure in the following open-source projects:
 
 > ## Aside: Culture Shock
 >
-> Folks coming from JavaScript tend to bring habits, expectations, and anxieties that are specific to JavaScript. They are legitimately important in that context, but they can cause some pretty severe troubles when when transferred to Elm.
+> Folks coming from JavaScript tend to bring habits, expectations, and anxieties that are specific to JavaScript. They are legitimately important in that context, but they can cause some pretty severe troubles when transferred to Elm.
 >
 >
 > ### Defensive Instincts
