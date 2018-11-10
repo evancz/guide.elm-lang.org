@@ -36,7 +36,7 @@ And if we try invalid arguments like `toName (Visitar "kate95")` or `toName Anon
 
 ## Wild Cards
 
-The `toName` function we just defined works great, but notice that the `age` is not used in the implementation? When some of the associated data is unused, it is common to use a “wild card” instead of giving it a name:
+The `toName` function we just defined works great, but notice that the `age` is not used in the implementation. When some of the associated data is unused, it is common to use a “wild card” instead of giving it a name:
 
 ```elm
 toName : User -> String
