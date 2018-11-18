@@ -29,7 +29,7 @@ You can think of `Browser.element` as setting up a system like this:
 
 ![](diagrams/element.svg)
 
-In addition to producing `Html` values, our programs will also send `Cmd` and `Sub` values to the runtime system. In this world, our programms can **command** the runtime system to make an HTTP request or to generate a random number. They can also **subscribe** to the current time.
+In addition to producing `Html` values, our programs will also send `Cmd` and `Sub` values to the runtime system. In this world, our programs can **command** the runtime system to make an HTTP request or to generate a random number. They can also **subscribe** to the current time.
 
 I think commands and subscriptions make more sense when you start seeing examples, so let&rsquo;s do that!
 
