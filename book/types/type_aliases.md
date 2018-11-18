@@ -17,7 +17,7 @@ hasDecentBio user =
   String.length user.bio > 80
 ```
 
-That would be `{ name : String, bio : String } -> Bool` without the type annotation. **The main point of type aliases is to help us write shorter and clearer type annotations.** This becomes more important as your application grows. Say we have a `updateBio` function:
+That would be `{ name : String, bio : String } -> Bool` without the type alias. **The main point of type aliases is to help us write shorter and clearer type annotations.** This becomes more important as your application grows. Say we have a `updateBio` function:
 
 ```elm
 updateBio : String -> User -> User
