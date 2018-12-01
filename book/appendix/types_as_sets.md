@@ -130,4 +130,4 @@ As your program changes, the set of possible values in code may start to diverge
 >
 > Interestingly, some imperative languages have custom types! Rust is a great example. They call them [enums](https://doc.rust-lang.org/book/second-edition/ch06-01-defining-an-enum.html) to build on the intuition folks may have from C and Java. So in Rust, addition of cardinalities is just as easy as in Elm, and it brings all the same benefits!
 >
-> I think the point here is that “addition” of types is extraordinarily underrated in in general, and thinking of “types as sets” helps clarify why certain language designs would produce certain frustrations.
+> I think the point here is that “addition” of types is extraordinarily underrated in general, and thinking of “types as sets” helps clarify why certain language designs would produce certain frustrations.
