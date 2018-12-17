@@ -68,6 +68,8 @@ There are a bunch of types that can be given as flags:
 - records
 - [`Json.Decode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#Value)
 
+For optional `Maybe` fields in a flags record, you will need to still specify the _key_, even if the value is null.
+
 Many folks always use a `Json.Decode.Value` because it gives them really precise control. They can write a decoder to handle any weird scenarios in Elm code, recovering from unexpected data in a nice way.
 
 The other supported types actually come from before we had figured out a way to do JSON decoders. If you choose to use them, there are some subtleties to be aware of. The following examples show the desired flag type, and then the sub-points show what would happen with a couple different JS values:
