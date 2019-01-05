@@ -37,7 +37,7 @@ import Json.Encode as E
 port cache : E.Value -> Cmd msg
 ```
 
-The most important line is the `port` declaration. That creates a `cache` function, so we can create commands like `cache (E.int 42)` that will send a [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#Value) out to JavaScript.
+The most important line is the `port` declaration. That creates a `cache` function, so we can create commands like `cache (E.int 42)` that will send a [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value) out to JavaScript.
 
 On the JavaScript side, we initialize the program like normal, but we then subscribe to all the outgoing `cache` messages:
 
