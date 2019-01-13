@@ -78,7 +78,7 @@ view model =
 
 viewInput : String -> String -> String -> (String -> msg) -> Html msg
 viewInput t p v toMsg =
-  input [ type_ t, placeholder p, value v, onInput toMsg ] []
+  span [] [ input [ type_ t, placeholder p, value v, onInput toMsg ] [] ]
 
 
 viewValidation : Model -> Html msg
@@ -144,10 +144,11 @@ We start by creating a `<div>` with four child nodes. But instead of using funct
 ```elm
 viewInput : String -> String -> String -> (String -> msg) -> Html msg
 viewInput t p v toMsg =
-  input [ type_ t, placeholder p, value v, onInput toMsg ] []
+  span [] [ input [ type_ t, placeholder p, value v, onInput toMsg ] [] ]
 ```
 
-So `viewInput "text" "Name" model.name Name` can create a node like `<input type="text" placeholder="Name" value="Bill">`. That node will also send messages like `Name "Billy"` to `update` on user input.
+So `viewInput "text" "Name" model.name Name` can create a node like `<span><input type="text" placeholder="Name" value="Bill"></span>`. That node will also send messages like `Name "Billy"` to `update` on user input.
+(We wrap it in a span for compatibility with popular browser extensions, such as password managers.)
 
 The fourth entry is more interesting. It is a call to `viewValidation`:
 
