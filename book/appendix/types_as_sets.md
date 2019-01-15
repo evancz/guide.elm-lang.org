@@ -36,7 +36,7 @@ Some interesting things happen when you start figuring out how many values are i
 
 This gets more interesting when we start thinking about types like `(Bool, Bool)` that combine sets together.
 
-> **Note:** The cardinality for `Int` and `Float` are actually smaller than infinity. Computers need to fit the numbers into a fixed amount of bits (as described [here](/appendix/types-as-bits.html)) so it is more like cardinality(`Int32`) = 2^32 and cardinality(`Float32`) = 2^32. The point is just that it is a lot.
+> **Note:** The cardinality for `Int` and `Float` are actually smaller than infinity. Computers need to fit the numbers into a fixed amount of bits (as described [here](/appendix/types_as_bits.html)) so it is more like cardinality(`Int32`) = 2^32 and cardinality(`Float32`) = 2^32. The point is just that it is a lot.
 
 
 ## Multiplication (Tuples and Records)
