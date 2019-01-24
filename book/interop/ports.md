@@ -69,9 +69,7 @@ So there are only _outgoing_ messages for this interaction with JS. And I would 
 
 ## Incoming Messages
 
-Say we are creating a chat room in JavaScript, and we are curious to try out Elm a bit. Pretty much every company that uses Elm today, started by converting just one element to try it out. Does it work nice? Does the team like it? If so, great, try more elements! If not, no big deal, revert and use the technologies that work best for you!
-
-So when we look at our chat room app, we decide to convert an element that shows all active users. That means Elm needs to know about any changes to the active users list. Well, that sort of thing happens through ports!
+Say we are creating a chat room in JavaScript, and we decide to convert an element that shows all active users. That means Elm needs to know about any changes to the active users list. Well, that sort of thing happens through ports!
 
 On the Elm side, this means defining the `port` like this:
 
