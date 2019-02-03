@@ -75,6 +75,6 @@ var app = Elm.Main.init({
 
 We create an empty `<div>`. We want our Elm program to take over that node entirely. Maybe it is within a larger application, surrounded by tons of other stuff? That is fine!
 
-The `<script>` tag then inializes our Elm program. We grab the `node` we want to take over, and give it to `Elm.Main.init` which starts our program.
+The `<script>` tag then initializes our Elm program. We grab the `node` we want to take over, and give it to `Elm.Main.init` which starts our program.
 
 Now that we can embed Elm programs in an HTML document, it is time to start exploring the three interop options: flags, ports, and web components!
