@@ -15,7 +15,7 @@ Experience is a great teacher, so I recommend building an **application** that i
 
 ## Ask Questions
 
-There are loads of friendly and knowledgable folks on [Slack](https://elmlang.herokuapp.com/) and [Discourse](https://discourse.elm-lang.org/). Whether you just started programming or have 20 years experience in industry, the #beginners channel on Slack is great for people new to programming in Elm! Maybe you have an error message you are stuck on? Maybe you are struggling to understand JSON decoders? Maybe the `Task` type is tripping you up? Maybe you are curious to get some feedback on a custom type you defined? **Whatever the problem, you can always ask for help!**
+There are loads of friendly and knowledgeable folks on [Slack](https://elmlang.herokuapp.com/) and [Discourse](https://discourse.elm-lang.org/). Whether you just started programming or have 20 years experience in industry, the #beginners channel on Slack is great for people new to programming in Elm! Maybe you have an error message you are stuck on? Maybe you are struggling to understand JSON decoders? Maybe the `Task` type is tripping you up? Maybe you are curious to get some feedback on a custom type you defined? **Whatever the problem, you can always ask for help!**
 
 
 ## Meet People
