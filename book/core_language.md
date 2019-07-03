@@ -177,7 +177,7 @@ Tuples are another useful data structure. A tuple can hold a fixed number of val
 |     (False, "name was too long; please limit it to 20 characters")
 
 > goodName "Tom"
-(True, "name accepted!")
+(True,"name accepted!") : ( Bool, String.String )
 ```
 
 This can be quite handy, but when things start becoming more complicated, it is often best to use records instead of tuples.
@@ -190,38 +190,40 @@ A record is a fixed set of key-value pairs, similar to objects in JavaScript or 
 ```elm
 > point = { x = 3, y = 4 }
 { x = 3, y = 4 }
+    : { x : number, y : number1 }
 
 > point.x
-3
+3 : number
 
 > bill = { name = "Gates", age = 62 }
 { age = 62, name = "Gates" }
+    : { age : number, name : String.String }
 
 > bill.name
-"Gates"
+"Gates" : String.String
 ```
 
 So we can create records using curly braces and access fields using a dot. Elm also has a version of record access that works like a function. By starting the variable with a dot, you are saying *please access the field with the following name*. This means that `.name` is a function that gets the `name` field of the record.
 
 ```elm
 > .name bill
-"Gates"
+"Gates" : String.String
 
 > List.map .name [bill,bill,bill]
-["Gates","Gates","Gates"]
+["Gates","Gates","Gates"] : List String.String
 ```
 
 When it comes to making functions with records, you can do some pattern matching to make things a bit lighter.
 
 ```elm
 > under70 {age} = age < 70
-<function>
+<function> : { a | age : number } -> Bool
 
 > under70 bill
-True
+True : Bool
 
 > under70 { species = "Triceratops", age = 68000000 }
-False
+False : Bool
 ```
 
 So we can pass any record in as long as it has an `age` field that holds a number.
@@ -231,9 +233,11 @@ It is often useful to update the values in a record.
 ```elm
 > { bill | name = "Nye" }
 { age = 62, name = "Nye" }
+    : { age : number, name : String.String }
 
 > { bill | age = 22 }
 { age = 22, name = "Gates" }
+    : { age : number, name : String.String }
 ```
 
 It is important to notice that we do not make *destructive* updates. When we update some fields of `bill` we actually create a new record rather than overwriting the existing one. Elm makes this efficient by sharing as much content as possible. If you update one of ten fields, the new record will share the nine unchanged values.
