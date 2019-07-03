@@ -139,25 +139,25 @@ Lists can hold many values. Those values must all have the same type. Here are a
 ["Alice","Bob","Chuck"]
 
 > List.isEmpty names
-False
+False : Bool
 
 > List.length names
-3
+3 : Int
 
 > List.reverse names
-["Chuck","Bob","Alice"]
+["Chuck","Bob","Alice"] : List String
 
 > numbers = [1,4,3,2]
-[1,4,3,2]
+[1,4,3,2] : List number
 
 > List.sort numbers
-[1,2,3,4]
+[1,2,3,4] : List number
 
 > double n = n * 2
-<function>
+<function> : number -> number
 
 > List.map double numbers
-[2,8,6,4]
+[2,8,6,4] : List number
 ```
 
 Again, all elements of the list must have the same type.
