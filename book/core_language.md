@@ -136,7 +136,7 @@ Lists can hold many values. Those values must all have the same type. Here are a
 
 ```elm
 > names = [ "Alice", "Bob", "Chuck" ]
-["Alice","Bob","Chuck"]
+["Alice","Bob","Chuck"] : List String
 
 > List.isEmpty names
 False
