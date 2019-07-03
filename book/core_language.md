@@ -80,7 +80,7 @@ You can also define _anonymous functions_ like this:
 
 ```elm
 > \n -> n < 0
-<function>
+<function> : number -> Bool
 
 > (\n -> n < 0) 4
 False
