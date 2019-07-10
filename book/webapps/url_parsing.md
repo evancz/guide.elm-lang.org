@@ -101,7 +101,7 @@ routeParser =
 -- /blog/?query=whales   ==>  Just (BlogQuery Nothing)
 ```
 
-The `</>` and `<?>` operators let us to write parsers that look quite like the actual URLs we want to parse. And adding `Url.Parser.Query` allowed us to handle query parameters like `?q=seiza`.
+The `</>` and `<?>` operators let us write parsers that look quite like the actual URLs we want to parse. And adding `Url.Parser.Query` allowed us to handle query parameters like `?q=seiza`.
 
 
 ## Example 3
