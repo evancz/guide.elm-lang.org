@@ -1,6 +1,3 @@
-> **Note:** If you do not want to install yet, you can follow along anyway. Most sections can be done in [the online editor](https://elm-lang.org/try)!
-
-
 # Install
 
   * Mac &mdash; [installer][mac]
@@ -14,7 +11,10 @@
 
 After installing through any of those routes, you will have the `elm` binary available in your terminal!
 
-> **Troubleshooting:** The fastest way to learn *anything* is to talk with other people in the Elm community. We are friendly and happy to help! So if you get stuck during installation or encounter something weird, visit [the Elm Slack](http://elmlang.herokuapp.com/) and ask about it. In fact, if you run into something confusing at any point while learning or using Elm, come ask us about it. You can save yourself hours. Just do it!
+> **Troubleshooting:**
+>
+> 1. If you are having trouble, just skip this for now! You can try out a bunch of sections of this book with the [the online editor](https://elm-lang.org/try), and you can always come back to this later!
+> 2. The fastest way to learn *anything* is to talk with other people in the Elm community. We are friendly and happy to help! Try visiting [the Elm Slack](https://elmlang.herokuapp.com/) and asking about your problem. In fact, if you run into something confusing at any point, come ask about it as well!
 
 
 ## Terminal Tools
