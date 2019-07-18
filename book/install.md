@@ -1,4 +1,4 @@
-> **Note:** If you do not want to install yet, you can follow along anyway. Most sections can be done in an online editor!
+> **Note:** If you do not want to install yet, you can follow along anyway. Most sections can be done in [the online editor](https://elm-lang.org/try)!
 
 
 # Install
@@ -15,26 +15,6 @@
 After installing through any of those routes, you will have the `elm` binary available in your terminal!
 
 > **Troubleshooting:** The fastest way to learn *anything* is to talk with other people in the Elm community. We are friendly and happy to help! So if you get stuck during installation or encounter something weird, visit [the Elm Slack](http://elmlang.herokuapp.com/) and ask about it. In fact, if you run into something confusing at any point while learning or using Elm, come ask us about it. You can save yourself hours. Just do it!
-
-
-## Configure Your Editor
-
-Using Elm is way nicer when you have a code editor to help you out. There are Elm plugins for at least the following editors:
-
-  * [Atom](https://atom.io/packages/language-elm)
-  * [Brackets](https://github.com/lepinay/elm-brackets)
-  * [Emacs](https://github.com/jcollard/elm-mode)
-  * [IntelliJ](https://github.com/klazuka/intellij-elm)
-  * [Light Table](https://github.com/rundis/elm-light)
-  * [Sublime Text](https://packagecontrol.io/packages/Elm%20Language%20Support)
-  * [Vim](https://github.com/ElmCast/elm-vim)
-  * [VS Code](https://github.com/sbrink/vscode-elm)
-
-If you do not have an editor at all, [Sublime Text](https://www.sublimetext.com/) is a great one to get started with!
-
-You may also want to try out [elm-format][] which makes your code pretty!
-
-[elm-format]: https://github.com/avh4/elm-format
 
 
 ## Terminal Tools
@@ -79,7 +59,7 @@ elm reactor
 This starts a server at [`http://localhost:8000`](http://localhost:8000). You can navigate to any Elm file and see what it looks like. Try to check out `examples/01-button.elm`.
 
 
-## `elm make`
+### `elm make`
 
 `elm make` builds Elm projects. It can compile Elm code to HTML or JavaScript. It is the most general way to compile Elm code, so if your project becomes too advanced for `elm reactor`, you will want to start using `elm make` directly.
 
@@ -111,3 +91,25 @@ This will add the dependencies into your `elm.json` file, described in more deta
 The `elm` binary can do a bunch of stuff. Do not worry about remembering it all. You can always just run `elm --help` or `elm repl --help` to get a bunch of information about any of these commands.
 
 Next we are going to learn the basics of Elm!
+
+
+> ## Configure Your Editor?
+>
+> It can be tricky to set up some of these editors, so feel free to skip over this for now! You can go far with just [the online editor](https://elm-lang.org/try).
+>
+> Here are some of the community maintained plugins for Elm:
+>
+>  * [Atom](https://atom.io/packages/language-elm)
+>  * [Brackets](https://github.com/lepinay/elm-brackets)
+>  * [Emacs](https://github.com/jcollard/elm-mode)
+>  * [IntelliJ](https://github.com/klazuka/intellij-elm)
+>  * [Light Table](https://github.com/rundis/elm-light)
+>  * [Sublime Text](https://packagecontrol.io/packages/Elm%20Language%20Support)
+>  * [Vim](https://github.com/ElmCast/elm-vim)
+>  * [VS Code](https://github.com/sbrink/vscode-elm)
+>
+> If you do not have an editor at all, [Sublime Text](https://www.sublimetext.com/) is a great one to get started with!
+>
+> You may also want to try out [`elm-format`][] which makes your code pretty!
+
+[elm-format]: https://github.com/avh4/elm-format
