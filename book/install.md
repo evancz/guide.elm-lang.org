@@ -93,7 +93,7 @@ The `elm` binary can do a bunch of stuff. Do not worry about remembering it all.
 Next we are going to learn the basics of Elm!
 
 
-> ## Configure Your Editor?
+> #### Configure Your Editor?
 >
 > It can be tricky to set up some of these editors, so feel free to skip over this for now! You can go far with just [the online editor](https://elm-lang.org/try).
 >
@@ -110,6 +110,6 @@ Next we are going to learn the basics of Elm!
 >
 > If you do not have an editor at all, [Sublime Text](https://www.sublimetext.com/) is a great one to get started with!
 >
-> You may also want to try out [`elm-format`][] which makes your code pretty!
+> You may also want to try out [`elm-format`][elm-format] which makes your code pretty!
 
 [elm-format]: https://github.com/avh4/elm-format
