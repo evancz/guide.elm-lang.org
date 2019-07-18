@@ -1,7 +1,7 @@
 # HTTP
 
 ---
-#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://ellie-app.com/3SYRVMrLnGHa1).
+#### [Clone the code](https://github.com/evancz/elm-architecture-tutorial/) or follow along in the [online editor](https://elm-lang.org/examples/book).
 ---
 
 It is often helpful to grab information from elsewhere on the internet.
