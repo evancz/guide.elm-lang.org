@@ -1,6 +1,6 @@
 # `Html.Lazy`
 
-In the [`elm/html`](https://package.elm-lang.org/packages/elm/html/latest/) package is used to show things on screen. To understand how to optimize it, we need to learn how it works in the first place!
+The [`elm/html`](https://package.elm-lang.org/packages/elm/html/latest/) package is used to show things on screen. To understand how to optimize it, we need to learn how it works in the first place!
 
 
 ## What is the DOM?
