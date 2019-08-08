@@ -11,10 +11,7 @@
 
 After installing through any of those routes, you will have the `elm` binary available in your terminal!
 
-> **Troubleshooting:**
->
-> 1. If you are having trouble, just skip this for now! You can try out a bunch of sections of this book with the [the online editor](https://elm-lang.org/try), and you can always come back to this later!
-> 2. The fastest way to learn *anything* is to talk with other people in the Elm community. We are friendly and happy to help! Try visiting [the Elm Slack](https://elmlang.herokuapp.com/) and asking about your problem. In fact, if you run into something confusing at any point, come ask about it as well!
+**Note:** If you are having trouble, just skip installation for now! You can go through a lot of this book with the [the online editor](https://elm-lang.org/try), and if you are having fun, you can always try installing again later!
 
 
 ## Terminal Tools
