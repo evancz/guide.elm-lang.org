@@ -97,7 +97,7 @@ Next we are going to learn the basics of Elm!
 > Here are some of the community maintained plugins for Elm:
 >
 >  * [Atom](https://atom.io/packages/language-elm)
->  * [Brackets](https://github.com/lepinay/elm-brackets)
+>  * [Brackets](https://github.com/tommot348/elm-brackets)
 >  * [Emacs](https://github.com/jcollard/elm-mode)
 >  * [IntelliJ](https://github.com/klazuka/intellij-elm)
 >  * [Light Table](https://github.com/rundis/elm-light)
