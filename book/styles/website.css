@@ -2,6 +2,63 @@
 .pull-right { display: none !important; }
 
 
+/* REFORMAT BLOCKQUOTES */
+
+.markdown-section blockquote {
+	background: none;
+	color: inherit;
+	border: 1px solid rgb(51,51,51);
+	padding: 12px 16px 2px 16px;
+	margin: 2em;
+}
+
+
+/* CORRECT SIDEBAR COLORS */
+
+.book.color-theme-1 .book-summary { background: #D0C396; }
+.book.color-theme-2 .book-summary { background: #0A0E1D; }
+
+
+
+/* CORRECT SEPIA MODE DETAILS */
+
+.book.color-theme-1 .book-summary { border-right: none; }
+.book.color-theme-1 .book-summary ul.summary li.active > a { background: #f3eacb; }
+
+.book.color-theme-1 .book-body .page-wrapper .page-inner section.normal a { color: #4183c4; }
+.color-theme-1 .dropdown-menu { background-color: #FFFEFB; border-color: #FFFBEC; }
+.color-theme-1 .dropdown-menu .buttons { border-color: #FFFBEC; }
+.color-theme-1 .dropdown-menu .dropdown-caret .caret-inner { border-bottom: 9px solid #FFFEFB; }
+
+.book.color-theme-1 .book-summary ul.summary li a,
+.book.color-theme-1 .book-summary ul.summary li span
+{
+	color: rgb(112, 66, 20);
+}
+
+
+
+/* CORRECT NIGHT MODE DETAILS */
+
+.book.color-theme-2 .book-summary ul.summary li a,
+.book.color-theme-2 .book-summary ul.summary li a:hover,
+.book.color-theme-2 .book-summary ul.summary li.active > a,
+.book.color-theme-2 .book-summary ul.summary li span
+{
+    font-weight: normal;
+}
+
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal h1,
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal h2,
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal h3,
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal h4,
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal h5,
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal h6
+{
+	color: inherit;
+}
+
+
 /* CORRECT SEARCH BAR FORMAT */
 
 #book-search-input {
@@ -25,7 +82,6 @@
 .color-theme-1 #book-search-input input:hover
 {
 	color: #877f6a;
-	border-bottom-color: #7e888b;
 }
 
 .color-theme-2 #book-search-input input,
