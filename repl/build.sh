@@ -14,36 +14,48 @@ fi
 
 ## GENERATE JAVASCRIPT
 
-./elm make src/Repl.elm --output=index.js
+./elm make src/Repl.elm --output=assets/repl.js
 
 
 ## ADD WRAPPER (SET UP PORTS)
 
-cat <<EOF >> index.js
-;(function(init) {
-	var id = 0;
+cat <<EOF >> assets/repl.js
+;require(["gitbook"], function(gitbook) {
 
-	Elm.Repl.init = function(entries)
-	{
-		var repl = init({ node: document.currentScript, flags: { id: id++, entries: entries } });
+    gitbook.events.bind("page.change", function()
+    {
+        var nodes = gitbook.state.\$book[0].getElementsByClassName("elm-repl");
+        for (var i = 0; i < nodes.length; i++)
+        {
+            init(i, nodes[i]);
+        }
+    });
 
-		repl.ports.evaluate.subscribe(evaluate);
+    function init(id, node)
+    {
+        var repl = Elm.Repl.init({
+            node: node,
+            flags: { id: id, entries: JSON.parse(node.textContent) }
+        });
 
-		function evaluate(javascript)
-		{
-			var url = URL.createObjectURL(new Blob([javascript], { mime: "application/javascript" }));
-			var worker = new Worker(url);
+        repl.ports.evaluate.subscribe(evaluate);
 
-			worker.onmessage = function(e) { report(e.data) };
-			worker.onerror = function(e) { report(e.message) };
+        function evaluate(javascript)
+        {
+            var url = URL.createObjectURL(new Blob([javascript], { mime: "application/javascript" }));
+            var worker = new Worker(url);
 
-			function report(value)
-			{
-				repl.ports.outcomes.send(value);
-				URL.revokeObjectURL(url);
-				worker.terminate();
-			}
-		}
-	}
-})(Elm.Repl.init);
+            worker.onmessage = function(e) { report(e.data) };
+            worker.onerror = function(e) { report(e.message) };
+
+            function report(value)
+            {
+                repl.ports.outcomes.send(value);
+                URL.revokeObjectURL(url);
+                worker.terminate();
+            }
+        }
+    }
+
+});
 EOF

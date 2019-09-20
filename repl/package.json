@@ -1,0 +1,9 @@
+{
+    "name": "gitbook-plugin-elm-repl",
+    "description": "Interactive REPL for Elm examples.",
+    "main": "index.js",
+    "version": "1.0.0",
+    "engines": {
+        "gitbook": ">=2.0.0"
+    }
+}
