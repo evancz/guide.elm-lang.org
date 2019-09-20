@@ -3,11 +3,6 @@
 set -e
 
 
-## OVERRIDE FAVICON
-
-cp favicon.ico _book/gitbook/images/favicon.ico
-
-
 ## BUILD REPL
 
 (cd repl ; npm link ; bash build.sh)
@@ -22,3 +17,6 @@ sed -i 's/"youtube"/"youtube","elm-repl"/' package.json
 ./node_modules/.bin/gitbook build
 
 
+## OVERRIDE FAVICON
+
+cp favicon.ico _book/gitbook/images/favicon.ico
