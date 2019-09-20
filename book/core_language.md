@@ -232,19 +232,20 @@ A **record** can hold many values, and each value is associated with a name.
 
 Here is a record that represents British economist John A. Hobson:
 
-```elm
-> john =
-|   { firstName = "John"
-|   , lastName = "Hobson"
-|   , age = 81
-|   }
-|
-{ age = 81, firstName = "John", lastName = "Hobson" }
-
-> john.lastName
-"Hobson"
-
-```
+{% repl %}
+[
+	{
+		"input": "john =\n  { firstName = \"John\"\n  , lastName = \"Hobson\"\n  , age = 81\n  }",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, firstName : String, lastName : String }"
+	},
+	{
+		"input": "john.lastName",
+		"value": "\u001b[93m\"Hobson\"\u001b[0m",
+		"type_": "String"
+	}
+]
+{% endrepl %}
 
 We defined a record with three **fields** containing information about John's name and age.
 
@@ -252,31 +253,47 @@ Try accessing other fields like `john.age`.
 
 You can also access record fields by using a "field access function" like this:
 
-```elm
-> john = { firstName = "John", lastName = "Hobson", age = 81 }
-{ age = 81, firstName = "John", lastName = "Hobson" }
-
-> .lastName john
-"Hobson"
-
-> List.map .lastName [john,john,john]
-["Hobson","Hobson","Hobson"]
-
-```
+{% repl %}
+[
+	{
+		"input": "john = { firstName = \"John\", lastName = \"Hobson\", age = 81 }",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, firstName : String, lastName : String }"
+	},
+	{
+		"input": ".lastName john",
+		"value": "\u001b[93m\"Hobson\"\u001b[0m",
+		"type_": "String"
+	},
+	{
+		"input": "List.map .lastName [john,john,john]",
+		"value": "[\u001b[93m\"Hobson\"\u001b[0m,\u001b[93m\"Hobson\"\u001b[0m,\u001b[93m\"Hobson\"\u001b[0m]",
+		"type_": "List String"
+	}
+]
+{% endrepl %}
 
 It is often useful to **update** values in a record:
 
-```elm
-> john = { firstName = "John", lastName = "Hobson", age = 81 }
-{ age = 81, firstName = "John", lastName = "Hobson" }
-
-> { john | lastName = "Adams" }
-{ age = 81, firstName = "John", lastName = "Adams" }
-
-> { john | age = 22 }
-{ age = 22, firstName = "John", lastName = "Hobson" }
-
-```
+{% repl %}
+[
+	{
+		"input": "john = { firstName = \"John\", lastName = \"Hobson\", age = 81 }",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, firstName : String, lastName : String }"
+	},
+	{
+		"input": "{ john | lastName = \"Adams\" }",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Adams\"\u001b[0m }",
+		"type_": "{ age : number, firstName : String, lastName : String }"
+	},
+	{
+		"input": "{ john | age = 22 }",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m22\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, firstName : String, lastName : String }"
+	}
+]
+{% endrepl %}
 
 If you wanted to say these expressions out loud, you would say something like, "I want a new version of John where his last name is Adams" or "john where the age is 22".
 
@@ -284,18 +301,24 @@ Notice that when we update some fields of `john` we create a whole new record. I
 
 So a function to update ages might look like this:
 
-```elm
-> john = { firstName = "John", lastName = "Hobson", age = 81 }
-{ age = 81, firstName = "John", lastName = "Hobson" }
-
-> celebrateBirthday person =
-|   { person | age = person.age + 1 }
-|
-<function>
-
-> celebrateBirthday john
-{ age = 82, firstName = "John", lastName = "Hobson" }
-
-```
+{% repl %}
+[
+	{
+		"input": "celebrateBirthday person =\n  { person | age = person.age + 1 }\n",
+		"value": "\u001b[94m<function>\u001b[0m",
+		"type_": "{ a | age : number } -> { a | age : number }"
+	},
+	{
+		"input": "john = { firstName = \"John\", lastName = \"Hobson\", age = 81 }",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, firstName : String, lastName : String }"
+	},
+	{
+		"input": "celebrateBirthday john",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m82\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, firstName : String, lastName : String }"
+	}
+]
+{% endrepl %}
 
 Updating record fields like this is really common, so we will see a lot more of it in the next section!
