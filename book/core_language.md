@@ -193,7 +193,7 @@ Lists can hold many values. Those values must all have the same type. Here are a
 	},
 	{
 		"input": "List.map increment numbers",
-		"value": "[\u001b[95m5\u001b[0m,95m4\u001b[0m,\u001b[95m3\u001b[0m,\u001b[95m2\u001b[0m]",
+		"value": "[\u001b[95m5\u001b[0m,\u001b[95m4\u001b[0m,\u001b[95m3\u001b[0m,\u001b[95m2\u001b[0m]",
 		"type_": "List number"
 	}
 ]
@@ -235,7 +235,7 @@ Here is a record that represents British economist John A. Hobson:
 {% repl %}
 [
 	{
-		"input": "john =\n  { firstName = \"John\"\n  , lastName = \"Hobson\"\n  , age = 81\n  }",
+		"input": "john =\n  { firstName = \"John\"\n  , lastName = \"Hobson\"\n  , age = 81\n  }\n",
 		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
 		"type_": "{ age : number, firstName : String, lastName : String }"
 	},
