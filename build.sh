@@ -3,6 +3,11 @@
 set -e
 
 
+## OVERRIDE FAVICON
+
+cp favicon.ico _book/gitbook/images/favicon.ico
+
+
 ## BUILD REPL
 
 (cd repl ; npm link ; bash build.sh)
