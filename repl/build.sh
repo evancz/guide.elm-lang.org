@@ -25,7 +25,9 @@ cat <<EOF >> assets/repl.js
     gitbook.events.bind("page.change", function()
     {
         var nodes = gitbook.state.\$book[0].getElementsByClassName("elm-repl");
-        for (var i = 0; i < nodes.length; i++)
+        // must go through backwards because the nodes array is modified
+        // if any nodes no longer have that class name. It is pretty nuts!
+        for (var i = nodes.length; i--; )
         {
             init(i, nodes[i]);
         }
