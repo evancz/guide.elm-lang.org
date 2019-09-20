@@ -21,9 +21,11 @@ fi
 
 cat <<EOF >> index.js
 ;(function(init) {
-	Elm.Repl.init = function(flags)
+	var id = 0;
+
+	Elm.Repl.init = function(entries)
 	{
-		var repl = init({ node: document.currentScript, flags: flags });
+		var repl = init({ node: document.currentScript, flags: { id: id++, entries: entries } });
 
 		repl.ports.evaluate.subscribe(evaluate);
 

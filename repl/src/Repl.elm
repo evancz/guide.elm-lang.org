@@ -77,7 +77,8 @@ type alias Model =
   --
   , history : List Entry
   , activity : Activity
-  , focus : Bool
+  , id : String
+  , focus : Focus
   , visibility : E.Visibility
   }
 
@@ -87,28 +88,36 @@ type Activity
   | Waiting (List String) Int
 
 
-init : D.Value -> (Model, Cmd Msg)
+type Focus
+  = Inactive
+  | Active Cursor
+
+
+type Cursor = On | Off
+
+
+
+-- INIT
+
+
+type alias Flags =
+  { id : Int
+  , entries : List { input : String, value : String, type_ : String }
+  }
+
+
+init : Flags -> (Model, Cmd Msg)
 init flags =
-  ( Model Dict.empty Dict.empty Dict.empty (toInitialHistory flags) (Input [] "" "") False E.Visible
+  let
+    uid = "elm-repl-" ++ String.fromInt flags.id
+    history = List.map toEntry flags.entries
+
+    toEntry {input,value,type_} =
+      Entry (String.split "\n" input) (GoodWork value type_)
+  in
+  ( Model Dict.empty Dict.empty Dict.empty history (Input [] "" "") uid Inactive E.Visible
   , Cmd.none
   )
-
-
-toInitialHistory : D.Value -> List Entry
-toInitialHistory flags =
-  case D.decodeValue (D.list entryDecoder) flags of
-    Ok history -> history
-    Err _ -> []
-
-
-entryDecoder : D.Decoder Entry
-entryDecoder =
-  D.map2 Entry
-    (D.field "input" (D.map (String.split "\n") D.string))
-    (D.map2 GoodWork
-        (D.field "value" D.string)
-        (D.field "type" D.string)
-    )
 
 
 
@@ -138,6 +147,7 @@ type Msg
   | Blur
   | Focus
   | VisibilityChange E.Visibility
+  | Blink
   | Tick
   | Press String Bool Bool Bool
   | GotWorkerResponse (List String) (Result () Outcome)
@@ -151,19 +161,25 @@ update msg model =
       ( model, Cmd.none )
 
     Blur ->
-      ( { model | focus = False }
+      ( { model | focus = Inactive }
       , Cmd.none
       )
 
     Focus ->
-      ( { model | focus = True }
-      , Task.attempt (\_ -> NoOp) (Dom.focus "input-catcher")
+      ( { model | focus = Active On }
+      , Task.attempt (\_ -> NoOp) (Dom.focus model.id)
       )
 
     VisibilityChange visibility ->
       ( { model | visibility = visibility }
       , Cmd.none
       )
+
+    Blink ->
+      ( { model | focus = blink model.focus }
+      , Cmd.none
+      )
+
 
     Tick ->
       case model.activity of
@@ -244,7 +260,7 @@ update msg model =
               )
 
             Reset ->
-              ( Model Dict.empty Dict.empty Dict.empty [] (Input [] "" "") model.focus model.visibility
+              ( Model Dict.empty Dict.empty Dict.empty [] (Input [] "" "") model.id model.focus model.visibility
               , Cmd.none
               )
 
@@ -310,6 +326,14 @@ update msg model =
             }
           , Cmd.none
           )
+
+
+blink : Focus -> Focus
+blink focus =
+  case focus of
+    Inactive   -> Inactive
+    Active On  -> Active Off
+    Active Off -> Active On
 
 
 getLines : Activity -> List String
@@ -491,6 +515,9 @@ subscriptions model =
   Sub.batch
     [ E.onVisibilityChange VisibilityChange
     , outcomes (getEvalOutcome GotEvalOutcome)
+    , case model.focus of
+        Inactive -> Sub.none
+        Active _ -> Time.every 500 (\_ -> Blink)
     , case model.activity of
         Input _ _ _ ->
           Sub.none
@@ -517,7 +544,6 @@ view model =
     [ style "background" "black"
     , style "color" "white"
     , style "width" "80ch"
-    , style "max-height" "300px"
     , style "padding" "2ch"
     , style "margin" "0 0 1.275em 0"
     , style "fontFamily" "monospace"
@@ -527,7 +553,7 @@ view model =
     ]
     [ lazy viewHistory model.history
     , viewActivity model.activity model.focus
-    , viewInputCatcher
+    , lazy viewInputCatcher model.id
     ]
 
 
@@ -535,12 +561,12 @@ view model =
 -- VIEW ACTIVITY
 
 
-viewActivity : Activity -> Bool -> Html msg
-viewActivity activity hasFocus =
+viewActivity : Activity -> Focus -> Html msg
+viewActivity activity focus =
   case activity of
     Input lines before after ->
       p [ style "margin" "0" ] <|
-        unrollInput "> " lines before after hasFocus
+        unrollInput "> " lines before after focus
 
     Waiting lines n ->
       p [ style "margin" "0" ]
@@ -549,17 +575,17 @@ viewActivity activity hasFocus =
         ]
 
 
-unrollInput : String -> List String -> String -> String -> Bool -> List (Html msg)
-unrollInput starter lines before after hasFocus =
+unrollInput : String -> List String -> String -> String -> Focus -> List (Html msg)
+unrollInput starter lines before after focus =
   case lines of
     [] ->
       [ text starter
       , text before
       , span
-          [ if hasFocus then
-              style "background" "rgb(96,96,96)"
-            else
-              style "outline" "1px solid rgb(96,96,96)"
+          [ case focus of
+              Active On  -> style "background" "rgb(96,96,96)"
+              Active Off -> style "outline" "1px solid rgb(96,96,96)"
+              Inactive   -> style "outline" "1px solid rgb(96,96,96)"
           ]
           [ text (if String.isEmpty after then " " else String.left 1 after)
           ]
@@ -567,7 +593,7 @@ unrollInput starter lines before after hasFocus =
       ]
 
     line :: newerLines ->
-      text (starter ++ line ++ "\n") :: unrollInput "| " newerLines before after hasFocus
+      text (starter ++ line ++ "\n") :: unrollInput "| " newerLines before after focus
 
 
 
@@ -702,10 +728,10 @@ viewAnsiChunk chunk =
 -- VIEW INPUT CATCHER
 
 
-viewInputCatcher : Html Msg
-viewInputCatcher =
+viewInputCatcher : String -> Html Msg
+viewInputCatcher uid =
   input
-    [ id "input-catcher"
+    [ id uid
     , style "position" "absolute"
     , style "outline" "none"
     , style "border" "none"

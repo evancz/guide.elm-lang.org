@@ -1,0 +1,37 @@
+.book-header h1 { display: none; }
+.pull-right { display: none !important; }
+
+
+/* CORRECT SEARCH BAR FORMAT */
+
+#book-search-input {
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0 0 10px 0;
+}
+
+#book-search-input input,
+#book-search-input input:focus,
+#book-search-input input:hover
+{
+	padding: 10px 15px;
+	background: none;
+	border-bottom: 1px solid rgba(0,0,0,.07);
+}
+
+.color-theme-1 #book-search-input input,
+.color-theme-1 #book-search-input input:focus,
+.color-theme-1 #book-search-input input:hover
+{
+	color: #877f6a;
+	border-bottom-color: #7e888b;
+}
+
+.color-theme-2 #book-search-input input,
+.color-theme-2 #book-search-input input:focus,
+.color-theme-2 #book-search-input input:hover
+{
+	color: #f4f4f5;
+	border-bottom-color: #272a3a;
+}
