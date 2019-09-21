@@ -133,7 +133,7 @@ type alias Entry =
 type Answer
   = BadRequest
   | BadEntry Error.Error
-  | BadWork String
+  | BadSituation String
   | GoodEntry
   | GoodWork String String
 
@@ -260,7 +260,10 @@ update msg model =
               )
 
             Reset ->
-              ( Model Dict.empty Dict.empty Dict.empty [] (Input [] "" "") model.id model.focus model.visibility
+              ( { model
+                    | history = model.history ++ [ Entry lines (BadSituation "Error: unrecognized command.") ]
+                    , activity = Input [] "" ""
+                }
               , Cmd.none
               )
 
@@ -283,10 +286,20 @@ update msg model =
               )
 
             NoPorts ->
-              Debug.todo "NoPorts"
+              ( { model
+                    | history = model.history ++ [ Entry lines (BadSituation "Error: cannot define ports here.") ]
+                    , activity = Input [] "" ""
+                }
+              , Cmd.none
+              )
 
             InvalidCommand ->
-              Debug.todo "InvalidCommand"
+              ( { model
+                    | history = model.history ++ [ Entry lines (BadSituation "Error: unrecognized command.") ]
+                    , activity = Input [] "" ""
+                }
+              , Cmd.none
+              )
 
             Failure error ->
               ( { model
@@ -303,7 +316,7 @@ update msg model =
       case outcome of
         Throw message ->
           ( { model
-                | history = model.history ++ [ Entry lines (BadWork message) ]
+                | history = model.history ++ [ Entry lines (BadSituation message) ]
                 , activity = Input [] "" ""
             }
           , Cmd.none
@@ -370,11 +383,11 @@ processKey key before after =
     "ArrowRight" ->
       Edit (before ++ String.left 1 after) (String.dropLeft 1 after)
 
-    "ArrowDown" ->
-      Debug.todo "ArrowDown"
+--    "ArrowDown" ->
+--      Debug.todo "ArrowDown"
 
-    "ArrowUp" ->
-      Debug.todo "ArrowUp"
+--    "ArrowUp" ->
+--      Debug.todo "ArrowUp"
 
     "Enter" ->
       Enter
@@ -548,7 +561,6 @@ view model =
     , style "margin" "0 0 1.275em 0"
     , style "fontFamily" "monospace"
     , style "whiteSpace" "pre"
-    , style "overflow" "hidden"
     , onClick Focus
     ]
     [ lazy viewHistory model.history
@@ -654,7 +666,7 @@ viewEntry entry =
       BadEntry error ->
         Error.view error
 
-      BadWork message ->
+      BadSituation message ->
         [ text (message ++ "\n\n") ]
 
       GoodEntry ->
