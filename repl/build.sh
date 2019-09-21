@@ -3,18 +3,30 @@
 set -e
 
 
-## DOWNLOAD ELM
+## DOWNLOAD ELM AND UGLIFYJS
 
-if ! [ -x ./elm ]; then
+if ! [ -x elm ]; then
   curl -L -o elm.gz https://github.com/elm/compiler/releases/download/0.19.0/binary-for-linux-64-bit.gz
   gunzip elm.gz
   chmod +x elm
+fi
+if ! [ -x node_modules/.bin/uglifyjs ]; then
+  npm install uglify-js
 fi
 
 
 ## GENERATE JAVASCRIPT
 
-./elm make src/Repl.elm --output=assets/repl.js
+./elm make src/Repl.elm --optimize --output=elm.js
+
+./node_modules/.bin/uglifyjs elm.js --compress "pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe" \
+  | ./node_modules/.bin/uglifyjs --mangle --output=assets/repl.js
+
+echo "Initial size: $(cat elm.js | wc -c) bytes"
+echo "Minified size:$(cat assets/repl.js | wc -c) bytes"
+echo "Gzipped size: $(cat assets/repl.js | gzip -c | wc -c) bytes"
+
+rm elm.js
 
 
 ## ADD WRAPPER (SET UP PORTS)
