@@ -1,6 +1,6 @@
 # Reading Types
 
-In the [Core Language](/core_language.html) section of this book, we went through a bunch of interactive examples to get a feeling for the language. Well, we are going to do it again, but now with an emphasis on the **types** of each value.
+In the [Core Language](/core_language.html) section of this book, we went through a bunch of interactive examples to get a feeling for the language. Well, we are going to do it again, but with a new question in mind. What **type** of value is that?
 
 
 ## Primitives and Lists
@@ -36,7 +36,7 @@ Okay, but what is going on here exactly? Each entry shows value along with what 
 - The value `3` is an `Int`.
 - The value `3.1415` is a `Float`.
 
-Elm is able to figure out the type of any value you enter, so let's see what happens with lists:
+Elm is able to figure out the type of any value you enter! Let's see what happens with lists:
 
 {% replWithTypes %}
 [
@@ -49,25 +49,16 @@ Elm is able to figure out the type of any value you enter, so let's see what hap
 		"input": "[ 1.0, 8.6, 42.1 ]",
 		"value": "[\u001b[95m1.0\u001b[0m,\u001b[95m8.6\u001b[0m,\u001b[95m42.1\u001b[0m]",
 		"type_": "List Float"
-	},
-	{
-		"input": "[]",
-		"value": "[]",
-		"type_": "List a"
 	}
 ]
 {% endreplWithTypes %}
 
-The first two cases are fairly direct:
+You can read these types as:
 
 1. We have a `List` filled with `String` values.
 2. We have a `List` filled with `Float` values.
 
-The third case has a lower-case `a` in the type though. What is that?
-
-Since the list is empty, so we do not actually know what kind of values are in the list. So the type `List a` is saying "I know I have a list, but it could be filled with anything".
-
-The lower-case `a` is called a **type variable**. It means that there are no constraints in our program that pin this down to a specific type. This type can _vary_ based on how it is used.
+The **type** is a rough description of the particular value we are looking at.
 
 
 ## Functions
@@ -106,9 +97,15 @@ You will find that a `String -> Int` function *must* get a `String` argument!
 
 > **Note:** Functions that take multiple arguments end up having more and more arrows. For example, here is a function that takes two arguments:
 >
->```elm
-String.repeat : Int -> String -> String
-```
+> {% replWithTypes %}
+[
+	{
+		"input": "String.repeat",
+		"value": "\u001b[94m<function>\u001b[0m",
+		"type_": "Int -> String -> String"
+	}
+]
+{% endreplWithTypes %}
 >
 > Giving two arguments like `String.repeat 3 "ha"` will produce `"hahaha"`. It works to think of `->` as a weird way to separate arguments, but I explain the real reasoning [here](/appendix/function_types.md). It is pretty neat!
 
