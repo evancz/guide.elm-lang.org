@@ -698,7 +698,7 @@ viewGoodWork ansiValue tipe showTypes =
   ++
   [
     if showTypes then
-      span [ style "color" "rgb(129,131,131)" ] [ text (formatType ansiValue tipe) ]
+      span [ style "color" "rgb(203,204,205)" ] [ text (formatType ansiValue tipe) ]
     else
       text "\n\n"
   ]
