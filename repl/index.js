@@ -9,7 +9,7 @@ module.exports = {
             process: function(block) {
                 return '<div class="elm-repl">' + escapeText(block.body) + "</div>";
             }
-        }
+        },
         replWithTypes: {
             process: function(block) {
                 return '<div class="elm-repl show-types">' + escapeText(block.body) + "</div>";
