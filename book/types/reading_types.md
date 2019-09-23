@@ -169,7 +169,7 @@ Notice that lower-case `a` in the type? That is called a **type variable**. It c
 		"type_": "Int"
 	},
 	{
-		"input": "List.length [ "a", "b", "c" ]",
+		"input": "List.length [ \"a\", \"b\", \"c\" ]",
 		"value": "\u001b[95m3\u001b[0m",
 		"type_": "Int"
 	},
@@ -191,7 +191,7 @@ We just want the length, so it does not matter what is in the list. So the type 
 		"type_": "List a -> List a"
 	},
 	{
-		"input": "List.length [ "a", "b", "c" ]",
+		"input": "List.length [ \"a\", \"b\", \"c\" ]",
 		"value": "[\u001b[93m\"c\"\u001b[0m,\u001b[93m\"b\"\u001b[0m,\u001b[93m\"a\"\u001b[0m]",
 		"type_": "List String"
 	},
