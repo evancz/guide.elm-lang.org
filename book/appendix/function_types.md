@@ -26,6 +26,11 @@ It is a function that takes an `Int` and then produces _another_ function. So if
 {% replWithTypes %}
 [
 	{
+		"input": "String.repeat",
+		"value": "\u001b[94m<function>\u001b[0m",
+		"type_": "Int -> String -> String"
+	},
+	{
 		"input": "String.repeat 4",
 		"value": "\u001b[94m<function>\u001b[0m",
 		"type_": "String -> String"
