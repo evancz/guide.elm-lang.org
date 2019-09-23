@@ -80,6 +80,8 @@ type alias Model =
   , id : String
   , focus : Focus
   , visibility : E.Visibility
+  --
+  , showTypes : Bool
   }
 
 
@@ -102,6 +104,7 @@ type Cursor = On | Off
 
 type alias Flags =
   { id : Int
+  , types : Bool
   , entries : List { input : String, value : String, type_ : String }
   }
 
@@ -109,13 +112,24 @@ type alias Flags =
 init : Flags -> (Model, Cmd Msg)
 init flags =
   let
-    uid = "elm-repl-" ++ String.fromInt flags.id
-    history = List.map toEntry flags.entries
+    history =
+      List.map toEntry flags.entries
 
     toEntry {input,value,type_} =
       Entry (String.split "\n" input) (GoodWork value type_)
   in
-  ( Model Dict.empty Dict.empty Dict.empty history (Input [] "" "") uid Inactive E.Visible
+  ( { imports = Dict.empty
+    , types = Dict.empty
+    , decls = Dict.empty
+    --
+    , history = history
+    , activity = Input [] "" ""
+    , id = "elm-repl-" ++ String.fromInt flags.id
+    , focus = Inactive
+    , visibility = E.Visible
+    --
+    , showTypes = flags.types
+    }
   , Cmd.none
   )
 
@@ -563,7 +577,7 @@ view model =
     , style "whiteSpace" "pre"
     , onClick Focus
     ]
-    [ lazy viewHistory model.history
+    [ lazy2 viewHistory model.showTypes model.history
     , viewActivity model.activity model.focus
     , lazy viewInputCatcher model.id
     ]
@@ -643,19 +657,19 @@ waitingFrames =
 -- VIEW HISTORY
 
 
-viewHistory : List Entry -> Html msg
-viewHistory history =
+viewHistory : Bool -> List Entry -> Html msg
+viewHistory showTypes history =
   Keyed.node "p" [ style "margin" "0" ] <|
-    List.indexedMap viewKeyedEntry history
+    List.indexedMap (viewKeyedEntry showTypes) history
 
 
-viewKeyedEntry : Int -> Entry -> (String, Html msg)
-viewKeyedEntry index entry =
-  ( String.fromInt index, lazy viewEntry entry )
+viewKeyedEntry : Bool -> Int -> Entry -> (String, Html msg)
+viewKeyedEntry showTypes index entry =
+  ( String.fromInt index, lazy2 viewEntry showTypes entry )
 
 
-viewEntry : Entry -> Html msg
-viewEntry entry =
+viewEntry : Bool -> Entry -> Html msg
+viewEntry showTypes entry =
   span [] <|
     text ("> " ++ String.join "\n| " entry.lines ++ "\n")
     ::
@@ -673,21 +687,18 @@ viewEntry entry =
         [ text "\n" ]
 
       GoodWork ansiValue tipe ->
-        viewGoodWork ansiValue tipe
+        viewGoodWork ansiValue tipe showTypes
 
 
-viewGoodWork : String -> String -> List (Html msg)
-viewGoodWork ansiValue tipe =
-  viewAnsiString ansiValue ++ [ text "\n\n" ]
-  -- NOTE: replace this code  ^^^^^^^^^^^^^^^
-  -- with the following comment block to show
-  -- type annotations.
-
-{-
+viewGoodWork : String -> String -> Bool -> List (Html msg)
+viewGoodWork ansiValue tipe showTypes =
+  viewAnsiString ansiValue
   ++
-  [ span
-      [ style "color" "rgb(129,131,131)" ]
-      [ text (formatType ansiValue tipe) ]
+  [
+    if showTypes then
+      span [ style "color" "rgb(129,131,131)" ] [ text (formatType ansiValue tipe) ]
+    else
+      text "\n\n"
   ]
 
 
@@ -696,7 +707,6 @@ formatType ansiValue tipe =
   if String.length ansiValue + 3 + String.length tipe >= 80 || String.contains "\n" tipe
   then "\n    : " ++ String.replace "\n" "\n      " tipe ++ "\n\n"
   else " : " ++ tipe ++ "\n\n"
--}
 
 
 viewAnsiString : String -> List (Html msg)
