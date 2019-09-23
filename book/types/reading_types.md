@@ -14,31 +14,49 @@ Read <https://elm-lang.org/0.19.0/repl> to learn more: exit, help, imports, etc.
 
 Let's enter some simple expressions and see what happens:
 
-```elm
-> "hello"
-"hello" : String
-
-> not True
-False : Bool
-
-> round 3.1415
-3 : Int
-```
+{% replWithTypes %}
+[
+	{
+		"input": "\"hello\"",
+		"value": "\u001b[93m\"hello\"\u001b[0m",
+		"type_": "String"
+	},
+	{
+		"input": "not True",
+		"value": "\u001b[96mFalse\u001b[0m",
+		"type_": "Bool"
+	},
+	{
+		"input": "round 3.1415",
+		"value": "\u001b[95m3\u001b[0m",
+		"type_": "Int"
+	}
+]
+{% endreplWithTypes %}
 
 In these three examples, the REPL tells us the resulting value along with what *type* of value it happens to be. The value `"hello"` is a `String`. The value `3` is an `Int`. Nothing too crazy here.
 
 Let's see what happens with lists holding different types of values:
 
-```elm
-> [ "Alice", "Bob" ]
-[ "Alice", "Bob" ] : List String
-
-> [ 1.0, 8.6, 42.1 ]
-[ 1.0, 8.6, 42.1 ] : List Float
-
-> []
-[] : List a
-```
+{% replWithTypes %}
+[
+	{
+		"input": "[ \"Alice\", \"Bob\" ]",
+		"value": "[\u001b[93m\"Alice\"\u001b[0m,\u001b[93m\"Bob\"\u001b[0m]",
+		"type_": "List String"
+	},
+	{
+		"input": "[ 1.0, 8.6, 42.1 ]",
+		"value": "[\u001b[95m1.0\u001b[0m,\u001b[95m8.6\u001b[0m,\u001b[95m42.1\u001b[0m]",
+		"type_": "List Float"
+	},
+	{
+		"input": "[]",
+		"value": "[]",
+		"type_": "List a"
+	}
+]
+{% endreplWithTypes %}
 
 In the first case, we have a `List` filled with `String` values. In the second, the `List` is filled with `Float` values. In the third case the list is empty, so we do not actually know what kind of values are in the list. So the type `List a` is saying "I know I have a list, but it could be filled with anything". The lower-case `a` is called a *type variable*, meaning that there are no constraints in our program that pin this down to some specific type. In other words, the type can vary based on how it is used.
 
@@ -47,17 +65,27 @@ In the first case, we have a `List` filled with `String` values. In the second, 
 
 Let's see the type of some functions:
 
-```elm
-> String.length
-<function> : String -> Int
-```
+{% replWithTypes %}
+[
+	{
+		"input": "String.length",
+		"value": "\u001b[94m<function>\u001b[0m",
+		"type_": "String -> Int"
+	}
+]
+{% endreplWithTypes %}
 
 The function `String.length` has type `String -> Int`. This means it *must* take in a `String` argument, and it will definitely return an integer result. So let's try giving it an argument:
 
-```elm
-> String.length "Supercalifragilisticexpialidocious"
-34 : Int
-```
+{% replWithTypes %}
+[
+	{
+		"input": "String.length \"Supercalifragilisticexpialidocious\"",
+		"value": "\u001b[95m34\u001b[0m",
+		"type_": "Int"
+	}
+]
+{% endreplWithTypes %}
 
 So we start with a `String -> Int` function and give it a `String` argument. This results in an `Int`.
 
@@ -121,36 +149,59 @@ People can make mistakes in type annotations though, so what happens if the anno
 
 As you look through the functions in [`elm/core`][core], you will see some type signatures with lower-case letters in them. We can check some of them out in `elm repl`:
 
-```elm
-> List.length
-<function> : List a -> Int
-```
+{% replWithTypes %}
+[
+	{
+		"input": "List.length",
+		"value": "\u001b[94m<function>\u001b[0m",
+		"type_": "List a -> Int"
+	}
+]
+{% endreplWithTypes %}
 
 Notice that lower-case `a` in the type? That is called a **type variable**. It can vary depending on how [`List.length`][length] is used:
 
-```elm
-> List.length [1,1,2,3,5,8]
-6 : Int
-
-> List.length [ "a", "b", "c" ]
-3 : Int
-
-> List.length [ True, False ]
-2 : Int
-```
+{% replWithTypes %}
+[
+	{
+		"input": "List.length [1,1,2,3,5,8]",
+		"value": "\u001b[95m6\u001b[0m",
+		"type_": "Int"
+	},
+	{
+		"input": "List.length [ "a", "b", "c" ]",
+		"value": "\u001b[95m3\u001b[0m",
+		"type_": "Int"
+	},
+	{
+		"input": "List.length [ True, False ]",
+		"value": "\u001b[95m2\u001b[0m",
+		"type_": "Int"
+	}
+]
+{% endreplWithTypes %}
 
 We just want the length, so it does not matter what is in the list. So the type variable `a` is saying that we can match any type. Let&rsquo;s look at another common example:
 
-```elm
-> List.reverse
-<function> : List a -> List a
-
-> List.reverse [ "a", "b", "c" ]
-["c","b","a"] : List String
-
-> List.reverse [ True, False ]
-[False,True] : List Bool
-```
+{% replWithTypes %}
+[
+	{
+		"input": "List.reverse",
+		"value": "\u001b[94m<function>\u001b[0m",
+		"type_": "List a -> List a"
+	},
+	{
+		"input": "List.length [ "a", "b", "c" ]",
+		"value": "[\u001b[93m\"c\"\u001b[0m,\u001b[93m\"b\"\u001b[0m,\u001b[93m\"a\"\u001b[0m]",
+		"type_": "List String"
+	},
+	{
+		"input": "List.length [ True, False ]",
+		"value": "[\u001b[96mFalse\u001b[0m,\u001b[96mTrue\u001b[0m]",
+		"type_": "List Bool"
+	}
+]
+{% endreplWithTypes %}
 
 Again, the type variable `a` can vary depending on how [`List.reverse`][reverse] is used. But in this case, we have an `a` in the argument and in the result. This means that if you give a `List Int` you must get a `List Int` as well. Once we decide what `a` is, that’s what it is everywhere.
 

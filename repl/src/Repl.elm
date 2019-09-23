@@ -82,6 +82,7 @@ type alias Model =
   , visibility : E.Visibility
   --
   , showTypes : Bool
+  , initialHistory : List Entry
   }
 
 
@@ -112,7 +113,7 @@ type alias Flags =
 init : Flags -> (Model, Cmd Msg)
 init flags =
   let
-    history =
+    initialHistory =
       List.map toEntry flags.entries
 
     toEntry {input,value,type_} =
@@ -122,13 +123,14 @@ init flags =
     , types = Dict.empty
     , decls = Dict.empty
     --
-    , history = history
+    , history = initialHistory
     , activity = Input [] "" ""
     , id = "elm-repl-" ++ String.fromInt flags.id
     , focus = Inactive
     , visibility = E.Visible
     --
     , showTypes = flags.types
+    , initialHistory = initialHistory
     }
   , Cmd.none
   )
@@ -275,7 +277,7 @@ update msg model =
 
             Reset ->
               ( { model
-                    | history = model.history ++ [ Entry lines (BadSituation "Error: unrecognized command.") ]
+                    | history = model.initialHistory
                     , activity = Input [] "" ""
                 }
               , Cmd.none
