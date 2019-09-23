@@ -49,8 +49,11 @@ cat <<EOF >> assets/repl.js
     {
         var repl = Elm.Repl.init({
             node: node,
-            types: node.className.indexOf('show-types') !== -1,
-            flags: { id: id, entries: JSON.parse(node.textContent) }
+            flags: {
+                id: id,
+                types: node.className.indexOf('show-types') !== -1,
+                entries: JSON.parse(node.textContent)
+            }
         });
 
         repl.ports.evaluate.subscribe(evaluate);
