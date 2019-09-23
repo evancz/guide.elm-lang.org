@@ -31,7 +31,7 @@ You can see examples of this structure in the following open-source projects:
 - [`package.elm-lang.org`](https://github.com/elm/package.elm-lang.org)
 
 
-> ## Aside: Culture Shock
+> ## Culture Shock
 >
 > Folks coming from JavaScript tend to bring habits, expectations, and anxieties that are specific to JavaScript. They are legitimately important in that context, but they can cause some pretty severe troubles when transferred to Elm.
 >
