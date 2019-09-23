@@ -91,7 +91,7 @@ viewMessage : List Error.Chunk -> List (Html msg)
 viewMessage chunks =
   case chunks of
     [] ->
-      [ text "\n\n\n" ]
+      [ text "\n\n" ]
 
     chunk :: others ->
       let
