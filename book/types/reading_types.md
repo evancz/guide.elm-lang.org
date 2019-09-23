@@ -1,13 +1,6 @@
 # Reading Types
 
-In the [Core Language](/core_language.html) section of this book, we ran a bunch of code in the REPL. Well, we are going to do it again, but now with an emphasis on the types that are getting spit out. So type `elm repl` in your terminal again. You should see this:
-
-```elm
----- Elm 0.19.0 ----------------------------------------------------------------
-Read <https://elm-lang.org/0.19.0/repl> to learn more: exit, help, imports, etc.
---------------------------------------------------------------------------------
->
-```
+In the [Core Language](/core_language.html) section of this book, we went through a bunch of interactive examples to get a feeling for the language. Well, we are going to do it again, but now with an emphasis on the **types** of each value.
 
 
 ## Primitives and Lists
@@ -34,9 +27,16 @@ Let's enter some simple expressions and see what happens:
 ]
 {% endreplWithTypes %}
 
-In these three examples, the REPL tells us the resulting value along with what *type* of value it happens to be. The value `"hello"` is a `String`. The value `3` is an `Int`. Nothing too crazy here.
+Click on this black box ⬆️ and the cursor should start blinking. Type in `3.1415` and press the ENTER key. It should print out `3.1415` followed by the type `Float`.
 
-Let's see what happens with lists holding different types of values:
+Okay, but what is going on here exactly? Each entry shows value along with what **type** of value it happens to be. You can read these examples out loud like this:
+
+- The value `"hello"` is a `String`.
+- The value `False` is a `Bool`.
+- The value `3` is an `Int`.
+- The value `3.1415` is a `Float`.
+
+Elm is able to figure out the type of any value you enter, so let's see what happens with lists:
 
 {% replWithTypes %}
 [
@@ -58,7 +58,16 @@ Let's see what happens with lists holding different types of values:
 ]
 {% endreplWithTypes %}
 
-In the first case, we have a `List` filled with `String` values. In the second, the `List` is filled with `Float` values. In the third case the list is empty, so we do not actually know what kind of values are in the list. So the type `List a` is saying "I know I have a list, but it could be filled with anything". The lower-case `a` is called a *type variable*, meaning that there are no constraints in our program that pin this down to some specific type. In other words, the type can vary based on how it is used.
+The first two cases are fairly direct:
+
+1. We have a `List` filled with `String` values.
+2. We have a `List` filled with `Float` values.
+
+The third case has a lower-case `a` in the type though. What is that?
+
+Since the list is empty, so we do not actually know what kind of values are in the list. So the type `List a` is saying "I know I have a list, but it could be filled with anything".
+
+The lower-case `a` is called a **type variable**. It means that there are no constraints in our program that pin this down to a specific type. This type can _vary_ based on how it is used.
 
 
 ## Functions
@@ -75,7 +84,9 @@ Let's see the type of some functions:
 ]
 {% endreplWithTypes %}
 
-The function `String.length` has type `String -> Int`. This means it *must* take in a `String` argument, and it will definitely return an integer result. So let's try giving it an argument:
+Try entering `round` or `sqrt` to see some other function types ⬆️
+
+The `String.length` function has type `String -> Int`. This means it *must* take in a `String` argument, and it will definitely return an `Int` value. So let's try giving it an argument:
 
 {% replWithTypes %}
 [
@@ -89,17 +100,9 @@ The function `String.length` has type `String -> Int`. This means it *must* take
 
 So we start with a `String -> Int` function and give it a `String` argument. This results in an `Int`.
 
-What happens when you do not give a `String` though?
+What happens when you do not give a `String` though? Try entering `String.length [1,2,3]` or `String.length True` to see what happens ⬆️
 
-```elm
-> String.length [1,2,3]
--- error!
-
-> String.length True
--- error!
-```
-
-A `String -> Int` function *must* get a `String` argument!
+You will find that a `String -> Int` function *must* get a `String` argument!
 
 > **Note:** Functions that take multiple arguments end up having more and more arrows. For example, here is a function that takes two arguments:
 >
@@ -112,7 +115,7 @@ String.repeat : Int -> String -> String
 
 ## Type Annotations
 
-So far we have just let Elm figure out the types, but it also lets you write a **type annotation** on the line above a definition if you want. So when you are writing code, you can say things like this:
+So far we have just let Elm figure out the types, but it also lets you write a **type annotation** on the line above a definition. So when you are writing code, you can say things like this:
 
 ```elm
 half : Float -> Float
@@ -216,11 +219,19 @@ Again, the type variable `a` can vary depending on how [`List.reverse`][reverse]
 
 There are a few “constrained” type variables. The most common example is probably the `number` type. The [`negate`][negate] function uses it:
 
-```elm
-negate : number -> number
-```
+{% replWithTypes %}
+[
+	{
+		"input": "negate",
+		"value": "\u001b[94m<function>\u001b[0m",
+		"type_": "number -> number"
+	}
+]
+{% endreplWithTypes %}
 
-Normally type variables can get filled in with _anything_, but `number` can only be filled in by `Int` and `Float` values. It constrains the possibilities.
+Try expressions like `negate 3.1415` and `negate (round 3.1415)` and `negate "hi"` ⬆️
+
+Normally type variables can get filled in with anything, but `number` can only be filled in by `Int` and `Float` values. It constrains the possibilities.
 
 The full list of constrained type variables is:
 
