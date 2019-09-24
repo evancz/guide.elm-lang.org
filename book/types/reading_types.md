@@ -219,6 +219,7 @@ There are a few “constrained” type variables. The most common example is pro
 {% replWithTypes %}
 [
 	{
+		"add-decl": "negate",
 		"input": "negate",
 		"value": "\u001b[94m<function>\u001b[0m",
 		"type_": "number -> number"

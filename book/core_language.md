@@ -59,6 +59,7 @@ For example, here is a `greet` function that takes in a name and says hello:
 {% repl %}
 [
 	{
+		"add-decl": "greet",
 		"input": "greet name =\n  \"Hello \" ++ name ++ \"!\"\n",
 		"value": "\u001b[94m<function>\u001b[0m",
 		"type_": "String -> String"
@@ -85,6 +86,7 @@ Okay, now that greetings are out of the way, how about an `madlib` function that
 {% repl %}
 [
 	{
+		"add-decl": "madlib",
 		"input": "madlib animal adjective =\n  \"The ostentatious \" ++ animal ++ \" wears \" ++ adjective ++ \" shorts.\"\n",
 		"value": "\u001b[94m<function>\u001b[0m",
 		"type_": "String -> String -> String"
@@ -126,6 +128,7 @@ Let's make a new `greet` function that is appropriately respectful to president 
 {% repl %}
 [
 	{
+		"add-decl": "greet",
 		"input": "greet name =\n  if name == \"Abraham Lincoln\" then\n    \"Greetings Mr. President!\"\n  else\n    \"Hey!\"\n",
 		"value": "\u001b[94m<function>\u001b[0m",
 		"type_": "String -> String"
@@ -157,6 +160,7 @@ Lists can hold many values. Those values must all have the same type. Here are a
 {% repl %}
 [
 	{
+		"add-decl": "names",
 		"input": "names =\n  [ \"Alice\", \"Bob\", \"Chuck\" ]\n",
 		"value": "[\u001b[93m\"Alice\"\u001b[0m,\u001b[93m\"Bob\"\u001b[0m,\u001b[93m\"Chuck\"\u001b[0m]",
 		"type_": "List String"
@@ -177,6 +181,7 @@ Lists can hold many values. Those values must all have the same type. Here are a
 		"type_": "List String"
 	},
 	{
+		"add-decl": "numbers",
 		"input": "numbers =\n  [4,3,2,1]\n",
 		"value": "[\u001b[95m4\u001b[0m,\u001b[95m3\u001b[0m,\u001b[95m2\u001b[0m,\u001b[95m1\u001b[0m]",
 		"type_": "List number"
@@ -187,6 +192,7 @@ Lists can hold many values. Those values must all have the same type. Here are a
 		"type_": "List number"
 	},
 	{
+		"add-decl": "increment",
 		"input": "increment n =\n  n + 1\n",
 		"value": "\u001b[94m<function>\u001b[0m",
 		"type_": "number -> number"
@@ -211,6 +217,7 @@ Tuples are another useful data structure. A tuple can hold two or three values, 
 {% repl %}
 [
 	{
+		"add-decl": "isGoodName",
 		"input": "isGoodName name =\n  if String.length name <= 20 then\n    (True, \"name accepted!\")\n  else\n    (False, \"name was too long; please limit it to 20 characters\"\n",
 		"value": "\u001b[94m<function>\u001b[0m",
 		"type_": "String -> ( Bool, String )"
@@ -235,6 +242,7 @@ Here is a record that represents British economist John A. Hobson:
 {% repl %}
 [
 	{
+		"add-decl": "john",
 		"input": "john =\n  { firstName = \"John\"\n  , lastName = \"Hobson\"\n  , age = 81\n  }\n",
 		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
 		"type_": "{ age : number, firstName : String, lastName : String }"
@@ -256,6 +264,7 @@ You can also access record fields by using a "field access function" like this:
 {% repl %}
 [
 	{
+		"add-decl": "john",
 		"input": "john = { firstName = \"John\", lastName = \"Hobson\", age = 81 }",
 		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
 		"type_": "{ age : number, firstName : String, lastName : String }"
@@ -278,6 +287,7 @@ It is often useful to **update** values in a record:
 {% repl %}
 [
 	{
+		"add-decl": "john",
 		"input": "john = { firstName = \"John\", lastName = \"Hobson\", age = 81 }",
 		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
 		"type_": "{ age : number, firstName : String, lastName : String }"
@@ -304,11 +314,13 @@ So a function to update ages might look like this:
 {% repl %}
 [
 	{
+		"add-decl": "celebrateBirthday",
 		"input": "celebrateBirthday person =\n  { person | age = person.age + 1 }\n",
 		"value": "\u001b[94m<function>\u001b[0m",
 		"type_": "{ a | age : number } -> { a | age : number }"
 	},
 	{
+		"add-decl": "john",
 		"input": "john = { firstName = \"John\", lastName = \"Hobson\", age = 81 }",
 		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
 		"type_": "{ age : number, firstName : String, lastName : String }"
