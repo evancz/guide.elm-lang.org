@@ -1,7 +1,7 @@
 module Flags exposing
   ( Flags
   , State
-  , Content
+  , Entry(..)
   , decode
   )
 
@@ -25,15 +25,15 @@ type alias State =
   { imports : Dict String String
   , types : Dict String String
   , decls : Dict String String
-  , content : List Content
+  , entries : List Entry
   }
 
 
-type alias Content =
-  { input : String
-  , value : String
-  , type_ : String
-  }
+type Entry
+  = Expr String String String
+  | Decl String String String String
+  | Type String String
+  | Import String String
 
 
 
@@ -53,33 +53,25 @@ decoder =
     (D.map toState (D.field "entries" (D.list entryDecoder)))
 
 
-
--- ENTRY DECODER
-
-
-type Entry
-  = Expr Content
-  | Decl String Content
-  | Type String Content
-  | Import String Content
-
-
 entryDecoder : D.Decoder Entry
 entryDecoder =
   D.oneOf
-    [ D.map2 Decl (D.field "add-decl" D.string) contentDecoder
-    , D.map2 Type (D.field "add-type" D.string) contentDecoder
-    , D.map2 Import (D.field "add-import" D.string) contentDecoder
-    , D.map Expr contentDecoder
+    [ D.map4 Decl
+        (D.field "add-decl" D.string)
+        (D.field "input" D.string)
+        (D.field "value" D.string)
+        (D.field "type_" D.string)
+    , D.map2 Type
+          (D.field "add-type" D.string)
+          (D.field "input" D.string)
+    , D.map2 Import
+          (D.field "add-import" D.string)
+          (D.field "input" D.string)
+    , D.map3 Expr
+        (D.field "input" D.string)
+        (D.field "value" D.string)
+        (D.field "type_" D.string)
     ]
-
-
-contentDecoder : D.Decoder Content
-contentDecoder =
-  D.map3 Content
-    (D.field "input" D.string)
-    (D.field "value" D.string)
-    (D.field "type_" D.string)
 
 
 
@@ -94,26 +86,26 @@ toState entries =
 addEntry : Entry -> State -> State
 addEntry entry state =
   case entry of
-    Expr content ->
+    Expr input value tipe ->
       { state
-          | content = content :: state.content
+          | entries = entry :: state.entries
       }
 
-    Decl name content ->
+    Decl name input value tipe ->
       { state
-          | content = content :: state.content
-          , decls = Dict.insert name content.input state.decls
+          | entries = entry :: state.entries
+          , decls = Dict.insert name input state.decls
       }
 
-    Type name content ->
+    Type name input ->
       { state
-          | content = content :: state.content
-          , types = Dict.insert name content.input state.types
+          | entries = entry :: state.entries
+          , types = Dict.insert name input state.types
       }
 
-    Import name content ->
+    Import name input ->
       { state
-          | content = content :: state.content
-          , imports = Dict.insert name content.input state.imports
+          | entries = entry :: state.entries
+          , imports = Dict.insert name input state.imports
       }
 

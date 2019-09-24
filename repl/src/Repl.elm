@@ -134,26 +134,37 @@ init value =
     Nothing ->
       ( InvalidFlags, Cmd.none )
 
-    Just flags ->
+    Just { id, types, state } ->
       ( ValidFlags
-          { imports = flags.state.imports
-          , types = flags.state.types
-          , decls = flags.state.decls
-          , history = List.map toEntry flags.state.content
+          { imports = state.imports
+          , types = state.types
+          , decls = state.decls
+          , history = List.map toHistoryEntry state.entries
           , activity = Input [] "" ""
-          , id = "elm-repl-" ++ String.fromInt flags.id
+          , id = "elm-repl-" ++ String.fromInt id
           , focus = Inactive
           , visibility = E.Visible
-          , showTypes = flags.types
-          , initialState = flags.state
+          , showTypes = types
+          , initialState = state
           }
       , Cmd.none
       )
 
 
-toEntry : Flags.Content -> Entry
-toEntry content =
-  Entry (String.split "\n" content.input) (GoodWork content.value content.type_)
+toHistoryEntry : Flags.Entry -> Entry
+toHistoryEntry entry =
+  case entry of
+    Flags.Expr input value tipe ->
+      Entry (String.split "\n" input) (GoodWork value tipe)
+
+    Flags.Decl _ input value tipe ->
+      Entry (String.split "\n" input) (GoodWork value tipe)
+
+    Flags.Type _ input ->
+      Entry (String.split "\n" input) GoodEntry
+
+    Flags.Import _ input ->
+      Entry (String.split "\n" input) GoodEntry
 
 
 
@@ -292,13 +303,13 @@ updateState msg state =
 
             Reset ->
               let
-                { imports, types, decls, content } = state.initialState
+                { imports, types, decls, entries } = state.initialState
               in
               ( { state
                     | imports = imports
                     , types = types
                     , decls = decls
-                    , history = List.map toEntry content
+                    , history = List.map toHistoryEntry entries
                     , activity = Input [] "" ""
                 }
               , Cmd.none
