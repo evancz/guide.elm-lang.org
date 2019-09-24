@@ -22,18 +22,29 @@ This can be handy in two main scenarios: partial functions and optional fields.
 
 ## Partial Functions
 
-Sometimes you want a function that gives an answer for some inputs, but not others. Many people run into this with [`String.toFloat`][toFloat] when trying to convert user input into numbers. Open up `elm repl` to see it in action:
+Sometimes you want a function that gives an answer for some inputs, but not others. Many people run into this with [`String.toFloat`][toFloat] when trying to convert user input into numbers. Let's see it in action:
 
-```elm
-> String.toFloat
-<function> : String -> Maybe Float
+{% replWithTypes %}
+[
+  {
+    "input": "String.toFloat",
+    "value": "\u001b[36m<function>\u001b[0m",
+    "type_": "String -> Maybe Float"
+  },
+  {
+    "input": "String.toFloat \"3.1415\"",
+    "value": "\u001b[96mJust\u001b[0m \u001b[95m3.1415\u001b[0m",
+    "type_": "Maybe Float"
+  },
+  {
+    "input": "String.toFloat \"abc\"",
+    "value": "\u001b[96mNothing\u001b[0m",
+    "type_": "Maybe Float"
+  }
+]
+{% endreplWithTypes %}
 
-> String.toFloat "3.1415"
-Just 3.1415 : Maybe Float
-
-> String.toFloat "abc"
-Nothing : Maybe Float
-```
+Try calling `String.toFloat` with other strings to see what happens ⬆️
 
 Not all strings make sense as numbers, so this function models that explicitly. Can a string be turned into a float? Maybe! From there we can pattern match on the resulting data and continue as appropriate.
 
