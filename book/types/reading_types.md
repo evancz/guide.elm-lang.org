@@ -191,12 +191,12 @@ We just want the length, so it does not matter what is in the list. So the type 
 		"type_": "List a -> List a"
 	},
 	{
-		"input": "List.length [ \"a\", \"b\", \"c\" ]",
+		"input": "List.reverse [ \"a\", \"b\", \"c\" ]",
 		"value": "[\u001b[93m\"c\"\u001b[0m,\u001b[93m\"b\"\u001b[0m,\u001b[93m\"a\"\u001b[0m]",
 		"type_": "List String"
 	},
 	{
-		"input": "List.length [ True, False ]",
+		"input": "List.reverse [ True, False ]",
 		"value": "[\u001b[96mFalse\u001b[0m,\u001b[96mTrue\u001b[0m]",
 		"type_": "List Bool"
 	}
