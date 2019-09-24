@@ -6,6 +6,7 @@ import Browser.Events as E
 import Dict exposing (Dict)
 import Elm.Error as Error
 import Error
+import Flags
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -70,7 +71,13 @@ getEvalOutcome toMsg value =
 -- MODEL
 
 
-type alias Model =
+type Model
+  = InvalidFlags
+  | ValidFlags State
+
+
+
+type alias State =
   { imports : Dict String String
   , types : Dict String String
   , decls : Dict String String
@@ -82,7 +89,7 @@ type alias Model =
   , visibility : E.Visibility
   --
   , showTypes : Bool
-  , initialHistory : List Entry
+  , initialState : Flags.State
   }
 
 
@@ -97,43 +104,6 @@ type Focus
 
 
 type Cursor = On | Off
-
-
-
--- INIT
-
-
-type alias Flags =
-  { id : Int
-  , types : Bool
-  , entries : List { input : String, value : String, type_ : String }
-  }
-
-
-init : Flags -> (Model, Cmd Msg)
-init flags =
-  let
-    initialHistory =
-      List.map toEntry flags.entries
-
-    toEntry {input,value,type_} =
-      Entry (String.split "\n" input) (GoodWork value type_)
-  in
-  ( { imports = Dict.empty
-    , types = Dict.empty
-    , decls = Dict.empty
-    --
-    , history = initialHistory
-    , activity = Input [] "" ""
-    , id = "elm-repl-" ++ String.fromInt flags.id
-    , focus = Inactive
-    , visibility = E.Visible
-    --
-    , showTypes = flags.types
-    , initialHistory = initialHistory
-    }
-  , Cmd.none
-  )
 
 
 
@@ -155,6 +125,38 @@ type Answer
 
 
 
+-- INIT
+
+
+init : D.Value -> ( Model, Cmd Msg )
+init value =
+  case Flags.decode value of
+    Nothing ->
+      ( InvalidFlags, Cmd.none )
+
+    Just flags ->
+      ( ValidFlags
+          { imports = flags.state.imports
+          , types = flags.state.types
+          , decls = flags.state.decls
+          , history = List.map toEntry flags.state.content
+          , activity = Input [] "" ""
+          , id = "elm-repl-" ++ String.fromInt flags.id
+          , focus = Inactive
+          , visibility = E.Visible
+          , showTypes = flags.types
+          , initialState = flags.state
+          }
+      , Cmd.none
+      )
+
+
+toEntry : Flags.Content -> Entry
+toEntry content =
+  Entry (String.split "\n" content.input) (GoodWork content.value content.type_)
+
+
+
 -- UPDATE
 
 
@@ -172,62 +174,75 @@ type Msg
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
+  case model of
+    InvalidFlags ->
+      ( InvalidFlags, Cmd.none )
+
+    ValidFlags state ->
+      let
+        (newState, cmds) = updateState msg state
+      in
+      ( ValidFlags newState, cmds )
+
+
+updateState : Msg -> State -> (State, Cmd Msg)
+updateState msg state =
   case msg of
     NoOp ->
-      ( model, Cmd.none )
+      ( state, Cmd.none )
 
     Blur ->
-      ( { model | focus = Inactive }
+      ( { state | focus = Inactive }
       , Cmd.none
       )
 
     Focus ->
-      ( { model | focus = Active On }
-      , Task.attempt (\_ -> NoOp) (Dom.focus model.id)
+      ( { state | focus = Active On }
+      , Task.attempt (\_ -> NoOp) (Dom.focus state.id)
       )
 
     VisibilityChange visibility ->
-      ( { model | visibility = visibility }
+      ( { state | visibility = visibility }
       , Cmd.none
       )
 
     Blink ->
-      ( { model | focus = blink model.focus }
+      ( { state | focus = blink state.focus }
       , Cmd.none
       )
 
 
     Tick ->
-      case model.activity of
+      case state.activity of
         Input _ _ _ ->
-          ( model, Cmd.none )
+          ( state, Cmd.none )
 
         Waiting input n ->
-          ( { model | activity = Waiting input (n + 1) }
+          ( { state | activity = Waiting input (n + 1) }
           , Cmd.none
           )
 
     Press key alt ctrl meta ->
-      case model.activity of
+      case state.activity of
         Waiting _ _ ->
-          ( model, Cmd.none )
+          ( state, Cmd.none )
 
         Input lines before after ->
           if alt && not ctrl && not meta then
             let
               (newBefore, newAfter) = processAltKey key before after
             in
-            ( { model | activity = Input lines newBefore newAfter }
+            ( { state | activity = Input lines newBefore newAfter }
             , Cmd.none
             )
 
           else if alt || ctrl || meta then
-            ( model, Cmd.none )
+            ( state, Cmd.none )
 
           else
             case processKey key before after of
               Edit newBefore newAfter ->
-                ( { model | activity = Input lines newBefore newAfter }
+                ( { state | activity = Input lines newBefore newAfter }
                 , Cmd.none
                 )
 
@@ -236,15 +251,15 @@ update msg model =
                   waitingLines =
                     lines ++ [before ++ after]
                 in
-                ( { model | activity = Waiting waitingLines 0 }
-                , checkEntry model waitingLines
+                ( { state | activity = Waiting waitingLines 0 }
+                , checkEntry state waitingLines
                 )
 
     GotWorkerResponse lines result ->
       case result of
         Err err ->
-          ( { model
-                | history = model.history ++ [ Entry lines (BadRequest err) ]
+          ( { state
+                | history = state.history ++ [ Entry lines (BadRequest err) ]
                 , activity = Input [] "" ""
             }
           , Cmd.none
@@ -253,73 +268,79 @@ update msg model =
         Ok outcome ->
           case outcome of
             NewImport name ->
-              ( { model
-                    | imports = Dict.insert name (String.join "\n" lines ++ "\n") model.imports
-                    , history = model.history ++ [ Entry lines GoodEntry ]
+              ( { state
+                    | imports = Dict.insert name (String.join "\n" lines ++ "\n") state.imports
+                    , history = state.history ++ [ Entry lines GoodEntry ]
                     , activity = Input [] "" ""
                 }
               , Cmd.none
               )
 
             NewType name ->
-              ( { model
-                    | types = Dict.insert name (String.join "\n" lines ++ "\n") model.types
-                    , history = model.history ++ [ Entry lines GoodEntry ]
+              ( { state
+                    | types = Dict.insert name (String.join "\n" lines ++ "\n") state.types
+                    , history = state.history ++ [ Entry lines GoodEntry ]
                     , activity = Input [] "" ""
                 }
               , Cmd.none
               )
 
             NewWork javascript ->
-              ( model
+              ( state
               , evaluate javascript
               )
 
             Reset ->
-              ( { model
-                    | history = model.initialHistory
+              let
+                { imports, types, decls, content } = state.initialState
+              in
+              ( { state
+                    | imports = imports
+                    , types = types
+                    , decls = decls
+                    , history = List.map toEntry content
                     , activity = Input [] "" ""
                 }
               , Cmd.none
               )
 
             Skip ->
-              ( { model
-                    | history = model.history ++ [ Entry lines GoodEntry ]
+              ( { state
+                    | history = state.history ++ [ Entry lines GoodEntry ]
                     , activity = Input [] "" ""
                 }
               , Cmd.none
               )
 
             Indent ->
-              ( { model | activity = Input lines "  " "" }
+              ( { state | activity = Input lines "  " "" }
               , Cmd.none
               )
 
             DefStart name ->
-              ( { model | activity = Input lines (name ++ " ") "" }
+              ( { state | activity = Input lines (name ++ " ") "" }
               , Cmd.none
               )
 
             NoPorts ->
-              ( { model
-                    | history = model.history ++ [ Entry lines (BadSituation "Error: cannot define ports here.") ]
+              ( { state
+                    | history = state.history ++ [ Entry lines (BadSituation "Error: cannot define ports here.") ]
                     , activity = Input [] "" ""
                 }
               , Cmd.none
               )
 
             InvalidCommand ->
-              ( { model
-                    | history = model.history ++ [ Entry lines (BadSituation "Error: unrecognized command.") ]
+              ( { state
+                    | history = state.history ++ [ Entry lines (BadSituation "Error: unrecognized command.") ]
                     , activity = Input [] "" ""
                 }
               , Cmd.none
               )
 
             Failure error ->
-              ( { model
-                    | history = model.history ++ [ Entry lines (BadEntry error) ]
+              ( { state
+                    | history = state.history ++ [ Entry lines (BadEntry error) ]
                     , activity = Input [] "" ""
                 }
               , Cmd.none
@@ -327,12 +348,12 @@ update msg model =
 
     GotEvalOutcome outcome ->
       let
-        lines = getLines model.activity
+        lines = getLines state.activity
       in
       case outcome of
         Throw message ->
-          ( { model
-                | history = model.history ++ [ Entry lines (BadSituation message) ]
+          ( { state
+                | history = state.history ++ [ Entry lines (BadSituation message) ]
                 , activity = Input [] "" ""
             }
           , Cmd.none
@@ -343,14 +364,14 @@ update msg model =
             newDecls =
               case maybeName of
                 Nothing ->
-                  model.decls
+                  state.decls
 
                 Just name ->
-                  Dict.insert name (String.join "\n" lines ++ "\n") model.decls
+                  Dict.insert name (String.join "\n" lines ++ "\n") state.decls
           in
-          ( { model
+          ( { state
                 | decls = newDecls
-                , history = model.history ++ [ Entry lines (GoodWork ansiValue tipe) ]
+                , history = state.history ++ [ Entry lines (GoodWork ansiValue tipe) ]
                 , activity = Input [] "" ""
             }
           , Cmd.none
@@ -470,16 +491,16 @@ findNextBoundary skipped char remaining =
 -- CHECK ENTRY
 
 
-checkEntry : Model -> List String -> Cmd Msg
-checkEntry model lines =
+checkEntry : State -> List String -> Cmd Msg
+checkEntry state lines =
   Http.post
     { url = "https://worker.elm-lang.org/repl"
     , body =
         Http.jsonBody <|
           E.object
-            [ ( "imports", E.dict identity E.string model.imports )
-            , ( "types", E.dict identity E.string model.types )
-            , ( "decls", E.dict identity E.string model.decls )
+            [ ( "imports", E.dict identity E.string state.imports )
+            , ( "types", E.dict identity E.string state.types )
+            , ( "decls", E.dict identity E.string state.decls )
             , ( "entry", E.string (String.join "\n" lines) )
             ]
     , expect =
@@ -521,18 +542,18 @@ toOutcome response =
             ["def-start",name]  -> Ok (DefStart name)
             ["no-ports"]        -> Ok NoPorts
             ["invalid-command"] -> Ok InvalidCommand
-            _                   -> Err (Http.BadBody "corrupted HTTP response")
+            _                   -> Err (Http.BadBody "corrupt HTTP response")
 
         Just "application/json" ->
           case D.decodeString Error.decoder body of
             Ok  e -> Ok (Failure e)
-            Err _ -> Err ()
+            Err _ -> Err (Http.BadBody "corrupt HTTP response")
 
         Just "application/javascript" ->
           Ok (NewWork body)
 
         _ ->
-          Err (Http.BadBody "corrupted HTTP response")
+          Err (Http.BadBody "corrupt HTTP response")
 
 
 
@@ -541,21 +562,26 @@ toOutcome response =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.batch
-    [ E.onVisibilityChange VisibilityChange
-    , outcomes (getEvalOutcome GotEvalOutcome)
-    , case model.focus of
-        Inactive -> Sub.none
-        Active _ -> Time.every 500 (\_ -> Blink)
-    , case model.activity of
-        Input _ _ _ ->
-          Sub.none
+  case model of
+    InvalidFlags ->
+      Sub.none
 
-        Waiting _ _ ->
-          case model.visibility of
-            E.Visible -> Time.every delay (\_ -> Tick)
-            E.Hidden -> Sub.none
-    ]
+    ValidFlags state ->
+      Sub.batch
+        [ E.onVisibilityChange VisibilityChange
+        , outcomes (getEvalOutcome GotEvalOutcome)
+        , case state.focus of
+            Inactive -> Sub.none
+            Active _ -> Time.every 500 (\_ -> Blink)
+        , case state.activity of
+            Input _ _ _ ->
+              Sub.none
+
+            Waiting _ _ ->
+              case state.visibility of
+                E.Visible -> Time.every delay (\_ -> Tick)
+                E.Hidden -> Sub.none
+        ]
 
 
 delay : Float
@@ -572,17 +598,25 @@ view model =
   div
     [ style "background" "black"
     , style "color" "white"
-    , style "width" "80ch"
+    , style "width" "100%"
     , style "padding" "2ch"
     , style "margin" "0 0 1.275em 0"
     , style "fontFamily" "monospace"
     , style "whiteSpace" "pre"
     , onClick Focus
     ]
-    [ lazy2 viewHistory model.showTypes model.history
-    , viewActivity model.activity model.focus
-    , lazy viewInputCatcher model.id
-    ]
+    (
+      case model of
+        InvalidFlags ->
+          [ span [ style "color" "rgb(252,57,31)" ] [ text "INVALID FLAGS" ]
+          ]
+
+        ValidFlags state ->
+          [ lazy2 viewHistory state.showTypes state.history
+          , viewActivity state.activity state.focus
+          , lazy viewInputCatcher state.id
+          ]
+    )
 
 
 
@@ -752,7 +786,7 @@ viewBadRequest : Http.Error -> List (Html msg)
 viewBadRequest err =
   let
     viewProblem error details =
-      [ span [ style "color" "rgb(194,54,33)" ] [ text ("Error: " ++ message) ]
+      [ span [ style "color" "rgb(194,54,33)" ] [ text ("Error: " ++ error) ]
       , text ("\n" ++ details)
       ]
   in
@@ -773,8 +807,8 @@ viewBadRequest err =
       viewProblem ("problem talking to server (" ++ String.fromInt code ++ ")")
         "Please report this to <https://github.com/evancz/guide.elm-lang.org/issues>"
 
-    Http.BadBody _ ->
-      viewProblem "unexpected server response"
+    Http.BadBody message ->
+      viewProblem message
         "Please report this to <https://github.com/evancz/guide.elm-lang.org/issues>"
 
 
