@@ -147,7 +147,7 @@ type alias Entry =
 
 
 type Answer
-  = BadRequest
+  = BadRequest Http.Error
   | BadEntry Error.Error
   | BadSituation String
   | GoodEntry
@@ -166,7 +166,7 @@ type Msg
   | Blink
   | Tick
   | Press String Bool Bool Bool
-  | GotWorkerResponse (List String) (Result () Outcome)
+  | GotWorkerResponse (List String) (Result Http.Error Outcome)
   | GotEvalOutcome EvalOutcome
 
 
@@ -242,9 +242,9 @@ update msg model =
 
     GotWorkerResponse lines result ->
       case result of
-        Err () ->
+        Err err ->
           ( { model
-                | history = model.history ++ [ Entry lines BadRequest ]
+                | history = model.history ++ [ Entry lines (BadRequest err) ]
                 , activity = Input [] "" ""
             }
           , Cmd.none
@@ -502,13 +502,13 @@ type Outcome
   | Failure Error.Error
 
 
-toOutcome : Http.Response String -> Result () Outcome
+toOutcome : Http.Response String -> Result Http.Error Outcome
 toOutcome response =
   case response of
-    Http.BadUrl_ _      -> Err ()
-    Http.Timeout_       -> Err ()
-    Http.NetworkError_  -> Err ()
-    Http.BadStatus_ _ _ -> Err ()
+    Http.BadUrl_ url    -> Err <| Http.BadUrl url
+    Http.Timeout_       -> Err <| Http.Timeout
+    Http.NetworkError_  -> Err <| Http.NetworkError
+    Http.BadStatus_ m _ -> Err <| Http.BadStatus m.statusCode
     Http.GoodStatus_ metadata body ->
       case Dict.get "content-type" metadata.headers of
         Just "text/plain" ->
@@ -521,7 +521,7 @@ toOutcome response =
             ["def-start",name]  -> Ok (DefStart name)
             ["no-ports"]        -> Ok NoPorts
             ["invalid-command"] -> Ok InvalidCommand
-            _                   -> Err ()
+            _                   -> Err (Http.BadBody "corrupted HTTP response")
 
         Just "application/json" ->
           case D.decodeString Error.decoder body of
@@ -532,7 +532,7 @@ toOutcome response =
           Ok (NewWork body)
 
         _ ->
-          Err ()
+          Err (Http.BadBody "corrupted HTTP response")
 
 
 
@@ -676,8 +676,8 @@ viewEntry showTypes entry =
     text ("> " ++ String.join "\n| " entry.lines ++ "\n")
     ::
     case entry.answer of
-      BadRequest ->
-        [ text "<bad request>\n\n" ]
+      BadRequest err ->
+        viewBadRequest err
 
       BadEntry error ->
         Error.view error
@@ -746,6 +746,36 @@ viewAnsiChunk chunk =
     "97m" -> viewAnsi "rgb(233,235,235)"
     _ ->
       text (if String.startsWith "0m" chunk then String.dropLeft 2 chunk else chunk)
+
+
+viewBadRequest : Http.Error -> List (Html msg)
+viewBadRequest err =
+  let
+    viewProblem error details =
+      [ span [ style "color" "rgb(194,54,33)" ] [ text ("Error: " ++ message) ]
+      , text ("\n" ++ details)
+      ]
+  in
+  case err of
+    Http.BadUrl _ ->
+      viewProblem "unexpected server request"
+        "Please report this to <https://github.com/evancz/guide.elm-lang.org/issues>"
+
+    Http.Timeout ->
+      viewProblem "server took too long"
+        "Try again when your internet connection is more reliable?"
+
+    Http.NetworkError ->
+      viewProblem "unable to talk to server"
+        "Try again when your internet connection is more reliable?"
+
+    Http.BadStatus code ->
+      viewProblem ("problem talking to server (" ++ String.fromInt code ++ ")")
+        "Please report this to <https://github.com/evancz/guide.elm-lang.org/issues>"
+
+    Http.BadBody _ ->
+      viewProblem "unexpected server response"
+        "Please report this to <https://github.com/evancz/guide.elm-lang.org/issues>"
 
 
 
