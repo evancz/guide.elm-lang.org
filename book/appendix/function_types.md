@@ -27,12 +27,12 @@ It is a function that takes an `Int` and then produces _another_ function. So if
 [
 	{
 		"input": "String.repeat",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "Int -> String -> String"
 	},
 	{
 		"input": "String.repeat 4",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "String -> String"
 	},
 	{
@@ -42,12 +42,12 @@ It is a function that takes an `Int` and then produces _another_ function. So if
 	},
 	{
 		"input": "String.join",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "String -> List String -> String"
 	},
 	{
 		"input": "String.join \"|\"",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "List String -> String"
 	},
 	{

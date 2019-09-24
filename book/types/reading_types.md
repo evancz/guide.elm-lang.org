@@ -69,7 +69,7 @@ Let's see the type of some functions:
 [
 	{
 		"input": "String.length",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "String -> Int"
 	}
 ]
@@ -101,7 +101,7 @@ You will find that a `String -> Int` function *must* get a `String` argument!
 [
 	{
 		"input": "String.repeat",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "Int -> String -> String"
 	}
 ]
@@ -153,7 +153,7 @@ As you look through the functions in [`elm/core`][core], you will see some type 
 [
 	{
 		"input": "List.length",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "List a -> Int"
 	}
 ]
@@ -187,7 +187,7 @@ We just want the length, so it does not matter what is in the list. So the type 
 [
 	{
 		"input": "List.reverse",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "List a -> List a"
 	},
 	{
@@ -221,7 +221,7 @@ There are a few “constrained” type variables. The most common example is pro
 	{
 		"add-decl": "negate",
 		"input": "negate",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "number -> number"
 	}
 ]

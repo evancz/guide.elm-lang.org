@@ -61,7 +61,7 @@ For example, here is a `greet` function that takes in a name and says hello:
 	{
 		"add-decl": "greet",
 		"input": "greet name =\n  \"Hello \" ++ name ++ \"!\"\n",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "String -> String"
 	},
 	{
@@ -88,7 +88,7 @@ Okay, now that greetings are out of the way, how about an `madlib` function that
 	{
 		"add-decl": "madlib",
 		"input": "madlib animal adjective =\n  \"The ostentatious \" ++ animal ++ \" wears \" ++ adjective ++ \" shorts.\"\n",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "String -> String -> String"
 	},
 	{
@@ -130,7 +130,7 @@ Let's make a new `greet` function that is appropriately respectful to president 
 	{
 		"add-decl": "greet",
 		"input": "greet name =\n  if name == \"Abraham Lincoln\" then\n    \"Greetings Mr. President!\"\n  else\n    \"Hey!\"\n",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "String -> String"
 	},
 	{
@@ -194,7 +194,7 @@ Lists can hold many values. Those values must all have the same type. Here are a
 	{
 		"add-decl": "increment",
 		"input": "increment n =\n  n + 1\n",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "number -> number"
 	},
 	{
@@ -219,7 +219,7 @@ Tuples are another useful data structure. A tuple can hold two or three values, 
 	{
 		"add-decl": "isGoodName",
 		"input": "isGoodName name =\n  if String.length name <= 20 then\n    (True, \"name accepted!\")\n  else\n    (False, \"name was too long; please limit it to 20 characters\"\n",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "String -> ( Bool, String )"
 	},
 	{
@@ -316,7 +316,7 @@ So a function to update ages might look like this:
 	{
 		"add-decl": "celebrateBirthday",
 		"input": "celebrateBirthday person =\n  { person | age = person.age + 1 }\n",
-		"value": "\u001b[94m<function>\u001b[0m",
+		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "{ a | age : number } -> { a | age : number }"
 	},
 	{
