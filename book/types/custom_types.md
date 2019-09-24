@@ -43,18 +43,42 @@ kate95 = Visitor "kate95"
 
 The data is attached directly to the variant, so there is no need for the record anymore.
 
-Another benefit of this approach is that each variant can have different associated data. Say that `Regular` users gave their age when they signed up. There is no nice way to capture that with records, but when you define your own custom type it is no problem. We add some associated data to the `Regular` variant:
+Another benefit of this approach is that each variant can have different associated data. Say that `Regular` users gave their age when they signed up. There is no nice way to capture that with records, but when you define your own custom type it is no problem. Let's add some associated data to the `Regular` variant in an interactive example:
 
-```elm
-type User
-  = Regular String Int
-  | Visitor String
+{% replWithTypes %}
+[
+  {
+    "add-type": "User",
+    "input": "type User\n  = Regular String Int\n  | Visitor String\n"
+  },
+  {
+    "input": "Regular",
+    "value": "\u001b[36m<function>\u001b[0m",
+    "type_": "String -> Int -> User"
+  },
+  {
+    "input": "Visitor",
+    "value": "\u001b[36m<function>\u001b[0m",
+    "type_": "String -> User"
+  },
+  {
+    "add-decl": "thomas",
+    "input": "thomas = Regular \"Thomas\" 44",
+    "value": "\u001b[96mRegular\u001b[0m \u001b[93m\"Thomas\"\u001b[0m \u001b[95m44\u001b[0m",
+    "type_": "User"
+  },
+  {
+    "add-decl": "kate95",
+    "input": "kate95 = Visitor \"kate95\"",
+    "value": "\u001b[96mVisitor\u001b[0m \u001b[93m\"Thomas\"\u001b[0m",
+    "type_": "User"
+  }
+]
+{% endreplWithTypes %}
 
-thomas = Regular "Thomas" 44
-kate95 = Visitor "kate95"
-```
+Try defining a `Regular` visitor with a name and age ⬆️
 
-The different variants of a type can diverge quite dramatically. For example, maybe we add location for `Regular` users so we can suggest regional chat rooms. Add more associated data! Or maybe we want to have anonymous users. Add a third variant called `Anonymous`. Maybe we end up with:
+We only added an age, but variants of a type can diverge quite dramatically. For example, maybe we want to add location for `Regular` users so we can suggest regional chat rooms. Add more associated data! Or maybe we want to have anonymous users. Add a third variant called `Anonymous`. Maybe we end up with:
 
 ```elm
 type User
