@@ -62,14 +62,12 @@ Another benefit of this approach is that each variant can have different associa
     "type_": "String -> User"
   },
   {
-    "add-decl": "thomas",
-    "input": "thomas = Regular \"Thomas\" 44",
+    "input": "Regular \"Thomas\" 44",
     "value": "\u001b[96mRegular\u001b[0m \u001b[93m\"Thomas\"\u001b[0m \u001b[95m44\u001b[0m",
     "type_": "User"
   },
   {
-    "add-decl": "kate95",
-    "input": "kate95 = Visitor \"kate95\"",
+    "input": "Visitor \"kate95\"",
     "value": "\u001b[96mVisitor\u001b[0m \u001b[93m\"Thomas\"\u001b[0m",
     "type_": "User"
   }
