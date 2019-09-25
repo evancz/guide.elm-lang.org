@@ -178,6 +178,7 @@ type Msg
   | VisibilityChange E.Visibility
   | Blink
   | Tick
+  | Reset
   | Press String Bool Bool Bool
   | GotWorkerResponse (List String) (Result Http.Error Outcome)
   | GotEvalOutcome EvalOutcome
@@ -232,6 +233,20 @@ updateState msg state =
           ( { state | activity = Waiting input (n + 1) }
           , Cmd.none
           )
+
+    Reset ->
+      let
+        { imports, types, decls, entries } = state.initialState
+      in
+      ( { state
+            | imports = imports
+            , types = types
+            , decls = decls
+            , history = List.map toHistoryEntry entries
+            , activity = Input [] "" ""
+        }
+      , Cmd.none
+      )
 
     Press key alt ctrl meta ->
       case state.activity of
@@ -299,20 +314,6 @@ updateState msg state =
             NewWork javascript ->
               ( state
               , evaluate javascript
-              )
-
-            Reset ->
-              let
-                { imports, types, decls, entries } = state.initialState
-              in
-              ( { state
-                    | imports = imports
-                    , types = types
-                    , decls = decls
-                    , history = List.map toHistoryEntry entries
-                    , activity = Input [] "" ""
-                }
-              , Cmd.none
               )
 
             Skip ->
@@ -524,7 +525,6 @@ type Outcome
   | NewType String
   | NewWork String
   --
-  | Reset
   | Skip
   | Indent
   | DefStart String
@@ -547,7 +547,6 @@ toOutcome response =
           case String.split ":" body of
             ["add-import",name] -> Ok (NewImport name)
             ["add-type",name]   -> Ok (NewType name)
-            ["reset"]           -> Ok Reset
             ["skip"]            -> Ok Skip
             ["indent"]          -> Ok Indent
             ["def-start",name]  -> Ok (DefStart name)
@@ -626,6 +625,7 @@ view model =
           [ lazy2 viewHistory state.showTypes state.history
           , viewActivity state.activity state.focus
           , lazy viewInputCatcher state.id
+          , lazy2 viewReset state.initialState.entries state.history
           ]
     )
 
@@ -851,3 +851,22 @@ onKeyDown =
       (D.field "ctrlKey" D.bool)
       (D.field "metaKey" D.bool)
 
+
+
+-- VIEW RESET
+
+
+viewReset : List Flags.Entry -> List Entry -> Html Msg
+viewReset initialEntries currentEntries =
+  button
+    [ style "display" (if List.length initialEntries == List.length currentEntries then "none" else "initial")
+    , style "background" "rgb(73,46,225)"
+    , style "border" "none"
+    , style "padding" "4px 8px"
+    , style "font-size" "small"
+    , style "color" "white"
+    , style "float" "right"
+    , onClick Reset
+    ]
+    [ text "Reset"
+    ]
