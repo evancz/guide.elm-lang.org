@@ -798,7 +798,7 @@ viewBadRequest err =
   let
     viewProblem error details =
       [ span [ style "color" "rgb(194,54,33)" ] [ text ("Error: " ++ error) ]
-      , text ("\n" ++ details)
+      , text ("\n" ++ details ++ "\n\n")
       ]
   in
   case err of
