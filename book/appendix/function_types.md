@@ -21,7 +21,7 @@ It starts to become clearer when you see all the parentheses. For example, it is
 String.repeat : Int -> (String -> String)
 ```
 
-It is a function that takes an `Int` and then produces _another_ function. So if we go into `elm repl` we can see this in action:
+It is a function that takes an `Int` and then produces _another_ function. Let's see this in action:
 
 {% replWithTypes %}
 [

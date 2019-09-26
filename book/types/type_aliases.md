@@ -42,7 +42,7 @@ It is much nicer to read with the type alias, and this is only for a record with
 
 ## Record Constructors
 
-When you create a type alias specifically for a record, it also generates a **record constructor**. So if we define a `User` type alias in `elm repl` we could start building records like this:
+When you create a type alias specifically for a record, it also generates a **record constructor**. So if we define a `User` type alias, we can start building records like this:
 
 {% replWithTypes %}
 [
