@@ -94,18 +94,24 @@ addEntry entry state =
     Decl name input value tipe ->
       { state
           | entries = entry :: state.entries
-          , decls = Dict.insert name input state.decls
+          , decls = Dict.insert name (checkNewline input) state.decls
       }
 
     Type name input ->
       { state
           | entries = entry :: state.entries
-          , types = Dict.insert name input state.types
+          , types = Dict.insert name (checkNewline input) state.types
       }
 
     Import name input ->
       { state
           | entries = entry :: state.entries
-          , imports = Dict.insert name input state.imports
+          , imports = Dict.insert name (checkNewline input) state.imports
       }
 
+
+checkNewline : String -> String
+checkNewline input =
+  if String.endsWith "\n" input
+  then input
+  else input ++ "\n"
