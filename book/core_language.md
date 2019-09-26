@@ -257,7 +257,7 @@ Here is a record that represents British economist John A. Hobson:
 
 We defined a record with three **fields** containing information about John's name and age.
 
-Try accessing other fields like `john.age`.
+Try accessing other fields like `john.age` ⬆️
 
 You can also access record fields by using a "field access function" like this:
 
