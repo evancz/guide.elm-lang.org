@@ -243,12 +243,12 @@ Here is a record that represents British economist John A. Hobson:
 [
 	{
 		"add-decl": "john",
-		"input": "john =\n  { firstName = \"John\"\n  , lastName = \"Hobson\"\n  , age = 81\n  }\n",
-		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
-		"type_": "{ age : number, firstName : String, lastName : String }"
+		"input": "john =\n  { first = \"John\"\n  , last = \"Hobson\"\n  , age = 81\n  }\n",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirst\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlast\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, first : String, last : String }"
 	},
 	{
-		"input": "john.lastName",
+		"input": "john.last",
 		"value": "\u001b[93m\"Hobson\"\u001b[0m",
 		"type_": "String"
 	}
@@ -265,17 +265,17 @@ You can also access record fields by using a "field access function" like this:
 [
 	{
 		"add-decl": "john",
-		"input": "john = { firstName = \"John\", lastName = \"Hobson\", age = 81 }",
-		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
-		"type_": "{ age : number, firstName : String, lastName : String }"
+		"input": "john = { first = \"John\", last = \"Hobson\", age = 81 }",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirst\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlast\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, first : String, last : String }"
 	},
 	{
-		"input": ".lastName john",
+		"input": ".last john",
 		"value": "\u001b[93m\"Hobson\"\u001b[0m",
 		"type_": "String"
 	},
 	{
-		"input": "List.map .lastName [john,john,john]",
+		"input": "List.map .last [john,john,john]",
 		"value": "[\u001b[93m\"Hobson\"\u001b[0m,\u001b[93m\"Hobson\"\u001b[0m,\u001b[93m\"Hobson\"\u001b[0m]",
 		"type_": "List String"
 	}
@@ -288,19 +288,19 @@ It is often useful to **update** values in a record:
 [
 	{
 		"add-decl": "john",
-		"input": "john = { firstName = \"John\", lastName = \"Hobson\", age = 81 }",
-		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
-		"type_": "{ age : number, firstName : String, lastName : String }"
+		"input": "john = { first = \"John\", last = \"Hobson\", age = 81 }",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirst\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlast\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, first : String, last : String }"
 	},
 	{
-		"input": "{ john | lastName = \"Adams\" }",
-		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Adams\"\u001b[0m }",
-		"type_": "{ age : number, firstName : String, lastName : String }"
+		"input": "{ john | last = \"Adams\" }",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirst\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlast\u001b[0m = \u001b[93m\"Adams\"\u001b[0m }",
+		"type_": "{ age : number, first : String, last : String }"
 	},
 	{
 		"input": "{ john | age = 22 }",
-		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m22\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
-		"type_": "{ age : number, firstName : String, lastName : String }"
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m22\u001b[0m, \u001b[37mfirst\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlast\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, first : String, last : String }"
 	}
 ]
 {% endrepl %}
@@ -321,14 +321,14 @@ So a function to update ages might look like this:
 	},
 	{
 		"add-decl": "john",
-		"input": "john = { firstName = \"John\", lastName = \"Hobson\", age = 81 }",
-		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
-		"type_": "{ age : number, firstName : String, lastName : String }"
+		"input": "john = { first = \"John\", last = \"Hobson\", age = 81 }",
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m81\u001b[0m, \u001b[37mfirst\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlast\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, first : String, last : String }"
 	},
 	{
 		"input": "celebrateBirthday john",
-		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m82\u001b[0m, \u001b[37mfirstName\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlastName\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
-		"type_": "{ age : number, firstName : String, lastName : String }"
+		"value": "{ \u001b[37mage\u001b[0m = \u001b[95m82\u001b[0m, \u001b[37mfirst\u001b[0m = \u001b[93m\"John\"\u001b[0m, \u001b[37mlast\u001b[0m = \u001b[93m\"Hobson\"\u001b[0m }",
+		"type_": "{ age : number, first : String, last : String }"
 	}
 ]
 {% endrepl %}
