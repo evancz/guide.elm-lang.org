@@ -218,7 +218,7 @@ Tuples are another useful data structure. A tuple can hold two or three values, 
 [
 	{
 		"add-decl": "isGoodName",
-		"input": "isGoodName name =\n  if String.length name <= 20 then\n    (True, \"name accepted!\")\n  else\n    (False, \"name was too long; please limit it to 20 characters\"\n",
+		"input": "isGoodName name =\n  if String.length name <= 20 then\n    (True, \"name accepted!\")\n  else\n    (False, \"name was too long; please limit it to 20 characters\")\n",
 		"value": "\u001b[36m<function>\u001b[0m",
 		"type_": "String -> ( Bool, String )"
 	},
