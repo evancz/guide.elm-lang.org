@@ -1,23 +1,21 @@
 # An Introduction to Elm
 
-**Elm is a functional language that compiles to JavaScript.** It competes with projects like React as a tool for creating websites and web apps. Elm has a very strong emphasis on simplicity, ease-of-use, and quality tooling.
+**Elm is a functional language that compiles to JavaScript.** It helps you make websites and web apps. It has a very strong emphasis on simplicity, ease-of-use, and quality tooling.
 
 This guide will:
 
   - Teach you the fundamentals of programming in Elm.
-  - Show you how to make interactive apps with *The Elm Architecture*.
+  - Show you how to make interactive apps with **The Elm Architecture**.
   - Emphasize principles and patterns that generalize to programming in any language.
 
 By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use.
 
-If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript and React code. The ideas transfer pretty easily!
+If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript code. The ideas transfer pretty easily!
 
 
 ## A Quick Sample
 
-Of course *I* think Elm is good, so look for yourself.
-
-Here is [a simple counter](https://elm-lang.org/examples/buttons). If you look at the code, it just lets you increment and decrement the counter:
+Here is a little program that lets you increment and decrement a number:
 
 ```elm
 import Browser
@@ -45,18 +43,22 @@ view model =
     ]
 ```
 
-Notice that the `update` and `view` are entirely decoupled. You describe your HTML in a declarative way and Elm takes care of messing with the DOM.
+Try it out in the online editor [here](https://elm-lang.org/examples/buttons).
+
+The code can definitely look unfamiliar at first, so we will get into how this example works soon!
 
 
 ## Why a *functional* language?
 
-Forget what you have heard about functional programming. Fancy words, weird ideas, bad tooling. Barf. Elm is about:
+I learned to program in languages like Java and Python. It was nice! But once I learned some functional languages in school (particularly Standard ML and OCaml) I noticed that I was able to add features and make changes much faster and more reliably than before. I felt **confident** in my programs in a way that I never had before. I decided to learn Haskell on my own, but that confidence evaporated in the cloud of fancy concepts there. After working through them for a couple years, I found that all the time I spent learning was not really paying off in programs that were easier to read or write.
+
+I made Elm in an effort to extract the minimal features necessary for that feeling of **confident programming**. In practice this means:
 
   - No runtime errors in practice. No `null`. No `undefined` is not a function.
   - Friendly error messages that help you add features more quickly.
-  - Well-architected code that *stays* well-architected as your app grows.
+  - Reliable refactoring so architecture can evolve with your project.
   - Automatically enforced semantic versioning for all Elm packages.
 
-No combination of JS libraries can ever give you this, yet it is all free and easy in Elm. Now these nice things are *only* possible because Elm builds upon 40+ years of work on typed functional languages. So Elm is a functional language because the practical benefits are worth the couple hours you'll spend reading this guide.
+No combination of JS libraries can give you this because these characteristics come from the design of the language itself! So Elm is a functional language because the practical benefits are worth the couple hours you'll spend reading this guide.
 
 I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised!
