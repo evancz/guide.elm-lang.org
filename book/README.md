@@ -57,6 +57,6 @@ You can get some benefits from programming in a functional *style*, but there ar
   - Reliable refactoring.
   - Automatically enforced semantic versioning for all Elm packages.
 
-No combination of JS libraries can give you this! These characteristics come from the design of the language itself, and they have to be built in from the very beginning. So Elm is a functional *language* because the practical benefits are worth the couple hours you'll spend reading this guide.
+No combination of JS libraries can give you this! These characteristics come from the design of the language itself, and they have to be built in from the very beginning. And thanks to these guarantees, it is quite common for Elm programmers to say they never felt so **confident** while programming. Confident to add features quickly. Confident to refactor thousands of lines. But without the background anxiety that you missed something important!
 
 I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised!
