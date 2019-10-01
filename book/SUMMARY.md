@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-* [Install](install.md)
 * [Core Language](core_language.md)
 * [The Elm Architecture](architecture/README.md)
    * [Buttons](architecture/buttons.md)
@@ -20,6 +19,9 @@
    * [JSON](effects/json.md)
    * [Random](effects/random.md)
    * [Time](effects/time.md)
+* [Installation](install/README.md)
+   * [Editor](install/editor.md)
+   * [Terminal](install/terminal.md)
 * [JavaScript Interop](interop/README.md)
    * [Flags](interop/flags.md)
    * [Ports](interop/ports.md)
