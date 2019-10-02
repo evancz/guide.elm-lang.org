@@ -1,39 +1,37 @@
 
 # Terminal
 
-You just set up a code editor so you can edit Elm files locally, so the next step is to obtain an executable file named `elm`. This file can help you start projects, compile Elm code, install packages, and a bunch of other stuff!
+You just set up a code editor to edit Elm files locally, so the next step is to obtain an executable file named `elm`. This file can help you start projects, compile Elm code, install packages, and a bunch of other stuff!
 
-
-## Install
-
-Click the relevant link:
+Here are the **install** links:
 
 - [Mac](https://github.com/elm/compiler/releases/download/0.19.0/installer-for-mac.pkg)
 - <a href="https://github.com/elm/compiler/blob/master/installers/linux/README.md" target="_blank">Linux</a>
 - [Windows](https://github.com/elm/compiler/releases/download/0.19.0/installer-for-windows.exe)
 
-It will walk you through the install process!
-
-> **Aside:** There are [past versions](https://github.com/elm/compiler/releases) and [uninstall directions](https://github.com/elm/compiler/tree/master/installers/README.md) available if needed.
+They will walk you through the installation process!
 
 
 ## Open the Terminal
 
-Start by opening up the terminal on your computer. It may be called `cmd.exe` or `Command Prompt` on Windows.
+After installation is through, open up the terminal on your computer. It may be called `cmd.exe` or `Command Prompt` on Windows.
 
 ![terminal](images/terminal.png)
 
-Navigate to your desktop. This can be done with `cd ~/Desktop` on Mac and Linux. It would be something like `cd C:\Users\<username>\Desktop` on Windows.
+Start by navigating to your desktop in the terminal:
+
+```bash
+# Mac and Linux
+cd ~/Desktop
+
+# Windows (but with <username> filled in with your user name)
+cd C:\Users\<username>\Desktop
+```
+
+The next step is to get familiar with `elm` command. I personally had a really hard time learning terminal commands, so I worked hard to make the `elm` command nice to use. Let's go through a couple common scenarios.
 
 
-## Try out Elm!
-
-The next step is to get familiar with `elm` command. I personally had a really hard time learning terminal commands, so I worked hard to make the `elm` command nice to use.
-
-Let's go through a couple of common uses.
-
-
-### `elm init`
+## `elm init`
 
 You can start an Elm project by running:
 
@@ -49,7 +47,7 @@ It just creates an `elm.json` file and a `src/` directory:
 Now try creating a file called `src/Main.elm` in your editor, and copying in the code from [the buttons example](https://elm-lang.org/examples/buttons).
 
 
-### `elm reactor`
+## `elm reactor`
 
 `elm reactor` helps you build Elm projects without messing with the terminal too much. You just run it at the root of your project, like this:
 
@@ -60,7 +58,7 @@ elm reactor
 This starts a server at [`http://localhost:8000`](http://localhost:8000). You can navigate to any Elm file and see what it looks like. Try to check out your `src/Main.elm` file!
 
 
-### `elm make`
+## `elm make`
 
 You can compile Elm code to HTML or JavaScript with commands like this:
 
@@ -79,7 +77,7 @@ This is the most general way to compile Elm code. It is extremely useful once yo
 > **Note:** This command produces the same messages you have been seeing in the online editor and with `elm reactor`. Years of work has gone into them so far, but please report any unhelpful messages [here](https://github.com/elm/error-message-catalog/issues). I am sure there are ways to improve!
 
 
-### `elm install`
+## `elm install`
 
 Elm packages all live at [`package.elm-lang.org`](https://package.elm-lang.org/).
 
