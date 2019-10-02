@@ -31,7 +31,7 @@ cd C:\Users\<username>\Desktop
 The next step is to get familiar with `elm` command. I personally had a really hard time learning terminal commands, so I worked hard to make the `elm` command nice to use. Let's go through a couple common scenarios.
 
 
-## `elm init`
+## 🌱 `elm init`
 
 You can start an Elm project by running:
 
@@ -47,7 +47,7 @@ It just creates an `elm.json` file and a `src/` directory:
 Now try creating a file called `src/Main.elm` in your editor, and copying in the code from [the buttons example](https://elm-lang.org/examples/buttons).
 
 
-## `elm reactor`
+## 📝 `elm reactor`
 
 `elm reactor` helps you build Elm projects without messing with the terminal too much. You just run it at the root of your project, like this:
 
@@ -58,7 +58,7 @@ elm reactor
 This starts a server at [`http://localhost:8000`](http://localhost:8000). You can navigate to any Elm file and see what it looks like. Try to check out your `src/Main.elm` file!
 
 
-## `elm make`
+## 🔧 `elm make`
 
 You can compile Elm code to HTML or JavaScript with commands like this:
 
@@ -77,7 +77,7 @@ This is the most general way to compile Elm code. It is extremely useful once yo
 > **Note:** This command produces the same messages you have been seeing in the online editor and with `elm reactor`. Years of work has gone into them so far, but please report any unhelpful messages [here](https://github.com/elm/error-message-catalog/issues). I am sure there are ways to improve!
 
 
-## `elm install`
+## 📦 `elm install`
 
 Elm packages all live at [`package.elm-lang.org`](https://package.elm-lang.org/).
 
