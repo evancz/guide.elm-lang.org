@@ -1,6 +1,7 @@
 {
     "redirects": [
-        { "from": "get_started.html", "to": "install.html" },
+        { "from": "get_started.html", "to": "/install/" },
+        { "from": "install.html", "to": "/install/" },
         { "from": "reuse/modules.html", "to": "webapps/modules.html" },
         { "from": "interop/json.html", "to": "effects/json.html" },
         { "from": "types/union_types.html", "to": "types/custom_types.html" }
