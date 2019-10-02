@@ -19,4 +19,4 @@ I have worked hard to make the next two pages go smoothly, but it is always poss
 
 These topics will help you create more complex personal projects and eventually get things going at work!
 
-**Motivation 2:** If you run into any trouble, you can ask about it in a [community forum](https://elm-lang.org/community). Talking through an install problem with someone else can usually save you a lot of time, and people are happy to help out. Please ask for help!
+**Motivation 2:** If you run into any trouble, please ask about it in a [community forum](https://elm-lang.org/community)! Talking through an install problem can usually save you a lot of time, and people are happy to help out. Please ask for help!
