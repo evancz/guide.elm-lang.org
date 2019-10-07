@@ -1,7 +1,7 @@
 .book-header h1 { display: none; }
 .book-summary { border: none; }
 .divider { display: none; }
-.gitbook-link { display: none; }
+.gitbook-link { display: none !important; }
 
 
 /* REFORMAT BLOCKQUOTES */
