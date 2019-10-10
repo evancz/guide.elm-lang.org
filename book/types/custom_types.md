@@ -68,7 +68,7 @@ Another benefit of this approach is that each variant can have different associa
   },
   {
     "input": "Visitor \"kate95\"",
-    "value": "\u001b[96mVisitor\u001b[0m \u001b[93m\"Thomas\"\u001b[0m",
+    "value": "\u001b[96mVisitor\u001b[0m \u001b[93m\"kate95\"\u001b[0m",
     "type_": "User"
   }
 ]
