@@ -1,4 +1,4 @@
-# Editors
+# Install a Code Editor
 
 The first step is to get a code editor set up to handle Elm files.
 

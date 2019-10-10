@@ -1,13 +1,13 @@
 
-# Terminal
+# Install Elm
 
-You just set up a code editor to edit Elm files locally, so the next step is to obtain an executable file named `elm`. Here are the **install** links:
+You set up a code editor to edit Elm files on the previous page, so the next step is to obtain an executable file named `elm`. Here are the **install** links:
 
 - **Mac** - [installer](https://github.com/elm/compiler/releases/download/0.19.0/installer-for-mac.pkg)
 - **Linux** - <a href="https://github.com/elm/compiler/blob/master/installers/linux/README.md" target="_blank">instructions</a>
 - **Windows** - [installer](https://github.com/elm/compiler/releases/download/0.19.0/installer-for-windows.exe)
 
-After installation is through, open up the terminal on your computer. It may be called `cmd.exe` or `Command Prompt` on Windows.
+After installation is complete, open up the terminal on your computer. It may be called `cmd.exe` or `Command Prompt` on Windows.
 
 ![terminal](images/terminal.png)
 
