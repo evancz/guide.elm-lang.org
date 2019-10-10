@@ -1,7 +1,7 @@
 
 # Install Elm
 
-You set up a code editor to edit Elm files on the previous page, so the next step is to obtain an executable file named `elm`. Here are the **install** links:
+The previous page described how to install a code editor for editing Elm files, so the next step is to obtain an executable file named `elm`. Here are the **install** links:
 
 - **Mac** - [installer](https://github.com/elm/compiler/releases/download/0.19.0/installer-for-mac.pkg)
 - **Linux** - <a href="https://github.com/elm/compiler/blob/master/installers/linux/README.md" target="_blank">instructions</a>
