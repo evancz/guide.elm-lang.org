@@ -31,7 +31,7 @@ toName user =
 
 The `case` expression allows us to branch based on which variant we happen to see, so whether we see Thomas or Kate, we always know how to show their name.
 
-And if we try invalid arguments like `toName (Visitor "kate95")` or `toName Anonymous`, the compiler tells us about it immediately. This means many simple mistakes can be fixed in seconds, rather than making it to users and costing a lot more time overall.
+And if we try invalid arguments like `toName (Regular "kate95")` or `toName Anonymous`, the compiler tells us about it immediately. This means many simple mistakes can be fixed in seconds, rather than making it to users and costing a lot more time overall.
 
 
 ## Wild Cards
