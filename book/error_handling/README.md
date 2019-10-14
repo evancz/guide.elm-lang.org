@@ -20,7 +20,7 @@ Instead of crashing on bad input, we say explicitly that the result may be an `A
 
 This kind of thing comes up all the time! For example, maybe you want to turn a bunch of user input into a `Post` to share with others. But what happens if they forget to add a title? Or there is no content in the post? We could model all these problems explicitly:
 
-```
+```elm
 type MaybePost
   = Post { title : String, content : String }
   | NoTitle
