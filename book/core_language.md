@@ -97,8 +97,8 @@ Okay, now that greetings are out of the way, how about an `madlib` function that
 		"type_": "String"
 	},
 	{
-		"input": "madlib (\"butter\" ++ \"fly\") \"metalic\"",
-		"value": "\u001b[93m\"The ostentatious butterfly wears metalic shorts.\"\u001b[0m",
+		"input": "madlib (\"butter\" ++ \"fly\") \"metallic\"",
+		"value": "\u001b[93m\"The ostentatious butterfly wears metallic shorts.\"\u001b[0m",
 		"type_": "String"
 	}
 ]
@@ -113,8 +113,8 @@ Notice how we used parentheses to group `"butter" ++ "fly"` together in the seco
 >     madlib "cat" "ergonomic"                  -- Elm
 >     madlib("cat", "ergonomic")                // JavaScript
 >
->     madlib ("butter" ++ "fly") "metalic"      -- Elm
->     madlib("butter" + "fly", "metalic")       // JavaScript
+>     madlib ("butter" ++ "fly") "metallic"      -- Elm
+>     madlib("butter" + "fly", "metallic")       // JavaScript
 >
 > This can be surprising at first, but this style ends up using fewer parentheses and commas. It makes the language feel really clean and minimal once you get used to it!
 
