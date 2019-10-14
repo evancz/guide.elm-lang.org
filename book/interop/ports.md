@@ -2,7 +2,7 @@
 
 The previous two pages, we saw the JavaScript needed to start Elm programs and a way to pass in flags on initialization:
 
-```elm
+```javascript
 // initialize
 var app = Elm.Main.init({
   node: document.getElementById('elm')
