@@ -147,7 +147,7 @@ People can make mistakes in type annotations though, so what happens if the anno
 
 ## Type Variables
 
-As you look through the functions in [`elm/core`][core], you will see some type signatures with lower-case letters in them. We can check some of them out in `elm repl`:
+As you look through more Elm code, you will start to see type annotations with lower-case letters in them. A common example is the `List.length` function:
 
 {% replWithTypes %}
 [
@@ -207,14 +207,13 @@ Again, the type variable `a` can vary depending on how [`List.reverse`][reverse]
 
 > **Note:** Type variables must start with a lower-case letter, but they can be full words. We could write the type of `List.length` as `List value -> Int` and we could write the type of `List.reverse` as `List element -> List element`. It is fine as long as they start with a lower-case letter. Type variables `a` and `b` are used by convention in many places, but some type annotations benefit from more specific names.
 
-[core]: https://package.elm-lang.org/packages/elm/core/latest/
 [length]: https://package.elm-lang.org/packages/elm/core/latest/List#length
 [reverse]: https://package.elm-lang.org/packages/elm/core/latest/List#reverse
 
 
 ## Constrained Type Variables
 
-There are a few “constrained” type variables. The most common example is probably the `number` type. The [`negate`][negate] function uses it:
+There is a special variant of type variables in Elm called **constrained** type variables. The most common example is the `number` type. The [`negate`](https://package.elm-lang.org/packages/elm/core/latest/Basics#negate) function uses it:
 
 {% replWithTypes %}
 [
@@ -228,7 +227,7 @@ There are a few “constrained” type variables. The most common example is pro
 
 Try expressions like `negate 3.1415` and `negate (round 3.1415)` and `negate "hi"` ⬆️
 
-Normally type variables can get filled in with anything, but `number` can only be filled in by `Int` and `Float` values. It constrains the possibilities.
+Normally type variables can get filled in with anything, but `number` can only be filled in by `Int` and `Float` values. It _constrains_ the possibilities.
 
 The full list of constrained type variables is:
 
@@ -239,4 +238,4 @@ The full list of constrained type variables is:
 
 These constrained type variables exist to make operators like `(+)` and `(<)` a bit more flexible.
 
-[negate]: https://package.elm-lang.org/packages/elm/core/latest/Basics#negate
+By now we have covered types for values and functions pretty well, but what does this look like when we start wanting more complex data structures?
