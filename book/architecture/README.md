@@ -9,60 +9,26 @@ So The Elm Architecture is easy in Elm, but it is useful in any front-end projec
 
 ## The Basic Pattern
 
-The logic of every Elm program breaks into three parts:
+Elm programs always look something like this:
+
+![Diagram of The Elm Architecture](buttons.svg)
+
+The Elm program produces HTML to show on screen, and then the computer sends back messages of what is going on. "They clicked a button!"
+
+What happens within the Elm program though? It always breaks into three parts:
 
   * **Model** &mdash; the state of your application
-  * **Update** &mdash; a way to update your state
-  * **View** &mdash; a way to view your state as HTML
+  * **View** &mdash; a way to turn your state into HTML
+  * **Update** &mdash; a way to update your state based on messages
 
-So I always start with the following skeleton and fill in details for my particular case.
+These three concepts are the core of **The Elm Architecture**.
 
-```elm
-import Html exposing (..)
-
-
--- MODEL
-
-type alias Model = { ... }
-
-
--- UPDATE
-
-type Msg = ...
-
-update : Msg -> Model -> Model
-update msg model =
-  ...
-
-
--- VIEW
-
-view : Model -> Html Msg
-view model =
-  ...
-
-```
-
-That is the essence of The Elm Architecture. We will proceed by filling in this skeleton with increasingly interesting logic.
-
-
-# The Elm Architecture + User Input
-
-Your web app is going to need to deal with user input. This section will get you familiar with The Elm Architecture in the context of things like:
-
-  - Buttons
-  - Text Fields
-  - Check Boxes
-  - Radio Buttons
-  - etc.
-
-We will go through a few examples that build knowledge gradually, so go in order!
-
+The next few examples are going to show how to use this pattern for user input, like buttons and text fields. It will make this much more concrete!
 
 
 ## Follow Along
 
-The following examples are all available in the online editor:
+The examples are all available in the online editor:
 
 [![online editor](try.png)](https://elm-lang.org/try)
 
@@ -72,4 +38,4 @@ This editor shows hints in the top left corner:
   <source src="hints.mp4" type="video/mp4">
 </video>
 
-Hopefully this will be helpful as you work through the upcoming examples!
+Be sure to try out the hints if you run into something confusing!

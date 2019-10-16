@@ -1,10 +1,10 @@
 # Buttons
 
----
-#### Follow along in [the online editor](https://elm-lang.org/examples/buttons).
----
+Our first example is a counter that can be incremented or decremented.
 
-Our first example is a counter that can be incremented or decremented. I find that it can be helpful to see the entire program in one place, so here it is! We will break it down afterwards.
+I included the full program below. Click the blue "Edit" button to mess with it in the online editor. Try changing text on one of the buttons. **Click the blue button now!**
+
+<div class="edit-link"><a href="https://elm-lang.org/examples/buttons">Edit</a></div>
 
 ```elm
 import Browser
@@ -12,8 +12,13 @@ import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
 
 
+
+-- MAIN
+
+
 main =
   Browser.sandbox { init = init, update = update, view = view }
+
 
 
 -- MODEL
@@ -50,23 +55,67 @@ view model =
     ]
 ```
 
-That's everything!
+Now that you have poked around the code a little bit, you may have some questions. What is the `main` value doing? How do the different parts fit together? Let's go through the code and talk about it.
 
-> **Note:** This section has `type` and `type alias` declarations. You can read all about these in the upcoming section on [types](/types/index.html). You do not *need* to deeply understand that stuff now, but you are free to jump ahead if it helps.
+> **Note:** The code here uses [type annotations](/types/reading_types.html), [type aliases](/types/type_aliases.html), and [custom types](/types/custom_types.html). The point of this section is to get a feeling for The Elm Architecture though, so we will not cover them until a bit later. I encourage you to peek ahead if you are getting stuck on these aspects!
 
-When writing this program from scratch, I always start by taking a guess at the model. To make a counter, we at least need to keep track of a number that is going up and down. So let's just start with that!
+
+## Main
+
+The `main` value is special in Elm. It describes what gets shown on screen. In this case, we are going to initialize our application with the `init` value, the `view` function is going to show everything on screen, and user input is going to be fed into the `update` function. Think of this as the high-level description of our program.
+
+
+## Model
+
+Data modeling is extremely important in Elm. The point of the **model** is to capture all the details about your application as data.
+
+To make a counter, we need to keep track of a number that is going up and down. That means our model is really small this time:
 
 ```elm
 type alias Model = Int
 ```
 
-Now that we have a model, we need to define how it changes over time. I always start my `UPDATE` section by defining a set of messages that we will get from the UI:
+We just need an `Int` value to track the current count. We can see that in our initial value:
+
+```elm
+init : Model
+init =
+  0
+```
+
+The initial value is zero, and it will go up and down as people press different buttons.
+
+
+## View
+
+We have a model, but how do we show it on screen? That is the role of the `view` function:
+
+```elm
+view : Model -> Html Msg
+view model =
+  div []
+    [ button [ onClick Decrement ] [ text "-" ]
+    , div [] [ text (String.fromInt model) ]
+    , button [ onClick Increment ] [ text "+" ]
+    ]
+```
+
+This function takes in the `Model` as an argument. It outputs HTML. So we are saying that we want to show a decrement button, the current count, and an increment button.
+
+Notice that we have an `onClick` handler for each button. These are saying: **when someone clicks, generate a message**. So the plus button is generating an `Increment` message. What is that and where does it go? To the `update` function!
+
+
+## Update
+
+The `update` function describes how our `Model` will change over time.
+
+We define two messages that it might receive:
 
 ```elm
 type Msg = Increment | Decrement
 ```
 
-I definitely know the user will be able to increment and decrement the counter. The `Msg` type describes these capabilities as *data*. Important! From there, the `update` function just describes what to do when you receive one of these messages.
+From there, the `update` function just describes what to do when you receive one of these messages.
 
 ```elm
 update : Msg -> Model -> Model
@@ -79,31 +128,35 @@ update msg model =
       model - 1
 ```
 
-If you get an `Increment` message, you increment the model. If you get a `Decrement` message, you decrement the model. Pretty straight-forward stuff.
+If you get an `Increment` message, you increment the model. If you get a `Decrement` message, you decrement the model.
 
-Okay, so that's all good, but how do we actually make some HTML and show it on screen? Elm has a library called `elm/html` that gives you full access to HTML5 as normal Elm functions:
-
-```elm
-view : Model -> Html Msg
-view model =
-  div []
-    [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (String.fromInt model) ]
-    , button [ onClick Increment ] [ text "+" ]
-    ]
-```
-
-One thing to notice is that our `view` function is producing a `Html Msg` value. This means that it is a chunk of HTML that can produce `Msg` values. And when you look at the definition, you see the `onClick` attributes are set to give out `Increment` and `Decrement` values. These will get fed directly into our `update` function, driving our whole app forward.
-
-Another thing to notice is that `div` and `button` are just normal Elm functions. These functions take (1) a list of attributes and (2) a list of child nodes. It is just HTML with slightly different syntax. Instead of having `<` and `>` everywhere, we have `[` and `]`. We have found that folks who can read HTML have a pretty easy time learning to read this variation. Okay, but why not have it be *exactly* like HTML? **Since we are using normal Elm functions, we have the full power of the Elm programming language to help us build our views!** We can refactor repetitive code out into functions. We can put helpers in modules and import them just like any other code. We can use the same testing frameworks and libraries as any other Elm code. Everything that is nice about programming in Elm is 100% available to help you with your view. No need for a hacked together templating language!
-
-There is also something a bit deeper going on here. **The view code is entirely declarative**. We take in a `Model` and produce some `Html`. That is it. There is no need to mutate the DOM manually. Elm takes care of that behind the scenes. This gives Elm [much more leeway to make optimizations](https://elm-lang.org/blog/blazing-fast-html) and ends up making rendering *faster* overall. So you write less code and the code runs faster. The best kind of abstraction!
-
-This pattern is the essence of The Elm Architecture. Every example we see from now on will be a slight variation on this basic pattern: `Model`, `update`, `view`.
+So whenever we get a message, we run it through `update` to get a new model. We then call `view` to figure out how to show the new model on screen. Then repeat! User input generates a message, `update` the model, `view` it on screen. Etc.
 
 
-> **Exercise:** One cool thing about The Elm Architecture is that it is super easy to extend as our product requirements change. Say your product manager has come up with this amazing "reset" feature. A new button that will reset the counter to zero.
+## Overview
+
+Now that you have seen all the parts of an Elm program, it may be a bit easier to see how they fit into the diagram we saw earlier:
+
+![Diagram of The Elm Architecture](buttons.svg)
+
+Elm starts by rendering the initial value on screen. From there you enter into this loop:
+
+1. Wait for user input.
+2. Send a message to `update`
+3. Produce a new `Model`
+4. Call `view` to get new HTML
+5. Show the new HTML on screen
+6. Repeat!
+
+This is the essence of The Elm Architecture. Every example we see from now on will be a slight variation on this basic pattern.
+
+
+> **Exercise:** Add a button to reset the counter to zero:
 >
-> To add the feature you come back to the `Msg` type and add another possibility: `Reset`. You then move on to the `update` function and describe what happens when you get that message. Finally you add a button in your view.
+> 1. Add a `Reset` variant to the `Msg` type
+> 2. Add a `Reset` branch in the `update` function
+> 3. Add a button in the `view` function.
 >
-> See if you can implement the "reset" feature!
+> You can edit the example in the online editor [here](https://elm-lang.org/examples/buttons).
+>
+> If that goes well, try adding another button to increment by steps of 10.

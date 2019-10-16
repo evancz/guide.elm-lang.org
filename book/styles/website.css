@@ -15,6 +15,22 @@
 }
 
 
+/* EDIT LINK */
+
+.edit-link { position: relative; }
+
+.edit-link a {
+	position: absolute;
+	top: .85em;
+	right: 1em;
+	padding: .5em 1em;
+	color: white !important;
+	background: #1293D8 !important;
+	text-decoration: none !important;
+	font-family: Consolas,"Liberation Mono",Menlo,Courier,monospace;
+}
+
+
 /* CORRECT SIDEBAR COLORS */
 
 .book.color-theme-1 .book-summary { background: #D0C396; }
