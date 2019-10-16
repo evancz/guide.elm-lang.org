@@ -1,16 +1,14 @@
 # HTTP
 
----
-#### Follow along in [the online editor](https://elm-lang.org/examples/book).
----
-
 It is often helpful to grab information from elsewhere on the internet.
 
-For example, say we want to load the full text of _Public Opinion_ by Walter Lippmann. Published in 1922, this book provides a historical perspective on the rise of mass media and its implications for democracy. For our purposes here, we will focus on how to use the [`elm/http`][http] package to get this book into our app!
+For example, say we want to load the full text of _Public Opinion_ by Walter Lippmann. Published in 1922, this book provides a historical perspective on the rise of mass media and its implications for democracy. For our purposes here, we will focus on how to use the [`elm/http`][http] package to get this book into our program!
 
-Let&rsquo;s start by just looking at all the code. There are some new things, but do not worry. We will go through it all!
+Click the blue "Edit" button to look through this program in the online editor. You will probably see the screen say "Loading..." before the full book shows up. **Click the blue button now!**
 
 [http]: https://package.elm-lang.org/packages/elm/http/latest
+
+<div class="edit-link"><a href="https://elm-lang.org/examples/book">Edit</a></div>
 
 ```elm
 import Browser

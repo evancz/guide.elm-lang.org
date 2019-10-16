@@ -1,16 +1,12 @@
 # Time
 
----
-#### Follow along in [the online editor](https://elm-lang.org/examples/time).
----
-
 Now we are going to make a digital clock. (Analog will be an exercise!)
 
 So far we have focused on commands. With the HTTP and randomness examples, we commanded Elm to do specific work immediately, but that is sort of a weird pattern for a clock. We _always_ want to know the current time. This is where **subscriptions** come in!
 
-After you read through the code, we will talk about how we are using the [`elm/time`][time] package here:
+Start by clicking the blue "Edit" button and looking through the code a bit in the online editor.
 
-[time]: https://package.elm-lang.org/packages/elm/time/latest/
+<div class="edit-link"><a href="https://elm-lang.org/examples/time">Edit</a></div>
 
 ```elm
 import Browser
@@ -96,7 +92,9 @@ view model =
   h1 [] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
 ```
 
-Let&rsquo;s go through the new stuff.
+The new stuff is all coming from the [`elm/time`][time] package. Let&rsquo;s go through these parts!
+
+[time]: https://package.elm-lang.org/packages/elm/time/latest/
 
 
 ## `Time.Posix` and `Time.Zone`

@@ -1,13 +1,10 @@
 # JSON
 
----
-#### Follow along in [the online editor](https://elm-lang.org/examples/cat-gifs).
----
-
 We just saw an example that uses HTTP to get the content of a book. That is great, but a ton of servers return data in a special format called JavaScript Object Notation, or JSON for short.
 
-So our next example shows how to fetch some JSON data, allowing us to press a button to show random cat GIFs.
+So our next example shows how to fetch some JSON data, allowing us to press a button to show random cat GIFs. Click the blue "Edit" button and look through the program a bit. Try not to only look at the cats! **Click the blue button now!**
 
+<div class="edit-link"><a href="https://elm-lang.org/examples/cat-gifs">Edit</a></div>
 
 ```elm
 import Browser

@@ -1,15 +1,10 @@
 # Random
 
----
-#### Follow along in [the online editor](https://elm-lang.org/examples/numbers).
----
-
 So far we have only seen commands to make HTTP requests, but we can command other things as well, like generating random values! So we are going to make an app that rolls dice, producing a random number between 1 and 6.
 
-We need the [`elm/random`][readme] package for this. The [`Random`][random] module in particular. Let&rsquo;s start by just looking at all the code:
+Click the blue "Edit" button to see this example in action. Generate a couple random numbers, and look through the code to try to figure out how it works. **Click the blue button now!**
 
-[readme]: https://package.elm-lang.org/packages/elm/random/latest
-[random]: https://package.elm-lang.org/packages/elm/random/latest/Random
+<div class="edit-link"><a href="https://elm-lang.org/examples/numbers">Edit</a></div>
 
 ```elm
 import Browser
@@ -101,6 +96,11 @@ Generating random values works a bit different than in languages like JavaScript
 
 
 ## Random Generators
+
+We are using the [`elm/random`][readme] package for this. The [`Random`][random] module in particular.
+
+[readme]: https://package.elm-lang.org/packages/elm/random/latest
+[random]: https://package.elm-lang.org/packages/elm/random/latest/Random
 
 The core idea is that we have random `Generator` that describes _how_ to generate a random value. For example:
 
