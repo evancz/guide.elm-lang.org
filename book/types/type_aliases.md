@@ -1,6 +1,6 @@
 # Type Aliases
 
-Elm allows you to create a **type alias**. An alias is just a shorter name for some other type. It looks like this:
+Type annotations can start to get long. This might be a real problem if you have records with many fields! This is the core motivation for type aliases. A **type alias** is a shorter name for a type. For example, you could create a `User` alias like this:
 
 ```elm
 type alias User =
@@ -9,35 +9,39 @@ type alias User =
   }
 ```
 
-So rather than having to type out this record type all the time, we can just say `User` instead. For example, you can shorten type annotations like this:
+Rather than writing the whole record type all the time, we can just say `User` instead. This helps us write type annotations that are easier to read:
 
 ```elm
+-- WITH ALIAS
+
 isOldEnoughToVote : User -> Bool
 isOldEnoughToVote user =
   user.age >= 18
 
--- The following type annotations are equivalent:
---
---     isOldEnoughToVote : User -> Bool
---     isOldEnoughToVote : { name : String, age : Int } -> Bool
---
+
+-- WITHOUT ALIAS
+
+isOldEnoughToVote : { name : String, age : Int } -> Bool
+isOldEnoughToVote user =
+  user.age >= 18
 ```
 
-So all we are doing is making an **alias** for a long type. **Type aliases help us write shorter and clearer type annotations.** This becomes more important as your application grows. Say we have a `celebrateBirthday` function:
+These two definitions are equivalent, but the one with a type alias is shorter and easier to read. So all we are doing is making an **alias** for a long type.
 
-```elm
-celebrateBirthday : User -> User
-celebrateBirthday user =
-  { user | age = user.age + 1 }
 
--- The following type annotations are equivalent:
---
---     celebrateBirthday : User -> User
---     celebrateBirthday : { name : String, age : Int } -> { name : String, age : Int }
---
+## Models
+
+It is extremely common to use type aliases when designing a model. When we were learning about The Elm Architecture, we saw a model like this:
+
+```
+type alias Model =
+  { name : String
+  , password : String
+  , passwordAgain : String
+  }
 ```
 
-It is much nicer to read with the type alias, and this is only for a record with two fields! Imagine we need to add fields as our application grows. When we use type aliases, we could add 10 or 100 fields to the `User` type alias without needing to make any changes to our `celebrateBirthday` function. Nice!
+The main benefit of using a type alias for this is when we write the type annotations for the `update` and `view` functions. Writing `Msg -> Model -> Model` is so much nicer than the fully expanded version! It has the added benefit that we can add fields to our model without needing to change any type annotations.
 
 
 ## Record Constructors
