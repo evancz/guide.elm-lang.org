@@ -3,7 +3,7 @@
 
 The previous page described how to install a code editor for Elm, so the next step is to obtain an executable file named `elm`. Here are the **install** links:
 
-- **Mac** - <a href="https://github.com/elm/compiler/blob/master/installers/mac/README.md" target="_blank">instructions</a>
+- **Mac** - [installer](https://github.com/elm/compiler/releases/download/0.19.1/installer-for-windows.pkg)
 - **Linux** - <a href="https://github.com/elm/compiler/blob/master/installers/linux/README.md" target="_blank">instructions</a>
 - **Windows** - [installer](https://github.com/elm/compiler/releases/download/0.19.1/installer-for-windows.exe)
 
