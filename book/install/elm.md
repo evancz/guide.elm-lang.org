@@ -5,7 +5,7 @@ The previous page described how to install a code editor for Elm, so the next st
 
 - **Mac** - <a href="https://github.com/elm/compiler/blob/master/installers/mac/README.md" target="_blank">instructions</a>
 - **Linux** - <a href="https://github.com/elm/compiler/blob/master/installers/linux/README.md" target="_blank">instructions</a>
-- **Windows** - [installer](https://github.com/elm/compiler/releases/download/0.19.0/installer-for-windows.exe)
+- **Windows** - [installer](https://github.com/elm/compiler/releases/download/0.19.1/installer-for-windows.exe)
 
 After installation is complete, open up the terminal on your computer. It may be called `cmd.exe` or `Command Prompt` on Windows.
 
