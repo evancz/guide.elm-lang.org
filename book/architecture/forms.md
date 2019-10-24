@@ -181,7 +181,7 @@ This function first compares the two passwords. If they match, you get green tex
 
 These helper functions begin to show the benefits of having our HTML library be normal Elm code. We _could_ put all that code into our `view`, but making helper functions is totally normal in Elm, even in view code. "Is this getting hard to understand? Maybe I can break out a helper function!"
 
-> **Exercises:** Go look at this example in the online editor [here](https://elm-lang.org/examples/forms). Try to add the following featuers to the `viewValidation` helper function:
+> **Exercises:** Go look at this example in the online editor [here](https://elm-lang.org/examples/forms). Try to add the following features to the `viewValidation` helper function:
 >
 >  - Check that the password is longer than 8 characters.
 >  - Make sure the password contains upper case, lower case, and numeric characters.
