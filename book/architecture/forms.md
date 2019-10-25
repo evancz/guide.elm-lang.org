@@ -116,7 +116,7 @@ type Msg
   | PasswordAgain String
 ```
 
-This means our `update` is needs a case for all three variations:
+This means our `update` needs a case for all three variations:
 
 ```elm
 update : Msg -> Model -> Model
@@ -154,7 +154,7 @@ view model =
 
 In previous examples we were using `input` and `div` directly. Why did we stop?
 
-The neat thing about HTML in Elm is that `input` and `div` are just normal functions. They take (1) a list of attributes and (2) a list of child nodes. **Since we are using normal Elm functions, we have the full power of the Elm to help us build our views!** We can refactor repetitive code out into customized helper functions. That is exactly what we are doing here!
+The neat thing about HTML in Elm is that `input` and `div` are just normal functions. They take (1) a list of attributes and (2) a list of child nodes. **Since we are using normal Elm functions, we have the full power of Elm to help us build our views!** We can refactor repetitive code out into customized helper functions. That is exactly what we are doing here!
 
 So our `view` function has three calls to `viewInput`:
 
