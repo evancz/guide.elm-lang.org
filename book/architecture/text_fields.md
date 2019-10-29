@@ -131,7 +131,7 @@ When we receive a message that the `<input>` node has changed, we update the `co
 3. `{ content = "bar" }`
 4. `{ content = "bard" }`
 
-We need to track this information explicitly in our model, otherwise there is now way to show the reversed text in our `view` function!
+We need to track this information explicitly in our model, otherwise there is no way to show the reversed text in our `view` function!
 
 > **Exercise:** Go to the example in the online editor [here](https://elm-lang.org/examples/text-fields) and show the length of the `content` in your `view` function. Use the [`String.length`](https://package.elm-lang.org/packages/elm/core/latest/String#length) function!
 >
