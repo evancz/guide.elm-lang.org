@@ -254,32 +254,20 @@ updateState msg state =
           ( state, Cmd.none )
 
         Input lines before after ->
-          if alt && not ctrl && not meta then
-            let
-              (newBefore, newAfter) = processAltKey key before after
-            in
-            ( { state | activity = Input lines newBefore newAfter }
-            , Cmd.none
-            )
+          case processKey key alt ctrl meta before after of
+            Edit newBefore newAfter ->
+              ( { state | activity = Input lines newBefore newAfter }
+              , Cmd.none
+              )
 
-          else if alt || ctrl || meta then
-            ( state, Cmd.none )
-
-          else
-            case processKey key before after of
-              Edit newBefore newAfter ->
-                ( { state | activity = Input lines newBefore newAfter }
-                , Cmd.none
-                )
-
-              Enter ->
-                let
-                  waitingLines =
-                    lines ++ [before ++ after]
-                in
-                ( { state | activity = Waiting waitingLines 0 }
-                , checkEntry state waitingLines
-                )
+            Enter ->
+              let
+                waitingLines =
+                  lines ++ [before ++ after]
+              in
+              ( { state | activity = Waiting waitingLines 0 }
+              , checkEntry state waitingLines
+              )
 
     GotWorkerResponse lines result ->
       case result of
@@ -417,8 +405,8 @@ type NewInput
   | Enter
 
 
-processKey : String -> String -> String -> NewInput
-processKey key before after =
+processKey : String -> Bool -> Bool -> Bool -> String -> String -> NewInput
+processKey key alt ctrl meta before after =
   case key of
     "Backspace" ->
       Edit (String.dropRight 1 before) after
@@ -427,10 +415,20 @@ processKey key before after =
       Edit before (String.dropLeft 1 after)
 
     "ArrowLeft" ->
-      Edit (String.dropRight 1 before) (String.right 1 before ++ after)
+      if alt && not ctrl && not meta then
+        moveLeft Edit before after
+      else if not alt && not ctrl && not meta then
+        Edit (String.dropRight 1 before) (String.right 1 before ++ after)
+      else
+        Edit before after
 
     "ArrowRight" ->
-      Edit (before ++ String.left 1 after) (String.dropLeft 1 after)
+      if alt && not ctrl && not meta then
+        moveRight Edit before after
+      else if not alt && not ctrl && not meta then
+        Edit (before ++ String.left 1 after) (String.dropLeft 1 after)
+      else
+        Edit before after
 
 --    "ArrowDown" ->
 --      Debug.todo "ArrowDown"
@@ -449,41 +447,37 @@ processKey key before after =
 
 
 
--- PROCESS ALT KEY
+-- MOVE LEFT/RIGHT
 
 
-processAltKey : String -> String -> String -> (String, String)
-processAltKey key before after =
-  case key of
-    "ArrowLeft" ->
-      case List.reverse (String.toList before) of
-        [] ->
-          ("", after)
+moveLeft : (String -> String -> a) -> String -> String -> a
+moveLeft func before after =
+  case List.reverse (String.toList before) of
+    [] ->
+      func "" after
 
-        c :: cs ->
-          let
-            (skipped, remaining) = findNextBoundary [] c cs
-          in
-          ( String.fromList (List.reverse remaining)
-          , String.fromList skipped ++ after
-          )
+    c :: cs ->
+      let
+        (skipped, remaining) = findNextBoundary [] c cs
+      in
+      func
+        (String.fromList (List.reverse remaining))
+        (String.fromList skipped ++ after)
 
-    "ArrowRight" ->
-      case String.toList after of
-        [] ->
-          (before, "")
 
-        c :: cs ->
-          let
-            (skipped, remaining) = findNextBoundary [] c cs
-          in
-          ( before ++ String.fromList (List.reverse skipped)
-          , String.fromList remaining
-          )
+moveRight : (String -> String -> a) -> String -> String -> a
+moveRight func before after =
+  case String.toList after of
+    [] ->
+      func before ""
 
-    _ ->
-      ( before, after )
-
+    c :: cs ->
+      let
+        (skipped, remaining) = findNextBoundary [] c cs
+      in
+      func
+        (before ++ String.fromList (List.reverse skipped))
+        (String.fromList remaining)
 
 
 findNextBoundary : List Char -> Char -> List Char -> (List Char, List Char)
