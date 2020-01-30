@@ -65,6 +65,8 @@ So there are only _outgoing_ messages for this interaction with JS. And I would 
 > **Note 2:** There is not a LocalStorage package for Elm right now, so the current recommendation is to use ports like we just saw. Some people wonder about the timeline to get support directly in Elm. Some people wonder quite aggressively! I tried to write about that [here](https://github.com/elm/projects/blob/master/roadmap.md#where-is-the-localstorage-package).
 >
 > **Note 3:** Once you `subscribe` to outgoing port messages, you can `unsubscribe` as well. It works like `addEventListener` and `removeEventListener`, also requiring reference-equality of functions to work.
+>
+> **Note 4:** When you add a port, you must send it a message, otherwise Elm will not generate any JavaScript for it. If you see a JavaScript console message saying that your new port is not defined--or worse, that `app.ports` is not defined--then try sending a message to your new port by calling it from at least one branch of your `update` function.
 
 
 ## Incoming Messages
