@@ -2,7 +2,7 @@
 
 The previous page showed the JavaScript needed to start an Elm program:
 
-```elm
+```javascript
 var app = Elm.Main.init({
   node: document.getElementById('elm')
 });
