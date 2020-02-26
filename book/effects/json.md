@@ -273,7 +273,7 @@ That is all we needed for our HTTP example, but decoders can do more! For exampl
 map2 : (a -> b -> value) -> Decoder a -> Decoder b -> Decoder value
 ```
 
-This function takes in two decoders. It tries them both and combines their results. So now we can put together two different decoders:
+This function takes in a type constructor function and two decoders. It tries both decoders and combines their results using the type constructor. So now we can put together two different decoders:
 
 ```elm
 import Json.Decode exposing (Decoder, map2, field, string, int)
@@ -289,6 +289,8 @@ personDecoder =
   	(field "name" string)
   	(field "age" int)
 ```
+
+Here, since a type alias generates a constructor function for its type, the `Person` constructor is the first argument to map2, followed by the two decoders.
 
 So if we used `personDecoder` on `{ "name": "Tom", "age": 42 }` we would get out an Elm value like `Person "Tom" 42`.
 
