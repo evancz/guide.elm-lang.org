@@ -17,6 +17,8 @@ var app = Elm.Main.init({
 
 We can give information to the Elm program, but only when it starts. What if you want to talk to JavaScript while the program is running?
 
+You can check out the minimal examples of using ports for [`WebSockets`](https://github.com/elm-community/js-integration-examples/tree/master/websockets) and [`localStorage`](https://github.com/elm-community/js-integration-examples/tree/master/localStorage), but come back to see why it is that way!
+
 
 ## Message Passing
 
@@ -34,23 +36,23 @@ port module Main exposing (..)
 
 import Json.Encode as E
 
-port cache : E.Value -> Cmd msg
+port storeNumber : E.Value -> Cmd msg
 ```
 
-The most important line is the `port` declaration. That creates a `cache` function, so we can create commands like `cache (E.int 42)` that will send a [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value) out to JavaScript.
+The most important line is the `port` declaration. That creates a `storeNumber` function, so we can create commands like `storeNumber (E.int 42)` that will send a [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value) out to JavaScript.
 
-On the JavaScript side, we initialize the program like normal, but we then subscribe to all the outgoing `cache` messages:
+On the JavaScript side, we initialize the program like normal, but we then subscribe to all the outgoing `storeNumber` messages:
 
 ```javascript
 var app = Elm.Main.init({
   node: document.getElementById('elm')
 });
-app.ports.cache.subscribe(function(data) {
-  localStorage.setItem('cache', JSON.stringify(data));
+app.ports.storeNumber.subscribe(function(data) {
+  localStorage.setItem('number', JSON.stringify(data));
 });
 ```
 
-Commands like `cache (E.int 42)` send values to anyone subscribing to the `cache` port in JavaScript. So the JS code would get `42` as `data` and cache it in `localStorage`.
+Commands like `storeNumber (E.int 42)` send values to anyone subscribing to the `storeNumber` port in JavaScript. So the JS code would get `42` as `data` and put it in `localStorage`.
 
 In most programs that want to cache information like this, you communicate with JavaScript in two ways:
 
@@ -60,9 +62,9 @@ In most programs that want to cache information like this, you communicate with 
 So there are only _outgoing_ messages for this interaction with JS. And I would not get too intense trying to minimize the data crossing the border. Keep it simple, and be more tricky only if you find it necessary in practice!
 
 
-> **Note 1:** This is not a binding to the `setItem` function! This is a common misinterpretation. **The point is not to cover the LocalStorage API one function at a time.** It is to ask for some caching. The JS code can decide to use LocalStorage, IndexedDB, WebSQL, or whatever else. So instead of thinking “should each JS function be a port?” think about “what needs to be accomplished in JS?” We have been thinking about caching, but it is the same in a fancy restaurant. You decide what you want, but you do not micromanage exactly how it is prepared. Your high-level message (your food order) goes back to the kitchen and you get a bunch of very specific messages back (drinks, appetizers, main course, desert, etc.) as a result. My point is that **well-designed ports create a clean separation of concerns.** Elm can do the view however it wants and JavaScript can do the caching however it wants.
+> **Note 1:** This is not a binding to the `setItem` function! This is a common misinterpretation. **The point is not to cover the LocalStorage API one function at a time.** It is to ask for some storage. The JS code can decide to use LocalStorage, IndexedDB, WebSQL, or whatever else. So instead of thinking “should each JS function be a port?” think about “what needs to be accomplished in JS?” We have been thinking about storing values, but it is the same in a fancy restaurant. You decide what you want, but you do not micromanage exactly how it is prepared. Your high-level message (your food order) goes back to the kitchen and you get a bunch of very specific messages back (drinks, appetizers, main course, desert, etc.) as a result. My point is that **well-designed ports create a clean separation of concerns.** Elm can do the view however it wants and JavaScript can do the storage however it wants.
 >
-> **Note 2:** There is not a LocalStorage package for Elm right now, so the current recommendation is to use ports like we just saw. Some people wonder about the timeline to get support directly in Elm. Some people wonder quite aggressively! I tried to write about that [here](https://github.com/elm/projects/blob/master/roadmap.md#where-is-the-localstorage-package).
+> **Note 2:** There is not a `localStorage` package for Elm yet, so the current recommendation is to use ports like in [this example](https://github.com/elm-community/js-integration-examples/tree/master/localStorage) for now.
 >
 > **Note 3:** Once you `subscribe` to outgoing port messages, you can `unsubscribe` as well. It works like `addEventListener` and `removeEventListener`, also requiring reference-equality of functions to work.
 
@@ -109,6 +111,8 @@ Now you may be wondering, why send the _entire_ list though? Why not just say wh
 
 Instead, I chose a design that makes synchronization errors impossible. JavaScript owns the state. All the Elm code does is get the complete list and display it. If the Elm code needs to change the list for some reason, it cannot! JavaScript owns the state. Instead, I would send a message out to JavaScript asking for specific changes. Point is, **state should be owned by Elm or by JavaScript, never both.** This dramatically reduces the risk of synchronization errors. Many folks who struggle with ports fall into this trap of never really deciding who owns the state. Be wary!
 
+Check out [this websocket example](https://github.com/elm-community/js-integration-examples/tree/master/websockets) for another example of incoming messages.
+
 
 ## Notes
 
@@ -141,5 +145,6 @@ I hope this information will help you find ways to embed Elm in your existing Ja
 >
 > 1. **Packages are designed for Elm.** As members of the Elm community get more experience and confidence, we are starting to see fresh approaches to layout and data visualization that work seamlessly with The Elm Architecture and the overall ecosystem. I expect this to keep happening with other sorts of problems!
 > 2. **Packages are portable.** If the compiler someday produces x86 or WebAssembly, the whole ecosystem just keeps working, but faster! Ports guarantee that all packages are written entirely in Elm, and Elm itself was designed such that other non-JS compiler targets are viable.
+> 3. **Packages are more secure.** Languages like JavaScript have serious security concerns with packages. Reports of [stealing credentials](https://www.bleepingcomputer.com/news/security/compromised-javascript-package-caught-stealing-npm-credentials/) and [stealing API keys](https://winbuzzer.com/2020/01/14/microsoft-discovers-an-npm-package-thats-been-stealing-unix-user-data-xcxwbn/) are not uncommon, imposing a permanent auditing cost on all packages. Do they add a keylogger to `window`? Elm packages can guarantee that entire categories of exploits just cannot happen, reducing auditing cost and security risks overall.
 >
 > So this is definitely a longer and harder path, but languages live for 30+ years. They have to support teams and companies for decades, and when I think about what Elm will look like in 20 or 30 years, I think the trade-offs that come with ports look really promising! My talk [What is Success?](https://youtu.be/uGlzRt-FYto) starts a little slow, but it gets into this a bit more!
