@@ -1,117 +1,243 @@
 # Ports
 
-The previous two pages, we saw the JavaScript needed to start Elm programs and a way to pass in flags on initialization:
+Ports allow communication between Elm and JavaScript.
 
-```javascript
-// initialize
+Ports are probably most commonly used for [`WebSockets`](https://github.com/elm-community/js-integration-examples/tree/master/websockets) and [`localStorage`](https://github.com/elm-community/js-integration-examples/tree/master/localStorage). Let's focus on the `WebSockets` example.
+
+
+## Ports in JavaScript
+
+Here we have pretty much the same HTML we have been using on the previous pages, but with a bit of extra JavaScript code in there. We create a connection to `wss://echo.websocket.org` that just repeats back whatever you send it. You can see in the [live example](https://ellie-app.com/8yYgw7y7sM2a1) that this lets us make the skeleton of a chat room:
+
+```html
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Elm + Websockets</title>
+  <script type="text/javascript" src="elm.js"></script>
+</head>
+
+<body>
+	<div id="myapp"></div>
+</body>
+
+<script type="text/javascript">
+
+// Start the Elm application.
 var app = Elm.Main.init({
-  node: document.getElementById('elm')
+	node: document.getElementById('myapp')
 });
 
-// initialize with flags
-var app = Elm.Main.init({
-  node: document.getElementById('elm'),
-  flags: Date.now()
+// Create your WebSocket.
+var socket = new WebSocket('wss://echo.websocket.org');
+
+// When a command goes to the `sendMessage` port, we pass the message
+// along to the WebSocket.
+app.ports.sendMessage.subscribe(function(message) {
+    socket.send(message);
 });
+
+// When a message comes into our WebSocket, we pass the message along
+// to the `messageReceiver` port.
+socket.addEventListener("message", function(event) {
+	app.ports.messageReceiver.send(event.data);
+});
+
+// If you want to use a JavaScript library to manage your WebSocket
+// connection, replace the code in JS with the alternate implementation.
+</script>
+
+</html>
 ```
 
-We can give information to the Elm program, but only when it starts. What if you want to talk to JavaScript while the program is running?
+We call `Elm.Main.init()` like in all of our interop examples, but this time we are actually using the resulting `app` object. We are subscribing to the `sendMessage` port and we are sending to the `messageReceiver` port.
 
-You can check out the minimal examples of using ports for [`WebSockets`](https://github.com/elm-community/js-integration-examples/tree/master/websockets) and [`localStorage`](https://github.com/elm-community/js-integration-examples/tree/master/localStorage), but come back to see why it is that way!
-
-
-## Message Passing
-
-Elm allows you to pass messages between Elm and JavaScript through **ports**. Unlike the request/response pairs you see with HTTP, the messages sent through ports just go in one direction. It is like sending a letter. For example, banks in the United States send me hundreds of unsolicited letters, cajoling me to indebt myself to them so I will finally be happy. Those messages are all one-way. All letters are like that really. I may send a letter to my friend and she may reply, but there is nothing inherent about messages that demands request/response pairs. Point is, **Elm and JavaScript can communicate by sending these one-way messages through ports.**
+Those correspond to code written on the Elm side.
 
 
-## Outgoing Messages
+## Ports in Elm
 
-Say we want to use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Storage) to cache some information. The solution is to set up a port that sends information out to JavaScript.
-
-On the Elm side, this means defining the `port` like this:
+Check out the lines that use the `port` keyword in the corresponding Elm file. This is how we define the ports that we just saw on the JavaScript side.
 
 ```elm
 port module Main exposing (..)
 
-import Json.Encode as E
-
-port storeNumber : E.Value -> Cmd msg
-```
-
-The most important line is the `port` declaration. That creates a `storeNumber` function, so we can create commands like `storeNumber (E.int 42)` that will send a [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value) out to JavaScript.
-
-On the JavaScript side, we initialize the program like normal, but we then subscribe to all the outgoing `storeNumber` messages:
-
-```javascript
-var app = Elm.Main.init({
-  node: document.getElementById('elm')
-});
-app.ports.storeNumber.subscribe(function(data) {
-  localStorage.setItem('number', JSON.stringify(data));
-});
-```
-
-Commands like `storeNumber (E.int 42)` send values to anyone subscribing to the `storeNumber` port in JavaScript. So the JS code would get `42` as `data` and put it in `localStorage`.
-
-In most programs that want to cache information like this, you communicate with JavaScript in two ways:
-
-1. You pass in cached data through flags on initialization
-2. You send data out periodically to update the cache
-
-So there are only _outgoing_ messages for this interaction with JS. And I would not get too intense trying to minimize the data crossing the border. Keep it simple, and be more tricky only if you find it necessary in practice!
+import Browser
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Json.Decode as D
 
 
-> **Note 1:** This is not a binding to the `setItem` function! This is a common misinterpretation. **The point is not to cover the LocalStorage API one function at a time.** It is to ask for some storage. The JS code can decide to use LocalStorage, IndexedDB, WebSQL, or whatever else. So instead of thinking “should each JS function be a port?” think about “what needs to be accomplished in JS?” We have been thinking about storing values, but it is the same in a fancy restaurant. You decide what you want, but you do not micromanage exactly how it is prepared. Your high-level message (your food order) goes back to the kitchen and you get a bunch of very specific messages back (drinks, appetizers, main course, desert, etc.) as a result. My point is that **well-designed ports create a clean separation of concerns.** Elm can do the view however it wants and JavaScript can do the storage however it wants.
->
-> **Note 2:** There is not a `localStorage` package for Elm yet, so the current recommendation is to use ports like in [this example](https://github.com/elm-community/js-integration-examples/tree/master/localStorage) for now.
->
-> **Note 3:** Once you `subscribe` to outgoing port messages, you can `unsubscribe` as well. It works like `addEventListener` and `removeEventListener`, also requiring reference-equality of functions to work.
+
+-- MAIN
 
 
-## Incoming Messages
+main : Program () Model Msg
+main =
+  Browser.element
+    { init = init
+    , view = view
+    , update = update
+    , subscriptions = subscriptions
+    }
 
-Say we are creating a chat room in JavaScript, and we are curious to try out Elm a bit. Pretty much every company that uses Elm today, started by converting just one element to try it out. Does it work nice? Does the team like it? If so, great, try more elements! If not, no big deal, revert and use the technologies that work best for you!
 
-So when we look at our chat room app, we decide to convert an element that shows all active users. That means Elm needs to know about any changes to the active users list. Well, that sort of thing happens through ports!
 
-On the Elm side, this means defining the `port` like this:
 
-```elm
-port module Main exposing (..)
+-- PORTS
 
-import Json.Encode as E
+
+port sendMessage : String -> Cmd msg
+port messageReceiver : (String -> msg) -> Sub msg
+
+
+
+-- MODEL
+
+
+type alias Model =
+  { draft : String
+  , messages : List String
+  }
+
+
+init : () -> ( Model, Cmd Msg )
+init flags =
+  ( { draft = "", messages = [] }
+  , Cmd.none
+  )
+
+
+
+-- UPDATE
+
 
 type Msg
-  = Searched String
-  | Changed E.Value
+  = DraftChanged String
+  | Send
+  | Recv String
 
-port activeUsers : (E.Value -> msg) -> Sub msg
+
+-- Use the `sendMessage` port when someone presses ENTER or clicks
+-- the "Send" button. Check out index.html to see the corresponding
+-- JS where this is piped into a WebSocket.
+--
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+  case msg of
+    DraftChanged draft ->
+      ( { model | draft = draft }
+      , Cmd.none
+      )
+
+    Send ->
+      ( { model | draft = "" }
+      , sendMessage model.draft
+      )
+
+    Recv message ->
+      ( { model | messages = model.messages ++ [message] }
+      , Cmd.none
+      )
+
+
+
+-- SUBSCRIPTIONS
+
+
+-- Subscribe to the `messageReceiver` port to hear about messages coming in
+-- from JS. Check out the index.html file to see how this is hooked up to a
+-- WebSocket.
+--
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+  messageReceiver Recv
+
+
+
+-- VIEW
+
+
+view : Model -> Html Msg
+view model =
+  div []
+    [ h1 [] [ text "Echo Chat" ]
+    , ul []
+        (List.map (\msg -> li [] [ text msg ]) model.messages)
+    , input
+        [ type_ "text"
+        , placeholder "Draft"
+        , onInput DraftChanged
+        , on "keydown" (ifIsEnter Send)
+        , value model.draft
+        ]
+        []
+    , button [ onClick Send ] [ text "Send" ]
+    ]
+
+
+
+-- DETECT ENTER
+
+
+ifIsEnter : msg -> D.Decoder msg
+ifIsEnter msg =
+  D.field "key" D.string
+    |> D.andThen (\key -> if key == "Enter" then D.succeed msg else D.fail "some other key")
 ```
 
-Again, the important line is the `port` declaration. It creates a `activeUsers` function, and if we subscribe to `activeUsers Changed`, we will get a `Msg` whenever folks send values in from JavaScript.
+Notice that the first line says `port module` rather than just `module`. This makes it possible to define ports in a given module. The compiler gives a hint about this if it is needed, so hopefully no one gets too stuck on that!
 
-On the JavaScript side, we initialize the program like normal, but now we are able to send messages to any `activeUsers` subscriptions:
+Okay, but what is going on with the `port` declarations for `sendMessage` and `messageReceiver`?
+
+
+## Outgoing Messages (`Cmd`)
+
+The `sendMessage` declaration lets us send messages out of Elm.
+
+```elm
+port sendMessage : String -> Cmd msg
+```
+
+Here we are declaring that we want to send out `String` values, but we could send out any of the types that work with flags. We talked about those types on the previous page, and you can check out [this `localStorage` example](https://ellie-app.com/8yYddD6HRYJa1) to see a [`Json.Encode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode#Value) getting sent out to JavaScript.
+
+From there we can use `sendMessage` like any other function. If your `update` function produces a `sendMessage "hello"` command, you will hear about it on the JavaScript side:
 
 ```javascript
-var activeUsers = // however this is defined
-
-var app = Elm.Main.init({
-  node: document.getElementById('elm'),
-  flags: activeUsers
+app.ports.sendMessage.subscribe(function(message) {
+    socket.send(message);
 });
-
-// after someone enters or exits
-app.ports.activeUsers.send(activeUsers);
 ```
 
-I start the Elm program with any known active users, and every time the active user list changes, I send the entire list through the `activeUsers` port.
+This JavaScript code is subscribed to all of the outgoing messages. You can `subscribe` multiple functions and `unsubscribe` functions by reference, but we generally recommend keeping things static.
 
-Now you may be wondering, why send the _entire_ list though? Why not just say who enters or exits? This approach sounds nice, but it creates the risk of synchronization errors. JavaScript thinks there are 20 active users, but somehow Elm thinks there are 25. Is there a bug in Elm code? Or in JavaScript? Forgot to send an exit message through ports? These bugs are extremely tricky to sort out, and you can end up wasting hours or days trying to figure them out.
+We also recommend sending out richer messages, rather than making lots of individual ports. Maybe that means having a custom type in Elm that represents everything you might need to tell JS, and then using [`Json.Encode`](https://package.elm-lang.org/packages/elm/json/latest/Json-Encode) to send it out to a single JS subscription. Many people find that this creates a cleaner separation of concerns. The Elm code clearly owns some state, and the JS clearly owns other state.
 
-Instead, I chose a design that makes synchronization errors impossible. JavaScript owns the state. All the Elm code does is get the complete list and display it. If the Elm code needs to change the list for some reason, it cannot! JavaScript owns the state. Instead, I would send a message out to JavaScript asking for specific changes. Point is, **state should be owned by Elm or by JavaScript, never both.** This dramatically reduces the risk of synchronization errors. Many folks who struggle with ports fall into this trap of never really deciding who owns the state. Be wary!
 
-Check out [this websocket example](https://github.com/elm-community/js-integration-examples/tree/master/websockets) for another example of incoming messages.
+## Incoming Messages (`Sub`)
+
+The `messageReceiver` declaration lets us listen for messages coming in to Elm.
+
+```elm
+port messageReceiver : (String -> msg) -> Sub msg
+```
+
+We are saying we are going to receive `String` values, but again, we can listen for any type that can come in through flags or outgoing ports. Just swap out the `String` type with one of the types that can cross the border.
+
+Again we can use `messageReceiver` like any other function. In our case we call `messageReceiver Recv` when defining our `subscriptions` because we want to hear about any incoming messages from JavaScript. This will let us get messages like `Recv "how are you?"` in our `update` function.
+
+On the JavaScript side, we are able to send things to this port whenever we want:
+
+```javascript
+socket.addEventListener("message", function(event) {
+	app.ports.messageReceiver.send(event.data);
+});
+```
+
+We happen to be sending whenever the websocket gets a message, but you could send at other times as well. Maybe we are getting messages from another data source as well. That is fine, and Elm does not need to know anything about it! Just send the strings through the relevant port.
 
 
 ## Notes
@@ -120,9 +246,9 @@ I want to add a couple notes about the examples we saw here:
 
 - **All `port` declarations must appear in a `port module`.** It is probably best to organize all your ports into one `port module` so it is easier to see the interface all in one place.
 
-- **Sending `Json.Decode.Value` through ports is recommended, but not the only way.** Like with flags, certain core types can pass through ports as well. This is from the time before JSON decoders, and you can read about it more [here](/interop/flags.html#verifying-flags).
+- **Sending `Json.Encode.Value` through ports is recommended.** Like with flags, certain core types can pass through ports as well. This is from the time before JSON decoders, and you can read about it more [here](/interop/flags.html#verifying-flags).
 
-- **Ports are for applications.** A `port module` is available in applications, but not in packages. This ensures that application authors have the flexibility they need, but the package ecosystem is entirely written in Elm. I argued [here](https://groups.google.com/d/msg/elm-dev/1JW6wknkDIo/H9ZnS71BCAAJ) that this will help us build a much stronger ecosystem and community in the long run.
+- **Ports are for applications.** A `port module` is available in applications, but not in packages. This ensures that application authors have the flexibility they need, but the package ecosystem is entirely written in Elm. We think this will create a stronger ecosystem and community in the long run, and we get into the tradeoffs in depth in the upcoming section on the [limits](/interop/limits.html) of Elm/JS interop.
 
 - **Ports are about creating strong boundaries!** Definitely do not try to make a port for every JS function you need. You may really like Elm and want to do everything in Elm no matter the cost, but ports are not designed for that. Instead, focus on questions like “who owns the state?” and use one or two ports to send messages back and forth. If you are in a complex scenario, you can even simulate `Msg` values by sending JS like `{ tag: "active-users-changed", list: ... }` where you have a tag for all the variants of information you might send across.
 
