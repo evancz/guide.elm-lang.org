@@ -26,6 +26,7 @@
    * [Flags](interop/flags.md)
    * [Ports](interop/ports.md)
    * [Custom Elements](interop/custom_elements.md)
+   * [Limits](interop/limits.md)
 * [Web Apps](webapps/README.md)
    * [Navigation](webapps/navigation.md)
    * [URL Parsing](webapps/url_parsing.md)
