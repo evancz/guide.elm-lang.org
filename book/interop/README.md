@@ -8,7 +8,7 @@ But what happens when you need to integrate with JavaScript? Maybe there is a br
 - [Ports](/interop/ports.html)
 - [Custom Elements](/interop/custom_elements.html)
 
-Before we get into the three mechanisms, we need know how to compile Elm programs to JavaScript!
+Before we get into the three mechanisms, we need to know how to compile Elm programs to JavaScript!
 
 > **NOTE:** If you are evaluating Elm for use at work, I encourage you to make sure these three mechanisms will be able to cover all of your needs. You can get a quick overview of this chapter by looking at these [examples](https://github.com/elm-community/js-integration-examples/). Please ask [here](https://discourse.elm-lang.org/) if you are not sure about something, and I encourage you to circle back to Elm later if you are not fully confident.
 
