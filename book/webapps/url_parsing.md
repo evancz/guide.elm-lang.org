@@ -142,7 +142,196 @@ So now we can handle URL fragments as well!
 Now that we have seen a few parsers, we should look at how this fits into a `Browser.application` program. Rather than just saving the current URL like last time, can we parse it into useful data and show that instead?
 
 ```elm
-TODO
+module Main exposing (Model, Msg(..), Route(..), init, links, main, routeParser, subscriptions, toRoute, update, view, viewLink)
+
+import Browser
+import Browser.Navigation as Nav
+import Debug
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Url exposing (Url)
+import Url.Parser as UP exposing ((</>), Parser, int, map, oneOf, parse, s, string, top)
+
+
+
+-- MAIN
+
+
+main : Program () Model Msg
+main =
+    Browser.application
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        , onUrlChange = UrlChanged
+        , onUrlRequest = LinkClicked
+        }
+
+
+
+-- MODEL
+
+
+type alias Model =
+    { key : Nav.Key
+    , route : Route
+    }
+
+
+type Route
+    = Topic String
+    | Blog Int
+    | User String
+    | Comment String Int
+    | NotFound
+    | Home
+
+
+init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+init flags url key =
+    ( Model key (toRoute url), Cmd.none )
+
+
+
+-- UPDATE
+
+
+type Msg
+    = LinkClicked Browser.UrlRequest
+    | UrlChanged Url.Url
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        LinkClicked urlRequest ->
+            case urlRequest of
+                Browser.Internal url ->
+                    ( model, Nav.pushUrl model.key (Url.toString url) )
+
+                Browser.External href ->
+                    ( model, Nav.load href )
+
+        UrlChanged url ->
+            ( { model | route = toRoute url }
+            , Cmd.none
+            )
+
+
+routeParser : Parser (Route -> a) a
+routeParser =
+    oneOf
+        [ UP.map Topic (UP.s "topic" </> string)
+        , UP.map Blog (UP.s "blog" </> int)
+        , UP.map User (UP.s "user" </> string)
+        , UP.map Comment (UP.s "user" </> string </> UP.s "comment" </> int)
+        , UP.map Home top
+        ]
+
+
+toRoute : Url -> Route
+toRoute url =
+    Maybe.withDefault NotFound (parse routeParser url)
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.none
+
+
+
+-- VIEW
+
+
+view : Model -> Browser.Document Msg
+view model =
+    case model.route of
+        Topic name ->
+            { title = name
+            , body =
+                [ text "The current topic is: "
+                , b [] [ text name ]
+                , ul [] links
+                ]
+            }
+
+        Blog id ->
+            let
+                stringID =
+                    String.fromInt id
+            in
+            { title = stringID
+            , body =
+                [ text "This blog id is: "
+                , b [] [ text stringID ]
+                , ul [] links
+                ]
+            }
+
+        User name ->
+            { title = "User " ++ name
+            , body =
+                [ text "The current user name is: "
+                , b [] [ text name ]
+                , ul [] links
+                ]
+            }
+
+        Comment name id ->
+            let
+                stringID =
+                    String.fromInt id
+            in
+            { title = "Comment " ++ stringID ++ " from " ++ name
+            , body =
+                [ text "The current comment ID is: "
+                , b [] [ text stringID ]
+                , text " and is from the user: "
+                , b [] [ text name ]
+                , ul [] links
+                ]
+            }
+
+        Home ->
+            { title = "home page"
+            , body =
+                [ text "This is the home page"
+                , ul [] links
+                ]
+            }
+
+        NotFound ->
+            { title = "Page not Found"
+            , body =
+                [ text "Page not found"
+                ]
+            }
+
+
+links : List (Html msg)
+links =
+    [ viewLink "/topic/architecture"
+    , viewLink "/topic/painting"
+    , viewLink "/topic/sculpture"
+    , viewLink "/blog/42"
+    , viewLink "/blog/123"
+    , viewLink "/blog/451"
+    , viewLink "/user/tom"
+    , viewLink "/user/sue"
+    , viewLink "/user/sue/comment/11"
+    , viewLink "/user/sue/comment/51"
+    , viewLink "/"
+    ]
+
+
+viewLink : String -> Html msg
+viewLink path =
+    li [] [ a [ href path ] [ text path ] ]
 ```
 
 The major new things are:
