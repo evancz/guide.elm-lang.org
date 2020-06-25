@@ -66,7 +66,7 @@ You can compile Elm code to HTML or JavaScript with commands like this:
 elm make src/Main.elm
 
 # Create an optimized JS file to embed in a custom HTML document.
-elm make src/Main.elm --optimize --output=elm.js
+elm make src/Main.elm --optimize --output=main.js
 ```
 
 Try running these commands on your `src/Main.elm` file.

@@ -20,11 +20,11 @@ Step two is to minify the resulting JavaScript code. I use a minifier called `ug
 Putting those together, we can optimize `src/Main.elm` with two terminal commands:
 
 ```bash
-elm make src/Main.elm --optimize --output=elm.js
-uglifyjs elm.js --compress 'pure_funcs="F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9",pure_getters,keep_fargs=false,unsafe_comps,unsafe' | uglifyjs --mangle --output=elm.min.js
+elm make src/Main.elm --optimize --output=main.js
+uglifyjs main.js --compress 'pure_funcs="F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9",pure_getters,keep_fargs=false,unsafe_comps,unsafe' | uglifyjs --mangle --output=main.min.js
 ```
 
-After this you will have an `elm.js` and a smaller `elm.min.js` file!
+After this you will have an `main.js` and a smaller `main.min.js` file!
 
 > **Note 1:** `uglifyjs` is called twice there. First to `--compress` and second to `--mangle`. This is necessary! Otherwise `uglifyjs` will ignore our `pure_funcs` flag.
 >
@@ -35,15 +35,15 @@ After this you will have an `elm.js` and a smaller `elm.min.js` file!
 
 It is hard to remember all those flags for `uglifyjs`, so it is probably better to write a script that does this.
 
-Say we want a bash script that produces `elm.js` and `elm.min.js` files. On Mac or Linux, we can define `optimize.sh` like this:
+Say we want a bash script that produces `main.js` and `main.min.js` files. On Mac or Linux, we can define `optimize.sh` like this:
 
 ```bash
 #!/bin/sh
 
 set -e
 
-js="elm.js"
-min="elm.min.js"
+js="main.js"
+min="main.min.js"
 
 elm make --optimize --output=$js $@
 
@@ -57,8 +57,8 @@ echo "Gzipped size: $(cat $min | gzip -c | wc -c) bytes"
 Now if I run `./optimize.sh src/Main.elm` on my [TodoMVC](https://github.com/evancz/elm-todomvc) code, I see something like this in the terminal:
 
 ```
-Compiled size:  122297 bytes  (elm.js)
-Minified size:   24123 bytes  (elm.min.js)
+Compiled size:  122297 bytes  (main.js)
+Minified size:   24123 bytes  (main.min.js)
 Gzipped size:     9148 bytes
 ```
 
