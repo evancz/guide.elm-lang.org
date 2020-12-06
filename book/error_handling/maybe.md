@@ -48,7 +48,7 @@ Try calling `String.toFloat` with other strings to see what happens ⬆️
 
 Not all strings make sense as numbers, so this function models that explicitly. Can a string be turned into a float? Maybe! From there we can pattern match on the resulting data and continue as appropriate.
 
-> **Exercise:** I wrote a little program [here](https://ellie-app.com/3P9hcDhdsc5a1) that converts from Celsius to Fahrenheit. Try refactoring the `view` code in different ways. Can you put a red border around invalid input? Can you add more conversions? Fahrenheit to Celsius? Inches to Meters?
+> **Exercise:** I wrote a little program [here](https://ellie-app.com/bJSMQz9tydqa1) that converts from Celsius to Fahrenheit. Try refactoring the `view` code in different ways. Can you put a red border around invalid input? Can you add more conversions? Fahrenheit to Celsius? Inches to Meters?
 
 [toFloat]: https://package.elm-lang.org/packages/elm-lang/core/latest/String#toFloat
 
