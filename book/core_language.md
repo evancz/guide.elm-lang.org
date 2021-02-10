@@ -81,7 +81,7 @@ Try greeting someone else, like `"Stokely"` or `"Kwame"` ⬆️
 
 The values passed in to the function are commonly called **arguments**, so you could say "`greet` is a function that takes one argument."
 
-Okay, now that greetings are out of the way, how about an `madlib` function that takes _two_ arguments?
+Okay, now that greetings are out of the way, how about a `madlib` function that takes _two_ arguments?
 
 {% repl %}
 [
