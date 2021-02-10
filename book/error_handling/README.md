@@ -16,7 +16,7 @@ toAge userInput =
 -- toAge "ZZ" == InvalidInput
 ```
 
-Instead of crashing on bad input, we say explicitly that the result will either be a value like `Age 24` or `Age 99` or it will be an `InvalidInput` value. No matter what input we get, we always produce one of these two variants. From there, we use pattern matching which will ensure that both possibilities are accounted for. No crashing!
+No matter what input is given to the `toAge` function, it always produces a value. Valid input produces values like `Age 24` and `Age 99`, whereas invalid input produces the `InvalidInput` value. From there, we use pattern matching which will ensure that both possibilities are accounted for. No crashing!
 
 This kind of thing comes up all the time! For example, maybe you want to turn a bunch of user input into a `Post` to share with others. But what happens if they forget to add a title? Or there is no content in the post? We could model all these problems explicitly:
 
