@@ -20,22 +20,22 @@ In JavaScript, the equivalent code spits out `"undefined Hesse"`. Not even an er
 
 ```
 -- TYPE MISMATCH ---------------------------------------------------------------
+The 1st argument to `toFullName` is not what I expect:
 
-The argument to function `toFullName` is causing a mismatch.
-
-6│   toFullName { fistName = "Hermann", lastName = "Hesse" }
+4|   toFullName { fistName = "Hermann", lastName = "Hesse" }
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Function `toFullName` is expecting the argument to be:
+This argument is a record of type:
 
-    { …, firstName : … }
+    { fistName : String, lastName : String }
 
-But it is:
+But `toFullName` needs the 1st argument to be:
 
-    { …, fistName : … }
+    { a | firstName : String, lastName : String }
 
-Hint: I compared the record fields and found some potential typos.
+Hint: Seems like a record field typo. Maybe firstName should be fistName?
 
-    firstName <-> fistName
+Hint: Can more type annotations be added? Type annotations always help me give
+more specific messages, and I think they could help a lot in this case!
 ```
 
 It sees that `toFullName` is getting the wrong *type* of argument. Like the hint in the error message says, someone accidentally wrote `fist` instead of `first`.
