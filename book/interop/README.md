@@ -57,7 +57,7 @@ I want to call attention to the important lines here:
 
 - `<head>` - We have a line to load our compiled `main.js` file. This is required! If you compile an Elm module called `Main`, you will get an `Elm.Main.init()` function available in JavaScript. If you compile an Elm module named `Home`, you will get an `Elm.Home.init()` function in JavaScript. Etc.
 
-- `<body>` - We need to do two things here. First, we create a `<div>` that we want our Elm program to take over. Maybe it is within a larger application, surrounded by tons of other stuff? That is fine! Second, we have a `<script>` that initializes our Elm program. Here we call the `Elm.Main.init()` function to start our program, passing in the `node` we want to take over.
+- `<body>` - We need to do two things here. First, we create a `<div>` that we want our Elm program to take over. Maybe it is within a larger application, surrounded by tons of other stuff? That is fine! Second, we have a `<script>` to initialize our Elm program. Here we call the `Elm.Main.init()` function to start our program, passing in the `node` we want to take over.
 
 Now that we know how to embed Elm programs in an HTML document, it is time to start exploring the three interop options: flags, ports, and custom elements!
 
