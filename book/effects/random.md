@@ -161,7 +161,7 @@ We first create `Symbol` to describe the pictures that can appear on the slot ma
 
 From there we use `map3` to combine them into a new `spin` generator. It says to generate three symbols and then put them together into a `Spin`.
 
-The point here is that from small building blocks, we can create a `Generator` that describes pretty complex behavior. And then from our application, we just have to say something like `Random.generate NewSpin spin` to get the next random value.
+The point here is that from small building blocks, we can create a `Generator` that describes pretty complex behavior. And then from our application, we just have to say something like `Random.generate Spin spin` to get the next random value.
 
 
 > **Exercises:** Here are a few ideas to make the example code on this page a bit more interesting!
