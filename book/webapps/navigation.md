@@ -153,6 +153,16 @@ view model =
 viewLink : String -> Html msg
 viewLink path =
   li [] [ a [ href path ] [ text path ] ]
+
+
+onUrlChange : Url.Url -> Msg
+onUrlChange url =
+    UrlChanged url
+
+
+onUrlRequest : Browser.UrlRequest -> Msg
+onUrlRequest urlRequest =
+    LinkClicked urlRequest
 ```
 
 The `update` function can handle either `LinkClicked` or `UrlChanged` messages. There is a lot of new stuff in the `LinkClicked` branch, so we will focus on that first!
