@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Core Language](core_language.md)
+* [Bases du langage](bases_du_langage.md)
 * [The Elm Architecture](architecture/README.md)
    * [Buttons](architecture/buttons.md)
    * [Text Fields](architecture/text_fields.md)

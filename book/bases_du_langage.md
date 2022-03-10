@@ -1,16 +1,17 @@
 
-# Core Language
+# Bases du langage
 
-Let's start by getting a feeling for Elm code!
+Commençons par nous familiariser avec le code Elm !
 
-The goal here is to become familiar with **values** and **functions** so you will be more confident reading Elm code when we get to the larger examples later on.
+L'objectif est de vous familiariser avec les **valeurs** et les **fonctions** afin que vous soyez plus confiant dans la lecture du code Elm lorsque nous aborderons les exemples plus importants par la suite.
 
 
-## Values
+## Valeurs
 
-The smallest building block in Elm is called a **value**. This includes things like `42`, `True`, and `"Hello!"`.
 
-Let's start by looking at numbers:
+Le plus petit bloc de construction dans Elm est appelé une **valeur**. Cela inclut des choses comme `42`, `True`, et `"Hello !"`.
+
+Commençons par regarder les nombres :
 
 {% repl %}
 [
@@ -22,11 +23,12 @@ Let's start by looking at numbers:
 ]
 {% endrepl %}
 
-All the examples on this page are interactive, so click on this black box ⬆️ and the cursor should start blinking. Type in `2 + 2` and press the ENTER key. It should print out `4`. You should be able to interact with any of the examples on this page the same way!
+Tous les exemples de cette page sont interactifs. Cliquez sur la boîte noire au dessus ⬆️ et le curseur devrait commencer à clignoter. Tapez `2 + 2` et appuyez sur la touche _Entrée_. Le résultat devrait être "4". Vous devriez pouvoir interagir avec tous les exemples de cette page de la même manière !
 
-Try typing in things like `30 * 60 * 1000` and `2 ^ 4`. It should work just like a calculator!
+Essayez de taper des choses comme `30 * 60 * 1000` et `2 ^ 4`. Cela devrait fonctionner comme une calculatrice !
 
-Doing math is fine and all, but it is surprisingly uncommon in most programs! It is much more common to work with **strings** like this:
+Faire des maths, c'est symapthique, mais c'est étonnamment rare dans la plupart des programmes ! Il est beaucoup plus courant de travailler avec des **chaînes de caractères** comme ceci :
+
 
 {% repl %}
 [
@@ -43,14 +45,16 @@ Doing math is fine and all, but it is surprisingly uncommon in most programs! It
 ]
 {% endrepl %}
 
-Try putting some strings together with the `(++)` operator ⬆️
 
-These primitive values get more interesting when we start writing functions to transform them!
+Essayez d'assembler quelques chaînes de caractères avec l'opérateur `(++)` ⬆️
 
-> **Note:** You can learn more about operators like [`(+)`](https://package.elm-lang.org/packages/elm/core/latest/Basics#+) and [`(/)`](https://package.elm-lang.org/packages/elm/core/latest/Basics#/) and [`(++)`](https://package.elm-lang.org/packages/elm/core/latest/Basics#++) in the documentation for the [`Basics`](https://package.elm-lang.org/packages/elm/core/latest/Basics) module. It is worth reading through all the docs in that package at some point!
+Ces valeurs primitives deviennent plus intéressantes quand on commence à écrire des fonctions pour les transformer !
 
 
-## Functions
+> **Note:** Vous pouvez en apprendre plus sur les opérateurs comme  [`(+)`](https://package.elm-lang.org/packages/elm/core/latest/Basics#+) et [`(/)`](https://package.elm-lang.org/packages/elm/core/latest/Basics#/) et [`(++)`](https://package.elm-lang.org/packages/elm/core/latest/Basics#++) dans la documentation du module [`Basics`](https://package.elm-lang.org/packages/elm/core/latest/Basics). Ça vaudra la peine de lire toute la documentation de ce paquet à un moment donné !
+
+
+## Fonctions
 
 A **function** is a way to transform values. Take in one value, and produce another.
 
