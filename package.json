@@ -1,0 +1,13 @@
+{
+    "name": "elm-book",
+    "description": "Elm guide.",
+    "version": "1.0.0",
+    "devDependencies": {
+        "gitbook-plugin-bulk-redirect": "^0.2.1",
+        "honkit": "^3.7.1"
+    },
+    "scripts": {
+        "build": "honkit build",
+        "serve": "honkit serve"
+    }
+}

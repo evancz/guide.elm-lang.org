@@ -10,11 +10,9 @@ set -e
 
 ## BUILD BOOK
 
-npm install gitbook-cli@2.3.2
-./node_modules/.bin/gitbook install
+npm install
 npm link gitbook-plugin-elm-repl
-sed -i 's/"youtube"/"youtube","elm-repl"/' book.json
-./node_modules/.bin/gitbook build
+npm run build
 
 
 ## OVERRIDE FAVICON
