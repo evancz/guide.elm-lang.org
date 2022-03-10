@@ -1,21 +1,22 @@
-# An Introduction to Elm
+# Une introduction à Elm
 
-**Elm is a functional language that compiles to JavaScript.** It helps you make websites and web apps. It has a strong emphasis on simplicity and quality tooling.
+**Elm est un langage fonctionnel qui compile en Javascript.** Il va vous aider à réaliser des sites webs et des applications. Elm met fortement l'accent sur la simplicité et la qualité des outils.
 
-This guide will:
+Ce guide va :
 
-  - Teach you the fundamentals of programming in Elm.
-  - Show you how to make interactive apps with **The Elm Architecture**.
-  - Emphasize principles and patterns that generalize to programming in any language.
-
-By the end I hope you will not only be able to create great web apps in Elm, but also understand the core ideas and patterns that make Elm nice to use.
-
-If you are on the fence, I can safely guarantee that if you give Elm a shot and actually make a project in it, you will end up writing better JavaScript code. The ideas transfer pretty easily!
+  - Vous apprendre les fondamentaux de la programmation en Elm.
+  - Vous montrer comment réaliser des applications intéractives à l'aide de **L'Architecture Elm**.
+  - Mettre l'accent sur des principes et des patterns valables dans d'autres langages de programmation.
 
 
-## A Quick Sample
+J'espère qu'à la fin de ce guide, vous serez non seulement capable de créer de superbes applications Web avec Elm, mais aussi de comprendre les idées et les concepts fondamentaux qui rendent Elm agréable à utiliser.
 
-Here is a little program that lets you increment and decrement a number:
+Si vous hésitez encore, je peux vous garantir que si vous donnez une chance à Elm et que vous l'utilisez pour réellement coder un projet, vous finirez quoiqu'il en soit par écrire un meilleur code JavaScript. Les idées sont facilement transférables !
+
+
+## Un rapide exemple
+
+Voici un petit programme qui vous permet d'incrémenter et de décrémenter un nombre :
 
 ```elm
 import Browser
@@ -43,20 +44,21 @@ view model =
     ]
 ```
 
-Try it out in the online editor [here](https://elm-lang.org/examples/buttons).
+Essayez-le dans l'éditeur en ligne [ici](https://elm-lang.org/examples/buttons).
 
-The code can definitely look unfamiliar at first, so we will get into how this example works soon!
+Le code peut sembler peu familier au premier abord, c'est pourquoi nous verrons bientôt comment fonctionne cet exemple !
 
 
-## Why a functional *language*?
+## Pourquoi un *langage* fonctionnel?
 
-You can get some benefits from programming in a functional *style*, but there are some things you can only get from a functional *language* like Elm:
 
-  - No runtime errors in practice.
-  - Friendly error messages.
-  - Reliable refactoring.
-  - Automatically enforced semantic versioning for all Elm packages.
+Vous pouvez obtenir certains avantages en programmant dans un *style* fonctionnel, mais il y a des choses que vous ne pouvez obtenir que dans un *langage* fonctionnel comme Elm :
 
-No combination of JS libraries can give you all of these guarantees. They come from the design of the language itself! And thanks to these guarantees, it is quite common for Elm programmers to say they never felt so **confident** while programming. Confident to add features quickly. Confident to refactor thousands of lines. But without the background anxiety that you missed something important!
+  - Aucune erreur d'exécution en pratique.
+  - Des messages d'erreur conviviaux.
+  - Un refactoring fiable.
+  - Un versionnement sémantique automatique de tous les paquets Elm.
 
-I have put a huge emphasis on making Elm easy to learn and use, so all I ask is that you give Elm a shot and see what you think. I hope you will be pleasantly surprised!
+Aucune combinaison de bibliothèques JS ne peut vous donner toutes ces garanties car elles proviennent de la conception même du langage ! Et grâce à ces garanties, il est assez courant pour les programmeurs Elm de dire qu'ils ne se sont jamais sentis aussi **confiants** en programmant. Confiants pour ajouter des fonctionnalités rapidement. Confiants pour remanier des milliers de lignes. Mais sans l'angoisse de manquer quelque chose d'important !
+
+J'ai mis l'accent sur la facilité d'apprentissage et d'utilisation d'Elm, donc tout ce que je vous demande, c'est d'essayer Elm et de voir ce que vous en pensez. J'espère que vous serez agréablement surpris !
