@@ -4,7 +4,6 @@
     "version": "1.0.0",
     "devDependencies": {
         "gitbook-plugin-bulk-redirect": "^0.2.1",
-        "gitbook-plugin-youtube": "^2.0.0",
         "honkit": "^3.7.1"
     },
     "scripts": {

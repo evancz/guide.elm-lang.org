@@ -83,8 +83,6 @@ You can check out the full version of this example [here](https://github.com/elm
 
 ## More Info
 
-Luke has a lot more experience with custom elements, and I think his Elm Europe talk is an excellent introduction!
-
-{% youtube %} https://www.youtube.com/watch?v=tyFe9Pw6TVE {% endyoutube %}
+Luke has a lot more experience with custom elements, and I think his Elm Europe talk is an excellent introduction: https://www.youtube.com/watch?v=tyFe9Pw6TVE
 
 Docs on custom elements can be kind of confusing, but I hope this is enough for people to get started embedding simple logic for `Intl` or even large React widgets if that seems like the right choice for your project.
