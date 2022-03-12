@@ -1,13 +1,12 @@
 # Flags
 
-Flags are a way to pass values into Elm on initialization.
+Les *flags* sont des valeurs transmises à Elm lors de la phase d'initialisation.
 
-Common uses are passing in API keys, environment variables, and user data. This can be handy if you generate the HTML dynamically. They can also help us load cached information in [this `localStorage` example](https://github.com/elm-community/js-integration-examples/tree/master/localStorage).
+Ils sont typiquement utilisés pour passer à Elm des clés d'API, des variables d'environnement ou des données utilisateur, et ils s'avèrent particulièrement pratiques si vous générez du HTML dynamiquement. Les flags peuvent également servir à charger des informations depuis `localStorage`, comme [dans cet exemple](https://github.com/elm-community/js-integration-examples/tree/master/localStorage).
 
+## Les flags en HTML
 
-## Flags in HTML
-
-The HTML is basically the same as before, but with an additional `flags` argument to the `Elm.Main.init()` function
+Reprenons notre exemple précédent de page HTML, en passant un argument `flags` à la fonction `Elm.Main.init()` :
 
 ```html
 <html>
@@ -29,14 +28,13 @@ The HTML is basically the same as before, but with an additional `flags` argumen
 </html>
 ```
 
-In this example we are passing in the current time in milliseconds, but any JS value that can be JSON decoded can be given as a flag.
+Ici nous passons la date courante en millisecondes, mais n'importe quelle autre valeur JavaScript pouvant être décodée en JSON peut être utilisée comme *flag*.
 
-> **Note:** This additional data is called “flags” because it is kind of like command line flags. You can call `elm make src/Main.elm`, but you can add some flags like `--optimize` and `--output=main.js` to customize its behavior. Same sort of thing.
+> **Note :** Ces données supplémentaires sont appelées *flags* car elles évoquent les options passées à une ligne de commande. Vous pouvez appeler la commande `elm make src/Main.elm` et y passer des *flags* (options) comme `--optimize` ou `--output=main.js` pour modifier son comportement. C'est le même principe.
 
+## Les flags en Elm
 
-## Flags in Elm
-
-To handle flags on the Elm side, you need to modify your `init` function a bit:
+Pour gérer les flags dans le code Elm, nous avons besoin de modifier notre fonction `init` :
 
 ```elm
 module Main exposing (..)
@@ -91,18 +89,17 @@ subscriptions _ =
   Sub.none
 ```
 
-The only important here is the `init` function says it takes an `Int` argument. This is how Elm code gets immediate access to the flags you pass in from JavaScript. From there, you can put things in your model or run some commands. Whatever you need to do.
+L'élément le plus important ici est que notre fonction `init` accepte désormais un argument de type `Int`. C'est de cette façon qu'Elm accède aux flags passés depuis JavaScript. Une fois ces données reçues, vous pouvez les exploiter dans votre modèle ou déclencher des commandes.
 
-I recommend checking out [this `localStorage` example](https://github.com/elm-community/js-integration-examples/tree/master/localStorage) for a more interesting use of flags!
+Si vous êtes curieux, [cet exemple utilisant `localStorage`](https://github.com/elm-community/js-integration-examples/tree/master/localStorage) met en œuvre les flags de façon beaucoup plus intéressante !
 
+## Vérification des flags
 
-## Verifying Flags
+Attendez, que se passe t-il si `init` accepte un flag de type `Int` et qu'un petit malin essaye d'initialiser l'application avec `Elm.Main.init({ flags: "bazinga" })` ?
 
-But what happens if `init` says it takes an `Int` flag, but someone tries to initialize with `Elm.Main.init({ flags: "haha, what now?" })`?
+Elm effectue s'assure que les flags sont exactement de la nature escomptée. Sans ces vérifications, n'importe quels types de valeur pourraient être passés, déclenchant des erreurs Elm à l'exécution !
 
-Elm checks for that sort of thing, making sure the flags are exactly what you expect. Without this check, you could pass in anything, leading to runtime errors in Elm!
-
-There are a bunch of types that can be given as flags:
+Il existe un certain nombre de types Elm natifs pouvant être utilisés pour les flags :
 
 - `Bool`
 - `Int`
@@ -115,30 +112,30 @@ There are a bunch of types that can be given as flags:
 - records
 - [`Json.Decode.Value`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#Value)
 
-Many folks always use a `Json.Decode.Value` because it gives them really precise control. They can write a decoder to handle any weird scenarios in Elm code, recovering from unexpected data in a nice way.
+Beaucoup de monde utilise `Json.Decode.Value` parce que ce type donne un contrôle très précis sur la nature des données. On peut écrire un décodeur dédié, permettant de traiter tous les types de scénarios bizarres qui peuvent survenir dans l'environnement Elm et retomber sur nos pieds.
 
-The other supported types actually come from before we had figured out a way to do JSON decoders. If you choose to use them, there are some subtleties to be aware of. The following examples show the desired flag type, and then the sub-points show what would happen with a couple different JS values:
+Les autres types supportés ont été implémentés à une époque où les décodeurs JSON n'existaient pas encore. Si vous décidez de les utiliser, il y a quelques subtilités dont vous devez avoir conscience. Les exemples suivants montrent, pour un type de *flag* attendu, ce qui se passe quand des valeurs JavaScript de types différents lui sont transmises :
 
-- `init : Int -> ...`
+- `init : Int -> …`
   - `0` => `0`
   - `7` => `7`
-  - `3.14` => error
-  - `6.12` => error
+  - `3.14` => erreur
+  - `6.12` => erreur
 
-- `init : Maybe Int -> ...`
+- `init : Maybe Int -> …`
   - `null` => `Nothing`
   - `42` => `Just 42`
-  - `"hi"` => error
+  - `"hi"` => erreur
 
-- `init : { x : Float, y : Float } -> ...`
+- `init : { x : Float, y : Float } -> …`
   - `{ x: 3, y: 4, z: 50 }` => `{ x = 3, y = 4 }`
-  - `{ x: 3, name: "Tom" }` => error
-  - `{ x: 360, y: "why?" }` => error
+  - `{ x: 3, name: "Tom" }` => erreur
+  - `{ x: 360, y: "why?" }` => erreur
 
-- `init : (String, Int) -> ...`
+- `init : (String, Int) -> …`
   - `["Tom", 42]` => `("Tom", 42)`
   - `["Sue", 33]` => `("Sue", 33)`
-  - `["Bob", "4"]` => error
-  - `["Joe", 9, 9]` => error
+  - `["Bob", "4"]` => erreur
+  - `["Joe", 9, 9]` => erreur
 
-Note that when one of the conversions goes wrong, **you get an error on the JS side!** We are taking the “fail fast” policy. Rather than the error making its way through Elm code, it is reported as soon as possible. This is another reason why people like to use `Json.Decode.Value` for flags. Instead of getting an error in JS, the weird value goes through a decoder, guaranteeing that you implement some sort of fallback behavior.
+Notez que quand une conversion se passe mal, **vous obtenez une erreur JavaScript !**. Dans ce type de cas, Elm adopte une stratégie d'échec rapide (*fail fast*) ; plutôt que de propager l'erreur dans le code Elm, nous la rapportons avant même qu'elle l'atteigne. C'est une raison supplémentaire qui fait privilégier par beaucoup l'utilisation de `Json.Decode.Value` pour les flags. Plutôt que de déclencher des erreurs JavaScript, la valeur erronée transite par un décodeur, nous obligeant ainsi à traiter ces cas d'erreurs au travers des garanties qu'apporte Elm à ce niveau.
