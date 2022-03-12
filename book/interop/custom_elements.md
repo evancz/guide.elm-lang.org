@@ -1,15 +1,20 @@
 # Custom Elements
 
-On the last few pages, we have seen (1) how to start Elm programs from JavaScript, (2) how to pass data in as flags on initialization, and (3) how to send messages between Elm and JS with ports. But guess what people? There is another way to do interop!
+Au cours des précédentes pages, nous avons vu :
 
-Browsers seem to be supporting [custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) more and more, and that turns out to be quite helpful for embedding JS into Elm programs.
+1. Comment démarrer une application Elm depuis Javascript ;
+1. Comment passer des *flags* à l'initialisation de l'application Elm ;
+1. Comment gérer la communication entre Elm et JavaScript avec les *ports*.
 
-Here is a [minimal example](https://github.com/elm-community/js-integration-examples/tree/master/internationalization) of how to use custom elements to do some localization and internationalization.
+Mais devinez quoi ? Il existe un autre moyen de faire communiquer ces deux environnements !
 
+Les navigateurs Web supportent de mieux en mieux les [custom elements](https://developer.mozilla.org/fr/docs/Web/Web_Components/Using_custom_elements) (composants Web personnalisés), qui vont s'avérer très utile pour intégrer du JavaScript à nos applications Elm.
 
-## Creating Custom Elements
+Voici un [exemple minimaliste](https://github.com/elm-community/js-integration-examples/tree/master/internationalization) illustrant la façon dont on peut exploiter ces custom elements pour gérer l'internationalisation et la localisation.
 
-Say we want to localize dates, but that is not accessible in Elm core packages yet. Maybe you want to write a function that localizes dates:
+## Créer des Custom Elements
+
+Imaginons vouloir traduire des dates mais que cette fonctionnalité n'est pas encore disponible dans un paquet Elm. Peut-être pourrions-nous écrire une fonction JavaScript permettant de le faire :
 
 ```javascript
 //
@@ -30,7 +35,7 @@ function localizeDate(lang, year, month)
 }
 ```
 
-But how do we use that in Elm?! Newer browsers allow you to create new types of DOM nodes like this:
+Mais comment utiliser notre fonction en Elm ?! Les navigateurs modernes vous permettent de créer des nouveaux éléments HTML comme ceci :
 
 ```javascript
 //
@@ -58,9 +63,9 @@ customElements.define('intl-date',
 );
 ```
 
-The most important parts here are `attributeChangedCallback` and `observedAttributes`. You need some logic like that to detect changes to the attributes you care about.
+Les éléments remarquables ici sont les fonctions `attributeChangedCallback` et `observedAttributes`, qui sont nécessaires pur intercepter les changements d'attributs intéressants.
 
-Load that before you initialize your Elm code, and you will be able to write code like this in Elm:
+En vous assurant de charger ce code JavaScript avant d'initialiser votre application Elm, vous serez capables d'écrire du code Elm de ce type :
 
 ```elm
 import Html exposing (Html, node)
@@ -76,13 +81,13 @@ viewDate lang year month =
     []
 ```
 
-Now you can call `viewDate` when you want access to that kind of localized information in your `view`.
+Maintenant, vous pouvez appeler la fonction `viewDate` dès que vous désirez afficher des dates internationalisées dans vos vues.
 
-You can check out the full version of this example [here](https://github.com/elm-community/js-integration-examples/tree/master/internationalization).
+Vous pouvez accéder à la version complète de cet exemple [ici](https://github.com/elm-community/js-integration-examples/tree/master/internationalization).
 
 
-## More Info
+## Plus d'information
 
-Luke has a lot more experience with custom elements, and I think his Elm Europe talk is an excellent introduction: https://www.youtube.com/watch?v=tyFe9Pw6TVE
+Luke a beaucoup plus d'expérience avec les custom elements, et cette [conférence à Elm Europe](https://www.youtube.com/watch?v=tyFe9Pw6TVE) est une excellente introduction !
 
-Docs on custom elements can be kind of confusing, but I hope this is enough for people to get started embedding simple logic for `Intl` or even large React widgets if that seems like the right choice for your project.
+La documentation autour des custom elements peut être un peu indigeste, mais nous espérons qu'elle restera utile si vous souhaitez commencer à internationaliser très simplement vos applications ou d'embarquer de gros composants React si vous estimez cela nécessaire à votre projet.
