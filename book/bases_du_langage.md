@@ -1,9 +1,8 @@
-
 # Bases du langage
 
 Commençons par nous familiariser avec le code Elm !
 
-L'objectif est de vous familiariser avec les **valeurs** et les **fonctions** afin que vous soyez plus confiant dans la lecture du code Elm lorsque nous aborderons les exemples plus importants par la suite.
+L'objectif est de vous familiariser avec les **valeurs** et les **fonctions** afin que vous soyez plus confiant dans la lecture du code Elm lorsque nous aborderons des exemples plus importants par la suite.
 
 
 ## Valeurs
@@ -48,7 +47,7 @@ Faire des maths, c'est symapthique, mais c'est étonnamment rare dans la plupart
 
 Essayez d'assembler quelques chaînes de caractères avec l'opérateur `(++)` ⬆️
 
-Ces valeurs primitives deviennent plus intéressantes quand on commence à écrire des fonctions pour les transformer !
+Ces valeurs primitives deviennent plus intéressantes quand on commence à écrire des fonctions pour les transformer !
 
 
 > **Note:** Vous pouvez en apprendre plus sur les opérateurs comme  [`(+)`](https://package.elm-lang.org/packages/elm/core/latest/Basics#+) et [`(/)`](https://package.elm-lang.org/packages/elm/core/latest/Basics#/) et [`(++)`](https://package.elm-lang.org/packages/elm/core/latest/Basics#++) dans la documentation du module [`Basics`](https://package.elm-lang.org/packages/elm/core/latest/Basics). Ça vaudra la peine de lire toute la documentation de ce paquet à un moment donné !
@@ -56,9 +55,9 @@ Ces valeurs primitives deviennent plus intéressantes quand on commence à écri
 
 ## Fonctions
 
-A **function** is a way to transform values. Take in one value, and produce another.
+Une **fonction** est une manière de transformer des valeurs. Elle prend en entrée une valeur et en produit une autre en sortie.
 
-For example, here is a `greet` function that takes in a name and says hello:
+Par exemple, voici une fonction `greet` qui prend en entrée un et nom et dit bonjour :
 
 {% repl %}
 [
@@ -81,11 +80,11 @@ For example, here is a `greet` function that takes in a name and says hello:
 ]
 {% endrepl %}
 
-Try greeting someone else, like `"Stokely"` or `"Kwame"` ⬆️
+Essayer de dire bonjour à quelqu'un d'autre, comme `"Stokely"` ou `"Kwame"` ⬆️
 
-The values passed in to the function are commonly called **arguments**, so you could say "`greet` is a function that takes one argument."
+Les valeurs passées en entrée de la fonction sont généralement appelée **arugments**, on pourrait alors dire que «`greet` est une fonction qui prend un argument ».
 
-Okay, now that greetings are out of the way, how about a `madlib` function that takes _two_ arguments?
+Maintenant que la politesse peut être mise de côté, que diriez-vous d'une fonction qui prend _deux_ arguments ?
 
 {% repl %}
 [
@@ -108,26 +107,27 @@ Okay, now that greetings are out of the way, how about a `madlib` function that 
 ]
 {% endrepl %}
 
-Try giving two arguments to the `madlib` function ⬆️
 
-Notice how we used parentheses to group `"butter" ++ "fly"` together in the second example. Each argument needs to be a primitive value like `"cat"` or it needs to be in parentheses!
+Essayez de passer deux arguments à la fonction `madlib` ⬆️
 
-> **Note:** People coming from languages like JavaScript may be surprised that functions look different here:
->
+Notez comment nous avons utilisé des parenthèses pour grouper `"butter" ++ "fly"` ensemble dans le deuxième exemple. Chaque argument doit être une valeur primitive comme `"cat"` ou doit obligatoirement se trouver entre parenthèses !
+
+> **Note:** Les personnes venant de langages comme Javascript pourraient être suprises par l'aspect différent qu'ont les foncitons :
+
 >     madlib "cat" "ergonomic"                  -- Elm
 >     madlib("cat", "ergonomic")                // JavaScript
 >
 >     madlib ("butter" ++ "fly") "metallic"      -- Elm
 >     madlib("butter" + "fly", "metallic")       // JavaScript
 >
-> This can be surprising at first, but this style ends up using fewer parentheses and commas. It makes the language feel really clean and minimal once you get used to it!
+> Ça peut paraître surprenant au début, mais ce style permet d'utiliser moins de parenthèses et de virgules. Il donne une sensation de propreté et de minimalisme au langage une fois que vous y êtes habitué !
 
 
-## If Expressions
+## Expressions If
 
-When you want to have conditional behavior in Elm, you use an if-expression.
+Lorsque que l'on veut obtenir un comportement conditionnel en Elm, on utilise une expression `if`.
 
-Let's make a new `greet` function that is appropriately respectful to president Abraham Lincoln:
+Faisons une nouvelle fonction `greet` qui respecte à sa juste valeur le président Abraham Lincoln :
 
 {% repl %}
 [
@@ -150,14 +150,14 @@ Let's make a new `greet` function that is appropriately respectful to president 
 ]
 {% endrepl %}
 
-There are probably other cases to cover, but that will do for now!
+Il y a sûrement d'autres cas à gérer, mais on va dire que c'est suffisant comme ça pour l'instant !
 
 
-## Lists
+## Listes
 
-Lists are one of the most common data structures in Elm. They hold a sequence of related things, similar to arrays in JavaScript.
+Les listes sont une des structures de données les plus courantes en Elm. Elles contiennent une séquence de choses similaires, comme les tableaux en JavaScript
 
-Lists can hold many values. Those values must all have the same type. Here are a few examples that use functions from the [`List`][list] module:
+Les listes peuvent contenir plusieurs valeurs. Ces valeurs doivent toutes avoir le même type. Voici quelques exemples qui utilisent des fonctions du module [`List`][list] :
 
 [list]: https://package.elm-lang.org/packages/elm/core/latest/List
 
@@ -209,14 +209,15 @@ Lists can hold many values. Those values must all have the same type. Here are a
 ]
 {% endrepl %}
 
-Try making your own list and using functions like `List.length` ⬆️
+Essayez de construire votre propre liste et d'utiliser des fonction comme `List.length` ⬆️
 
-And remember, all elements of the list must have the same type!
+Et n'oubliez pas : tous les éléments d'une liste doivent avoir le même type !
 
 
 ## Tuples
 
-Tuples are another useful data structure. A tuple can hold two or three values, and each value can have any type. A common use is if you need to return more than one value from a function. The following function gets a name and gives a message for the user:
+Les tuples sont un autre type de structure de données utile. Un tuple peut contenir deux ou trois valeurs et chaque valeur peut être de n'importe quel type. Il est classiquement utilisé lorsque l'on veut retourner plus d'une valeur dans une fonction. La fonction suivante prend un nom et retourne un message à l'utilisateur :
+
 
 {% repl %}
 [
@@ -234,14 +235,14 @@ Tuples are another useful data structure. A tuple can hold two or three values, 
 ]
 {% endrepl %}
 
-This can be quite handy, but when things start becoming more complicated, it is often best to use records instead of tuples.
+Ça peu être pratique, mais lorsque les choses commencent à se compliquer, il est souvent préférable d'utiliser des _records_ au lieux des tuples.
 
 
 ## Records
 
-A **record** can hold many values, and each value is associated with a name.
+Un _**record**_ peut contenir plusieurs valeurs, et chaque valeur est associée à un nom.
 
-Here is a record that represents British economist John A. Hobson:
+Voici un _record_ qui représente l'économiste britannique John A. Hobson :
 
 {% repl %}
 [
@@ -259,11 +260,11 @@ Here is a record that represents British economist John A. Hobson:
 ]
 {% endrepl %}
 
-We defined a record with three **fields** containing information about John's name and age.
+Nous avons défini un _record_ avec trois **champs** qui contiennent des informations au sujet du nom et de l'âge de John.
 
-Try accessing other fields like `john.age` ⬆️
+Essayez d'accéder à d'autres champs comme `john.age` ⬆️
 
-You can also access record fields by using a "field access function" like this:
+Vous pouvez aussi accéder aux champs d'un _record_ en utilisant une « fonction d'accès à un champ » comme ceci :
 
 {% repl %}
 [
@@ -286,7 +287,7 @@ You can also access record fields by using a "field access function" like this:
 ]
 {% endrepl %}
 
-It is often useful to **update** values in a record:
+Il est souvent utile de **mettre à jour** les valeurs d'un _record_ :
 
 {% repl %}
 [
@@ -309,11 +310,11 @@ It is often useful to **update** values in a record:
 ]
 {% endrepl %}
 
-If you wanted to say these expressions out loud, you would say something like, "I want a new version of John where his last name is Adams" or "john where the age is 22".
+Si vous vouliez prononcer ces expressions à haute voix, vous diriez quelque chose comme cela : « Je veux une nouvelle version de John pour laquelle son nom est Adams », ou « john dont l'âge est 22 ».
 
-Notice that when we update some fields of `john` we create a whole new record. It does not overwrite the existing one. Elm makes this efficient by sharing as much content as possible. If you update one of ten fields, the new record will share the nine unchanged values.
+Notez que lorsque nous mettons à jour des champs de `john`, nous créons un tout nouveau _record_ : ça n'écrase pas celui qui existe déjà. Elm rend cette opération efficace en partageant le maximum de contenu possible. Si vous mettez à jour un champs sur dix, le nouveau _record_ va partager les neuf valeurs qui n'ont pas été modifiées.
 
-So a function to update ages might look like this:
+Une fonction pour mettre à jour d'âge ressemblerait à quelque chose comme cela :
 
 {% repl %}
 [
@@ -337,4 +338,4 @@ So a function to update ages might look like this:
 ]
 {% endrepl %}
 
-Updating record fields like this is really common, so we will see a lot more of it in the next section!
+Mettre à jour les champs des _records_ de cette manière est très courant, nous verrons donc beaucoup d'autres exemples dans la section suivante !
