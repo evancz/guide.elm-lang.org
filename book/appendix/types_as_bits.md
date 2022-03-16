@@ -15,7 +15,7 @@ Nous en avons une compréhension conceptuelle à présent, mais comment sont-ils
 
 Un **bit** est une petite boite qui a deux états. Zéro ou un. Allumé ou éteint. La mémoire d'un ordinateur est une séquence de bits super longue.
 
-Ok, donc nous avons un gros tas de bits. Maintenant il nous faut _tout_ représenter avec ça !
+Ok, donc nous avons un gros tas de 0s et de 1s. Maintenant il nous faut _tout_ représenter avec ça !
 
 
 ## `Bool`
