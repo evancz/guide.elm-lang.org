@@ -500,7 +500,7 @@ findNextBoundary skipped char remaining =
 checkEntry : State -> List String -> Cmd Msg
 checkEntry state lines =
   Http.post
-    { url = "https://worker.elm-lang.org/repl"
+    { url = "https://worker-elm.pereprogramming.com/repl"
     , body =
         Http.jsonBody <|
           E.object
