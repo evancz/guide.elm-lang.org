@@ -1,27 +1,27 @@
-# Function Types
+# Types de fonctions
 
-As you look through packages like [`elm/core`][core] and [`elm/html`][html], you will definitely see functions with multiple arrows. For example:
+Lorsque vous parcourez des paquets tels que [`elm/core`][core] et [`elm/html`][html], vous verrez certainement des fonctions avec plusieurs flèches. Par exemple :
 
 ```elm
 String.repeat : Int -> String -> String
 String.join : String -> List String -> String
 ```
 
-Why so many arrows? What is going on here?!
+Pourquoi tant de flèches ? Qu'est-ce qui se passe ici ?!
 
 [core]: https://package.elm-lang.org/packages/elm/core/latest/
 [html]: https://package.elm-lang.org/packages/elm/html/latest/
 
 
-## Hidden Parentheses
+## Les parenthèses cachées
 
-It starts to become clearer when you see all the parentheses. For example, it is also valid to write the type of `String.repeat` like this:
+Cela devient plus clair lorsque vous voyez toutes les parenthèses. Par exemple, il est également valide d'écrire le type de `String.repeat` comme ceci :
 
 ```elm
 String.repeat : Int -> (String -> String)
 ```
 
-It is a function that takes an `Int` and then produces _another_ function. Let's see this in action:
+C'est une fonction qui prend un `Int` et produit ensuite _une autre_ fonction. Voyons cela en action :
 
 {% replWithTypes %}
 [
@@ -58,78 +58,78 @@ It is a function that takes an `Int` and then produces _another_ function. Let's
 ]
 {% endreplWithTypes %}
 
-So conceptually, **every function accepts one argument.** It may return another function that accepts one argument. Etc. At some point it will stop returning functions.
+Donc, conceptuellement, **chaque fonction accepte un seul argument.** Elle peut renvoyer une autre fonction qui accepte un argument. Etc. À un moment donné, elle cessera de renvoyer des fonctions.
 
-We _could_ always put the parentheses to indicate that this is what is really happening, but it starts to get pretty unwieldy when you have multiple arguments. It is the same logic behind writing `4 * 2 + 5 * 3` instead of `(4 * 2) + (5 * 3)`. It means there is a bit extra to learn, but it is so common that it is worth it.
+Nous _pourrions_ toujours mettre les parenthèses pour indiquer que c'est ce qui se passe réellement, mais cela commence à devenir assez lourd lorsque vous avez plusieurs arguments. C'est la même logique que derrière l'écriture `4 * 2 + 5 * 3` au lieu de `(4 * 2) + (5 * 3)`. Cela signifie qu'il y a un peu plus à apprendre, mais c'est tellement courant que cela en vaut la peine.
 
-Fine, but what is the point of this feature in the first place? Why not do `(Int, String) -> String` and give all the arguments at once?
+D'accord, mais à quoi sert cette fonctionnalité à la base ? Pourquoi ne pas faire `(Int, String) -> String` et donner tous les arguments en même temps ?
 
 
-## Partial Application
+## Application partielle
 
-It is quite common to use the `List.map` function in Elm programs:
+C'est assez courant d'utiliser la fonction `List.map` dans les programmes Elm :
 
 ```elm
 List.map : (a -> b) -> List a -> List b
 ```
 
-It takes two arguments: a function and a list. From there it transforms every element in the list with that function. Here are some examples:
+Elle prend deux arguments : une fonction et une liste. À partir de là, elle transforme chaque élément de la liste avec cette fonction. Voici quelques exemples :
 
 - `List.map String.reverse ["part","are"] == ["trap","era"]`
 - `List.map String.length ["part","are"] == [4,3]`
 
-Now remember how `String.repeat 4` had type `String -> String` on its own? Well, that means we can say:
+Maintenant, rappelez-vous comment `String.repeat 4` avait juste le type `String -> String` ? Eh bien, cela signifie que nous pouvons écrire :
 
 - `List.map (String.repeat 2) ["ha","choo"] == ["haha","choochoo"]`
 
-The expression `(String.repeat 2)` is a `String -> String` function, so we can use it directly. No need to say `(\str -> String.repeat 2 str)`.
+L'expression `(String.repeat 2)` est une fonction `String -> String`, donc on peut l'utiliser directement. Nul besoin d'écrire `(\str -> String.repeat 2 str)`.
 
-Elm also uses the convention that **the data structure is always the last argument** across the ecosystem. This means that functions are usually designed with this possible usage in mind, making this a pretty common technique.
+Elm utilise également la convention selon laquelle **la structure des données est toujours le dernier argument** dans l'écosystème. Cela signifie que les fonctions sont généralement conçues avec cette utilisation possible à l'esprit, ce qui en fait une technique assez courante.
 
-Now it is important to remember that **this can be overused!** It is convenient and clear sometimes, but I find it is best used in moderation. So I always recommend breaking out top-level helper functions when things get even a _little_ complicated. That way it has a clear name, the arguments are named, and it is easy to test this new helper function. In our example, that means creating:
+Maintenant, il est important de se rappeler que **cela peut être surutilisé !** C'est parfois pratique et clair, mais je trouve qu'il vaut mieux l'utiliser avec modération. Je recommande donc de toujours extraire les fonctions utilitaires à la racine du fichier lorsque les choses deviennent même _un peu_ compliquées. De cette façon, elle a un nom clair, les arguments sont nommés et il est facile de tester cette nouvelle fonction utilitaire. Dans notre exemple, cela signifie créer :
 
 ```elm
--- List.map reduplicate ["ha","choo"]
+-- List.map redoublement ["ha","choo"]
 
-reduplicate : String -> String
-reduplicate string =
+redoublement : String -> String
+redoublement string =
   String.repeat 2 string
 ```
 
-This case is really simple, but (1) it is now clearer that I am interested in the linguistic phenomenon known as [reduplication](https://en.wikipedia.org/wiki/Reduplication) and (2) it will be quite easy to add new logic to `reduplicate` as my program evolves. Maybe I want [shm-reduplication](https://en.wikipedia.org/wiki/Shm-reduplication) support at some point?
+Ce cas est vraiment simple, mais (1) il est maintenant plus clair que je m'intéresse au phénomène linguistique connu sous le nom de [redoublement](https://fr.wikipedia.org/wiki/Redoublement_(linguistique)) et (2) ce sera assez facile d'ajouter une nouvelle logique à `redoublement` au fur et à mesure que mon programme évolue. Peut-être qu'il me faudra un [redoublement expressif](https://fr.wikipedia.org/wiki/Redoublement_(linguistique)#Redoublement_expressif) à un moment donné ?
 
-In other words, **if your partial application is getting long, make it a helper function.** And if it is multi-line, it should _definitely_ be turned into a top-level helper! This advice applies to using anonymous functions too.
+En d'autres termes, **si votre application partielle devient longue, faites-en une fonction utilitaire.** Et si elle est multiligne, elle devrait _absolument_ être transformée en une fonction utilitaire à la racine du fichier ! Ce conseil s'applique également à l'utilisation des fonctions anonymes.
 
-> **Note:** If you are ending up with “too many” functions when you use this advice, I recommend using comments like `-- REDUPLICATION` to give an overview of the next five or ten functions. Old school! I have shown this with `-- UPDATE` and `-- VIEW` comments in previous examples, but it is a generic technique that I use in all my code. And if you are worried about files getting too long with this advice, I recommend watching [The Life of a File](https://youtu.be/XpDsk374LDE)!
+> **Remarque :** Si vous vous retrouvez avec "trop de" fonctions lorsque vous utilisez ce conseil, je vous conseille d'utiliser des commentaires tels que "-- REDOUBLEMENT" pour donner un aperçu des cinq ou dix fonctions suivantes. Comme à la vieille école! Je l'ai montré avec les commentaires `-- UPDATE` et `-- VIEW` dans les exemples précédents, mais c'est une technique générique que j'utilise dans tout mon code. Et si vous craignez que les fichiers ne deviennent trop longs avec ce conseil, je vous recommande de regarder [La vie d'un fichier](https://youtu.be/XpDsk374LDE) (en anglais) !of a File](https://youtu.be/XpDsk374LDE)!
 
 
 ## Pipelines
 
-Elm also has a [pipe operator][pipe] that relies on partial application. For example, say we have a `sanitize` function for turning user input into integers:
+Elm a également un [opérateur pipe][pipe] qui repose sur une application partielle. Par exemple, supposons que nous ayons une fonction `assainir` pour transformer la saisie de l'utilisateur en nombres entiers :
 
 ```elm
--- BEFORE
-sanitize : String -> Maybe Int
-sanitize input =
+-- AVANT
+assainir : String -> Maybe Int
+assainir input =
   String.toInt (String.trim input)
 ```
 
-We can rewrite it like this:
+On peut la réécrire de la sorte :
 
 ```elm
--- AFTER
-sanitize : String -> Maybe Int
-sanitize input =
+-- APRÈS
+assainir : String -> Maybe Int
+assainir input =
   input
     |> String.trim
     |> String.toInt
 ```
 
-So in this “pipeline” we pass the input to `String.trim` and then that gets passed along to `String.toInt`.
+Ainsi, dans ce "pipeline", nous transmettons la saisie à `String.trim`, puis celle-ci est transmise à `String.toInt`.
 
-This is neat because it allows a “left-to-right” reading that many people like, but **pipelines can be overused!** When you have three or four steps, the code often gets clearer if you break out a top-level helper function. Now the transformation has a name. The arguments are named. It has a type annotation. It is much more self-documenting that way, and your teammates and your future self will appreciate it! Testing the logic gets easier too.
+C'est bien car cela permet une lecture "de gauche à droite" que beaucoup de gens aiment, mais **les pipelines peuvent être surutilisés !** Lorsque vous avez trois ou quatre étapes, le code devient souvent plus clair si vous extrayez une fonction utilitaire à la racine du fichier. De cette sorte, la transformation a un nom. Les arguments sont nommés. Elle a une annotation de type. C'est beaucoup plus auto-documenté de cette façon, et vos coéquipiers et votre futur vous l'apprécieront ! Tester la logique devient également plus facile.
 
-> **Note:** I personally prefer the `BEFORE`, but perhaps that is just because I learned functional programming in languages without pipes!
+> **Remarque :** Personnellement, je préfère le `AVANT`, mais c'est peut-être simplement parce que j'ai appris la programmation fonctionnelle avec des langages sans pipelines !
 
 [pipe]: https://package.elm-lang.org/packages/elm/core/latest/Basics#|&gt;
 
