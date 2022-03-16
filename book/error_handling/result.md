@@ -1,8 +1,8 @@
 # Result
 
-The `Maybe` type can help with simple functions that may fail, but it does not tell you _why_ it failed. Imagine if a compiler just said `Nothing` if anything was wrong with your program. Good luck figuring out what went wrong!
+Le type `Maybe` est très utile pour une fonction pouvant échouer, mais ne nous explique pas *pourquoi* elle a échoué. Imaginez si un compilateur ne vous affichait que “`Nothing`” en cas d'erreur au niveau de notre code… Bon courage pour identifier le souci !
 
-This is where the [`Result`][Result] type becomes helpful. It is defined like this:
+C'est en cela que le type [`Result`][Result] est particulièrement utile. Il est défini de cette façon :
 
 ```elm
 type Result error value
@@ -10,28 +10,28 @@ type Result error value
   | Err error
 ```
 
-The point of this type is to give additional information when things go wrong. It is really helpful for error reporting and error recovery!
+Son but est de fournir des informations supplémentaires en cas de problème. C'est particulièrement utile pour gérer des rapports d'erreur et réagir plus efficacement quand ils surviennent !
 
 [Result]: https://package.elm-lang.org/packages/elm-lang/core/latest/Result#Result
 
 
-## Error Reporting
+## Rapport d'erreur
 
-Perhaps we have a website where people input their age. We could check that the age is reasonable with a function like this:
+Reprenons notre exemple d'application dans laquelle les utilisateurs peuvent renseigner leur âge. On pourrait vérifier que l'âge est valide avec une fonction comme celle-ci :
 
 ```elm
 isReasonableAge : String -> Result String Int
 isReasonableAge input =
   case String.toInt input of
     Nothing ->
-      Err "That is not a number!"
+      Err "Ce n'est pas un nombre !"
 
     Just age ->
       if age < 0 then
-        Err "Please try again after you are born."
+        Err "Vous n'êtes pas encore né !"
 
       else if age > 135 then
-        Err "Are you some kind of turtle?"
+        Err "Êtes-vous une tortue ?"
 
       else
         Ok age
@@ -42,12 +42,12 @@ isReasonableAge input =
 -- isReasonableAge "150" == Err ...
 ```
 
-Not only can we check the age, but we can also show people error messages depending on the particulars of their input. This kind of feedback is much better than `Nothing`!
+Non seulement nous validons l'âge, mais nous pouvons également afficher à nos utilisateurs des messages d'erreur utiles quand ils saisissent n'importe quoi. Ce type de feedback est tout de même plus intéressant que `Nothing` !
 
 
-## Error Recovery
+## Résilience
 
-The `Result` type can also help you recover from errors. One place you see this is when making HTTP requests. Say we want to show the full text of _Anna Karenina_ by Leo Tolstoy. Our HTTP request results in a `Result Error String` to capture the fact that the request may succeed with the full text, or it may fail in a bunch of different ways:
+Le type `Result` peut également vous permettre d'être plus résilient face aux erreurs. Un bon exemple est quand on fait des requêtes HTTP. Imaginons vouloir afficher le texte intégral d'_Anna Karénine_ de Léon Tolstoï ; notre requête HTTP retourne un `Result Error String` qui modélise le fait que notre requête peut aboutir et nous retourner une `String` contenant le contenu de l'œuvre, ou échouer de différentes façons :
 
 ```elm
 type Error
@@ -62,6 +62,6 @@ type Error
 -- Err NetworkError   : Result Error String
 ```
 
-From there we can show nicer error messages as we discussed before, but we can also try to recover from the failure! If we see a `Timeout` it may work to wait a little while and try again. Whereas if we see a `BadStatus 404` then there is no point in trying again.
+Dans ce type de cas et comme vu précédemment, nous pouvons afficher des messages très explicites, mais nous pouvons aussi essayer d'effectuer une récupération sur incident ! Si nous obtenons un `Timeout`, ça peut valoir le coup d'attendre un peu et retenter la requête. Alors que si nous obtenons une `BadStatus 404`, aucun intérêt puisque la ressource n'existe pas ou plus.
 
-The next chapter shows how to actually make HTTP requests, so we will run into the `Result` and `Error` types again very soon!
+Le chapitre suivant aborde comment effectuer des requêtes HTTP, alors préparez vous à rencontrer les types `Result` et `Error` à nouveau très vite !
