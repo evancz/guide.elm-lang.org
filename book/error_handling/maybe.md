@@ -131,9 +131,9 @@ type alias Info =
   }
 ```
 
-Ce nouveau modèle explicite bien mieux la logique applicative sous-jacente.  Il n'y a que deux situations possibles : soit vous avez juste le nom, soit vous avez le nom et tout un tas d'autres informations associées. Dans le code de votre vue, vous ne vous préoccupez plus que de savoir si vous afficher la version `Less` ou `More` d'un profil. Vous n'avez plus à vous poser des questions du type &ldquo;que se passe t-il si j'ai un `age` mais pas de `weight` ?&rdquo;, parce que c'est n'est plus possible avec notre type plus strict !
+Ce nouveau modèle explicite bien mieux la logique applicative sous-jacente.  Il n'y a que deux situations possibles : soit vous avez juste le nom, soit vous avez le nom et tout un tas d'autres informations associées. Dans le code de votre vue, vous ne vous préoccupez plus que de savoir si vous affichez la version `Less` ou `More` d'un profil. Vous n'avez plus à vous poser des questions du type &ldquo;que se passe t-il si j'ai un `age` mais pas de `weight` ?&rdquo;, parce que c'est n'est plus possible avec notre type plus strict !
 
-Retenez simplement que si vous utilisez `Maybe` partout, ça peut valor le coup d'examiner vos définitions de `type` et `type alias` pour voir si vous ne pourriez pas trouver des représentations plus précises. Ça donne généralement de jolis refactors dans vos udpates et vues !
+Retenez simplement que si vous utilisez `Maybe` partout, ça peut valoir le coup d'examiner vos définitions de `type` et `type alias` pour voir si vous ne pourriez pas trouver des représentations plus précises. Ça donne généralement de jolis refactors dans vos udpates et vues !
 
 
 > ## Aparté : du côté de chez `null`
