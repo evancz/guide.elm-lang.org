@@ -1,25 +1,25 @@
-# Install a Code Editor
+# Installer un éditeur de code
 
-The first step is to get a code editor set up to handle Elm files.
+La première étape est d'installer et configurer un éditeur de code pour gérer les fichiers Elm.
 
 ![editor](images/editor.png)
 
-There are a bunch of editor plugins maintained by community members for a broad range of editors. You can check out a list of them [here](https://github.com/elm/editor-plugins).
+Il y a beaucoup d'extensions et de plugins maintenus par les membres de la communauté pour un [large éventail d'éditeurs](https://github.com/elm/editor-plugins).
 
-It can be tricky to get an editor set up, so for the purpose of this guide, I am going to show how to get set up with Sublime Text in particular. Hopefully this will be helpful for people new to programming or as a backup for people who already have a preferred code editor.
+C'est parfois compliqué de configurer un éditeur de texte, aussi dans le cadre de ce guide, nous allons prendre *Sublime Text* pour exemple et voir comment le configurer. Cela pourra s'avérer utile si vous débutez en programmation, et présentera aux plus aguerris une solution alternative.
 
 
 ## Sublime Text
 
-**Step 1:** Download Sublime Text from [here](https://www.sublimetext.com/).
+**Étape 1 :** Téléchargez [Sublime Text](https://www.sublimetext.com/).
 
-**Step 2:** Install the "Elm Syntax Highlighting" plugin.
+**Étape 2 :** Installez le plugin “Elm Syntax Highlighting” :
 
 - [Mac](https://github.com/evancz/elm-syntax-highlighting/blob/master/install/mac.md)
 - [Linux](https://github.com/evancz/elm-syntax-highlighting/blob/master/install/linux.md)
 - [Windows](https://github.com/evancz/elm-syntax-highlighting/blob/master/install/windows.md)
 
-After going through those steps, it should be possible to open Elm files with syntax highlighting. Keywords like `import` and `type` should be colorful so the code is easier to read.
+Ceci fait, vous devriez pouvoir ouvrir les fichiers Elm en bénéficiant de la coloration syntaxique. Les mot-cés comme `import` et `type` devrait être colorisés, facilitant la lecture du code.
 
 
-> **Note:** There are alternatives! Community members have created editor plugins for Atom, Emacs, IntelliJ, Vim, VS Code, and many more. We try to keep [this page](https://github.com/elm/editor-plugins) up to date with all the options!
+> **Note :** Il y a d'autre possibilités ! Les membres de la communauté ont créé des extensions pour Atom, Emacs, IntelliJ, Vim, VS Code, et plein d'autres. Nous essayons d'en garder à jour une liste exhaustive sur [cette page](https://github.com/elm/editor-plugins) !

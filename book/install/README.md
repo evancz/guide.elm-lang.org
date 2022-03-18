@@ -1,10 +1,10 @@
 # Installation
 
-We have come a long way without installing anything! We learned **The Elm Architecture**. We learned about **types**. We learned how to interact with the outside world through **commands** and **subscriptions**. Things are going well, but we need to get Elm working on your computer for the next couple sections!
+Bon, on a déjà beaucoup discuté sans rien installer… Nous avons vu l'**Architecture Elm**. Nous avons découvert les **types**. Nous avons appris à interagir avec le monde extérieur avec les **commandes** et les **souscriptions**. C'est chouette, mais on va avoir besoin de faire fonctionner Elm sur notre ordinateur pour les sections suivantes !
 
-The next two pages will show how to get Elm working in your **editor** and then in your **terminal**.
+Les deux prochaines pages vous montreront comment intégrer Elm à votre **éditeur de code**, puis dans votre **terminal**.
 
 
-**Why?** Upcoming topics like "JavaScript Interop" work a lot better when you can save files locally on your computer. This will also set us up to create more complex personal projects!
+**Pourquoi ?** Les sujets à venir comme “Interopérabilité JavaScript” sont plus faciles à suivre si vous pouvez éditer et sauvegarder des fichiers localement. Ça vous permettra aussi de créer des projets personnels plus avancés !
 
-**Troubleshooting:** Things can sometimes go wrong with installation, so if you run into any trouble, please ask about it in a [community forum](https://elm-lang.org/community)! Talking through an install problem can usually save you a lot of time, and people are happy to help out. Please ask for help!
+**En cas de problème :** Comme pour toute procédure d'installation, les choses peuvent parfois dégénérer. Si vous rencontrez des problèmes, n'hésitez pas à demander de l'aide [auprès de la communauté](https://elm-lang.org/community) ! Discuter d'un problème d'installation peut bien souvent vous faire gagner du temps, et les gens sont heureux de pouvoir vous aider. Demandez de l'aide !
