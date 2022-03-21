@@ -1,21 +1,21 @@
-# Commands and Subscriptions
+# Commandes et Souscriptions
 
-Earlier in this book we saw The Elm Architecture handle mouse and keyboard interactions, but what about talking to servers? Generating random numbers?
+Plus tôt dans ce livre nous avons vu comment l'**Architecture Elm** gérait les interactions avec le clavier et la souris, mais qu'en est-il de la communication avec des serveurs ? De la génération de nombres aléatoires ?
 
-To answer these questions, it helps to learn more about how The Elm Architecture works behind the scenes. This will explain why things work a bit differently than in languages like JavaScript, Python, etc.
+Pour répondre à ces questions, il va nous être utile d'en apprendre un peu plus sur comment fonctionne l'**Architecture Elm** en coulisses. Cela va permettre de comprendre pourquoi est-ce que les choses fonctionnent un peu différemment en Elm par rapport aux autres langages comme Javascript, Python, etc.
 
 
 ## `sandbox`
 
-I have not made a big deal about it, but so far all of our programs were created with [`Browser.sandbox`][sandbox]. We gave an initial `Model` and describe how to `update` and `view` it.
+Je n'ai pas trop insisté dessus, mais jusqu'ici nos programmes ont été créés avec [`Browser.sandbox`][sandbox]. Nous lui avons passé un `Model` initial et décrit comment le mettre à jour avec `update` et l'afficher avec `view`.
 
-You can think of `Browser.sandbox` as setting up a system like this:
+Vous pouvez considérer `Browser.sandbox` comme un système de ce type :
 
 ![](diagrams/sandbox.svg)
 
-We get to stay in the world of Elm, writing functions and transforming data. This hooks up to Elm&rsquo;s **runtime system**. The runtime system figures out how to render `Html` efficiently. Did anything change? What is the minimal DOM modification needed? It also figures out when someone clicks a button or types into a text field. It turns that into a `Msg` and feeds it into your Elm code.
+Nous pouvons rester dans le monde de Elm, c'est à dire écrire des fonctions et transformer de la donnée. Ceci est lié au **runtime system** de Elm. Le _runtime system_ se charge de trouver comment afficher l'`Html` de manière efficace. Est-ce que quelque chose a changé ? Quelle est la modification minimale du DOM requise ? Il se charge aussi de gérer lorsque quelqu'un clique sur un bouton ou saisit quelque chose dans un champs texte. Il transforme cela en un `Msg` et le transmet à notre code Elm.
 
-By cleanly separating out all the DOM manipulation, it becomes possible to use extremely aggressive optimizations. So Elm&rsquo;s runtime system is a big part of why Elm is [one of the fastest options available][benchmark].
+En séparant proprement toutes les manipulations du DOM, il devient possible d'utiliser des optimisations extrêmement agressives. Le **runtime system** d'Elm est en grande partie responsable d'une fait qu'Elm soit [une des options disponibles les plus rapides][benchmark].
 
 [sandbox]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#sandbox
 [benchmark]: https://elm-lang.org/blog/blazing-fast-html-round-two
@@ -23,34 +23,33 @@ By cleanly separating out all the DOM manipulation, it becomes possible to use e
 
 ## `element`
 
-In the next few examples, we are going to use [`Browser.element`][element] to create programs. This will introduce the ideas of **commands** and **subscriptions** which allow us to interact with the outside world.
+Dans les exemples suivants, nous allons utiliser [`Browser.element`][element] pour créer des programmes. Ceci va nous amener aux concepts de **commandes** et de **souscriptions** qui vont nous permettre d'interagir avec le monde extérieur.
 
-You can think of `Browser.element` as setting up a system like this:
+Vous pouvez considérer `Browser.element` comme un système de ce type :
 
 ![](diagrams/element.svg)
 
-In addition to producing `Html` values, our programs will also send `Cmd` and `Sub` values to the runtime system. In this world, our programs can **command** the runtime system to make an HTTP request or to generate a random number. They can also **subscribe** to the current time.
+En plus de produire des valeurs `Html`, nos programmes vont aussi envoyer des valeurs `Cmd` et `Sub` au _runtime system_. Dans ce monde, nos programmes peuvent **commander** le _runtime system_ pour qu'il effectue une requête HTTP ou qu'il génère un nombre aléatoire. Ils peuvent aussi **souscrire** pour connaître l'heure actuelle.
 
-I think commands and subscriptions make more sense when you start seeing examples, so let&rsquo;s do that!
+Je pense que les commandes et les souscriptions prennent tout leur sens lorsque l'on commence à les voir en exemple. Allons-y donc !
 
 [element]: https://package.elm-lang.org/packages/elm/browser/latest/Browser#element
 
-
-> **Note 1:** Some readers may be worrying about asset size. &ldquo;A runtime system? That sounds big!&rdquo; It is not! In fact, Elm assets are [exceptionally small](https://elm-lang.org/blog/small-assets-without-the-headache) when compared to popular alternatives.
+> **Note 1:** Certains lecteurs pourraient être inquiets au sujet de la taille des fichiers. « Un _runtime système_ ? Ça a l'air énorme ! » Mais en fait, ça ne l'est pas. Les fichiers Elm sont [exceptionnellement petits](https://elm-lang.org/blog/small-assets-without-the-headache) par rapport aux autres alternatives populaires.
 >
-> **Note 2:** We are going to use packages from [`package.elm-lang.org`](https://package.elm-lang.org) in the upcoming examples. We have already been working with a couple:
+> **Note 2:** Nous allons utiliser des packages provenant de [`package.elm-lang.org`](https://package.elm-lang.org) dans les exemples qui arrivent. Nous avons déjà utilisé quelques uns :
 >
 > - [`elm/core`](https://package.elm-lang.org/packages/elm/core/latest/)
 > - [`elm/html`](https://package.elm-lang.org/packages/elm/html/latest/)
 >
-> But now we will start getting into some fancier ones:
+> Mais à partir de maintenant, nous allons nous intéresser à quelques autres un peu plus sophistiqués :
 >
 > - [`elm/http`](https://package.elm-lang.org/packages/elm/http/latest/)
 > - [`elm/json`](https://package.elm-lang.org/packages/elm/json/latest/)
 > - [`elm/random`](https://package.elm-lang.org/packages/elm/random/latest/)
 > - [`elm/time`](https://package.elm-lang.org/packages/elm/time/latest/)
 >
-> There are tons of other packages on `package.elm-lang.org` though! So when you are making your own Elm programs locally, it will probably involve running some commands like this in the terminal:
+> Il y a cependant des tonnes d'autres paquets sur `package.elm-lang.org` ! Ainsi, lorsque vous créerez vos propres programmes Elm en local, vous devrez probablement exécuter des commandes comme celles-ci dans le terminal :
 >
 >```bash
 elm init
@@ -58,6 +57,6 @@ elm install elm/http
 elm install elm/random
 ```
 >
-> That would set up an `elm.json` file with `elm/http` and `elm/random` as dependencies.
+> Cela créera un fichier `elm.json` avec `elm/http` et `elm/random` comme dépendances.
 >
-> I will be mentioning the packages we are using in the following examples, so I hope this gives some context on what that is all about!
+> Je mentionnerai les paquets que nous utiliserons dans les exemples suivants, donc j'espère que cela vous donnera un aperçu de ce dont il s'agit !
