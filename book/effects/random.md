@@ -1,8 +1,8 @@
-# Random
+# Valeurs aléatoires
 
-So far we have only seen commands to make HTTP requests, but we can command other things as well, like generating random values! So we are going to make an app that rolls dice, producing a random number between 1 and 6.
+Jusqu'à présent, nous n'avons vu que des commandes pour effectuer des requêtes HTTP, mais nous pouvons commander d'autres choses également, comme générer des valeurs aléatoires ! Nous allons donc créer une application qui lance des dés et produit un nombre aléatoire entre 1 et 6.
 
-Click the blue "Edit" button to see this example in action. Generate a couple random numbers, and look through the code to try to figure out how it works. **Click the blue button now!**
+Cliquez sur le bouton bleu "Edit" pour voir cet exemple en action. Générez quelques nombres aléatoires, et regardez le code pour essayer de comprendre comment cela fonctionne. **Cliquez sur le bouton bleu maintenant !**
 
 <div class="edit-link"><a href="https://elm-lang.org/examples/numbers">Edit</a></div>
 
@@ -86,23 +86,24 @@ view model =
     ]
 ```
 
-The new thing here is command issued in the `update` function:
+La nouveauté ici est la commande émise dans la fonction `update` :
 
 ```elm
 Random.generate NewFace (Random.int 1 6)
 ```
 
-Generating random values works a bit different than in languages like JavaScript, Python, Java, etc. So let&rsquo;s see how it works in Elm!
+La génération de valeurs aléatoires fonctionne un peu différemment que dans des langages comme JavaScript, Python, Java, etc. Voyons donc comment cela fonctionne dans Elm !
 
 
-## Random Generators
+## Générateurs aléatoires
 
-We are using the [`elm/random`][readme] package for this. The [`Random`][random] module in particular.
+Nous utilisons le paquet [`elm/random`][readme] pour cela. Le module [`Random`][random] en particulier.
 
 [readme]: https://package.elm-lang.org/packages/elm/random/latest
 [random]: https://package.elm-lang.org/packages/elm/random/latest/Random
 
-The core idea is that we have random `Generator` that describes _how_ to generate a random value. For example:
+
+L'idée de base est que nous avons un `Generator` aléatoire qui décrit _comment_ générer une valeur aléatoire. Par exemple :
 
 ```elm
 import Random
@@ -120,22 +121,22 @@ usuallyTrue =
   Random.weighted (80, True) [ (20, False) ]
 ```
 
-So here we have three random generators. The `roll` generator is saying it will produce an `Int`, and more specifically, it will produce an integer between `1` and `6` inclusive. Likewise, the `usuallyTrue` generator is saying it will produce a `Bool`, and more specifically, it will be true 80% of the time.
+Nous avons donc ici trois générateurs aléatoires. Le générateur `roll` dit qu'il produira un `Int`, et plus précisément, qu'il produira un entier entre `1` et `6` inclus. De même, le générateur `usuallyTrue` dit qu'il produira un `Bool`, et plus précisément, qu'il sera vrai 80% du temps.
 
-The point is that we are not actually generating the values yet. We are just describing _how_ to generate them. From there you use the [`Random.generate`][gen] to turn it into a command:
+En réalité, nous ne sommes pas encore en train de générer les valeurs. Nous décrivons simplement _comment_ les générer. À partir de là, vous pouvez utiliser [`Random.generate`][gen] pour la transformer en commande :
 
 ```elm
 generate : (a -> msg) -> Generator a -> Cmd msg
 ```
 
-When the command is performed, the `Generator` produces some value, and then that gets turned into a message for your `update` function. So in our example, the `Generator` produces a value between 1 and 6, and then it gets turned into a message like `NewFace 1` or `NewFace 4`. That is all we need to know to get our random dice rolls, but generators can do quite a bit more!
+Lorsque la commande est exécutée, le `Generator` produit une valeur, qui est ensuite transformée en un message pour votre fonction `update`. Ainsi, dans notre exemple, le `Generator` produit une valeur entre 1 et 6, et la transforme en un message comme `NewFace 1` ou `NewFace 4`. C'est tout ce que nous avons besoin de savoir pour obtenir nos lancers de dés aléatoires, mais les générateurs peuvent faire beaucoup plus !
 
 [gen]: https://package.elm-lang.org/packages/elm/random/latest/Random#generate
 
 
-## Combining Generators
+## Combiner des générateurs
 
-Once we have some simple generators like `probability` and `usuallyTrue`, we can start snapping them together with functions like [`map3`](https://package.elm-lang.org/packages/elm/random/latest/Random#map3). Imagine we want to make a simple slot machine. We could create a generator like this:
+Une fois que nous avons des générateurs simples comme `probability` et `usuallyTrue`, nous pouvons commencer à les assembler avec des fonctions comme [`map3`](https://package.elm-lang.org/packages/elm/random/latest/Random#map3). Imaginons que nous voulions créer une simple machine à sous. Nous pourrions créer un générateur comme celui-ci :
 
 ```elm
 import Random
@@ -157,20 +158,21 @@ spin =
   Random.map3 Spin symbol symbol symbol
 ```
 
-We first create `Symbol` to describe the pictures that can appear on the slot machine. We then create a random generator that generates each symbol with equal probability.
-
-From there we use `map3` to combine them into a new `spin` generator. It says to generate three symbols and then put them together into a `Spin`.
-
-The point here is that from small building blocks, we can create a `Generator` that describes pretty complex behavior. And then from our application, we just have to say something like `Random.generate NewSpin spin` to get the next random value.
+Nous créons d'abord `Symbol` pour décrire les images qui peuvent apparaître sur la machine à sous. Nous créons ensuite un générateur aléatoire qui génère chaque symbole avec une probabilité égale.
 
 
-> **Exercises:** Here are a few ideas to make the example code on this page a bit more interesting!
+À partir de là, nous utilisons `map3` pour les combiner dans un nouveau générateur `spin`. Il est dit de générer trois symboles et de les combiner en un `Spin`.
+
+Ce qui est important ici est que, à partir de petits blocs de construction, nous pouvons créer un `Generator` qui décrit un comportement assez complexe. Ensuite, dans notre application, il suffit de dire quelque chose comme `Random.generate NewSpin spin`" pour obtenir la prochaine valeur aléatoire.
+
+
+> **Exercices:** Voici quelques idées pour rendre le code d'exemple de cette page un peu plus intéressant !
 >
->   - Instead of showing a number, show the die face as an image.
->   - Instead of showing an image of a die face, use [`elm/svg`][svg] to draw it yourself.
->   - Create a weighted die with [`Random.weighted`][weighted].
->   - Add a second die and have them both roll at the same time.
->   - Have the dice flip around randomly before they settle on a final value.
+>   - Au lieu de montrer un nombre, montrez la face du dé sous forme d'image.
+>   - Au lieu d'afficher une image de la face d'un dé, utilisez [`elm/svg`][svg] pour la dessiner vous-même.
+>   - Créez un dé pondéré avec [`Random.weighted`][weighted].
+>   - Ajoutez un deuxième dé et faites-les lancer en même temps.
+>   - Faites en sorte que les dés se retournent de manière aléatoire avant de choisir une valeur finale.
 
 [svg]: https://package.elm-lang.org/packages/elm/svg/latest/
 [weighted]: https://package.elm-lang.org/packages/elm/random/latest/Random#weighted
