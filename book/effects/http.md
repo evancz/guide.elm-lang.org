@@ -1,10 +1,10 @@
 # HTTP
 
-It is often helpful to grab information from elsewhere on the internet.
+Il est souvent utile de récupérer des informations ailleurs sur Internet.
 
-For example, say we want to load the full text of _Public Opinion_ by Walter Lippmann. Published in 1922, this book provides a historical perspective on the rise of mass media and its implications for democracy. For our purposes here, we will focus on how to use the [`elm/http`][http] package to get this book into our program!
+Par exemple, imaginons que nous voulions charger le texte complet de _Public Opinion_ de Walter Lippmann. Publié en 1922, ce livre offre une perspective historique sur la montée des médias de masse et ses implications pour la démocratie. Pour ce qui nous amène ici, nous allons nous concentrer sur la façon d'utiliser le paquetage [`elm/http`][http] pour charger ce livre dans notre programme !
 
-Click the blue "Edit" button to look through this program in the online editor. You will probably see the screen say "Loading..." before the full book shows up. **Click the blue button now!**
+Cliquez sur le bouton bleu "Edit" pour regarder ce programme dans l'éditeur en ligne. Vous verrez probablement l'écran afficher "Loading..." avant que le livre complet n'apparaisse. **Cliquez sur le bouton bleu maintenant !**
 
 [http]: https://package.elm-lang.org/packages/elm/http/latest
 
@@ -95,14 +95,14 @@ view model =
       pre [] [ text fullText ]
 ```
 
-Some parts of this should be familiar from previous examples of The Elm Architecture. We still have a `Model` of our application. We still have an `update` that reacts to messages. We still have a `view` function that shows everything on screen.
+Certaines parties du code ci-dessus devraient vous être familières grâce aux précédents exemples de l'Architecture Elm. Nous avons toujours un `Model` de notre application. Nous avons toujours un `update` qui répond aux messages. Nous avons toujours une function `view` qui montre le tout à l'écran.
 
-The new parts extend the core pattern we saw before with some changes in `init` and `update`, and the addition of `subscription`.
+Les nouvelles parties étendent le principe de base que nous avions vu précédemment avec des changements dans `init` et dans `update` et l'ajout de `subscription`.
 
 
 ## `init`
 
-The `init` function describes how to initialize our program:
+La fonction `init` décrit comment initialiser le programme :
 
 ```elm
 init : () -> (Model, Cmd Msg)
@@ -115,11 +115,13 @@ init _ =
   )
 ```
 
-Like always, we have to produce the initial `Model`, but now we are also producing some **command** of what we want to do immediately. That command will eventually produce a `Msg` that gets fed into the `update` function.
 
-Our book website starts in the `Loading` state, and we want to GET the full text of our book. When making a GET request with [`Http.get`][get], we specify the `url` of the data we want to fetch, and we specify what we `expect` that data to be. So in our case, the `url` is pointing at some data on the Elm website, and we `expect` it to be a big `String` we can show on screen.
+Comme toujours, nous devons produire le `Model` initial, mais maintenant nous produisons aussi une **commande** de ce que nous voulons faire immédiatement. Cette commande produira finalement un `Msg` qui sera envoyé à la fonction `update`.
 
-The `Http.expectString GotText` line is saying a bit more than that we `expect` a `String` though. It is also saying that when we get a response, it should be turned into a `GotText` message:
+Le site web de notre livre commence dans l'état `Loading`, et nous voulons récupérer le texte complet de notre livre. Lorsque l'on fait une requête GET avec [`Http.get`][get], on spécifie l'`url` des données que l'on veut récupérer, et on spécifie ce que l'on attend (`expect`) de ces données. Dans notre cas, l'`url` pointe vers des données sur le site web d'Elm, et nous nous attendons (`expect`) à ce que ce soit une grande `String` que nous pouvons montrer à l'écran.
+
+
+La ligne `Http.expectString GotText` indique un peu plus que juste le fait que nous _attendons_ (`expect`) un `String`. Elle dit aussi que lorsque nous recevons une réponse, elle doit être transformée en un message `GotText` :
 
 ```elm
 type Msg
@@ -130,16 +132,15 @@ type Msg
 -- GotText (Err (Http.BadStatus 404))
 ```
 
-Notice that we are using the `Result` type from a couple sections back. This allows us to fully account for the possible failures in our `update` function. Speaking of `update` functions...
+Remarquez que nous utilisons le type `Result` que nous avons déjà utilisé quelques sections auparavant. Cela nous permet de prendre en compte les éventuels échecs de notre fonction `update`. En parlant de fonctions `update`...
 
 [get]: https://package.elm-lang.org/packages/elm/http/latest/Http#get
 
-> **Note:** If you are wondering why `init` is a function (and why we are ignoring the argument) we will talk about it in the upcoming chapter on JavaScript interop! (Preview: the argument lets us get information from JS on initialization.)
-
+> **Note:** Si vous vous demandez pourquoi `init` est une fonction (et pourquoi nous en ignorons l'argument), nous en parlerons dans le prochain chapitre sur l'interopérabilité JavaScript ! (Aperçu : l'argument nous permet d'obtenir des informations venant de JavaScript à l'initialisation).
 
 ## `update`
 
-Our `update` function is returning a bit more information as well:
+Notre fonction `update` renvoie également un peu plus d'informations :
 
 ```elm
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -154,28 +155,30 @@ update msg model =
           (Failure, Cmd.none)
 ```
 
-Looking at the type signature, we see that we are not just returning an updated model. We are _also_ producing a **command** of what we want Elm to do.
+En regardant la signature du type de la fonction, nous voyons que nous ne retournons pas seulement un modèle mis à jour. Nous produisons également une **commande** de ce que nous voulons qu'Elm fasse.
 
-Moving on to the implementation, we pattern match on messages like normal. When a `GotText` message comes in, we inspect the `Result` of our HTTP request and update our model depending on whether it was a success or failure. The new part is that we also provide a command.
+En ce qui concerne l'implémentation, nous faisons du _pattern matching_ sur les messages comme habituellement. Quand un message `GotText` arrive, nous inspectons le `Result` de notre requête HTTP et mettons à jour notre modèle selon qu'il s'agisse d'un succès ou d'un échec. La nouveauté est que nous fournissons également une commande.
 
-So in the case that we got the full text successfully, we say `Cmd.none` to indicate that there is no more work to do. We already got the full text!
+Ainsi, dans le cas où nous avons obtenu le texte complet avec succès, nous disons `Cmd.none` pour indiquer qu'il n'y a plus de travail à faire car nous avons déjà obtenu le texte complet !
 
-And in the case that there was some error, we also say `Cmd.none` and just give up. The text of the book did not load. If we wanted to get fancier, we could pattern match on the [`Http.Error`][Error] and retry the request if we got a timeout or something.
+Et dans le cas où il y a une erreur, nous disons également `Cmd.none` et nous abandonnons. Le texte du livre n'a pas été chargé. Si nous voulions être plus fantaisistes, nous pourrions faire un _pattern matching_ sur le [`Http.Error`][Error] et réessayer la requête si nous obtenons un timeout ou autre.
 
-The point here is that however we decide to update our model, we are also free to issue new commands. I need more data! I want a random number! Etc.
+Ce qu'il faut retenir, c'est que quelle que soit la façon dont nous décidons de mettre à jour notre modèle, nous sommes également libres d'émettre de nouvelles commandes. J'ai besoin de plus de données ! Je veux un nombre aléatoire ! Etc.
+
 
 [Error]: https://package.elm-lang.org/packages/elm/http/latest/Http#Error
 
 
 ## `subscription`
 
-The other new thing in this program is the `subscription` function. It lets you look at the `Model` and decide if you want to subscribe to certain information. In our example, we say `Sub.none` to indicate that we do not need to subscribe to anything, but we will soon see an example of a clock where we want to subscribe to the current time!
+L'autre nouveauté de ce programme est la fonction `subscription`. Elle vous permet de regarder le `Model` et de décider si vous voulez vous abonner à certaines informations. Dans notre exemple, nous disons `Sub.none` pour indiquer que nous n'avons pas besoin de nous abonner à quoi que ce soit, mais nous verrons bientôt un exemple d'horloge où nous voulons nous abonner à l'heure actuelle !
 
 
-## Summary
+## Résumé
 
-When we create a program with `Browser.element`, we set up a system like this:
+Lorsque nous créons un programme avec `Browser.element`, nous mettons en place un système comme celui-ci :
+
 
 ![](diagrams/element.svg)
 
-We get the ability to issue **commands** from `init` and `update`. This allows us to do things like make HTTP requests whenever we want. We also get the ability to **subscribe** to interesting information. (We will see an example of subscriptions later!)
+Nous avons la possibilité d'émettre des **commandes** depuis `init` et `update`. Cela nous permet de faire des choses comme des requêtes HTTP lorsque le besoin s'en fait sentir. Nous avons également la possibilité de nous **abonner** (**subscribe**) à des informations intéressantes. (Nous verrons un exemple d'abonnement plus tard !)
