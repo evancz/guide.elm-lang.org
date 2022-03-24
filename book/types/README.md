@@ -1,45 +1,45 @@
 # Types
 
-One of Elm's major benefits is that **users do not see runtime errors in practice**. This is possible because the Elm compiler can analyze your source code very quickly to see how values flow through your program. If a value can ever be used in an invalid way, the compiler tells you about it with a friendly error message. This is called *type inference*. The compiler figures out what *type* of values flow in and out of all your functions.
+L’un des points forts de Elm est que **les utilisateurs ne voient pas d’erreurs à l’exécution en pratique**. Cela est rendu possible par le fait que le compilateur Elm analyse votre code source très rapidement afin d’étudier comment les valeurs circulent dans votre programme. Si une valeur peut être utilisée d’une manière invalide, le compilateur vous en informe via un message d’erreur cordial. Cela s’appelle l’*inférence de types*. Le compilateur devine quels *types* de valeurs passent par vos fonctions.
 
-## An Example of Type Inference
+## Un exemple d’inférence de types
 
-The following code defines a `toFullName` function which extracts a person’s full name as a string:
+Le code suivant définit une fonction `toFullName` qui extrait le nom complet d’une personne sous la forme d’une chaîne de caractères :
 
 ```elm
 toFullName person =
-  person.firstName ++ " " ++ person.lastName
+    person.firstName ++ " " ++ person.lastName
 
 fullName =
-  toFullName { fistName = "Hermann", lastName = "Hesse" }
+    toFullName { fistName = "Hermann", lastName = "Hesse" }
 ```
 
-Like in JavaScript or Python, we just write the code with no extra clutter. Do you see the bug though?
+Comme en JavaScript ou Python, nous écrivons ici le code sans fioritures. Mais voyez-vous le bug ?
 
-In JavaScript, the equivalent code spits out `"undefined Hesse"`. Not even an error! Hopefully one of your users will tell you about it when they see it in the wild. In contrast, the Elm compiler just looks at the source code and tells you:
+En JavaScript, le code équivalent retourne `"undefined Hesse"`. Il n’y a même pas d’erreur ! Espérons que l’un de vos utilisateurs vous en informera quand il ou elle rencontrera ce bug dans la nature. À l’opposé, le compilateur Elm regarde simplement le code source et vous dit :
+
 
 ```
--- TYPE MISMATCH ---------------------------------------------------------------
+-- TYPE MISMATCH ---------------------------------------------------------- REPL
 
-The argument to function `toFullName` is causing a mismatch.
+The 1st argument to `toFullName` is not what I expect:
 
-6│   toFullName { fistName = "Hermann", lastName = "Hesse" }
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Function `toFullName` is expecting the argument to be:
+3|     toFullName { fistName = "Hermann", lastName = "Hesse" }
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This argument is a record of type:
 
-    { …, firstName : … }
+    { fistName : String, lastName : String }
 
-But it is:
+But `toFullName` needs the 1st argument to be:
 
-    { …, fistName : … }
+    { a | firstName : String, lastName : String }
 
-Hint: I compared the record fields and found some potential typos.
-
-    firstName <-> fistName
+Hint: Seems like a record field typo. Maybe firstName should be fistName?
+elm-france
 ```
 
-It sees that `toFullName` is getting the wrong *type* of argument. Like the hint in the error message says, someone accidentally wrote `fist` instead of `first`.
+Il constate que `toFullName` reçoit un argument du mauvais *type*. Comme le dit le message d’erreur, quelqu’un a par erreur tapé `fist` au lieu de `first`.
 
-It is great to have an assistant for simple mistakes like this, but it is even more valuable when you have hundreds of files and a bunch of collaborators making changes. No matter how big and complex things get, the Elm compiler checks that *everything* fits together properly just based on the source code.
+C’est déjà très bien d’avoir un assistant pour de simples erreurs comme celle-ci, mais c’est encore plus précieux quand vous avez des centaines de fichiers et un ensemble de collaborateurs qui travaillent dessus. Quelle que soit la taille et la complexité du projet, le compilateur Elm vérifie que **tout** est correct en se basant simplement sur le code source.
 
-The better you understand types, the more the compiler feels like a friendly assistant. So let's start learning more!
+Mieux vous comprendrez les types, plus le compilateur vous assistera efficacement. Continuons à apprendre !
