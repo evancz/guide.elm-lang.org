@@ -74,7 +74,7 @@ Pour réaliser un compteur, nous devons garder trace d'un nombre qui augmente ou
 type alias Model = Int
 ```
 
-Nous avons juste besoin d'une valeur `Int` (un nombre entier) pour garder la valeur courante du compteur. Nous pouvons voir cela dans notre valeur initiale :
+Nous avons juste besoin d'une valeur `Int` (un nombre entier) pour stocker la valeur courante du compteur :
 
 ```elm
 init : Model
