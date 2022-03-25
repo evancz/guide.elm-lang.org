@@ -1,10 +1,11 @@
-# Buttons
+# Boutons
 
-Our first example is a counter that can be incremented or decremented.
+Notre premier exemple est un compteur qui peut être incrémenté ou décrémenté.
 
-I included the full program below. Click the blue "Edit" button to mess with it in the online editor. Try changing text on one of the buttons. **Click the blue button now!**
+J’ai ajouté le programme complet ci-dessous. Cliquez sur le bouton bleu "Éditer" pour jouer avec l’éditeur en ligne. Essayez de changer le texte sur un des boutons.
+**Cliquez maintenant sur le bouton bleu !**
 
-<div class="edit-link"><a href="https://elm-lang.org/examples/buttons">Edit</a></div>
+<div class="edit-link"><a href="https://elm-lang.org/examples/buttons">Éditer</a></div>
 
 ```elm
 import Browser
@@ -55,27 +56,25 @@ view model =
     ]
 ```
 
-Now that you have poked around the code a little bit, you may have some questions. What is the `main` value doing? How do the different parts fit together? Let's go through the code and talk about it.
+Une fois familiarisés avec le code, nous devrions nous poser quelques questions. Que fait la valeur `main` ? Comment tout cela fonctionne ? Parcourons le code afin d’en discuter.
 
-> **Note:** The code here uses [type annotations](/types/reading_types.html), [type aliases](/types/type_aliases.html), and [custom types](/types/custom_types.html). The point of this section is to get a feeling for The Elm Architecture though, so we will not cover them until a bit later. I encourage you to peek ahead if you are getting stuck on these aspects!
+> **Note:** Le code qui est ici correspond aux [type annotations](/types/reading_types.html), [type aliases](/types/type_aliases.html), et [custom types](/types/custom_types.html). Cette section ne fait qu'esquisser les principes de l'Architecture Elm, que nous aborderons plus en détail par la suite. Cela dit, rien ne vous empêche de creuser dès à présent ces aspects si le cœur vous en dit !
 
+## La fonction principale `Main`
 
-## Main
+La valeur `main` est spéciale en Elm. Elle décrit ce qui sera affiché à l’écran. Dans notre cas, nous allons initialiser notre application avec la valeur `init`, la fonction `view` affichera tout ce qu’il y aura à l’écran, et les entrées de l’utilisateur seront transmises à la function `update`. Ayez en tête que c’est le fonctionnement global de notre programme.
 
-The `main` value is special in Elm. It describes what gets shown on screen. In this case, we are going to initialize our application with the `init` value, the `view` function is going to show everything on screen, and user input is going to be fed into the `update` function. Think of this as the high-level description of our program.
+## Le Modèle
 
+La modélisation des données est extrêmement important en Elm. L’intérêt du modèle est de projeter tous les détails de votre application sous forme de données.
 
-## Model
-
-Data modeling is extremely important in Elm. The point of the **model** is to capture all the details about your application as data.
-
-To make a counter, we need to keep track of a number that is going up and down. That means our model is really small this time:
+Pour réaliser un compteur, nous devons garder trace d’un nombre qui monte et descend. Notre modèle est vraiment simple cette fois-ci :
 
 ```elm
 type alias Model = Int
 ```
 
-We just need an `Int` value to track the current count. We can see that in our initial value:
+Nous avons juste besoin d’une valeur `Int` pour garder la valeur courante du compteur. Nous pouvons voir cela dans notre valeur initiale :
 
 ```elm
 init : Model
@@ -83,12 +82,11 @@ init =
   0
 ```
 
-The initial value is zero, and it will go up and down as people press different buttons.
+La valeur initiale est zéro, et elle augmentera ou diminuera au fur et à mesure que les gens cliqueront sur les différents boutons.
 
+## La vue
 
-## View
-
-We have a model, but how do we show it on screen? That is the role of the `view` function:
+Nous avons un modèle mais comment allons-nous l'afficher à l'écran ? C'est le rôle de la fonction `view`:
 
 ```elm
 view : Model -> Html Msg
@@ -100,22 +98,21 @@ view model =
     ]
 ```
 
-This function takes in the `Model` as an argument. It outputs HTML. So we are saying that we want to show a decrement button, the current count, and an increment button.
+Cette fonction prend le `model` en paramètre et renvoie du HTML. Nous souhaitons afficher un bouton pour incrémenter, décrémenter et voir la valeur du compteur.
 
-Notice that we have an `onClick` handler for each button. These are saying: **when someone clicks, generate a message**. So the plus button is generating an `Increment` message. What is that and where does it go? To the `update` function!
+À savoir que nous avons un gestionnaire d’événements `onClick` pour chaque bouton. Cela veut dire : **Quand quelqu’un clique, envoie un message**. Donc, le bouton _plus_ envoie le message `Increment`. Que se passe-t-il et où part le message ? À la fonction `update` !
 
+## Mise à jour
 
-## Update
+La fonction `update` décrit la façon dont le modèle va changer au fil du temps.
 
-The `update` function describes how our `Model` will change over time.
-
-We define two messages that it might receive:
+Nous avons défini deux messages qu'elle pourra recevoir:
 
 ```elm
 type Msg = Increment | Decrement
 ```
 
-From there, the `update` function just describes what to do when you receive one of these messages.
+À partir de là, la fonction `update` décrit simplement ce qu’il faut faire lorsqu’elle reçoit un des messages.
 
 ```elm
 update : Msg -> Model -> Model
@@ -128,35 +125,33 @@ update msg model =
       model - 1
 ```
 
-If you get an `Increment` message, you increment the model. If you get a `Decrement` message, you decrement the model.
+Si vous recevez un message `Increment`, vous incrémentez le modèle. Si vous recevez le message `Decrement`, vous le décrémentez.
 
-So whenever we get a message, we run it through `update` to get a new model. We then call `view` to figure out how to show the new model on screen. Then repeat! User input generates a message, `update` the model, `view` it on screen. Etc.
+À chaque fois que nous recevons un message, la fonction `update` traite le message afin d'obtenir un nouveau modèle. Ensuite, nous appelons la vue afin d'afficher le nouveau modèle à l’écran. Tous ceci se répète ! L'entrée utilisateur envoie un message, la fonction `update` met à jour le modèle, et la fonction `view` l’affiche à l’écran. Etc.
 
+## En résumé
 
-## Overview
-
-Now that you have seen all the parts of an Elm program, it may be a bit easier to see how they fit into the diagram we saw earlier:
+Maintenant que nous avons abordé toutes les parties d’un programme Elm, il est peut-être un peu plus facile de voir comment elles s’intègrent dans le diagramme que nous avons vu précédemment :
 
 ![Diagram of The Elm Architecture](buttons.svg)
 
-Elm starts by rendering the initial value on screen. From there you enter into this loop:
+Elm commence par afficher la valeur initiale à l’écran. Ensuite, vous entrez dans cette boucle :
 
-1. Wait for user input.
-2. Send a message to `update`
-3. Produce a new `Model`
-4. Call `view` to get new HTML
-5. Show the new HTML on screen
-6. Repeat!
+1. En attente d’une entrée utilisateur.
+2. Envoie un message à la fonction `update`
+3. Produit un nouveau `Model`
+4. Appelle `view` pour obtenir un nouveau HTML
+5. Affiche le nouveau HTML à l’écran
+6. Et on boucle !
 
-This is the essence of The Elm Architecture. Every example we see from now on will be a slight variation on this basic pattern.
+C'est l’essence même de l'Architecture Elm. Chaque exemple que nous verrons à partir de maintenant sera une légère variation de ce modèle.
 
-
-> **Exercise:** Add a button to reset the counter to zero:
+> **Exercice :** Ajoutez un bouton pour réinitialiser le compteur à zéro :
 >
-> 1. Add a `Reset` variant to the `Msg` type
-> 2. Add a `Reset` branch in the `update` function
-> 3. Add a button in the `view` function.
+> 1. Ajoutez un nouveau message `Reset` sur le type `Msg`
+> 2. Ajoutez une branche `Reset` dans la fonction `update`
+> 3. Ajoutez un bouton dans le fontion `view`.
 >
-> You can edit the example in the online editor [here](https://elm-lang.org/examples/buttons).
+> Vous pouvez éditer l’exemple dans l’éditeur en ligne [ici](https://elm-lang.org/examples/buttons).
 >
-> If that goes well, try adding another button to increment by steps of 10.
+> Si tout s’est bien passé, essayez d'ajouter un bouton qui permet d’incrémenter le compteur de 10.
