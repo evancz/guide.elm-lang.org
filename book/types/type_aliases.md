@@ -1,6 +1,6 @@
-# Type Aliases
+# Les alias de type
 
-Type annotations can start to get long. This might be a real problem if you have records with many fields! This is the core motivation for type aliases. A **type alias** is a shorter name for a type. For example, you could create a `User` alias like this:
+Les annotations peuvent devenir très longues, particulièrement si vous avez des [*records*](/bases_du_langage.html#records) contenant de nombreux champs ! C'est pour répondre à ce problème que les *alias* ont été conçus. Un **alias de type** est en quelque sorte un diminutif pour ce dernier, permettant de le référencer en utilisant un nom plus court. Par exemple, vous pourriez créer un alias `User` de cette façon :
 
 ```elm
 type alias User =
@@ -9,29 +9,29 @@ type alias User =
   }
 ```
 
-Rather than writing the whole record type all the time, we can just say `User` instead. This helps us write type annotations that are easier to read:
+Plutôt que d'écrire explicitement le type explicite du record tout le temps, on peut juste le référencer en utilisant `User`, ce qui nous permet d'écrire des annotations beaucoup plus simples à lire :
 
 ```elm
--- WITH ALIAS
+-- AVEC ALIAS
 
 isOldEnoughToVote : User -> Bool
 isOldEnoughToVote user =
   user.age >= 18
 
 
--- WITHOUT ALIAS
+-- SANS ALIAS
 
 isOldEnoughToVote : { name : String, age : Int } -> Bool
 isOldEnoughToVote user =
   user.age >= 18
 ```
 
-These two definitions are equivalent, but the one with a type alias is shorter and easier to read. So all we are doing is making an **alias** for a long type.
+Ces deux déclarations sont équivalentes, mais celle utilisant un alias est plus courte et plus simple à lire. Ici nous utilisons simplement un **alias** en replacement d'un type plus long.
 
 
-## Models
+## Modèles
 
-It is extremely common to use type aliases when designing a model. When we were learning about The Elm Architecture, we saw a model like this:
+Il est très courant d'utiliser des alias de type quand on crée un modèle. Quand on a étudié l'Architecture Elm, on a vu un modèle de ce type :
 
 ```
 type alias Model =
@@ -41,12 +41,12 @@ type alias Model =
   }
 ```
 
-The main benefit of using a type alias for this is when we write the type annotations for the `update` and `view` functions. Writing `Msg -> Model -> Model` is so much nicer than the fully expanded version! It has the added benefit that we can add fields to our model without needing to change any type annotations.
+L'utilisation d'un alias de type se révèle particulièrement intéressante à l'heure d'écrire les annotations de nos fonctions `update` et `view`. Écrire `Msg -> Model -> Model` est tellement plus simple et confortable que de recopier la forme exhaustive… En plus, si nous ajoutons ou modifions les champs de notre modèle, nous n'avons pas besoin de mettre à jours nos annotations.
 
 
-## Record Constructors
+## Constructeurs de record
 
-When you create a type alias specifically for a record, it also generates a **record constructor**. So if we define a `User` type alias, we can start building records like this:
+Quand vous créez un alias de record, cela génère du même coup un **constructeur de record**. Donc si vous définissez un alias de type `User`, on peut commencer à construire les records correspondants comme ceci :
 
 {% replWithTypes %}
 [
@@ -72,8 +72,8 @@ When you create a type alias specifically for a record, it also generates a **re
 ]
 {% endreplWithTypes %}
 
-Try creating another user or creating a type alias of your own ⬆️
+Essayez de créer un autre `User`, puis de créer votre propre alias ⬆️
 
-Note that the order of arguments in the record constructor match the order of fields in the type alias!
+Notez que l'ordre des arguments passés au constructeur de record correspond à l'ordre des champs dans l'alias de type !
 
-And again, **this is only for records.** Making type aliases for other types will not result in a constructor.
+Encore une fois, ceci n'est **valable que pour les records.** Créer des alias pour d'autres types ne fournira pas de constructeur.
