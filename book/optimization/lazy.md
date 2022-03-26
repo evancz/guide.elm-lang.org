@@ -1,15 +1,15 @@
 # `Html.Lazy`
 
-The [`elm/html`](https://package.elm-lang.org/packages/elm/html/latest/) package is used to show things on screen. To understand how to optimize it, we need to learn how it works in the first place!
+Le paquet [`elm/html`](https://package.elm-lang.org/packages/elm/html/latest/) est utilisé pour afficher des choses à l'écran. Pour comprendre comment l'optimiser, voyons d'abord comment il fonctionne !
 
 
-## What is the DOM?
+## Qu'est-ce que le DOM ?
 
-If you are creating an HTML file, you would write HTML directly like this:
+Lorsque vous créez un fichier HTML, vous écrivez du HTML directement comme ça :
 
 ```html
 <div>
-  <p>Chair alternatives include:</p>
+  <p>Parmi les alternatives aux chaises, on trouve :</p>
   <ul>
     <li>seiza</li>
     <li>chabudai</li>
@@ -17,22 +17,22 @@ If you are creating an HTML file, you would write HTML directly like this:
 </div>
 ```
 
-You can think of this as producing some DOM data structure behind the scenes:
+Vous pouvez y pensez comme produisant cette structure DOM en coulisses:
 
 ![](diagrams/dom.svg)
 
-The black boxes represent heavy-weight DOM objects with hundreds of attributes. And when any of them change, it can trigger expensive renders and reflows of page content.
+Les boîtes noires représentent des objets DOM lourds avec des centaines d'attributs. Et un changement de n'importe lequel d'entre eux peut déclencher des calculs très coûteux pour redessiner et réarranger le contenu de la page.
 
 
-## What is Virtual DOM?
+## Qu'est-ce que le _Virtual DOM_ ?
 
-If you are creating an Elm file, you would use `elm/html` to write something like this:
+Si vous créez un fichier Elm, vous utiliseriez plutôt `elm/html` pour avoir un code ressemblant à :
 
 ```elm
 viewChairAlts : List String -> Html msg
 viewChairAlts chairAlts =
   div []
-    [ p [] [ text "Chair alternatives include:" ]
+    [ p [] [ text "Parmi les alternatives aux chaises, on trouve :" ]
     , ul [] (List.map viewAlt chairAlts)
     ]
 
@@ -41,12 +41,11 @@ viewAlt chairAlt =
   li [] [ text chairAlt ]
 ```
 
-You can think of `viewChairAlts ["seiza","chabudai"]` as producing some “Virtual DOM” data structure behind the scenes:
+Vous pouvez penser à `viewChairAlts ["seiza","chabudai"]` comme produisant en coulisse une structure “Virtual DOM” :
 
 ![](diagrams/vdom.svg)
 
-The white boxes represent light-weight JavaScript objects. They only have the attributes you specify. Their creation can never cause renders or reflows. Point is, compared to DOM nodes, these are much cheaper to allocate!
-
+Les boîtes blanches représentent des objets Javascripts légers. Ils contiennent uniquement les attributs que vous spécifiez. Leur création n'engendredront jamais de calculs pour redessiner et réarranger la page. En bref, comparés aux noeuds DOM, ils sont beaucoup moins chers à allouer !
 
 ## Render
 
