@@ -1,6 +1,6 @@
 # Pattern Matching
 
-On the previous page, we learned how to create [custom types](/types/custom_types.html) with the `type` keyword. Our primary example was a `User` in a chat room:
+Nous venons d'apprendre à créer des [types personnalisés](/types/custom_types.html) avec le mot-clé `type`. Notre exemple principal était un type `User` dans un salon de discussion :
 
 ```elm
 type User
@@ -8,12 +8,12 @@ type User
   | Visitor String
 ```
 
-Regulars have a name and age, whereas visitors only have a name. So we have our custom type, but how do we actually use it?
+Les usagers de type `Regular` ont un identifiant et un âge, tandis que ceux de type `Visitor` n'ont qu'un identifiant. Nous avons personnalisé notre type, mais comment pouvons-nous l'utiliser concrètement ?
 
 
 ## `case`
 
-Say we want a `toName` function that decides on a name to show for each `User`. We need to use a `case` expression:
+Si nous voulons une fonction permettant de choisir l'identifiant à afficher pour un `User` donné, nous avons besoin d'utiliser une expression `case..of` :
 
 ```elm
 toName : User -> String
@@ -29,14 +29,14 @@ toName user =
 -- toName (Visitor "kate95")    == "kate95"
 ```
 
-The `case` expression allows us to branch based on which variant we happen to see, so whether we see Thomas or Kate, we always know how to show their name.
+L'expression `case..of` nous permet de distinguer chaque variante, de façon à pouvoir afficher le nom de Kate ou de Thomas quel que soit le statut de leur compte.
 
-And if we try invalid arguments like `toName (Visitar "kate95")` or `toName Anonymous`, the compiler tells us about it immediately. This means many simple mistakes can be fixed in seconds, rather than making it to users and costing a lot more time overall.
+Et si nous essayons de passer des arguments invalides comme  `toName (Visitor "kate95")` ou `toName Anonymous`, le compilateur nous le signale immédiatement. Cela veut dire que ce genre d'erreurs mineures peuvent être réglées en quelque secondes, plutôt que d'attendre que le problème survienne en production et prenne beaucoup plus de temps à régler au final.
 
 
-## Wild Cards
+## Jokers
 
-The `toName` function we just defined works great, but notice that the `age` is not used in the implementation? When some of the associated data is unused, it is common to use a “wild card” instead of giving it a name:
+La fonction `toName` que nous venons de définir fonctionne très bien, mais on se rend compte que la valeur `age` n'est pas utilisée. Dans pareil cas, quand une donnée associée n'est pas utilisée, il est courant d'utiliser un “joker” plutôt que de lui donner un nom :
 
 ```elm
 toName : User -> String
@@ -49,4 +49,4 @@ toName user =
       name
 ```
 
-The `_` acknowledges the data there, but also saying explicitly that nobody is using it.
+Le caractère `_` atteste que la donnée est présente, mais explicite le fait que personne ne l'utilise.
