@@ -1,11 +1,11 @@
 # Lire les types
 
-Au chapitre [Bases du langage](/bases_du_langage.html), nous avons pu manipuler un certain nombre d'exemples interactifs pour prendre contact avec le langage. Poursuivons, en nous interrogeant cette fois sur le **type** des valeurs manipulées.
+Au chapitre [Bases du langage](/bases_du_langage.html), nous avons pu manipuler un certain nombre d'exemples interactifs pour prendre contact avec le langage. Poursuivons cette démarche en nous interrogeant cette fois sur le **type** des valeurs manipulées.
 
 
 ## Types primitifs et listes
 
-Entrons quelques expressions simples et regardons ce que ça donne :
+Entrons quelques expressions simples et observons ce qui en résulte :
 
 {% replWithTypes %}
 [
@@ -27,9 +27,9 @@ Entrons quelques expressions simples et regardons ce que ça donne :
 ]
 {% endreplWithTypes %}
 
-Cliquez sur cette boîte noire juste au-dessus ⬆️ , et le curseur devrait commencer à clignoter. Saisissez `3.1415` et appuyez sur la touche Entrée de votre clavier. Cela devrait afficher `3.1415` suivi du type `Float`.
+Cliquez sur cette boîte noire juste au-dessus ⬆️ ; le curseur devrait commencer à clignoter. Saisissez `3.1415` et appuyez sur la touche Entrée de votre clavier. Cela devrait afficher `3.1415` suivi du type `Float`.
 
-Que se passe t-il concrètement ici ? Chaque entrée affiche une valeur suivie de son **type**. Vous pouvez lire ces lignes à voix haute :
+Que se passe t-il concrètement ici ? Chaque entrée affiche une valeur suivie de son **type**. Vous pouvez lire ces lignes à haute voix :
 
 - La valeur `"hello"` est une `String` (une chaîne de caractère).
 - La valeur `False` est un `Bool` (un booléen).
@@ -58,7 +58,7 @@ Vous pouvez lire ces types ainsi :
 1. Nous avons une `List` remplie de valeurs de type `String`.
 2. Nous avons une `List` remplie de valeurs de type `Float`.
 
-Au final, un **type** est une description sommaire du contenu d'une valeur.
+Au final, un **type** est la description sommaire du contenu d'une valeur.
 
 
 ## Fonctions
