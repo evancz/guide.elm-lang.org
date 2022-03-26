@@ -27,10 +27,10 @@ Placez-vous à la racine du projet, puis :
 
     npm run serve
 
+Le livre est alors servi sur [http://localhost:4000](http://localhost:4000/).
+
 ## Publier sur Github Pages
 
     npm run deploy
 
-Le site est publié sur [elm-france.github.io/guide.elm-lang.org](https://elm-france.github.io/guide.elm-lang.org/).
-
-Vous pouvez ensuite consulter le livre sur [http://localhost:4000](http://localhost:4000/).
+Le site est alors publié sur [elm-france.github.io/guide.elm-lang.org](https://elm-france.github.io/guide.elm-lang.org/).
