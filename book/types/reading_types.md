@@ -1,11 +1,11 @@
-# Reading Types
+# Lire les types
 
-In the [Core Language](/core_language.html) section of this book, we went through a bunch of interactive examples to get a feeling for the language. Well, we are going to do it again, but with a new question in mind. What **type** of value is that?
+Au chapitre [Bases du langage](/bases_du_langage.html), nous avons pu manipuler un certain nombre d'exemples interactifs pour prendre contact avec le langage. Poursuivons, en nous interrogeant cette fois sur le **type** des valeurs manipulées.
 
 
-## Primitives and Lists
+## Types primitifs et listes
 
-Let's enter some simple expressions and see what happens:
+Entrons quelques expressions simples et regardons ce que ça donne :
 
 {% replWithTypes %}
 [
@@ -27,16 +27,16 @@ Let's enter some simple expressions and see what happens:
 ]
 {% endreplWithTypes %}
 
-Click on this black box ⬆️ and the cursor should start blinking. Type in `3.1415` and press the ENTER key. It should print out `3.1415` followed by the type `Float`.
+Cliquez sur cette boîte noire juste au-dessus ⬆️ , et le curseur devrait commencer à clignoter. Saisissez `3.1415` et appuyez sur la touche Entrée de votre clavier. Cela devrait afficher `3.1415` suivi du type `Float`.
 
-Okay, but what is going on here exactly? Each entry shows value along with what **type** of value it happens to be. You can read these examples out loud like this:
+Que se passe t-il concrètement ici ? Chaque entrée affiche une valeur suivie de son **type**. Vous pouvez lire ces lignes à voix haute :
 
-- The value `"hello"` is a `String`.
-- The value `False` is a `Bool`.
-- The value `3` is an `Int`.
-- The value `3.1415` is a `Float`.
+- La valeur `"hello"` est une `String` (une chaîne de caractère).
+- La valeur `False` est un `Bool` (un booléen).
+- La valeur `3` est un `Int` (un nombre entier).
+- La valeur `3.1415` est un `Float` (un nombre flottant).
 
-Elm is able to figure out the type of any value you enter! Let's see what happens with lists:
+Elm est capable de deviner le type de n'importe quelle valeur que vous lui envoyez ! Regardons ce que ça donne avec les listes :
 
 {% replWithTypes %}
 [
@@ -53,17 +53,17 @@ Elm is able to figure out the type of any value you enter! Let's see what happen
 ]
 {% endreplWithTypes %}
 
-You can read these types as:
+Vous pouvez lire ces types ainsi :
 
-1. We have a `List` filled with `String` values.
-2. We have a `List` filled with `Float` values.
+1. Nous avons une `List` remplie de valeurs de type `String`.
+2. Nous avons une `List` remplie de valeurs de type `Float`.
 
-The **type** is a rough description of the particular value we are looking at.
+Au final, un **type** est une description sommaire du contenu d'une valeur.
 
 
-## Functions
+## Fonctions
 
-Let's see the type of some functions:
+Regardons le type de quelques fonctions :
 
 {% replWithTypes %}
 [
@@ -75,9 +75,9 @@ Let's see the type of some functions:
 ]
 {% endreplWithTypes %}
 
-Try entering `round` or `sqrt` to see some other function types ⬆️
+Essayez d'entrer `round` or `sqrt` pour observer d'autres types ⬆️
 
-The `String.length` function has type `String -> Int`. This means it *must* take in a `String` argument, and it will definitely return an `Int` value. So let's try giving it an argument:
+La fonction `String.length` a un type `String -> Int`. Cela signifie qu'elle *doit* prendre un argument de type `String` et qu'elle retourne une valeur de type `Int`. Essayons de lui fournir un argument :
 
 {% replWithTypes %}
 [
@@ -89,13 +89,13 @@ The `String.length` function has type `String -> Int`. This means it *must* take
 ]
 {% endreplWithTypes %}
 
-So we start with a `String -> Int` function and give it a `String` argument. This results in an `Int`.
+Donc on prend une fonction `String -> Int`, on lui passe un argument `String`, et ça donne un `Int`.
 
-What happens when you do not give a `String` though? Try entering `String.length [1,2,3]` or `String.length True` to see what happens ⬆️
+Mais que se passe t-il quand on donne autre chose qu'une `String` ? Essayez d'entrer `String.length [1,2,3]` ou `String.length True` pour voir ce que ça donne ⬆️
 
-You will find that a `String -> Int` function *must* get a `String` argument!
+Vous allez découvrir qu'une fonction `String -> Int` doit *absolument* recevoir un argument de type `String` !
 
-> **Note:** Functions that take multiple arguments end up having more and more arrows. For example, here is a function that takes two arguments:
+> **Note:** Plus Les fonctions prennent d'arguments, plus elles contiennent de *flèches* (`->`). Par exemple, cette fonction prend deux arguments :
 >
 > {% replWithTypes %}
 [
@@ -107,12 +107,12 @@ You will find that a `String -> Int` function *must* get a `String` argument!
 ]
 {% endreplWithTypes %}
 >
-> Giving two arguments like `String.repeat 3 "ha"` will produce `"hahaha"`. It works to think of `->` as a weird way to separate arguments, but I explain the real reasoning [here](/appendix/function_types.md). It is pretty neat!
+> Fournir deux arguments à `String.repeat` comme `String.repeat 3 "ha"` produira `"hahaha"`. On peut retenir que `->` est une façon un peu étrange de séparer les arguments, mais nous expliquons tout le raisonnement derrière [ici](/appendix/function_types.md). Et c'est plutôt cool !
 
 
-## Type Annotations
+## Annotations de type
 
-So far we have just let Elm figure out the types, but it also lets you write a **type annotation** on the line above a definition. So when you are writing code, you can say things like this:
+Jusqu'ici nous avons laissé Elm deviner les types, mais on peut également fournir une **annotation de type** au-dessus de la ligne définissant une fonction, comme ceci :
 
 ```elm
 half : Float -> Float
@@ -137,17 +137,17 @@ checkPower powerLevel =
 -- checkPower True -- error!
 ```
 
-Adding type annotations is not required, but it is definitely recommended! Benefits include:
+Ajouter des annotations de type n'est pas obligatoire, mais c'est fortement recommandé ! Parmi leurs nombreux bénéfices :
 
-1. **Error Message Quality** &mdash; When you add a type annotation, it tells the compiler what you are _trying_ to do. Your implementation may have mistakes, and now the compiler can compare against your stated intent. &ldquo;You said argument `powerLevel` was an `Int`, but it is getting used as a `String`!&rdquo;
-2. **Documentation** &mdash; When you revisit code later (or when a colleague visits it for the first time) it can be really helpful to see exactly what is going in and out of the function without having to read the implementation super carefully.
+1. **Qualité des messages d'erreur** &mdash; Quand vous ajoutez une annotation de type, le compilateur comprend ce que vous _essayez_ de faire. Votre implémentation peut comporter des erreurs, mais le compilateur peut maintenant les comparer à votre intention initiale. &ldquo;Vous avez dit que `powerLevel` était un `Int`, mais il est utilisé comme une `String` !&rdquo;
+2. **Documentation** &mdash; Quand vous revenez sur une base de code ancienne (ou quand d'autres collègues la découvrent pour la première fois), c'est très pratique de lire directement ce qui rentre et sort d'une fonction, sans avoir à lire l'implémentation très attentivement.
 
-People can make mistakes in type annotations though, so what happens if the annotation does not match the implementation? The compiler figures out all the types on its own, and it checks that your annotation matches the real answer. In other words, the compiler will always verify that all the annotations you add are correct. So you get better error messages _and_ documentation always stays up to date!
+Il est toutefois possible de se tromper en écrivant des annotations… du coup, que se passe t-il si une annotation ne correspond pas à son implémentation ? Le compilateur infère tous les types et vérifie que votre annotation colle systématiquement à la réalité. En d'autres termes, le compilateur vérifie en permanence que toutes les annotations que vous ajoutez sont cohérentes. Ainsi, vous disposez des meilleurs messages d'erreur possible _et_ d'une documentation toujours à jour !
 
 
-## Type Variables
+## Variables de type
 
-As you look through more Elm code, you will start to see type annotations with lower-case letters in them. A common example is the `List.length` function:
+En lisant du code Elm, vous pouvez tomber sur des annotations comportant une ou plusieurs lettres en minuscule, comme par exemple pour la fonction `List.length` :
 
 {% replWithTypes %}
 [
@@ -159,7 +159,7 @@ As you look through more Elm code, you will start to see type annotations with l
 ]
 {% endreplWithTypes %}
 
-Notice that lower-case `a` in the type? That is called a **type variable**. It can vary depending on how [`List.length`][length] is used:
+Vous voyez la lettre `a` dans le type `List a -> Int` ? C'est une **variable de type**, qui peut varier en fonction de l'usage fait de [`List.length`][length] :
 
 {% replWithTypes %}
 [
@@ -181,7 +181,7 @@ Notice that lower-case `a` in the type? That is called a **type variable**. It c
 ]
 {% endreplWithTypes %}
 
-We just want the length, so it does not matter what is in the list. So the type variable `a` is saying that we can match any type. Let&rsquo;s look at another common example:
+Nous ne nous intéressons qu'à la longueur de ces listes, sans jamais nous soucier du type de données qu'elles contiennent. La variable de type `a` indique qu'on peut cibler n'importe quel type. Regardons un autre exemple courant :
 
 {% replWithTypes %}
 [
@@ -203,17 +203,17 @@ We just want the length, so it does not matter what is in the list. So the type 
 ]
 {% endreplWithTypes %}
 
-Again, the type variable `a` can vary depending on how [`List.reverse`][reverse] is used. But in this case, we have an `a` in the argument and in the result. This means that if you give a `List Int` you must get a `List Int` as well. Once we decide what `a` is, that’s what it is everywhere.
+À nouveau, la variable de type `a` peut varier en fonction de comment [`List.reverse`][reverse] est utilisée. Mais ici, nous avons un `a` dans l'argument *et* le résultat. Cela signifie que quand vous passez une `List Int`, vous récupérez une `List Int` en retour également. Une fois décidé à quoi correspond la variable de type `a`, le type sous-jacent doit être cohérent partout.
 
-> **Note:** Type variables must start with a lower-case letter, but they can be full words. We could write the type of `List.length` as `List value -> Int` and we could write the type of `List.reverse` as `List element -> List element`. It is fine as long as they start with a lower-case letter. Type variables `a` and `b` are used by convention in many places, but some type annotations benefit from more specific names.
+> **Note :** Les variables de type doivent commencer par un caractère minuscule, mais elles peuvent tout aussi bien être des mots entiers. Nous pourrions écrire le type de `List.length` avec une signature `List value -> Int` et celui de `List.reverse` avec `List element -> List element`. Aucun problème tant qu'on commence bien une lettre minuscule. Les variables de type `a` et `b` sont souvent utilisées par convention, mais certaines annotations bénéficient aussi de noms plus appropriés.
 
 [length]: https://package.elm-lang.org/packages/elm/core/latest/List#length
 [reverse]: https://package.elm-lang.org/packages/elm/core/latest/List#reverse
 
 
-## Constrained Type Variables
+## Variables de type contraintes
 
-There is a special variant of type variables in Elm called **constrained** type variables. The most common example is the `number` type. The [`negate`](https://package.elm-lang.org/packages/elm/core/latest/Basics#negate) function uses it:
+Il y a une variante spéciale de types variables en Elm appelés variables de type **contraintes**. L'exemple la plus connue est `number`, qu'utilisent de nombreuses fonctions comme [`negate`](https://package.elm-lang.org/packages/elm/core/latest/Basics#negate) par exemple :
 
 {% replWithTypes %}
 [
@@ -225,17 +225,17 @@ There is a special variant of type variables in Elm called **constrained** type 
 ]
 {% endreplWithTypes %}
 
-Try expressions like `negate 3.1415` and `negate (round 3.1415)` and `negate "hi"` ⬆️
+Essayez de soumettre des expressions comme `negate 3.1415` ou `negate (round 3.1415)`, puis `negate "coucou"` ⬆️
 
-Normally type variables can get filled in with anything, but `number` can only be filled in by `Int` and `Float` values. It _constrains_ the possibilities.
+Normalement, les variables de type peuvent être remplies avec n'importe quel type, mais `number` ne peut l'être qu'avec `Int` ou `Float`. Ici la variable `number` _contraint_ les possibilités.
 
-The full list of constrained type variables is:
+La liste complète des variables de type contraintes est :
 
-- `number` permits `Int` and `Float`
-- `appendable` permits `String` and `List a`
-- `comparable` permits `Int`, `Float`, `Char`, `String`, and lists/tuples of `comparable` values
-- `compappend` permits `String` and `List comparable`
+- `number`, qui autorise `Int` et `Float`
+- `appendable`, qui autorise `String` et `List a`
+- `comparable`, qui autorise `Int`, `Float`, `Char`, `String`, et les listes/tuples de `comparable`
+- `compappend`, qui autorise `String` et `List comparable`
 
-These constrained type variables exist to make operators like `(+)` and `(<)` a bit more flexible.
+Ces variables de type contraintes existent pour rendre certains opérateurs comme `(+)` et `(<)` un peu plus flexibles.
 
-By now we have covered types for values and functions pretty well, but what does this look like when we start wanting more complex data structures?
+Nous avons vu les types pour les valeurs et les fonctions plutôt exhaustivement, mais à quoi ça ressemble quand on commence à vouloir des structures de données plus complexes ?
