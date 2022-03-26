@@ -9,7 +9,7 @@
 * [Les types](types/README.md)
    * [Lire les types](types/reading_types.md)
    * [Les alias de types](types/type_aliases.md)
-   * [Custom Types](types/custom_types.md)
+   * [Types personnalisés](types/custom_types.md)
    * [Pattern Matching](types/pattern_matching.md)
 * [Gestion d'erreur](error_handling/README.md)
    * [Maybe](error_handling/maybe.md)

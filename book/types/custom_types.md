@@ -1,18 +1,19 @@
-> **Note:** Custom types used to be referred to as “union types” in Elm. Names from other communities include [tagged unions](https://en.wikipedia.org/wiki/Tagged_union) and [ADTs](https://en.wikipedia.org/wiki/Algebraic_data_type).
+> **Note :** Les *types personnalisés* étaient auparavant appelés *union types* en Elm. D'autres noms véhiculant le même concept issus d'autres communautés sont [*tagged unions*](https://en.wikipedia.org/wiki/Tagged_union) et [*ADTs*](https://en.wikipedia.org/wiki/Algebraic_data_type).
 
-# Custom Types
 
-So far we have seen a bunch of types like `Bool`, `Int`, and `String`. But how do we define our own?
+# Types personnalisés
 
-Say we are making a chat room. Everyone needs a name, but maybe some users do not have a permanent account. They just give a name each time they show up.
+Jusqu'ici nous avons vu quelques types comme `Bool`, `Int` et `String`. Mais comment créer nos *propres* types ?
 
-We can describe this situation by defining a `UserStatus` type, listing all the possible variations:
+Imaginons un salon de discussion en ligne. Chaque usager a besoin d'un identifiant, mais certains n'ont pas créé de compte et fournissent simplement un identifiant à chaque fois qu'ils se connectent.
+
+Nous pouvons décrire cette situation en définissant un type `UserStatus` listant toutes les variantes possibles :
 
 ```elm
 type UserStatus = Regular | Visitor
 ```
 
-The `UserStatus` type has two **variants**. Someone can be a `Regular` or a `Visitor`. So we could represent a user as a record like this:
+Le type `UserStatus` a deux **variantes**. Les usagers peuvent être `Regular` ou `Visitor`. Nous pouvons représenter nos usagers en utilisant un *record*, comme ceci :
 
 ```elm
 type UserStatus
@@ -28,9 +29,9 @@ thomas = { status = Regular, name = "Thomas" }
 kate95 = { status = Visitor, name = "kate95" }
 ```
 
-So now we can track if someone is a `Regular` with an account or a `Visitor` who is just passing through. It is not too tough, but we can make it simpler!
+De cette façon, nous pouvons déterminer si nos usagers disposent d'un compte (`Regular`) ou pas (`Visitor`). Ce n'est pas trop compliqué, mais on peut rendre ça encore plus simple !
 
-Rather than creating a custom type and a type alias, we can represent all this with just a single custom type. The `Regular` and `Visitor` variants each have an associated data. In our case, the associated data is a `String` value:
+Plutôt que de créer un type personnalisé *et* un alias de type, on peut représenter l'ensemble au moyen *d'un seul* type personnalisé. Les variantes `Regular` et `Visitor` se voient chacune associée à un identifiant de type `String` :
 
 ```elm
 type User
@@ -41,9 +42,9 @@ thomas = Regular "Thomas"
 kate95 = Visitor "kate95"
 ```
 
-The data is attached directly to the variant, so there is no need for the record anymore.
+La donnée étant attachée directement à la variante, il n'y a même plus besoin de record.
 
-Another benefit of this approach is that each variant can have different associated data. Say that `Regular` users gave their age when they signed up. There is no nice way to capture that with records, but when you define your own custom type it is no problem. Let's add some associated data to the `Regular` variant in an interactive example:
+Un autre avantage de cette approche est que chaque variante peut avoir des données associées de types différents. Admettons qu'on propose à nos usagers `Regular` d'ajouter leur âge à la création de leur compte. Il n'y a pas de moyen évident de modéliser ça avec un record, mais avec un type personnalisé, aucun problème. Ajoutons quelques données spécifiques à notre variante `Regular` :
 
 {% replWithTypes %}
 [
@@ -74,9 +75,9 @@ Another benefit of this approach is that each variant can have different associa
 ]
 {% endreplWithTypes %}
 
-Try defining a `Regular` visitor with a name and age ⬆️
+Essayez de définir un usager `Regular` avec son identifiant et son âge ⬆️
 
-We only added an age, but variants of a type can diverge quite dramatically. For example, maybe we want to add location for `Regular` users so we can suggest regional chat rooms. Add more associated data! Or maybe we want to have anonymous users. Add a third variant called `Anonymous`. Maybe we end up with:
+Nous avons simplement ajouté l'âge, mais les variantes d'un type peuvent diverger de façon encore plus spectaculaire. Par exemple, nous pourrions ajouter la localisation des participants de type `Regular` pour leur proposer des salons régionalisés. Ou peut-être souhaitons-nous permettre l'utilisation de notre salon de façon anonyme. Ajoutez une troisième variante `Anonymous`, afin d'obtenir quelque chose de ce genre :
 
 ```elm
 type User
@@ -85,12 +86,12 @@ type User
   | Anonymous
 ```
 
-No problem! Let’s see some other examples now.
+Aucun souci ! Maintenant, voyons d'autres exemples.
 
 
 ## Messages
 
-In the architecture section, we saw a couple of examples of defining a `Msg` type. This sort of type is extremely common in Elm. In our chat room, we might define a `Msg` type like this:
+Dans le chapitre abordant l'[Architecture Elm](/architecture/), nous avons vu quelques exemples de définition d'un type `Msg`, très courant en Elm. Pour notre salon de discussion, on pourrait définir un type `Msg` comme celui-ci :
 
 ```elm
 type Msg
@@ -100,12 +101,12 @@ type Msg
   | ClickedExit
 ```
 
-We have four variants. Some variants have no associated data, others have a bunch. Notice that `ReceivedMessage` actually has a record as associated data. That is totally fine. Any type can be associated data! This allows you to describe interactions in your application very precisely.
+Nous avons quatre variantes. Deux d'entre elles n'ont aucune donnée associée, d'autres en ont. Notez que `ReceivedMessage` dispose d'un record associé : c'est tout à fait valide ! On peut associer n'importe quel type à une variante, ce qui permet de décrire les interactions applicatives de façon très précise.
 
 
-## Modeling
+## Modélisation
 
-Custom types become extremely powerful when you start modeling situations very precisely. For example, if you are waiting for some data to load, you might want to model it with a custom type like this:
+Les types personnalisés deviennent extrêmement puissants lorsqu'on commence à modéliser les situations très précisément. Par exemple, si vous chargez des données, vous pourriez avoir envie de modéliser l'état d'attente ou les échecs avec un type personnalisé :
 
 ```elm
 type Profile
@@ -114,9 +115,8 @@ type Profile
   | Success { name : String, description : String }
 ```
 
-So you can start in the `Loading` state and then transition to `Failure` or `Success` depending on what happens. This makes it really simple to write a `view` function that always shows something reasonable when data is loading.
+Ici on peut démarrer par `Loading` et transitionner vers `Failure` ou `Success` en fonction de ce qu'il advient. Cela rend triviale l'écriture d'une fonction `view` qui affichera dans tous les cas quelque chose de pertinent en fonction de l'état du chargement des données.
 
-Now we know how to create custom types, the next section will show how to use them!
+Maintenant que nous savons créer des types personnalisés, la section suivante va nous montrer comment les utiliser !
 
-
-> **Note: Custom types are the most important feature in Elm.** They have a lot of depth, especially once you get in the habit of trying to model scenarios more precisely. I tried to share some of this depth in [Types as Sets](/appendix/types_as_sets.html) and [Types as Bits](/appendix/types_as_bits.html) in the appendix. I hope you find them helpful!
+> **Note : Les types personnalisés sont la fonctionnalité la plus importante de Elm.** Ils apportent énormément de profondeur et de précision dans la modélisation des scénarios applicatifs. Nous avons essayé de détailler un peu de cette profondeur dans les sections [Les types sous forme d'ensembles](/appendix/types_as_sets.html) et [Les types sous forme de bits](/appendix/types_as_bits.html). Nous espérons qu'elles vous seront utiles !
