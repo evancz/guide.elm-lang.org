@@ -39,6 +39,8 @@ Try running this command to create an `elm.json` file and a `src/` directory:
 - [`elm.json`](https://github.com/elm/compiler/blob/master/docs/elm.json/application.md) describes your project.
 - `src/` holds all of your Elm files.
 
+This won't create a new directory for your project, so if you want a directory to hold `elm.json` and `src`, you should create it before running `elm init`.
+
 Now try creating a file called `src/Main.elm` in your editor, and copying in the code from [the buttons example](https://elm-lang.org/examples/buttons).
 
 
