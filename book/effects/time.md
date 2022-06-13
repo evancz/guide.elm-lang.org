@@ -175,6 +175,7 @@ Reading through the [`Task`][task] docs is the best way to understand that line.
 > **Exercises:**
 >
 > - Add a button to pause the clock, turning the `Time.every` subscription off.
+> - You might have noticed that it takes one second for current time to appear after page reload or unpause. Fix that!
 > - Make the digital clock look nicer. Maybe add some [`style`][style] attributes.
 > - Use [`elm/svg`][svg] to make an analog clock with a red second hand!
 
