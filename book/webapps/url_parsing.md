@@ -6,7 +6,34 @@ In a realistic web app, we want to show different content for different URLs:
 - `/search?q=seiza`
 - `/settings`
 
-How do we do that? We use the [`elm/url`](https://package.elm-lang.org/packages/elm/url/latest/) to parse the raw strings into nice Elm data structures. This package makes the most sense when you just look at examples, so that is what we will do!
+How do we do that? We use the [`elm/url`](https://package.elm-lang.org/packages/elm/url/latest/) to parse the raw strings into nice Elm data structures.
+
+The code to run a parser uses Url.Parser.parse, like this:
+
+```elm
+import Url
+import Url.Parser exposing (Parser, parse, int, map, oneOf, s, top)
+
+type Route = Home | Blog Int | NotFound
+
+route : Parser (Route -> a) a
+route =
+  oneOf
+    [ map Home top
+    , map Blog (s "blog" </> int)
+    ]
+
+toRoute : String -> Route
+toRoute string =
+  case Url.fromString string of
+    Nothing ->
+      NotFound
+
+    Just url ->
+      Maybe.withDefault NotFound (parse route url)
+```
+
+Defining parsers makes the most sense when you just look at examples, so that is what we will do!
 
 
 ## Example 1
