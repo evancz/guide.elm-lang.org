@@ -54,7 +54,7 @@ This will produce `main.js` which you can load from a custom HTML file like this
   <meta charset="UTF-8">
   <title>Main</title>
   <link rel="stylesheet" href="whatever-you-want.css">
-  <script src="main.js"></script>
+  <script src="/main.js"></script>
 </head>
 <body>
   <script>var app = Elm.Main.init();</script>
