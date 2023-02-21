@@ -49,4 +49,4 @@ toName user =
       name
 ```
 
-The `_` acknowledges the data there, but also saying explicitly that nobody is using it.
+The `_` acknowledges the data there, but also says explicitly that nobody is using it.
