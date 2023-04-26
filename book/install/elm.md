@@ -54,6 +54,10 @@ elm reactor
 
 This starts a server at [`http://localhost:8000`](http://localhost:8000). You can navigate to any Elm file and see what it looks like. Run `elm reactor`, follow the localhost link, and try to check out your `src/Main.elm` file!
 
+**Note:** If you run into issues with port 8000, you can specify a different port with:
+```bash
+elm reactor --port 8080
+```
 
 <br>
 
