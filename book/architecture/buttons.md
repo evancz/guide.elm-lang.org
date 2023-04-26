@@ -62,7 +62,7 @@ Now that you have poked around the code a little bit, you may have some question
 
 ## Main
 
-The `main` value is special in Elm. It describes what gets shown on screen. In this case, we are going to initialize our application with the `init` value, the `view` function is going to show everything on screen, and user input is going to be fed into the `update` function. Think of this as the high-level description of our program.
+The `main` value is special in Elm. It describes the pieces needed to run a program. In this case, we are going to initialize our application with the `init` value, the `view` function is going to show everything on screen, and user input is going to be fed into the `update` function. Think of this as the high-level description of our program.
 
 
 ## Model
