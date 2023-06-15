@@ -147,8 +147,7 @@ This example is pretty similar to the last one:
 - `update` handles the `GotQuote` message for whenever a new quote is available. Whatever happens there, we do not have any additional commands. It also handles the `MorePlease` message when someone presses the button, issuing a command to get more random quotes.
 - `view` shows you the quotes!
 
-The main difference is in the `getRandomCatGif` definition. Instead of using `Http.expectString`, we have switched to `Http.expectJson`. What is the deal with that?
-
+The main difference is in the `getRandomQuote` definition. Instead of using `Http.expectString`, we have switched to `Http.expectJson`. What is the deal with that?
 
 ## JSON
 
@@ -169,15 +168,14 @@ In JavaScript, the approach is to just turn JSON into JavaScript objects and hop
 
 In Elm, we validate the JSON before it comes into our program. So if the data has an unexpected structure, we learn about it immediately. There is no way for bad data to sneak through and cause a runtime exception three files over. This is accomplished with JSON decoders.
 
-
 ## JSON Decoders
 
 Say we have some JSON:
 
 ```json
 {
-	"name": "Tom",
-	"age": 42
+  "name": "Tom",
+  "age": 42
 }
 ```
 
@@ -192,7 +190,6 @@ If all goes well, we get an `Int` on the other side! And if we wanted the `"name
 If all goes well, we get a `String` on the other side!
 
 How do we create decoders like this though?
-
 
 ## Building Blocks
 
@@ -237,7 +234,6 @@ In this case we demand an object with a `"name"` field, and if it exists, we wan
 
 [field]: https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#field
 
-
 ## Combining Decoders
 
 But what if we want to decode _two_ fields? We snap decoders together with [`map2`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map2):
@@ -267,7 +263,6 @@ So if we used `personDecoder` on `{ "name": "Tom", "age": 42 }` we would get out
 
 If we really wanted to get into the spirit of decoders, we would define `personDecoder` as `map2 Person nameDecoder ageDecoder` using our previous definitions. You always want to be building your decoders up from smaller building blocks!
 
-
 ## Nesting Decoders
 
 A lot of JSON data is not so nice and flat. Imagine if `/api/random-quotes/v2` was released with richer information about authors:
@@ -276,8 +271,7 @@ A lot of JSON data is not so nice and flat. Imagine if `/api/random-quotes/v2` w
 {
   "quote": "December used to be a month but it is now a year",
   "source": "Letters from a Stoic",
-  "author":
-  {
+  "author": {
     "name": "Seneca",
     "age": 68,
     "origin": "Cordoba"
@@ -320,7 +314,6 @@ personDecoder =
 
 Notice that we do not bother decoding the `"origin"` field of the author. Decoders are fine with skipping over fields, which can be helpful when extracting a small amount of information from very large JSON values.
 
-
 ## Next Steps
 
 There are a bunch of important functions in `Json.Decode` that we did not cover here:
@@ -333,6 +326,5 @@ There are a bunch of important functions in `Json.Decode` that we did not cover 
 So there are ways to extract all sorts of data structures. The `oneOf` function is particularly helpful for messy JSON. (e.g. sometimes you get an `Int` and other times you get a `String` containing digits. So annoying!)
 
 We saw [`map2`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map2) and [`map4`](https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#map4) for handling objects with many fields. But as you start working with larger and larger JSON objects, it is worth checking out [`NoRedInk/elm-json-decode-pipeline`](https://package.elm-lang.org/packages/NoRedInk/elm-json-decode-pipeline/latest). The types there are a bit fancier, but some folks find them much easier to read and work with.
-
 
 > **Fun Fact:** I have heard a bunch of stories of folks finding bugs in their _server_ code as they switched from JS to Elm. The decoders people write end up working as a validation phase, catching weird stuff in JSON values. So when NoRedInk switched from React to Elm, it revealed a couple bugs in their Ruby code!
