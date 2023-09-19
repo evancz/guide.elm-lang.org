@@ -147,7 +147,7 @@ This example is pretty similar to the last one:
 - `update` handles the `GotQuote` message for whenever a new quote is available. Whatever happens there, we do not have any additional commands. It also handles the `MorePlease` message when someone presses the button, issuing a command to get more random quotes.
 - `view` shows you the quotes!
 
-The main difference is in the `getRandomCatGif` definition. Instead of using `Http.expectString`, we have switched to `Http.expectJson`. What is the deal with that?
+The main difference is in the `getRandomQuote` definition. Instead of using `Http.expectString`, we have switched to `Http.expectJson`. What is the deal with that?
 
 
 ## JSON
