@@ -3,9 +3,9 @@
 
 The previous page described how to install a code editor for Elm, so the next step is to obtain an executable file named `elm`. Here are the **install** links:
 
-- **Mac** - [installer](https://github.com/elm/compiler/releases/download/0.19.1/installer-for-mac.pkg)
-- **Linux** - <a href="https://github.com/elm/compiler/blob/master/installers/linux/README.md" target="_blank">instructions</a>
-- **Windows** - [installer](https://github.com/elm/compiler/releases/download/0.19.1/installer-for-windows.exe)
+- **Mac** - [installer](https://github.com/elm/compiler/releases/download/0.19.2/installer-for-mac.pkg)
+- **Linux** - <a href="https://github.com/elm/compiler/blob/main/installers/linux/README.md" target="_blank">instructions</a>
+- **Windows** - [installer](https://github.com/elm/compiler/releases/download/0.19.2/installer-for-windows.exe)
 
 After installation is complete, open up the terminal on your computer. It may be called `cmd.exe` or `Command Prompt` on Windows.
 
@@ -36,7 +36,7 @@ elm init
 
 Try running this command to create an `elm.json` file and a `src/` directory:
 
-- [`elm.json`](https://github.com/elm/compiler/blob/master/docs/elm.json/application.md) describes your project.
+- [`elm.json`](https://github.com/elm/compiler/blob/main/docs/elm.json/application.md) describes your project.
 - `src/` holds all of your Elm files.
 
 Now try creating a file called `src/Main.elm` in your editor, and copying in the code from [the buttons example](https://elm-lang.org/examples/buttons).
