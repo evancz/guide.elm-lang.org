@@ -248,6 +248,8 @@ Here are some simple guidelines and common pitfalls:
 
 - **Sending `Json.Encode.Value` through ports is recommended.** Like with flags, certain core types can pass through ports as well. This is from the time before JSON decoders, and you can read about it more [here](/interop/flags.html#verifying-flags).
 
+  - If you want to send or receive something that doesn't carry a value, you can use the `()` type. On the JS side, this corresponds to `null`. `port itHappened : ( () -> msg) -> Sub msg` would be triggered on the JS side with `app.ports.itHappened.send(null)`.
+
 - **All `port` declarations must appear in a `port module`.** It is probably best to organize all your ports into one `port module` so it is easier to see the interface all in one place.
 
 - **Ports are for applications.** A `port module` is available in applications, but not in packages. This ensures that application authors have the flexibility they need, but the package ecosystem is entirely written in Elm. We think this will create a stronger ecosystem and community in the long run, and we get into the tradeoffs in depth in the upcoming section on the [limits](/interop/limits.html) of Elm/JS interop.
