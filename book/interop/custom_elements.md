@@ -64,7 +64,7 @@ Load that before you initialize your Elm code, and you will be able to write cod
 
 ```elm
 import Html exposing (Html, node)
-import Html.Attributes (attribute)
+import Html.Attributes exposing (attribute)
 
 viewDate : String -> Int -> Int -> Html msg
 viewDate lang year month =
