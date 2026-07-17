@@ -74,7 +74,7 @@ Another benefit of this approach is that each variant can have different associa
 ]
 {% endreplWithTypes %}
 
-Try defining a `Regular` visitor with a name and age ⬆️
+Try defining a `Regular` user with a name and age ⬆️
 
 We only added an age, but variants of a type can diverge quite dramatically. For example, maybe we want to add location for `Regular` users so we can suggest regional chat rooms. Add more associated data! Or maybe we want to have anonymous users. Add a third variant called `Anonymous`. Maybe we end up with:
 
