@@ -85,6 +85,21 @@ type User
   | Anonymous
 ```
 
+With custom type definition we also get constructors for free. `Regular`, `Visitor` and `Anonymous` are all constructors returning `User` type as we can try in `elm repl`:
+
+```elm
+> type User \
+  = Regular String Int \
+  | Visitor String \
+  | Anonymous
+
+> Regular "Bourne" 33
+Regular "Bourne" 33 : User
+
+> Visitor "bond007"
+Visitor "bond007" : User
+```
+
 No problem! Let’s see some other examples now.
 
 
