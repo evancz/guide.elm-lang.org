@@ -163,6 +163,20 @@ From there we use `map3` to combine them into a new `spin` generator. It says to
 
 The point here is that from small building blocks, we can create a `Generator` that describes pretty complex behavior. And then from our application, we just have to say something like `Random.generate NewSpin spin` to get the next random value.
 
+But wait, you may be thinking, why is `Cherry` outside of the list? Consider the below:
+
+```elm
+symbol =
+  Random.uniform Cherry [ Seven, Bar, Grapes ] -- Why is Cherry not in the list?!
+```
+Well, consider what happens if the list is empty?:
+
+```elm
+symbol =
+  Random.uniform [ ] -- The list is empty
+```
+Oops! That looks like a grenade waiting to detonate! If that's the case, then we would have to return a `Maybe Generator` or `Generator Maybe a`, to handle that situation - and this adds some more complexity to our code. In other words, we want to force developers to provide for a default value, in this case: `Cherry` just in case the list is empty. If we can guarantee that, we can stop the problem at its root source, we and have a more pleasant API to deal with.
+
 
 > **Exercises:** Here are a few ideas to make the example code on this page a bit more interesting!
 >
