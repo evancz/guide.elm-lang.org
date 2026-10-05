@@ -6,7 +6,7 @@ set -e
 ## DOWNLOAD ELM AND UGLIFYJS
 
 if ! [ -x elm ]; then
-  curl -L -o elm.gz https://github.com/elm/compiler/releases/download/0.19.2/elm-0.19.2-linux-x64.gz
+  curl -L -o elm.gz https://github.com/elm/compiler/releases/download/0.19.3/elm-0.19.3-linux-x64.gz
   gunzip elm.gz
   chmod +x elm
 fi
