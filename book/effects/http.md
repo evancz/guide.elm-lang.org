@@ -97,7 +97,7 @@ view model =
 
 Some parts of this should be familiar from previous examples of The Elm Architecture. We still have a `Model` of our application. We still have an `update` that reacts to messages. We still have a `view` function that shows everything on screen.
 
-The new parts extend the core pattern we saw before with some changes in `init` and `update`, and the addition of `subscription`.
+The new parts extend the core pattern we saw before with some changes in `init` and `update`, and the addition of `subscriptions`.
 
 
 ## `init`
@@ -167,9 +167,9 @@ The point here is that however we decide to update our model, we are also free t
 [Error]: https://package.elm-lang.org/packages/elm/http/latest/Http#Error
 
 
-## `subscription`
+## `subscriptions`
 
-The other new thing in this program is the `subscription` function. It lets you look at the `Model` and decide if you want to subscribe to certain information. In our example, we say `Sub.none` to indicate that we do not need to subscribe to anything, but we will soon see an example of a clock where we want to subscribe to the current time!
+The other new thing in this program is the `subscriptions` function. It lets you look at the `Model` and decide if you want to subscribe to certain information. In our example, we say `Sub.none` to indicate that we do not need to subscribe to anything, but we will soon see an example of a clock where we want to subscribe to the current time!
 
 
 ## Summary
